@@ -1,0 +1,11 @@
+<ion-view view-title="账单">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate" ng-repeat="chat in cardDetail" type="item-text-wrap">
+
+        <h2>{{chat.name}}</h2>
+       <p >消费：<b>{{chat.lastText}}</b>元 <span> ({{chat.face}})</span></p> 
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

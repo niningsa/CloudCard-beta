@@ -1,0 +1,41 @@
+/* Empty. Add your own CSS if you like */
+
+.charInfo{
+	margin: 40px auto;
+	/* background: red; */
+	text-align: center;
+	width: 240px;
+	height: 240px;
+}
+.chartext{
+	text-align: left;
+	margin-bottom: 30px;
+	margin-left: 10px;
+}
+a:link{
+text-decoration:none;
+}
+a:visited{
+text-decoration:none;
+}
+a:hover{
+text-decoration:none;
+}
+a:active{
+text-decoration:none;
+}
+
+.powerbutton >input{
+	font-family: 宋体;
+}
+
+.fontstyle{
+	text-align:center;
+	 bottom: 0px;
+}
+
+.char_style{
+	height: 120px;
+	padding: 0px;
+	margin: 0px;
+}

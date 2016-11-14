@@ -1,0 +1,17 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="">
+  <ion-content class="padding">
+    <div class="charInfo">
+     <div class="chartext">理发卡-可用余额： {{lastText}</div>
+      <div id="output"></div>
+	  <br/>
+     <div class="fontstyle">你可以<a href="#/tab/cardinput/{{chat.id}}/{{chat.lastText}}">授权</a>给你好友！</div>
+   </div>
+
+  </ion-content>
+</ion-view>

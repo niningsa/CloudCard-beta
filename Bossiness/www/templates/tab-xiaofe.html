@@ -1,0 +1,17 @@
+<ion-view view-title="消费 ">
+	<ion-content class="">
+		<div class="charInfo">
+			<div class="topType">消费扫卡</div>
+			
+			<div class="list">
+				<label class="item">
+					<span class="input-label" style="float: left;">金额：</span>
+					<input type="text" class="form-control"	ng-model="xiaoinputMoney" style="width:150px" id="name" placeholder="请输入金额">
+				</label>
+			</div>
+			<div class="list" style="top: 20px;text-align: center;">
+				<button id="xiaofefrom" ng-controller="XiaofeExampleController" ng-click="scanBarcode()" class="button button-positive" style="width: 80%">确定</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

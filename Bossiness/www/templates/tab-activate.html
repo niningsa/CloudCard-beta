@@ -1,0 +1,25 @@
+<ion-view view-title="开卡">
+	<ion-content class="">
+		<div class="charInfo">
+			<div class="topType">开卡</div>
+			
+			<div class="list">
+				<label class="item">
+					<span class="input-label" style="float: left;">电话号码：</span>
+					<input type="text" id = "kaInputPhone" class="form-control"	ng-model="kaInputPhone" style="width:150px" id="name" placeholder="请输入电话号码">
+				</label>
+				<label class="item">
+					<span class="input-label" style="float: left;">预存金额：</span>
+					<input type="text" id="kaInputMoney" class="form-control" style="width:150px" id="name" placeholder="请输入金额">
+				</label>
+			</div>
+			<div class="list" style="top: 20px;text-align: center;">
+				<!-- <a href="#/tab/kaika"> -->
+					<button  class="button button-positive"  ng-controller="kakaController" ng-click="kaika()" style="width: 80%">确定</button>
+				<!-- </a> -->
+	  	</div>
+
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
