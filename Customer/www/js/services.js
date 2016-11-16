@@ -1,16 +1,15 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
+.factory('Chats', function($rootScope) {
    var chats;
    var that = this;
-
-
+   var token=$.cookie("token");
+   // if(token){
      $.ajax({
         type: "GET",
-        url: "https://192.168.1.110:8443/cloudcard/control/findFinAccountByPartyId",
+        url: $rootScope.interfaceUrl+"myCloudCards",
         async: false,
-        data: {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjbG91ZGNhcmQiLCJkZWxlZ2F0b3JOYW1lIjoiZGVmYXVsdCIsImV4cCI6MTQ4MDA1NTgwMCwidXNlciI6IkNDMTAwMDAiLCJpYXQiOjE0Nzg3NTk4MDB9.razjBCaXNa3rLsS_-kF8YglW4I01VteRClvpC0TbnPs"},
+        data: {"token": token},
         // dataType: "json",
         dataFilter: function(data){
            console.log("raw data: "+data);
@@ -21,25 +20,23 @@ angular.module('starter.services', [])
            return data;
         },
         success: function(data){
-            var finAccountList = data.finAccountList||[];
+            var finAccountList = data.cloudCardList||[];
             that.chats= $.map(finAccountList, function(o){
               return {
-                id: o.finAccountId,
-                name: o.finAccountName,
-                lastText: o.actualBalance,
+                id: o.cardId,
+                name: o.cardName,
+                lastText: o.cardBalance,
                 face: o.cardImg,
-                cardNumber: o.cardNumber
+                cardNumber: o.cardCode
               }});
         },
         error:function (e) {
-         alert("aaaa"+e);
          console.log(e);
        }
      });
-
-
-
-
+   // }else{
+   //   location.href="http://"+location.host+"/#/login";
+   // }
 
 
   return {
@@ -156,4 +153,21 @@ angular.module('starter.services', [])
       return null;
     }
   };
-});
+})
+
+
+.factory("getCode",function () {
+  //
+  var check = function(tel){
+    console.log(tel+"123123");
+  };
+
+  return {
+    getYZM:function (tel) {
+      return check(tel);
+    }
+  };
+
+})
+
+;
