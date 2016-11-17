@@ -386,7 +386,6 @@ angular.module('starter.controllers', [])
             $scope.$apply(function () {
               $scope.msg="";
             });
-
             //将 token 和 organizationPartyId 存入cookie 过期时间7天
             $.cookie("token",result.token,{
               expires:7
