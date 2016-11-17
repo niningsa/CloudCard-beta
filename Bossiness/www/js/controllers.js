@@ -54,7 +54,7 @@ angular.module('starter.controllers', [])
   //           // $scope.chats = '123456';
   //         // window.location.href="#/tab/returnMess/" + nginputMoney;
   //       }
-  //     }); 
+  //     });
   //   });
 
 
@@ -106,11 +106,11 @@ angular.module('starter.controllers', [])
 
 .controller("kakaController", function($scope, $cordovaBarcodeScanner) {
     $scope.kaika = function() {
-     
+
 
      var  kaInputPhone=$("#kaInputPhone").val();
       var kaInputMoney=$("#kaInputMoney").val();
-     
+
       var flag = true;
       //验证金额
      var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
@@ -132,13 +132,14 @@ angular.module('starter.controllers', [])
           $("#kaInputPhone").val("");
           $("#kaInputMoney").val("");
           window.location.href="#/tab/kaika/" + kaInputPhone + "/" + kaInputMoney;
-       
+
        })
      }
     }
   })
 
 
+//消费扫卡
 .controller("XiaofeExampleController", function($scope, $cordovaBarcodeScanner) {
     $scope.scanBarcode = function() {
 
@@ -149,7 +150,7 @@ angular.module('starter.controllers', [])
                 flag = true;
                 nginputMoney = $scope.xiaoinputMoney;
                 var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
-                 if (!moneyReg.test(nginputMoney)) {  
+                 if (!moneyReg.test(nginputMoney)) {
                       alert("消费金额输入有误,请重新");
                       flag = false;
                  };
@@ -168,13 +169,13 @@ angular.module('starter.controllers', [])
                           window.location.href="#/tab/returnMess/" + nginputMoney;
                         }
                     })
-                  } 
+                  }
                 }
               }, function(error) {
               console.log("An error happened -> " + error);
               });
 
-              
+
               // alert("跳过");
              });
     };
@@ -214,11 +215,11 @@ angular.module('starter.controllers', [])
 .controller("RechargeExampleController", function($scope, $cordovaBarcodeScanner) {
     $scope.scanBarcode = function() {
        $cordovaBarcodeScanner.scan().then(function(imageData) {
-        
+
         // alert(imageData.text + "扫到的数据");
         //扫二维码得到卡ID到数据查判断是开卡还是充值
         //判断有没有扫到数据
-        
+
 
         if(imageData.text!=null && imageData.text!=''){//判断有没有读取到数据
             url = "#/tab/returnMess";
@@ -241,8 +242,8 @@ angular.module('starter.controllers', [])
                         // alert("activate");
                         window.location.href="#/tab/activate/" + CardID;
                     }
-                   
-                    
+
+
                   }
                 }
               )
@@ -283,4 +284,128 @@ angular.module('starter.controllers', [])
       });
 
     };
-});
+})
+
+//获取验证码
+  .controller('LoginCtrl', function($scope,$interval,$rootScope,$http) {
+    // $scope.tel='15910989807';
+    $scope.codeBtn='获取验证码';
+
+    $scope.getIdentifyCode=function (tel) {
+      $scope.msg="";//先清空错误提示
+      if(tel){
+        /*
+         $.ajax({
+         url: $rootScope.interfaceUrl+"getLoginCaptcha",
+         type:"POST",
+         data: {
+         "teleNumber":tel
+         },
+         success: function(result){
+         console.log(result.code+" "+result.msg);
+         $scope.$apply(function () {
+         if(result.code=='500'){
+         $scope.msg=result.msg;
+         }else{
+
+         //倒计时
+         $scope.n=10;
+         $scope.codeBtn="获取中 "+$scope.n+" 秒";
+         var time=$interval(function () {
+         $scope.n--;
+         $scope.codeBtn="获取中 "+$scope.n+" 秒";
+         if($scope.n==0){
+         $interval.cancel(time); // 取消定时任务
+         $scope.codeBtn='获取验证码';
+         $scope.codeBtnDisable=false;
+         }
+         },1000);
+         $scope.codeBtnDisable=true;
+         }
+         });
+
+         }
+         });
+         */
+        $http({
+          method: "POST",
+          url: $rootScope.interfaceUrl+"getLoginCaptcha",
+          data: {
+            "teleNumber":tel
+          },
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },// 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+          transformRequest: function(obj) { // 参数是对象的话，需要把参数转成序列化的形式
+            var str = [];
+            for (var p in obj) {
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            }
+            return str.join("&");
+          }
+        }).success(function (result) {
+          console.log(result.code+" "+result.msg);
+          if(result.code=='500'){
+            $scope.msg=result.msg;
+          }else{
+            //倒计时
+            $scope.n=60;
+            $scope.codeBtn="获取中 "+$scope.n+" 秒";
+            var time=$interval(function () {
+              $scope.n--;
+              $scope.codeBtn="获取中 "+$scope.n+" 秒";
+              if($scope.n==0){
+                $interval.cancel(time); // 取消定时任务
+                $scope.codeBtn='获取验证码';
+                $scope.codeBtnDisable=false;
+              }
+            },1000);
+            $scope.codeBtnDisable=true;
+          }
+        });
+
+
+      }else{
+        $scope.msg="请输入您的手机号码！！"
+      }
+    };
+  })
+
+  //登录17092363583 284231
+  .controller('login', function($scope,$rootScope) {
+    $scope.cloudCardLogin=function () {
+      console.log($scope.user.tel+" "+$scope.user.identifyCode);
+      $.ajax({
+        url: $rootScope.interfaceUrl+"bizAppLogin",
+        type:"POST",
+        data: {
+          "teleNumber":$scope.user.tel,
+          "captcha":$scope.user.identifyCode
+        },
+        success: function(result){
+          console.log(result);
+          if(result.code=='200'){
+            $scope.$apply(function () {
+              $scope.msg="";
+            });
+
+            //将 token 和 organizationPartyId 存入cookie 过期时间7天
+            $.cookie("token",result.token,{
+              expires:7
+            });
+            $.cookie("organizationPartyId",result.organizationPartyId,{
+              expires:7
+            });
+
+            location.href="http://"+location.host+"/#/tab/dash";
+          }else{
+            $scope.$apply(function () {
+              $scope.msg=result.msg;
+            });
+          }
+        }
+      });
+
+    }
+  })
+
+
+;
