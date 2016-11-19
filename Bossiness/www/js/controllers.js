@@ -206,6 +206,8 @@ angular.module('starter.controllers', [])
                       flag = false;
                  };
               $cordovaBarcodeScanner.scan().then(function(imageData) {
+                alert(imageData.text);
+                alert("收费");
                if(imageData.text!=null && imageData.text!=''){//判断有没有读取到数据
                     if(flag){//金额格式不对不能提交数据
                     $.post("#/tab/returnMess",
