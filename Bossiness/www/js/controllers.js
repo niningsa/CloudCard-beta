@@ -266,7 +266,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller("RechargeExampleController", function($scope, $state, $cordovaBarcodeScanner,$rootScope) {
+.controller("RechargeExampleController", function($scope, $state, $cordovaBarcodeScanner, $rootScope) {
     $scope.scanBarcode = function() {
        $cordovaBarcodeScanner.scan().then(function(imageData) {
 
@@ -280,67 +280,37 @@ angular.module('starter.controllers', [])
 
         alert(cardCode+" "+token+" "+organizationPartyId);
         if(cardCode!='' && token!='' && organizationPartyId!="") {
-          // alert("Come in");
-          $.ajax({
-            url: $rootScope.interfaceUrl + "getCardInfoByCode",
-            type: "POST",
-            data: {
-              "cardCode": cardCode,
-              "token": token,
-              "organizationPartyId": organizationPartyId
-            },
-            success: function (result) {
-                alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
-                if(result.isActivated=='Y'){//已激活，那就到充值页面
-                  $state.go("tab.recharge",{
-                    cardCode: cardCode,
-                    cardName:result.cardName,
-                    cardBalance:result.cardBalance,
-                    cardImg:result.cardImg
-                  });
-                }else{//到开发页面
-                  alert(result.cardCode);
-                  $state.go("tab.activate",{
-                    cardCode: cardCode,
-                    cardName:result.cardName,
-                    cardBalance:result.cardBalance,
-                    cardImg:result.cardImg
-                  });
-                }
-            }
-          });
+          alert("Come in");
+          // $.ajax({
+          //   url: $rootScope.interfaceUrl + "getCardInfoByCode",
+          //   type: "POST",
+          //   data: {
+          //     "cardCode": cardCode,
+          //     "token": token,
+          //     "organizationPartyId": organizationPartyId
+          //   },
+          //   success: function (result) {
+          //       alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
+          //       if(result.isActivated=='Y'){//已激活，那就到充值页面
+          //         $state.go("tab.recharge",{
+          //           cardCode: cardCode,
+          //           cardName:result.cardName,
+          //           cardBalance:result.cardBalance,
+          //           cardImg:result.cardImg
+          //         });
+          //       }else{//到开发页面
+          //         alert(result.cardCode);
+          //         $state.go("tab.activate",{
+          //           cardCode: cardCode,
+          //           cardName:result.cardName,
+          //           cardBalance:result.cardBalance,
+          //           cardImg:result.cardImg
+          //         });
+          //       }
+          //   }
+          // });
         }
 
-        //用于点击确定按钮跳转
-        //  $("body").off("click").on("click","#xiaofefrom", function() {
-        //   flag = true;
-        //   //判断输入金额格式对不对
-        //   nginputMoney = $scope.inputMoney;
-        //   var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
-        //    if (!moneyReg.test(nginputMoney)) {
-        //         alert("消费金额输入有误,请重新");
-        //         flag = false;
-        //    };
-        //   if(flag){//金额格式不对不能提交数据
-        //     $.post("#/tab/returnMess",
-        //       {},
-        //       function(date){
-        //         if(date.mes=='success'){
-        //           alert("成功");
-        //         }else if(date.mes=='error'){
-        //           alert("失败");
-        //         }else{
-        //           // alert("提交金额，到后台查数据");
-        //           window.location.href="#/tab/returnMess/" + nginputMoney;
-        //         }
-        //     })
-        //   }
-        //   // alert("跳过");
-        // });
-
-
-      }, function(error) {
-      console.log("An error happened -> " + error);
       });
 
     };
