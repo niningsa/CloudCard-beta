@@ -7,10 +7,12 @@
 <ion-view view-title="">
   <ion-content class="padding">
     <div class="charInfo">
-     <div class="chartext">理发卡-可用余额： {{lastText}</div>
+      <div class="chartext">卡id： {{cardId}}</div>
+      <div class="chartext">卡二维码： {{cardCode}}</div>
+     <div class="chartext">{{cardName}}： {{cardBalance}} 元</div>
       <div id="output"></div>
 	  <br/>
-     <div class="fontstyle">你可以<a href="#/tab/cardinput/{{chat.id}}/{{chat.lastText}}">授权</a>给你好友！</div>
+     <div class="fontstyle">你可以<a href="#/tab/cardinput/{{cardId}}/{{cardBalance}}/{{cardName}}">授权</a>给你好友！</div>
    </div>
 
   </ion-content>

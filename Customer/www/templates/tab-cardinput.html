@@ -1,8 +1,12 @@
 <ion-view view-title="授权">
   <ion-content class="padding">
    <div class="charInfo">
-	   <div class="chartext">理发卡-可用余额：{{lastText}} 元</div>
+	   <div class="chartext">{{cardName}}：{{cardBalance}} 元</div>
 	   <div class="list">
+		  <label class="item item-input" style="display: none">
+		    <span class="input-label">卡id：</span>
+		    <input id="other_cardId" type="text" value="{{cardId}}"/>
+		  </label>
 		  <label class="item item-input">
 		    <span class="input-label">电话号码：</span>
 		    <input id="other_tel" type="text">

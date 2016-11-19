@@ -8,7 +8,7 @@ angular.module('starter.services', [])
 
      $.ajax({
         type: "GET",
-        url: "https://192.168.1.110:8443/cloudcard/control/findFinAccountByPartyId",
+        url: "http://192.168.0.107:8080/cloudcard/control/myCloudCards",
         async: false,
         data: {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjbG91ZGNhcmQiLCJkZWxlZ2F0b3JOYW1lIjoiZGVmYXVsdCIsImV4cCI6MTQ4MDA1NTgwMCwidXNlciI6IkNDMTAwMDAiLCJpYXQiOjE0Nzg3NTk4MDB9.razjBCaXNa3rLsS_-kF8YglW4I01VteRClvpC0TbnPs"},
         // dataType: "json",
@@ -21,14 +21,14 @@ angular.module('starter.services', [])
            return data;
         },
         success: function(data){
-            var finAccountList = data.finAccountList||[];
-            that.chats= $.map(finAccountList, function(o){
+            var cloudCardList = data.cloudCardList||[];
+            that.chats= $.map(cloudCardList, function(o){
               return {
-                id: o.finAccountId,
-                name: o.finAccountName,
-                lastText: o.actualBalance,
-                face: o.cardImg,
-                cardNumber: o.cardNumber
+                cardId: o.cardId,
+                cardName: o.cardName,
+                cardBalance: o.cardBalance,
+                cardImg: o.cardImg,
+                cardCode: o.cardCode
               }});
         },
         error:function (e) {
@@ -44,7 +44,7 @@ angular.module('starter.services', [])
 
   return {
     all: function() {
-      //console.table(that.chats );
+      console.table(that.chats );
       //console.table(that.chats[0].lastText );
       return that.chats;
     },

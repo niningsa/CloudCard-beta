@@ -1,18 +1,16 @@
 <ion-view view-title="我的卡">
   <ion-content>
-     <ion-scroll zooming="true" direction="xy" style="width: 100%; height: 100%">
+       <ion-item>
     <div style="width: 100%; height: 100%">
       <div class="list card" ng-repeat="chat in chats" style="border: 0px" class="char_style" >
-        <a class="item" href="#/tab/chats/{{chat.id}}" style="border: 0px">
-        <!-- <div class="item"> -->
-          <h2>{{chat.name}}</h2>
-  <!--       </div> -->
+        <a class="item" href="#/tab/chats/{{chat.cardId}}/{{chat.cardBalance}}/{{chat.cardName}}/{{chat.cardCode}}" style="border: 0px">
+          <h2>{{chat.cardName}}</h2>
         <div class="item item-image">
-          <img src="{{chat.face}}">
+          <img src="{{chat.cardImg}}">
         </div>
        </a>
       </div>
     </div>
-   </ion-scroll>
+    </ion-item>
   </ion-content>
 </ion-view>
