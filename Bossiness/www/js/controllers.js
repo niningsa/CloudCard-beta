@@ -54,7 +54,7 @@ angular.module('starter.controllers', [])
   //           // $scope.chats = '123456';
   //         // window.location.href="#/tab/returnMess/" + nginputMoney;
   //       }
-  //     }); 
+  //     });
   //   });
 
 
@@ -106,11 +106,11 @@ angular.module('starter.controllers', [])
 
 .controller("kakaController", function($scope, $cordovaBarcodeScanner) {
     $scope.kaika = function() {
-     
+
 
      var  kaInputPhone=$("#kaInputPhone").val();
       var kaInputMoney=$("#kaInputMoney").val();
-     
+
       var flag = true;
       //验证金额
      var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
@@ -132,7 +132,7 @@ angular.module('starter.controllers', [])
           $("#kaInputPhone").val("");
           $("#kaInputMoney").val("");
           window.location.href="#/tab/kaika/" + kaInputPhone + "/" + kaInputMoney;
-       
+
        })
      }
     }
@@ -149,7 +149,7 @@ angular.module('starter.controllers', [])
                 flag = true;
                 nginputMoney = $scope.xiaoinputMoney;
                 var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
-                 if (!moneyReg.test(nginputMoney)) {  
+                 if (!moneyReg.test(nginputMoney)) {
                       alert("消费金额输入有误,请重新");
                       flag = false;
                  };
@@ -168,13 +168,13 @@ angular.module('starter.controllers', [])
                           window.location.href="#/tab/returnMess/" + nginputMoney;
                         }
                     })
-                  } 
+                  }
                 }
               }, function(error) {
               console.log("An error happened -> " + error);
               });
 
-              
+
               // alert("跳过");
              });
     };
@@ -187,6 +187,7 @@ angular.module('starter.controllers', [])
           flag = true;
               //判断输入金额格式对不对
               nginputMoney = $scope.inputMoney;
+
               var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
               if (!moneyReg.test(nginputMoney)) {
                 alert("开卡金额输入有误,请重新");
@@ -214,11 +215,11 @@ angular.module('starter.controllers', [])
 .controller("RechargeExampleController", function($scope, $cordovaBarcodeScanner) {
     $scope.scanBarcode = function() {
        $cordovaBarcodeScanner.scan().then(function(imageData) {
-        
+
         // alert(imageData.text + "扫到的数据");
         //扫二维码得到卡ID到数据查判断是开卡还是充值
         //判断有没有扫到数据
-        
+
 
         if(imageData.text!=null && imageData.text!=''){//判断有没有读取到数据
             url = "#/tab/returnMess";
@@ -241,8 +242,8 @@ angular.module('starter.controllers', [])
                         // alert("activate");
                         window.location.href="#/tab/activate/" + CardID;
                     }
-                   
-                    
+
+
                   }
                 }
               )
