@@ -2,15 +2,23 @@
 	<ion-content class="">
 		<div class="charInfo">
 			<div class="topType">充卡</div>
-			
+			<div>
+        <p>
+          <label>卡名：</label>{{cardName}}
+        </p>
+        <p>
+          <label>余额：</label>{{cardBalance}}
+        </p>
+      </div>
 			<div class="list">
 				<label class="item">
+          <input ng-model="cardCode" type="hidden"/>
 					<span class="input-label" style="float: left;">金额：</span>
-					<input type="text" class="form-control"	ng-model="inputMoney" style="width:150px" id="name" placeholder="请输入金额">
+					<input type="text" ng-model="money" class="form-control"	ng-model="inputMoney" style="width:150px" id="name" placeholder="请输入金额">
 				</label>
 			</div>
 			<div class="list" style="top: 20px;text-align: center;">
-				<button ng-controller="KaiKaController" ng-click="scanBarcode()" class="button button-positive" style="width: 80%">确定</button>
+				<button ng-click="recharge(money,cardCode,cardName,cardBalance)" class="button button-positive" style="width: 80%">确定</button>
 			</div>
 		</div>
 	</ion-content>

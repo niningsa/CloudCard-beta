@@ -55,4 +55,9 @@ angular.module('starter.services', [])
       return _.filter(chats, function(o) { return o.type==type;});
     }
   };
-});
+})
+
+.factory("cardInfo",function () {
+
+})
+;

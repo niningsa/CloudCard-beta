@@ -63,7 +63,7 @@ angular.module('starter.controllers', [])
           flag = false;
      }
 
-    //正则验证输入金额是否合法 
+    //正则验证输入金额是否合法
 
      var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
      if (moneyReg.test($other_money)) {
@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
 
       $.ajax({
         type: "POST",
-        url: "http://192.168.0.107:8080/cloudcard/control/createCardAuth",
+        url: "http://192.168.0.109:8080/cloudcard/control/createCardAuth",
         async: false,
         data: {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjbG91ZGNhcmQiLCJkZWxlZ2F0b3JOYW1lIjoiZGVmYXVsdCIsImV4cCI6MTQ4MDA1NTgwMCwidXNlciI6IkNDMTAwMDAiLCJpYXQiOjE0Nzg3NTk4MDB9.razjBCaXNa3rLsS_-kF8YglW4I01VteRClvpC0TbnPs",
           "cardId":$other_cardId,

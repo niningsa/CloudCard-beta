@@ -86,16 +86,67 @@ angular.module('starter.controllers', [])
    $scope.imageData = $stateParams.imageData;
 })
 
-.controller('RechargeCtrl', function($scope,$stateParams) {
-  // alert("RechargeCtrl");
-   $scope.imageData = $stateParams.imageData;
+.controller('RechargeCtrl', function($scope, $state, $stateParams, $rootScope) {
+   $scope.cardCode = $stateParams.cardCode;
+   $scope.cardName = $stateParams.cardName;
+   $scope.cardImg = $stateParams.cardImg;
+   $scope.cardBalance = $stateParams.cardBalance;
+
+  //充值
+   $scope.recharge=function (money,cardCode,cardName,cardBalance) {
+      if(parseFloat(money)>0){
+
+        var token=$.cookie("token");
+        var organizationPartyId=$.cookie("organizationPartyId");
+        $.ajax({
+          url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
+          type: "POST",
+          data: {
+            "cardCode": cardCode,
+            "token": token,
+            "organizationPartyId": organizationPartyId,
+            "amount":money
+          },
+          success: function (result) {
+            console.log(result);
+            $state.go("tab.recharge",{
+              cardCode: cardCode,
+              cardName:cardName,
+              cardBalance:parseFloat(cardBalance)+parseFloat(money),
+              cardImg:""
+            });
+          }
+        });
+      }
+   }
 })
 
-.controller('ActivateCtrl', function($scope,$stateParams) {
-  // alert("ActivateCtrl");
-   $scope.imageData = $stateParams.imageData;
-    nginputMoney = $scope.kaInputMoney;
-})
+  .controller('ActivateCtrl', function($scope, $state, $stateParams, $rootScope) {
+    $scope.cardCode = $stateParams.cardCode;
+    $scope.cardName = $stateParams.cardName;
+    $scope.cardImg = $stateParams.cardImg;
+    $scope.cardBalance = $stateParams.cardBalance;
+
+    $scope.activate=function (money,cardCode,kaInputPhone) {
+      var token=$.cookie("token");
+      var organizationPartyId=$.cookie("organizationPartyId");
+      $.ajax({
+        url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
+        type: "POST",
+        data: {
+          "cardCode": cardCode,
+          "token": token,
+          "organizationPartyId": organizationPartyId,
+          "amount":money,
+          "teleNumber":kaInputPhone
+        },
+        success: function (result) {
+          alert("开卡成功！"+cardCode+",金额为："+parseFloat(money));
+        }
+      });
+    }
+
+  })
 
 .controller('kaikaCtrl', function($scope,$stateParams) {
   // alert("kaikaCtrl");
@@ -213,7 +264,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller("RechargeExampleController", function($scope, $cordovaBarcodeScanner) {
+.controller("RechargeExampleController", function($scope, $state, $cordovaBarcodeScanner,$rootScope) {
     $scope.scanBarcode = function() {
        $cordovaBarcodeScanner.scan().then(function(imageData) {
 
@@ -221,36 +272,42 @@ angular.module('starter.controllers', [])
         //扫二维码得到卡ID到数据查判断是开卡还是充值
         //判断有没有扫到数据
 
-        alert(122112);
-        if(imageData.text!=null && imageData.text!=''){//判断有没有读取到数据
+        var cardCode=imageData.text;
+        var token=$.cookie("token");
+        var organizationPartyId=$.cookie("organizationPartyId");
 
-          url = "#/tab/returnMess";
-            $.post(
-                url,
-                // {"imageData",imageData},
-                function(date){
-                  if(date.mes=='success'){
-                  alert("成功");
-                  }else if(date.mes=='error'){
-                    alert("失败");
-                  }else{
-                     // alert("扫二维码,到后台查数据");
-                    var chage = "kaka";//模拟充值业务
-                    if (chage == 'kaka') {
-                        var CardID = 1;//模拟数据
-                        window.location.href="#/tab/recharge/" + CardID;
-                    }else if(chage == 'zhongzhi'){
-                        var CardID = 1;//模拟数据
-                        // alert("activate");
-                        window.location.href="#/tab/activate/" + CardID;
-                    }
-
-
-                  }
+        alert(cardCode+" "+token+" "+organizationPartyId);
+        if(cardCode!='' && token!='' && organizationPartyId!="") {
+          // alert("Come in");
+          $.ajax({
+            url: $rootScope.interfaceUrl + "getCardInfoByCode",
+            type: "POST",
+            data: {
+              "cardCode": cardCode,
+              "token": token,
+              "organizationPartyId": organizationPartyId
+            },
+            success: function (result) {
+                alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
+                if(result.isActivated=='Y'){//已激活，那就到充值页面
+                  $state.go("tab.recharge",{
+                    cardCode: cardCode,
+                    cardName:result.cardName,
+                    cardBalance:result.cardBalance,
+                    cardImg:result.cardImg
+                  });
+                }else{//到开发页面
+                  alert(result.cardCode);
+                  $state.go("tab.activate",{
+                    cardCode: cardCode,
+                    cardName:result.cardName,
+                    cardBalance:result.cardBalance,
+                    cardImg:result.cardImg
+                  });
                 }
-              )
+            }
+          });
         }
-
 
         //用于点击确定按钮跳转
         //  $("body").off("click").on("click","#xiaofefrom", function() {
@@ -291,6 +348,7 @@ angular.module('starter.controllers', [])
   .controller('LoginCtrl', function($scope,$interval,$rootScope,$http) {
     // $scope.tel='15910989807';
     $scope.codeBtn='获取验证码';
+    $scope.user={"tel":"17092363583"};
 
     $scope.getIdentifyCode=function (tel) {
       $scope.msg="";//先清空错误提示
@@ -371,7 +429,7 @@ angular.module('starter.controllers', [])
   })
 
   //登录17092363583 284231
-  .controller('login', function($scope,$rootScope) {
+  .controller('login', function($scope,$state,$rootScope) {
     $scope.cloudCardLogin=function () {
       console.log($scope.user.tel+" "+$scope.user.identifyCode);
       $.ajax({
@@ -395,7 +453,8 @@ angular.module('starter.controllers', [])
               expires:7
             });
 
-            location.href="http://"+location.host+"/#/tab/dash";
+            // location.href="http://"+location.host+"/#/tab/dash";
+            $state.go("tab.dash");
           }else{
             $scope.$apply(function () {
               $scope.msg=result.msg;
@@ -406,6 +465,7 @@ angular.module('starter.controllers', [])
 
     }
   })
+
 
 
 ;
