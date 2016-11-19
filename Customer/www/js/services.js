@@ -1,16 +1,16 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
+.factory('Chats', function($rootScope) {
    var chats;
    var that = this;
-
-
+   var token=$.cookie("token");
+   // if(token){
      $.ajax({
         type: "GET",
-        url: "http://192.168.0.107:8080/cloudcard/control/myCloudCards",
+        url: $rootScope.interfaceUrl+"myCloudCards",
+
         async: false,
-        data: {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjbG91ZGNhcmQiLCJkZWxlZ2F0b3JOYW1lIjoiZGVmYXVsdCIsImV4cCI6MTQ4MDA1NTgwMCwidXNlciI6IkNDMTAwMDAiLCJpYXQiOjE0Nzg3NTk4MDB9.razjBCaXNa3rLsS_-kF8YglW4I01VteRClvpC0TbnPs"},
+        data: {"token": token},
         // dataType: "json",
         dataFilter: function(data){
            console.log("raw data: "+data);
@@ -29,17 +29,16 @@ angular.module('starter.services', [])
                 cardBalance: o.cardBalance,
                 cardImg: o.cardImg,
                 cardCode: o.cardCode
+
               }});
         },
         error:function (e) {
-         alert("aaaa"+e);
          console.log(e);
        }
      });
-
-
-
-
+   // }else{
+   //   location.href="http://"+location.host+"/#/login";
+   // }
 
 
   return {
@@ -156,4 +155,21 @@ angular.module('starter.services', [])
       return null;
     }
   };
-});
+})
+
+
+.factory("getCode",function () {
+  //
+  var check = function(tel){
+    console.log(tel+"123123");
+  };
+
+  return {
+    getYZM:function (tel) {
+      return check(tel);
+    }
+  };
+
+})
+
+;

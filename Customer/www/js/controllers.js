@@ -9,12 +9,6 @@ angular.module('starter.controllers', [])
   })
 
 .controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-
   $scope.chats = Chats.all();
     //alert( $scope.chats[0].lastText);
   $scope.remove = function(chat) {
@@ -43,6 +37,7 @@ angular.module('starter.controllers', [])
   // });
 })
 
+
 //授权的controller
 .controller('inputCtrl', function($scope, $stateParams, Chats) {
    $scope.cardId  =$stateParams.cardId;
@@ -69,6 +64,7 @@ angular.module('starter.controllers', [])
      }
 
     //正则验证输入金额是否合法
+
      var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
      if (moneyReg.test($other_money)) {
         if(parseInt($other_money) > parseInt($scope.cardBalance)){
@@ -78,8 +74,9 @@ angular.module('starter.controllers', [])
      }else{
           alert("金额输入有误,请重新输入");
           flag = false;
-     };
+     }
     if(flag){
+
       $.ajax({
         type: "POST",
         url: "http://192.168.0.107:8080/cloudcard/control/createCardAuth",
@@ -110,6 +107,7 @@ angular.module('starter.controllers', [])
         }
       });
 
+
     };
   });
 })
@@ -117,4 +115,129 @@ angular.module('starter.controllers', [])
 
 .controller('CardDetailCtrl', function($scope,CardDetail) {
  $scope.cardDetail = CardDetail.all();
-});
+
+})
+
+
+
+
+
+
+//获取验证码
+.controller('LoginCtrl', function($scope,$interval,$rootScope,$http) {
+  // $scope.tel='15910989807';
+  $scope.codeBtn='获取验证码';
+
+  $scope.getIdentifyCode=function (tel) {
+    $scope.msg="";//先清空错误提示
+    if(tel){
+      /*
+      $.ajax({
+          url: $rootScope.interfaceUrl+"getLoginCaptcha",
+          type:"POST",
+          data: {
+              "teleNumber":tel
+          },
+          success: function(result){
+              console.log(result.code+" "+result.msg);
+              $scope.$apply(function () {
+                if(result.code=='500'){
+                  $scope.msg=result.msg;
+                }else{
+
+                    //倒计时
+                    $scope.n=10;
+                    $scope.codeBtn="获取中 "+$scope.n+" 秒";
+                    var time=$interval(function () {
+                        $scope.n--;
+                        $scope.codeBtn="获取中 "+$scope.n+" 秒";
+                        if($scope.n==0){
+                            $interval.cancel(time); // 取消定时任务
+                            $scope.codeBtn='获取验证码';
+                            $scope.codeBtnDisable=false;
+                        }
+                    },1000);
+                    $scope.codeBtnDisable=true;
+                }
+              });
+
+          }
+      });
+      */
+      $http({
+        method: "POST",
+        url: $rootScope.interfaceUrl+"getLoginCaptcha",
+        data: {
+          "teleNumber":tel
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },// 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+        transformRequest: function(obj) { // 参数是对象的话，需要把参数转成序列化的形式
+          var str = [];
+          for (var p in obj) {
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          }
+          return str.join("&");
+        }
+      }).success(function (result) {
+        console.log(result.code+" "+result.msg);
+          if(result.code=='500'){
+                $scope.msg=result.msg;
+          }else{
+            //倒计时
+            $scope.n=60;
+            $scope.codeBtn="获取中 "+$scope.n+" 秒";
+            var time=$interval(function () {
+              $scope.n--;
+              $scope.codeBtn="获取中 "+$scope.n+" 秒";
+              if($scope.n==0){
+                $interval.cancel(time); // 取消定时任务
+                $scope.codeBtn='获取验证码';
+                $scope.codeBtnDisable=false;
+              }
+            },1000);
+            $scope.codeBtnDisable=true;
+          }
+      });
+
+
+    }else{
+        $scope.msg="请输入您的手机号码！！"
+    }
+  };
+})
+
+ //登录
+.controller('login', function($scope,$rootScope) {
+    $scope.cloudCardLogin=function () {
+      console.log($scope.user.tel+" "+$scope.user.identifyCode);
+      $.ajax({
+        url: $rootScope.interfaceUrl+"userAppLogin",
+        type:"POST",
+        data: {
+          "teleNumber":$scope.user.tel,
+          "captcha":$scope.user.identifyCode
+        },
+        success: function(result){
+          console.log(result.code+" "+result.msg);
+          if(result.code=='200'){
+            $scope.$apply(function () {
+              $scope.msg="";
+            });
+            //将token 存入cookie 过期时间7天
+            $.cookie("token",result.token,{
+              expires:7
+            });
+            location.href="http://"+location.host+"/#/tab/chats";
+          }else{
+            $scope.$apply(function () {
+              $scope.msg=result.msg;
+            });
+          }
+        }
+      });
+
+    }
+})
+
+;
+
