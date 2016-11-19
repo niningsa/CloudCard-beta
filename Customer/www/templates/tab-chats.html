@@ -3,7 +3,7 @@
        <ion-item>
     <div style="width: 100%; height: 100%">
       <div class="list card" ng-repeat="chat in chats" style="border: 0px" class="char_style" >
-        <a class="item" href="#/tab/chats/{{chat.cardId}}/{{chat.cardBalance}}/{{chat.cardName}}/{{chat.cardCode}}" style="border: 0px">
+        <a class="item" href="#/tab/chats/{{chat.cardId}}/{{chat.cardBalance}}/{{chat.cardName}}/{{chat.cardCode}}/{{chat.isAuthToOthers}}/{{chat.isAuthToMe}}" style="border: 0px">
           <h2>{{chat.cardName}}</h2>
         <div class="item item-image">
           <img src="{{chat.cardImg}}">
