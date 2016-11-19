@@ -63,7 +63,7 @@ angular.module('starter.controllers', [])
           flag = false;
      }
 
-    //正则验证输入金额是否合法
+    //正则验证输入金额是否合法 
 
      var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
      if (moneyReg.test($other_money)) {
