@@ -28,7 +28,9 @@ angular.module('starter.services', [])
                 cardName: o.cardName,
                 cardBalance: o.cardBalance,
                 cardImg: o.cardImg,
-                cardCode: o.cardCode
+                cardCode: o.cardCode,
+                isAuthToMe: o.isAuthToMe,
+                isAuthToOthers: o.isAuthToOthers
 
               }});
         },

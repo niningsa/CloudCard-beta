@@ -21,6 +21,8 @@ angular.module('starter.controllers', [])
     $scope.cardBalance = $stateParams.cardBalance;
     $scope.cardName = $stateParams.cardName;
     $scope.cardCode  =$stateParams.cardCode;
+    $scope.isAuthToOthers  =$stateParams.isAuthToOthers;
+    $scope.isAuthToMe  =$stateParams.isAuthToMe;
     //alert($stateParams.chatId);
     //alert($scope.lastText);
   //$scope.chat = Chats.get($stateParams.chatId);
@@ -28,6 +30,11 @@ angular.module('starter.controllers', [])
   // alert(jQuery('#output'));
   //  将客户的cardCode放入生成的二维码中
    jQuery('#output').qrcode($stateParams.cardCode);
+    //根据是否授权来控制授权按钮的显示与否
+    if($stateParams.isAuthToOthers=='N' && $scope.isAuthToMe=='N'){
+      jQuery('#sq').html('你可以<a href="#/tab/cardinput/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}">授权</a>给你好友！');
+
+    }
 
   //  jQuery('#output').qrcode({
   //     render: "table", //table方式
@@ -39,11 +46,11 @@ angular.module('starter.controllers', [])
 
 
 //授权的controller
-.controller('inputCtrl', function($scope, $stateParams, Chats) {
+.controller('inputCtrl', function($scope, $stateParams,$rootScope,$http,Chats) {
    $scope.cardId  =$stateParams.cardId;
    $scope.cardBalance  =$stateParams.cardBalance;
    $scope.cardName  =$stateParams.cardName;
-
+    var token=$.cookie("token");
   $("body").off("click").on("click","#powerfrom", function() {
     $other_tel=$("#other_tel").val();
     $other_cardId=$("#other_cardId").val();
@@ -57,14 +64,12 @@ angular.module('starter.controllers', [])
 
     //验证手机号是否合法
     var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-     var flag =false;
+     var flag =true;
     if (!phoneReg.test($other_tel)) {
       alert("请输入正确的手机号码");
           flag = false;
      }
-
-    //正则验证输入金额是否合法 
-
+    //正则验证输入金额是否合法
      var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
      if (moneyReg.test($other_money)) {
         if(parseInt($other_money) > parseInt($scope.cardBalance)){
@@ -76,12 +81,14 @@ angular.module('starter.controllers', [])
           flag = false;
      }
     if(flag){
-
       $.ajax({
         type: "POST",
-        url: "http://192.168.0.107:8080/cloudcard/control/createCardAuth",
+        url: $rootScope.interfaceUrl+"createCardAuth",
+        //url:"http://192.168.0.109:8080/cloudcard/control/createCardAuth",
         async: false,
-        data: {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjbG91ZGNhcmQiLCJkZWxlZ2F0b3JOYW1lIjoiZGVmYXVsdCIsImV4cCI6MTQ4MDA1NTgwMCwidXNlciI6IkNDMTAwMDAiLCJpYXQiOjE0Nzg3NTk4MDB9.razjBCaXNa3rLsS_-kF8YglW4I01VteRClvpC0TbnPs",
+        data: {
+          //"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjbG91ZGNhcmQiLCJkZWxlZ2F0b3JOYW1lIjoiZGVmYXVsdCIsImV4cCI6MTQ4MDA1NTgwMCwidXNlciI6IkNDMTAwMDAiLCJpYXQiOjE0Nzg3NTk4MDB9.razjBCaXNa3rLsS_-kF8YglW4I01VteRClvpC0TbnPs",
+         "token":token,
           "cardId":$other_cardId,
           "teleNumber":$other_tel,
           "amount":$other_money,
@@ -98,11 +105,14 @@ angular.module('starter.controllers', [])
         },
         success: function(data){
           console.log(data);
+          alert(data.msg);
           //授权成功，传入必要的参数，跳转到授权成功的查看页面
-          window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
+          //window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
+          window.location.href="http://"+location.host+"#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
         },
         error:function (e) {
           console.log(e);
+
           window.location.href="#/tab/cardinput";
         }
       });

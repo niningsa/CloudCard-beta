@@ -68,7 +68,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     //从卡中将卡Id和金额传进去
     .state('tab.chat-detail', {
 
-      url: '/chats/:cardId/:cardBalance/:cardName/:cardCode',
+      url: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
 
       cache: false,
       views: {
