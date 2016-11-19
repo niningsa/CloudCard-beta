@@ -188,6 +188,7 @@ angular.module('starter.controllers', [])
           flag = true;
               //判断输入金额格式对不对
               nginputMoney = $scope.inputMoney;
+
               var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
               if (!moneyReg.test(nginputMoney)) {
                 alert("开卡金额输入有误,请重新");
