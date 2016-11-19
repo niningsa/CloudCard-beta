@@ -3,7 +3,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 .run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
 
-    $rootScope.interfaceUrl="http://192.168.0.107:8080/cloudcard/control/"; //接口前一截一样的
+    $rootScope.interfaceUrl="http://192.168.0.109:8080/cloudcard/control/"; //接口前一截一样的
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);

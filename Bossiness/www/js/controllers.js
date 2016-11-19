@@ -220,9 +220,10 @@ angular.module('starter.controllers', [])
         //扫二维码得到卡ID到数据查判断是开卡还是充值
         //判断有没有扫到数据
 
-
+        alert(122112);
         if(imageData.text!=null && imageData.text!=''){//判断有没有读取到数据
-            url = "#/tab/returnMess";
+
+          url = "#/tab/returnMess";
             $.post(
                 url,
                 // {"imageData",imageData},
@@ -247,7 +248,6 @@ angular.module('starter.controllers', [])
                   }
                 }
               )
-
         }
 
 

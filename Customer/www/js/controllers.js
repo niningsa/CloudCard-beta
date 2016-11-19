@@ -12,7 +12,7 @@ angular.module('starter.controllers', [])
     // alert($scope.chatId+" "+$scope.lastText);
   var token=$.cookie("token");
   // if(token) {
-    jQuery('#output').qrcode("http:/'./jetienne.com?stateParams=" + $stateParams.chatId);
+    jQuery('#output').qrcode("http:/'./jetienne.com?==" + $stateParams.chatId);
   // }else{
   //   location.href="http://"+location.host+"/#/login";
   // }
@@ -93,6 +93,9 @@ angular.module('starter.controllers', [])
 //获取验证码
 .controller('LoginCtrl', function($scope,$interval,$rootScope,$http) {
   // $scope.tel='15910989807';
+  $scope.user={
+    tel:"18702104254"
+  };
   $scope.codeBtn='获取验证码';
 
   $scope.getIdentifyCode=function (tel) {
@@ -174,7 +177,7 @@ angular.module('starter.controllers', [])
 })
 
  //登录
-.controller('login', function($scope,$rootScope) {
+.controller('login', function($scope,$rootScope,$state) {
     $scope.cloudCardLogin=function () {
       console.log($scope.user.tel+" "+$scope.user.identifyCode);
       $.ajax({
@@ -194,7 +197,8 @@ angular.module('starter.controllers', [])
             $.cookie("token",result.token,{
               expires:7
             });
-            location.href="http://"+location.host+"/#/tab/chats";
+            $state.go("tab.chats");
+            // location.href="http://"+location.host+"/#/tab/chats";
           }else{
             $scope.$apply(function () {
               $scope.msg=result.msg;
