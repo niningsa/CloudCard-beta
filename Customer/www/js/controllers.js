@@ -105,7 +105,6 @@ angular.module('starter.controllers', [])
         },
         success: function(data){
           console.log(data);
-          alert(data.msg);
           //授权成功，传入必要的参数，跳转到授权成功的查看页面
           //window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
           window.location.href="http://"+location.host+"#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
