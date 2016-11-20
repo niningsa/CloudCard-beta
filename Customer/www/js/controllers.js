@@ -32,8 +32,7 @@ angular.module('starter.controllers', [])
    jQuery('#output').qrcode($stateParams.cardCode);
     //根据是否授权来控制授权按钮的显示与否
     if($stateParams.isAuthToOthers=='N' && $scope.isAuthToMe=='N'){
-      jQuery('#sq').html('你可以<a href="#/tab/cardinput/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}">授权</a>给你好友！');
-
+      jQuery('#sq').html('你可以<a href="#/tab/cardinput/'+$stateParams.cardId+'/'+$stateParams.cardBalance+'/'+$stateParams.cardName+'/'+$stateParams.cardCode+'">授权</a>给你好友！');
     }
 
   //  jQuery('#output').qrcode({
