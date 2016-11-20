@@ -142,8 +142,10 @@ angular.module('starter.controllers', [])
           "teleNumber":kaInputPhone
         },
         success: function (result) {
-          alert(result.);
-          alert("开卡成功！"+cardCode+",金额为："+parseFloat(money));
+          alert(result.code+" "+result.msg);
+          if(result.code=='200'){
+            alert("开卡成功！"+cardCode+",金额为："+parseFloat(money));
+          }
         }
       });
     }
