@@ -3,27 +3,28 @@
    <div class="charInfo">
 	   <div class="chartext">{{cardName}}：{{cardBalance}} 元</div>
 	   <div class="list">
-		  <label class="item item-input" style="display: none">
+		  <label class=" item-input" style="display: none">
 		    <span class="input-label">卡id：</span>
-		    <input id="other_cardId" type="text" value="{{cardId}}"/>
+		    <input id="other_cardId" class="form-control" type="text" value="{{cardId}}"/>
 		  </label>
-		  <label class="item item-input">
-		    <span class="input-label">电话号码：</span>
-		    <input id="other_tel" type="text">
-		  </label>
-		  <label class="item item-input">
+		  <label class="">
+		    <span class="input-label ">电话号码：</span>
+        <input id="other_tel" type="text" class="form-control"/>
+		  </label><br/>
+		  <label class="">
 		    <span class="input-label">授权金额：</span>
-		    <input id="other_money" type="text">
-		  </label>
-		  <label class="item item-input">
+		    <input id="other_money" type="text" class="form-control"/>
+		  </label><br/>
+		  <label class="">
 		    <span class="input-label">授权时间：</span>
-		    <input id="other_startDate" type="date">
-		  </label>
-		  <label class="item item-input">
+		    <input id="other_startDate" type="date" class="form-control"/>
+		  </label><br/>
+		  <label class="">
 		    <span class="input-label">截止时间：</span>
-		    <input id="other_endDate" type="date">
+		    <input id="other_endDate" type="date" class="form-control"/>
 		  </label>
-		</div>
+       <time-picker  time-picker-result="toolModel.timePickerResult"  title="请选择时间"></time-picker>
+     </div>
 	  	<div class="powerbutton">
 		  <button id="powerfrom" class="button button-positive" style="width: 100%">授权</button>
 	  	</div>

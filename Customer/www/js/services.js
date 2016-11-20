@@ -6,7 +6,7 @@ angular.module('starter.services', [])
    var token=$.cookie("token");
    // if(token){
      $.ajax({
-        type: "GET",
+        type: "POST",
         url: $rootScope.interfaceUrl+"myCloudCards",
 
         async: false,

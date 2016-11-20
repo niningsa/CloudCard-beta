@@ -23,7 +23,6 @@ angular.module('starter.controllers', [])
     $scope.cardCode  =$stateParams.cardCode;
     $scope.isAuthToOthers  =$stateParams.isAuthToOthers;
     $scope.isAuthToMe  =$stateParams.isAuthToMe;
-    //alert($stateParams.chatId);
     //alert($scope.lastText);
   //$scope.chat = Chats.get($stateParams.chatId);
   //  console.table($scope.chat );
@@ -31,8 +30,11 @@ angular.module('starter.controllers', [])
   //  将客户的cardCode放入生成的二维码中
    jQuery('#output').qrcode($stateParams.cardCode);
     //根据是否授权来控制授权按钮的显示与否
-    if($stateParams.isAuthToOthers=='N' && $scope.isAuthToMe=='N'){
+    if($stateParams.isAuthToOthers=='N' & $scope.isAuthToMe=='N'){
       jQuery('#sq').html('你可以<a href="#/tab/cardinput/'+$stateParams.cardId+'/'+$stateParams.cardBalance+'/'+$stateParams.cardName+'/'+$stateParams.cardCode+'">授权</a>给你好友！');
+    }else{
+      jQuery('#sq').html('该卡已被授权');
+
     }
 
   //  jQuery('#output').qrcode({
@@ -56,14 +58,27 @@ angular.module('starter.controllers', [])
     $other_money=$("#other_money").val();
     $other_startDate=$("#other_startDate").val();
     $other_endDate=$("#other_endDate").val();
-    if ($other_endDate == null | $other_endDate ==''){
-        var nowtime = new Date();
-        $other_endDate = nowtime.toLocaleDateString().replace('/','-').replace('/','-');
-    }
 
+    var flag =true;
+    if ($other_endDate == null | $other_endDate ==''){
+      alert("请将时间填写完整");
+        //var nowtime = new Date();
+        //$other_endDate = nowtime.toLocaleDateString().replace('/','-').replace('/','-');
+      return false;
+    }
+    if ($other_startDate == null | $other_startDate ==''){
+      //var nowtime2 = new Date();
+      //$other_endDate = nowtime2.toLocaleDateString().replace('/','-').replace('/','-');
+      alert("请将时间填写完整");
+      return false;
+    }
+    if($other_startDate > $other_endDate ){
+      alert("截止时间应大于授权时间");
+      return false;
+    }
     //验证手机号是否合法
     var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-     var flag =true;
+
     if (!phoneReg.test($other_tel)) {
       alert("请输入正确的手机号码");
           flag = false;
@@ -105,8 +120,8 @@ angular.module('starter.controllers', [])
         success: function(data){
           console.log(data);
           //授权成功，传入必要的参数，跳转到授权成功的查看页面
-          //window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
-          window.location.href="http://"+location.host+"#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
+          window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
+          //window.location.href="http://"+location.host+"#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
         },
         error:function (e) {
           console.log(e);

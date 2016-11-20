@@ -4,8 +4,8 @@
 	margin: 40px auto;
 	/* background: red; */
 	text-align: center;
-	width: 240px;
-	height: 240px;
+	width: 80%;
+	height: 80%;
 }
 .chartext{
 	text-align: left;
@@ -38,4 +38,10 @@ text-decoration:none;
 	height: 120px;
 	padding: 0px;
 	margin: 0px;
+}
+.list > label{
+  display: flex;
+}
+.list > label >input{
+  width: 60%;
 }
