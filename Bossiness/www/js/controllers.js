@@ -25,13 +25,6 @@ angular.module('starter.controllers', [])
    $scope.nginputMoney = $stateParams.nginputMoney;
 })
 
-.controller('AccountCtrl', function($scope,Chats) {
-  var charts = Chats.all();
-  $scope.Chats = charts;
-
-})
-
-
 
   // $("body").on("change","#account_type", function() {
   //  var $account_type = $("#account_type").val();//得到选择的类型
@@ -133,6 +126,39 @@ angular.module('starter.controllers', [])
   };
 })
 
+  /*
+   * Desc 账单列表数据展示
+   * Author LN
+   * Date 2016-11-20
+   * */
+  .controller('AccountCtrl', function($scope, $rootScope, $http, Chats) {
+    var charts = Chats.all();                                              // 商家账单
+    $scope.Chats = charts;
+
+                                                                           // 商家授信额度查询
+    $http({
+      method: "POST",
+      url: $rootScope.interfaceUrl+"getLimitAndPresellInfo",
+      data: {
+        "token": $rootScope.token,
+        "organizationPartyId":$rootScope.organizationPartyId
+      },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },   // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+      transformRequest: function(obj) {                                   // 参数是对象的话，需要把参数转成序列化的形式
+        var str = [];
+        for (var p in obj) {
+          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        }
+        return str.join("&");
+      }
+    }).success(function (result) {
+      console.table(result);
+      $scope.presellAmount=result.presellAmount;                           //	已卖出金额
+      $scope.limitAmount=result.limitAmount;                               //	卖卡限额
+      $scope.balance=result.balance;                                       //	卖卡余额
+    });
+  })
+
 
   /*
    * Desc 消费扫卡
@@ -153,18 +179,16 @@ angular.module('starter.controllers', [])
             var cardCode=imageData.text;
             var token=$.cookie("token");
             var organizationPartyId=$.cookie("organizationPartyId");
+            alert(cardCode+" "+token+" "+organizationPartyId);
 
-            alert(cardCode+" "+token+" "+organizationPartyId+" "+amount);
-            if(cardCode!='' && token!='' && organizationPartyId!="") {
-              alert("Come in");
-
+            if(cardCode!='') {
               $.ajax({
                 url: $rootScope.interfaceUrl + "cloudCardWithdraw",
                 type: "POST",
                 data: {
                   "cardCode": cardCode,
                   "token": token,
-                  "organizationPartyId": organizationPartyId,
+                  "organizationPartyId":organizationPartyId,
                   "amount":amount
                 },
                 success: function (result) {
@@ -197,6 +221,7 @@ angular.module('starter.controllers', [])
     $scope.cardBalance = $stateParams.cardBalance;
   })
 
+
   /*
    * Desc 扫二维码得到卡ID到数据查判断是开卡还是充值
    * Author LN
@@ -207,48 +232,50 @@ angular.module('starter.controllers', [])
       $scope.scanBarcode = function() {
          $cordovaBarcodeScanner.scan().then(function(imageData) {
 
-          // alert(imageData.text + "扫到的数据");
-          var cardCode=imageData.text;
+          var cardCode=imageData.text;                // 扫到的数据
           var token=$.cookie("token");
           var organizationPartyId=$.cookie("organizationPartyId");
 
           alert(cardCode+" "+token+" "+organizationPartyId);
-          if(cardCode!='' && token!='' && organizationPartyId!="") {
-            alert("Come in");
+
+          if(cardCode!='') {
             $.ajax({
               url: $rootScope.interfaceUrl + "getCardInfoByCode",
               type: "POST",
               data: {
                 "cardCode": cardCode,
                 "token": token,
-                "organizationPartyId": organizationPartyId
+                "organizationPartyId":organizationPartyId
               },
               success: function (result) {
+                  alert(result.code+" "+result.msg);
                   alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
-                  if(result.isActivated=='Y'){//已激活，那就到充值页面
-                    $state.go("tab.recharge",{
-                      cardCode: cardCode,
-                      cardName:result.cardName,
-                      cardBalance:result.cardBalance,
-                      cardImg:result.cardImg
-                    });
-                  }else{//到开发页面
-                    alert(result.cardCode);
-                    $state.go("tab.activate",{
-                      cardCode: cardCode,
-                      cardName:result.cardName,
-                      cardBalance:result.cardBalance,
-                      cardImg:result.cardImg
-                    });
+
+                  if(result.code=='200'){
+                      if(result.isActivated=='Y'){        //已激活，那就到充值页面
+                        $state.go("tab.recharge",{
+                          cardCode: cardCode,
+                          cardName:result.cardName,
+                          cardBalance:result.cardBalance,
+                          cardImg:result.cardImg
+                        });
+                      }else{                              //到开发页面
+                        alert(result.cardCode);
+                        $state.go("tab.activate",{
+                          cardCode: cardCode,
+                          cardName:result.cardName,
+                          cardBalance:result.cardBalance,
+                          cardImg:result.cardImg
+                        });
+                      }
                   }
               }
             });
           }
-
         });
-
       };
   })
+
 
   /*
    * Desc 充值
@@ -263,16 +290,16 @@ angular.module('starter.controllers', [])
 
     $scope.recharge=function (money,cardCode,cardName,cardBalance) {
       if(parseFloat(money)>0){
-
         var token=$.cookie("token");
         var organizationPartyId=$.cookie("organizationPartyId");
+        alert(cardCode+" "+token+" "+organizationPartyId);
         $.ajax({
           url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
           type: "POST",
           data: {
             "cardCode": cardCode,
             "token": token,
-            "organizationPartyId": organizationPartyId,
+            "organizationPartyId":organizationPartyId,
             "amount":money
           },
           success: function (result) {
@@ -314,13 +341,14 @@ angular.module('starter.controllers', [])
     $scope.activate=function (money,cardCode,kaInputPhone,cardName) {
       var token=$.cookie("token");
       var organizationPartyId=$.cookie("organizationPartyId");
+      alert(cardCode+" "+token+" "+organizationPartyId);
       $.ajax({
         url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
         type: "POST",
         data: {
           "cardCode": cardCode,
           "token": token,
-          "organizationPartyId": organizationPartyId,
+          "organizationPartyId":organizationPartyId,
           "amount":money,
           "teleNumber":kaInputPhone
         },
@@ -329,7 +357,7 @@ angular.module('starter.controllers', [])
           if(result.code=='200'){
             alert("开卡成功！"+cardCode+",充值金额为："+parseFloat(money));
             $state.go("tab.kaika",{
-              cardCode:result.cardCode,
+              cardCode:cardCode,
               cardName:cardName,
               money:money,
               kaInputPhone:kaInputPhone
@@ -338,7 +366,6 @@ angular.module('starter.controllers', [])
         }
       });
     }
-
   })
 
   //开卡成功后，页面初始化
@@ -348,6 +375,7 @@ angular.module('starter.controllers', [])
     $scope.money = $stateParams.money;
     $scope.kaInputPhone = $stateParams.kaInputPhone;
   })
+
 
   /*
    * Desc 获取验证码
@@ -368,8 +396,8 @@ angular.module('starter.controllers', [])
           data: {
             "teleNumber":tel
           },
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },// 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
-          transformRequest: function(obj) { // 参数是对象的话，需要把参数转成序列化的形式
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+          transformRequest: function(obj) {                                 // 参数是对象的话，需要把参数转成序列化的形式
             var str = [];
             for (var p in obj) {
               str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
@@ -403,6 +431,7 @@ angular.module('starter.controllers', [])
       }
     };
   })
+
 
   /*
   * Desc 登录
@@ -441,10 +470,6 @@ angular.module('starter.controllers', [])
           }
         }
       });
-
     }
   })
-
-
-
 ;

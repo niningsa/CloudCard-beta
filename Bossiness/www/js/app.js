@@ -12,8 +12,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
 
-    $rootScope.interfaceUrl="http://192.168.0.109:8080/cloudcard/control/"; //接口前一截一样的
-
+    $rootScope.interfaceUrl="http://192.168.0.109:8080/cloudcard/control/";   //全局： 接口 URL
+    $rootScope.token=$.cookie("token");                                       //全局： token
+    $rootScope.organizationPartyId=$.cookie("organizationPartyId");           //全局： 商家 partyId
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -26,21 +27,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }
   });
 })
-
-
-  // .controller("ExampleController", function($scope, $cordovaBarcodeScanner) {
-  //   $scope.scanBarcode = function() {
-  //     $cordovaBarcodeScanner.scan().then(function(imageData) {
-  //       alert(imageData.text);
-  //       console.log("Barcode Format -> " + imageData.format);
-  //       console.log("Cancelled -> " + imageData.cancelled);
-  //     }, function(error) {
-  //     console.log("An error happened -> " + error);
-  //     });
-  //   };
-  // })
-
-
 
 
 .config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
@@ -60,14 +46,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
+  .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
   })
 
   // Each tab has its own nav history stack:
-
   .state('tab.dash', {
     url: '/dash',
     views: {
@@ -122,7 +107,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }
   })
 
-.state('tab.recharge', {
+  .state('tab.recharge', {
     url: '/recharge/:cardCode/:cardName/:cardImg/:cardBalance',
     cache: false,
     views: {
@@ -142,10 +127,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
           controller: 'ActivateCtrl'
         }
       }
-    })
+  })
 
-
-    .state('tab.kaika', {
+  .state('tab.kaika', {
       url: '/kaika/:cardCode/:cardName/:money/:kaInputPhone',
       cache: false,
       views: {
@@ -154,7 +138,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
           controller: 'kaikaCtrl'
         }
       }
-    })
+  })
 
   .state('tab.returnMess', {
       url: '/returnMess/:cardCode/:amount/:cardBalance',
@@ -165,7 +149,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
           controller: 'returnMessCtrl'
         }
       }
-    })
+  })
 
   .state('tab.returnChongZhiMess', {
       url: '/returnChongZhiMess/:cardCode/:cardName/:money/:amount',
@@ -175,7 +159,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
           controller: 'returnChongZhiMessCtrl'
         }
       }
-    })
+  })
 
   .state('login', {
        url: '/login',
