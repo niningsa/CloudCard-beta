@@ -25,11 +25,32 @@ angular.module('starter.controllers', [])
    $scope.nginputMoney = $stateParams.nginputMoney;
 })
 
-.controller('AccountCtrl', function($scope,Chats) {
-  var charts = Chats.all();
-  $scope.Chats = charts;
 
-})
+  .controller('AccountCtrl', function($scope, $rootScope, $http, Chats) {
+    var charts = Chats.all();
+    $scope.Chats = charts;
+    $http({
+        method: "POST",
+        url: $rootScope.interfaceUrl+"getLimitAndPresellInfo",
+        data: {
+           "token": $rootScope.token,
+           "organizationPartyId":$rootScope.organizationPartyId,
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },   // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+        transformRequest: function(obj) {                                   // 参数是对象的话，需要把参数转成序列化的形式
+          var str = [];
+          for (var p in obj) {
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          }
+          return str.join("&");
+        }
+    }).success(function (result) {
+        alert(result.code+" "+result.msg);
+        $scope.presellAmount=result.presellAmount;                           //	已卖出金额
+        $scope.limitAmount=result.limitAmount;                               //	卖卡限额
+        $scope.balance=result.balance;                                       //	卖卡余额
+    });
+  })
 
 
 
@@ -151,13 +172,9 @@ angular.module('starter.controllers', [])
         }else{
           $cordovaBarcodeScanner.scan().then(function(imageData) {
             var cardCode=imageData.text;
-            var token=$.cookie("token");
-            var organizationPartyId=$.cookie("organizationPartyId");
+            alert(cardCode);
 
-            alert(cardCode+" "+token+" "+organizationPartyId+" "+amount);
-            if(cardCode!='' && token!='' && organizationPartyId!="") {
-              alert("Come in");
-
+            if(cardCode!='') {
               $.ajax({
                 url: $rootScope.interfaceUrl + "cloudCardWithdraw",
                 type: "POST",
@@ -329,7 +346,7 @@ angular.module('starter.controllers', [])
           if(result.code=='200'){
             alert("开卡成功！"+cardCode+",充值金额为："+parseFloat(money));
             $state.go("tab.kaika",{
-              cardCode:result.cardCode,
+              cardCode:cardCode,
               cardName:cardName,
               money:money,
               kaInputPhone:kaInputPhone
@@ -368,8 +385,8 @@ angular.module('starter.controllers', [])
           data: {
             "teleNumber":tel
           },
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },// 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
-          transformRequest: function(obj) { // 参数是对象的话，需要把参数转成序列化的形式
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+          transformRequest: function(obj) {                                 // 参数是对象的话，需要把参数转成序列化的形式
             var str = [];
             for (var p in obj) {
               str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
