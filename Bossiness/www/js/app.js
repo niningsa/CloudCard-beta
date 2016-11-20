@@ -146,7 +146,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 
     .state('tab.kaika', {
-      url: '/kaika/:phone/:money',
+      url: '/kaika/:cardCode/:cardName/:money/:kaInputPhone',
       cache: false,
       views: {
         'tab-dash': {
@@ -156,35 +156,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       }
     })
 
-
-
-
-.state('tab.returnMess', {
-    url: '/returnMess/:nginputMoney',
-    cache: false,
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-returnMess.html',
-        controller: 'returnMessCtrl'
+  .state('tab.returnMess', {
+      url: '/returnMess/:cardCode/:amount/:cardBalance',
+      cache: false,
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-returnMess.html',
+          controller: 'returnMessCtrl'
+        }
       }
-    }
-  })
+    })
 
-.state('tab.returnChongZhiMess', {
-    url: '/returnChongZhiMess/:nginputMoney',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-returnChongZhiMess.html',
-        controller: 'returnChongZhiMessCtrl'
+  .state('tab.returnChongZhiMess', {
+      url: '/returnChongZhiMess/:cardCode/:cardName/:money/:amount',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-returnChongZhiMess.html',
+          controller: 'returnChongZhiMessCtrl'
+        }
       }
-    }
-  })
+    })
 
-.state('login', {
-     url: '/login',
-     templateUrl: "templates/login.html",
-     controller:'LoginCtrl'
-})
+  .state('login', {
+       url: '/login',
+       templateUrl: "templates/login.html",
+       controller:'LoginCtrl'
+  })
   ;
 
   // if none of the above states are matched, use this as the fallback

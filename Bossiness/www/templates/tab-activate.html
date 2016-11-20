@@ -3,16 +3,12 @@
 		<div class="charInfo">
 			<div class="topType">开卡</div>
 
-      <div>
-        <p>
-          <label>卡名：</label>{{cardName}}
-        </p>
-        <p>
-          <label>余额：</label>{{cardBalance}}
-        </p>
-      </div>
 			<div class="list">
 				<label class="item">
+					<span class="input-label" style="float: left;">卡名：</span>
+          <span ng-bind="cardName"></span>
+				</label>
+        <label class="item">
 					<span class="input-label" style="float: left;">电话号码：</span>
           <input ng-model="cardCode" type="hidden"/>
 					<input type="text" id = "kaInputPhone" class="form-control"	ng-model="kaInputPhone" style="width:150px"  placeholder="请输入电话号码">
@@ -24,7 +20,7 @@
 			</div>
 			<div class="list" style="top: 20px;text-align: center;">
 				<!-- <a href="#/tab/kaika"> -->
-					<button  class="button button-positive"  ng-click="activate(money,cardCode,kaInputPhone)" style="width: 80%">确定</button>
+					<button  class="button button-positive"  ng-click="activate(money,cardCode,kaInputPhone,cardName)" style="width: 80%">确定</button>
 				<!-- </a> -->
 	  	</div>
 
