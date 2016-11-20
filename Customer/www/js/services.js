@@ -63,87 +63,51 @@ angular.module('starter.services', [])
   };
 })
 
-.factory('CardDetail', function() {
-  // Might use a resource here that returns a JSON array
-   // var chats;
-   //  $.ajax({
-   //     type: "GET",
-   //     url: "http://192.168.1.106:8080/cloudcard/control/test",
-   //     data: {"idToFind":"10001"},
-   //     // dataType: "json",
-   //     dataFilter: function(data){
-   //        console.log("raw data: "+data);
-   //        var idx =  data.indexOf("//");
-   //        if(data && /^\s*\/\/.*/.test(data) && idx>-1){
-   //          data = data.substring(idx+2);
-   //        }
-   //        return data;
-   //     },
-   //     success: function(data){
-   //       alert("i'm here!!!!");
-   //       console.log(data);
-   //         chats = [{
-   //          id: data.id,
-   //          name: data.name,
-   //          lastText: data.lastText,
-   //          face: data.face
-   //        }]
-   //     },
-   //     error:function (e) {
-   //      alert("aaaa"+e);
-   //      console.log(e);
-   //    }
-   //  });
+//用户账单列表数据
+.factory('CardDetail', function($rootScope) {
+    var chats;
+    var that = this;
+    var token=$.cookie("token");
+    var organizationPartyId=$.cookie("organizationPartyId");
+    // if(token){
+    $.ajax({
+      type: "POST",
+      url: $rootScope.interfaceUrl+"getUserPayment",
+      async: false,
+      data: {"token": token,
+             "organizationPartyId": organizationPartyId,
+             "viewIndex":0,
+             "viewSize":20},
+      // dataType: "json",
+      dataFilter: function(data){
+        console.log("raw data: "+data);
+        var idx =  data.indexOf("//");
+        if(data && /^\s*\/\/.*/.test(data) && idx>-1){
+          data = data.substring(idx+2);
+        }
+        return data;
+      },
+      success: function(data){
+        var paymentList = data.paymentList||[];
+        that.chats= $.map(paymentList, function(o){
+          return {
+            storeName: o.storeName,
+            cardBalance: o.amount,
+            type: o.type,
+            typeDesc: o.typeDesc,
+            transDate: o.transDate
 
-
-
-  // Some fake testing data
-  chats = [{
-    id: 0,
-    name: '沙龙_l001_1',
-    lastText: '122',
-    face: '2016-11-1'
-  }, {
-    id: 1,
-    name: '奶茶_l002_1',
-    lastText: '80',
-    face: '2016-11-2'
-  }, {
-    id: 2,
-    name: '新白鹿_l003_1',
-    lastText: '333',
-    face: '2016-11-2'
-  }, {
-    id: 3,
-    name: '奶茶_l002_1',
-    lastText: '500',
-    face: '2016-11-3'
-  },  {
-    id: 3,
-    name: '新白鹿_l003_1',
-    lastText: '500',
-    face: '2016-11-3'
-  }, {
-    id: 3,
-    name: '新白鹿_l003_1',
-    lastText: '200',
-    face: '2016-11-3'
-  }, {
-    id: 3,
-    name: '回头客',
-    lastText: '600',
-    face: '2016-11-3'
-  },{
-    id: 4,
-    name: '一品鲜_l003_1',
-    lastText: '310',
-    face: '2016-11-3'
-  }];
+          }});
+      },
+      error:function (e) {
+        console.log(e);
+      }
+    });
 
   return {
     all: function() {
       // alert(chats);
-      return chats;
+      return that.chats;
     },
     remove: function(chat) {
       chats.splice(chats.indexOf(chat), 1);

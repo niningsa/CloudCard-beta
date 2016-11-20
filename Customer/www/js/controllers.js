@@ -136,7 +136,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('CardDetailCtrl', function($scope,CardDetail) {
+.controller('CardDetailCtrl', function($scope,CardDetail,$rootScope) {
  $scope.cardDetail = CardDetail.all();
 
 })

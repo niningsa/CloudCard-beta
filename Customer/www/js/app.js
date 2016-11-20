@@ -67,9 +67,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     })
     //从卡中将卡Id和金额传进去
     .state('tab.chat-detail', {
-
       url: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
-
       cache: false,
       views: {
         'tab-chats': {
@@ -89,7 +87,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-
+//用户授权成功的页面
   .state('tab.cardreturn', {
       url: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate',
       views: {
@@ -99,7 +97,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-
+//账单的查询列表
   .state('tab.account', {
     url: '/account',
     views: {
