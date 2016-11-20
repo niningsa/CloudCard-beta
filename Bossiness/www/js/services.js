@@ -32,7 +32,7 @@ angular.module('starter.services', [])
       "viewSize":200
     },
     success: function(data){
-      alert(data.code+" "+data.msg);
+      console.log(data.code+" "+data.msg);
       if(data.code=='200'){
         var paymentList = data.paymentList||[];
         chats= $.map(paymentList, function(o){
@@ -55,6 +55,7 @@ angular.module('starter.services', [])
   // }
   return {
     all: function() {
+      console.table(chats);
       return chats;
     },
     remove: function(chat) {
