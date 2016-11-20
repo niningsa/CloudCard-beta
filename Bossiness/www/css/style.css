@@ -1,0 +1,86 @@
+Empty. Add your own CSS if you like
+.accountbg{
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+.zkmoney{
+	text-align: center;
+	width:100%;
+	/* height: 280px; */
+	/* background: yellow; */
+	background: url('../img/bg05.jpg');
+	background-size:100%;
+}
+.moeny1{
+	width:100%;
+	height:70px;  /*设置div的大小*/
+	background: url('../img/timg.jpg');
+	text-align: center;        /*文字水平居中对齐*/
+	line-height: 90px;        /*设置文字行距等于div的高度*/
+	overflow:hidden;
+}
+.money{
+	/* background: url('../img/bg01.jpg'); */
+	text-align: center;
+	height: 150px;
+	padding: 0px;
+	margin: 0px;
+
+}
+
+.money2{
+	float: left;
+	margin-bottom: 0px;
+
+}
+.money3{
+	margin-left: 10px;
+	padding-left: 12px;
+	margin-bottom: 0px;
+}
+.money4{
+	/* background: #EE6435; */
+	background: url('../img/timg2.jpg');
+	line-height: 60px;
+	overflow:hidden;
+	
+
+}
+
+
+
+
+.al{
+	filter:alpha(opacity=70);  -moz-opacity:0.7;  -khtml-opacity: 0.7;  opacity: 0.7;  
+	background:  url('../img/bg1_2.jpg') no-repeat;
+}
+.alcolor{
+
+	font-family:"黑体";
+	color:#ff0000;
+}
+
+.showType{
+	/* background:  url('../img/bg1_3.jpg'); */
+	height: 100%;
+	height: 90px;
+	text-align: center;
+	line-height: 90px;        /*设置文字行距等于div的高度*/
+	overflow:hidden;
+}
+
+.zkmoneyPadding{
+	height: 9px;
+	background: #ff00ff url() 0 0 no-repeat;
+}
+
+.charInfo{
+	margin: 40px auto;
+	text-align: center;
+	width: 350px;
+}
+
+.topType{
+	height: 70px;
+}
