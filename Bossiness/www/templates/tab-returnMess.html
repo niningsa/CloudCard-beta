@@ -5,16 +5,23 @@
 		<span ng-model="moneyinfo"></span>
 	   <div class="list">
 		  <label class="item item-input al">
-		    <span class="input-label">卡信息:</span>
+		    <span class="input-label">卡号信息:</span>
 		    <!-- <input id="other_tel" type="text" readonly="ture" /> -->
-		    			<span>理发店K001</span>
+		    			<span ng-bind="cardCode"></span>
 		  </label>
 		  <br>
 		  <label class="item item-input al">
 		    <span class="input-label">已收金额:</span>
-			<span>{{moneyinfo}}</span>
+			<span ng-bind="amount"></span>
 		    <!-- <input  size="20" type="text"  style="color:#ff0000;font-family:黑体;"> -->
 		  </label>
+      <br>
+		  <label class="item item-input al">
+		    <span class="input-label">卡余额:</span>
+			<span ng-bind="cardBalance"></span>
+		    <!-- <input  size="20" type="text"  style="color:#ff0000;font-family:黑体;"> -->
+		  </label>
+
 		</div>
 	  	<div class="powerbutton">
 	  	<a href="#/tab/dash">
