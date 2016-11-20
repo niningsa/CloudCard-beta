@@ -12,8 +12,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
 
-    $rootScope.interfaceUrl="http://192.168.0.109:8080/cloudcard/control/"; //接口前一截一样的
-
+    $rootScope.interfaceUrl="http://192.168.0.109:8080/cloudcard/control/";   //接口前一截一样的
+    $rootScope.token=$.cookie("token");                                       //全局 token
+    $rootScope.organizationPartyId=$.cookie("organizationPartyId");           //全局 商家partyId
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);

@@ -1,29 +1,32 @@
 <ion-view view-title="账单">
   <ion-content>
-  	
+
     <div id="test" class="money">
     	<!-- <div class="money1" style="height: 60%">已经买卡：2000元</div> -->
-    	<div id="moeny1" class="moeny1" style="height: 60%">已卖卡：2000元</div>
+    	<div id="moeny1" class="moeny1" style="height: 60%">已卖卡：<span ng-bind="presellAmount"></span>元</div>
     	<div style="height: 40%" class="money4">
-    		<div class="money2" >剩余额度：1000元</div>
-    		<div class="money3">总额度： 3000元</div>
+    		<div class="money2">卖卡限额：<span ng-bind="limitAmount"></span>元</div>
+    		<div class="money3">卖卡余额：<span ng-bind="balance"></span>元</div>
 
     	</div>
     </div>
-    
+
     <div class="list list-inset">
-    <span>消费类型：</span>
-    <!-- <select id="account_type"  class="account_type">
-    	<option value="all">全部</option>
-    	<option value="type_1">消费</option>
-    	<option value="type_2">充值</option>
-    	<option value="type_3">开卡</option>
-    </select> -->
+      <!--
+      <span>消费类型：</span>
+      <select id="account_type"  class="account_type">
+          <option value="all">全部</option>
+          <option value="type_1">消费</option>
+          <option value="type_2">充值</option>
+          <option value="type_3">开卡</option>
+      </select> -->
         <ion-list>
       <ion-item class="item-remove-animate" ng-repeat="chat in Chats" type="item-text-wrap">
-
-        <h2>{{chat.name}}</h2>
-       <p ><b>{{chat.lastText}}</b>元 <span> ({{chat.face}})</span></p> 
+        <div>
+          <span ng-bind="chat.typeDesc"></span>
+          <span ng-bind="chat.customerName"></span>
+        </div>
+       <p ><b ng-bind="chat.amount"></b>元 <span ng-bind="chat.transDate"></span></p>
       </ion-item>
     </ion-list>
     </div>
