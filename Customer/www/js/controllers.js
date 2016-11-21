@@ -142,6 +142,31 @@ angular.module('starter.controllers', [])
 })
 
 
+  //退出登录
+.controller('loginOutController', function($scope,CardDetail,$rootScope,$state) {
+    $scope.loginOut=function(){
+      //退出登录时清除cookie;
+        var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
+        if (keys) {
+          for (var i = keys.length; i--;)
+            document.cookie=keys[i]+'=0;expires=' + new Date( 0).toUTCString()
+        }
+      $state.go("login");
+    }
+
+
+})
+  //返回首页
+.controller('returnController', function($scope,CardDetail,$rootScope,$state) {
+    $scope.return=function(){
+
+      $state.go("tab.chats");
+    }
+
+
+})
+
+
 
 
 

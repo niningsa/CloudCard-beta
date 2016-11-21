@@ -1,50 +1,50 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function($rootScope) {
-   var chats;
-   var that = this;
-   var token=$.cookie("token");
-   // if(token){
-     $.ajax({
-        type: "POST",
-        url: $rootScope.interfaceUrl+"myCloudCards",
+.factory('Chats', function($rootScope,$state) {
 
-        async: false,
-        data: {"token": token},
-        // dataType: "json",
-        dataFilter: function(data){
-           console.log("raw data: "+data);
-           var idx =  data.indexOf("//");
-           if(data && /^\s*\/\/.*/.test(data) && idx>-1){
-             data = data.substring(idx+2);
-           }
-           return data;
-        },
-        success: function(data){
-            var cloudCardList = data.cloudCardList||[];
-            that.chats= $.map(cloudCardList, function(o){
-              return {
-                cardId: o.cardId,
-                cardName: o.cardName,
-                cardBalance: o.cardBalance,
-                cardImg: o.cardImg,
-                cardCode: o.cardCode,
-                isAuthToMe: o.isAuthToMe,
-                isAuthToOthers: o.isAuthToOthers
-
-              }});
-        },
-        error:function (e) {
-         console.log(e);
-       }
-     });
-   // }else{
-   //   location.href="http://"+location.host+"/#/login";
-   // }
 
 
   return {
     all: function() {
+      var chats;
+      var that = this;
+      var token=$.cookie("token");
+      if(token){
+      $.ajax({
+        type: "POST",
+        url: $rootScope.interfaceUrl+"myCloudCards",
+        async: false,
+        data: {"token": token},
+        // dataType: "json",
+        dataFilter: function(data){
+          console.log("raw data: "+data);
+          var idx =  data.indexOf("//");
+          if(data && /^\s*\/\/.*/.test(data) && idx>-1){
+            data = data.substring(idx+2);
+          }
+          return data;
+        },
+        success: function(data){
+          var cloudCardList = data.cloudCardList||[];
+          that.chats= $.map(cloudCardList, function(o){
+            return {
+              cardId: o.cardId,
+              cardName: o.cardName,
+              cardBalance: o.cardBalance,
+              cardImg: o.cardImg,
+              cardCode: o.cardCode,
+              isAuthToMe: o.isAuthToMe,
+              isAuthToOthers: o.isAuthToOthers
+
+            }});
+        },
+        error:function (e) {
+          console.log(e);
+        }
+      });
+      }else{
+        $state.go("login");
+      }
       console.table(that.chats );
       //console.table(that.chats[0].lastText );
       return that.chats;
@@ -64,49 +64,56 @@ angular.module('starter.services', [])
 })
 
 //用户账单列表数据
-.factory('CardDetail', function($rootScope) {
-    var chats;
-    var that = this;
-    var token=$.cookie("token");
-    var organizationPartyId=$.cookie("organizationPartyId");
-    // if(token){
-    $.ajax({
-      type: "POST",
-      url: $rootScope.interfaceUrl+"getUserPayment",
-      async: false,
-      data: {"token": token,
-             "organizationPartyId": organizationPartyId,
-             "viewIndex":0,
-             "viewSize":20},
-      // dataType: "json",
-      dataFilter: function(data){
-        console.log("raw data: "+data);
-        var idx =  data.indexOf("//");
-        if(data && /^\s*\/\/.*/.test(data) && idx>-1){
-          data = data.substring(idx+2);
-        }
-        return data;
-      },
-      success: function(data){
-        var paymentList = data.paymentList||[];
-        that.chats= $.map(paymentList, function(o){
-          return {
-            storeName: o.storeName,
-            cardBalance: o.amount,
-            type: o.type,
-            typeDesc: o.typeDesc,
-            transDate: o.transDate
-
-          }});
-      },
-      error:function (e) {
-        console.log(e);
-      }
-    });
+.factory('CardDetail', function($rootScope,$state) {
 
   return {
     all: function() {
-      // alert(chats);
+
+      var chats;
+      var that = this;
+      var token=$.cookie("token");
+      var organizationPartyId=$.cookie("organizationPartyId");
+      if(token!=null) {
+        $.ajax({
+          type: "POST",
+          url: $rootScope.interfaceUrl + "getUserPayment",
+          async: false,
+          data: {
+            "token": token,
+            "organizationPartyId": organizationPartyId,
+            "viewIndex": 0,
+            "viewSize": 20
+          },
+          // dataType: "json",
+          dataFilter: function (data) {
+            console.log("raw data: " + data);
+            var idx = data.indexOf("//");
+            if (data && /^\s*\/\/.*/.test(data) && idx > -1) {
+              data = data.substring(idx + 2);
+            }
+            return data;
+          },
+          success: function (data) {
+            var paymentList = data.paymentList || [];
+            that.chats = $.map(paymentList, function (o) {
+              return {
+                storeName: o.storeName,
+                cardBalance: o.amount,
+                type: o.type,
+                typeDesc: o.typeDesc,
+                transDate: o.transDate
+
+              }
+            });
+          },
+          error: function (e) {
+            console.log(e);
+          }
+        });
+      }else{
+        $state.go("login");
+      }
+      console.table(that.chats );
       return that.chats;
     },
     remove: function(chat) {
