@@ -24,7 +24,34 @@ text-decoration:none;
 a:active{
 text-decoration:none;
 }
-
+#tc{
+  text-align:center;
+  font-family: 华文楷体;
+  font-size: 20px;
+  padding: 20px;
+}
+#gx{
+  text-align:center;
+  font-family: 华文楷体;
+  font-size: 20px;
+  padding: 20px;
+}
+#about{
+  text-align:center;
+  font-family: 华文楷体;
+  font-size: 20px;
+  padding: 20px;
+}
+#cloud{
+  text-align:center;
+  padding: 20px;
+}
+#fh{
+  text-align:center;
+  font-family: 华文楷体;
+  font-size: 20px;
+  padding: 20px;
+}
 .powerbutton >input{
 	font-family: 宋体;
 }

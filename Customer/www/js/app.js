@@ -3,7 +3,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 .run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
 
-    $rootScope.interfaceUrl="http://192.168.0.109:8080/cloudcard/control/"; //接口前一截一样的
+    $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -55,7 +55,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
-
+//我的卡页面查询列表
   .state('tab.chats', {
       url: '/chats',
       views: {
@@ -63,8 +63,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           templateUrl: 'templates/tab-chats.html',
           controller: 'ChatsCtrl'
         }
-      }
+      },
+    cache:false,
+      params:{
+      isCache:true
+    }
     })
+    //解决页面不刷新的操作
+  //.state('tab.chats', {
+  //    url: '/chats',
+  //    templateUrl: 'templates/tab-chats.html',
+  //    controller: 'ChatsCtrl'
+  //  })
     //从卡中将卡Id和金额传进去
     .state('tab.chat-detail', {
       url: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
@@ -105,14 +115,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         templateUrl: 'templates/tab-account.html',
         controller: 'CardDetailCtrl'
       }
-    }
+    },
+      cache:false,
+      params:{
+        isCache:true
+      }
   })
 
+    //用户的退出和检查更新
+    .state('setting', {
+          url: '/setting',
+          templateUrl: 'templates/setting.html'
+          //controller: 'settingCtrl'
+
+    })
   .state('login', {
     url: '/login',
     templateUrl: "templates/login.html",
     controller:'LoginCtrl'
   });
+
 
 
 
