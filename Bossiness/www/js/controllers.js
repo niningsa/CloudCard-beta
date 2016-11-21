@@ -1,147 +1,38 @@
-angular.module('starter.controllers', [])
+  angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
-  // alert(window.innerHeight);
-  // alert($("#zkmoney").html());
-  $("#zkmoney").height(window.innerHeight*0.6);
-})
+  //首页
+  .controller('DashCtrl', function($scope, $state) {
+    $("#zkmoney").height(window.innerHeight*0.6); //heqiao
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
-
-.controller('ChatDetailCtrl', function($scope, $stateParams) {
-   $scope.nginputMoney = $stateParams.nginputMoney;
-})
-
-
-  // $("body").on("change","#account_type", function() {
-  //  var $account_type = $("#account_type").val();//得到选择的类型
-  //  alert($account_type);
-  //   if ($account_type == 'all' ) {//选择不同的类型
-  //     charts = Chats.all();
-  //   }else {
-  //      $scope.Chats = Chats.select($account_type);
-  //   }
-  //   alert($scope.Chats);
-  //   $.post("#/tab/returnMess",
-  //     {},
-  //     function(date){
-  //       if(date.mes=='success'){
-  //         alert("成功");
-  //       }else if(date.mes=='error'){
-  //         alert("失败");
-  //       }else{
-  //         alert("选择消费类型，到后台查数据");
-  //           // $scope.chats = '123456';
-  //         // window.location.href="#/tab/returnMess/" + nginputMoney;
-  //       }
-  //     });
-  //   });
-
-
-// .controller('accountTypeController', function($scope,$stateParams) {
-//    $scope.expression =function(){};
-//    alert("aaa");
-
-// })
-.controller('TestCtrl', function($scope){
-  $scope.change = function(x){
-    console.log(x);
-  }
-})
-
-.controller("kakaController", function($scope, $cordovaBarcodeScanner) {
-    $scope.kaika = function() {
-
-
-     var  kaInputPhone=$("#kaInputPhone").val();
-      var kaInputMoney=$("#kaInputMoney").val();
-
-      var flag = true;
-      //验证金额
-     var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
-     if (!moneyReg.test(kaInputMoney)) {
-      alert("金额输入有误,请重新");
-      flag = false;
-      };
-
-      //验证电话号码
-      var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-      if (!phoneReg.test(kaInputPhone)) {
-        alert("号码有误");
-        flag = false;
-      };
-      if(flag){
-       //请求到后台
-       $.post('#/tab/ceshidizhi',{},function(date){
-          //将input类容清空
-          $("#kaInputPhone").val("");
-          $("#kaInputMoney").val("");
-          window.location.href="#/tab/kaika/" + kaInputPhone + "/" + kaInputMoney;
-
-       })
-     }
+    var token=$.cookie("token");
+    if(token==null){
+      $state.go("login");
     }
   })
 
-.controller("KaiKaController", function($scope, $cordovaBarcodeScanner) {
-  $scope.scanBarcode = function() {
-          //用于点击确定按钮跳转
-          flag = true;
-              //判断输入金额格式对不对
-              nginputMoney = $scope.inputMoney;
-
-              var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
-              if (!moneyReg.test(nginputMoney)) {
-                alert("开卡金额输入有误,请重新");
-                flag = false;
-              };
-
-              if(flag){//金额格式不对不能提交数据
-                $.post("#/tab/test",
-                  {},
-                  function(date){
-                    if(date.mes=='success'){
-                      alert("成功");
-                    }else if(date.mes=='error'){
-                      alert("失败");
-                    }else{
-                      // alert("提交金额，到后台查数据");
-                      window.location.href="#/tab/returnChongZhiMess/" + nginputMoney;
-                    }
-                  })
-              }
-  };
-})
 
   /*
    * Desc 账单列表数据展示
    * Author LN
    * Date 2016-11-20
    * */
-  .controller('AccountCtrl', function($scope, $rootScope, $http, Chats) {
+  .controller('AccountCtrl', function($scope, $rootScope, $http, $state, Chats) {
+    var token=$.cookie("token");
+    var organizationPartyId=$.cookie("organizationPartyId");
+
     var charts = Chats.all();                                              // 商家账单
     $scope.Chats = charts;
 
+    if(token==''){
+      $state.go("login");
+    }
                                                                            // 商家授信额度查询
     $http({
       method: "POST",
       url: $rootScope.interfaceUrl+"getLimitAndPresellInfo",
       data: {
-        "token": $rootScope.token,
-        "organizationPartyId":$rootScope.organizationPartyId
+        "token": token,
+        "organizationPartyId":organizationPartyId
       },
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },   // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
       transformRequest: function(obj) {                                   // 参数是对象的话，需要把参数转成序列化的形式
@@ -153,10 +44,16 @@ angular.module('starter.controllers', [])
       }
     }).success(function (result) {
       console.table(result);
-      $scope.presellAmount=result.presellAmount;                           //	已卖出金额
-      $scope.limitAmount=result.limitAmount;                               //	卖卡限额
-      $scope.balance=result.balance;                                       //	卖卡余额
+
+      $scope.presellAmount=result.presellAmount;                          //	已卖出金额
+      $scope.limitAmount=result.limitAmount;                              //	卖卡限额
+      $scope.balance=result.balance;                                      //	卖卡余额
     });
+
+    //刷新操作
+    $scope.doRefresh = function() {
+      // history.go(0);
+    };
   })
 
 
@@ -165,23 +62,31 @@ angular.module('starter.controllers', [])
    * Author LN
    * Date 2016-11-20
    * */
-  .controller("XiaofeExampleController", function($scope, $state, $cordovaBarcodeScanner, $rootScope) {
+  .controller("XiaofeExampleController", function($scope, $state, $cordovaBarcodeScanner, $rootScope, $http) {
+    var token=$.cookie("token");
+    var organizationPartyId=$.cookie("organizationPartyId");
+
+    if(token==null){
+      $state.go("login");
+    }
+
+    //金额必须大于0的数字
+    $("input[name='amount']").keyup(function(){
+      var amount=$(this).val();
+      if(parseFloat(amount)<=0){
+        alert("输入金额不合法，请重新输入！！");
+        $(this).val("");
+        history.go(0);
+      }
+    });
+
     $scope.scanBarcode = function(amount) {
       //用于点击确定按钮跳转
-      $("body").off("click").on("click","#xiaofefrom", function() {
-
-        //判断输入金额格式对不对
-        var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
-        if (!moneyReg.test(amount)) {
-          alert("消费金额输入有误,请重新");
-        }else{
           $cordovaBarcodeScanner.scan().then(function(imageData) {
             var cardCode=imageData.text;
-            var token=$.cookie("token");
-            var organizationPartyId=$.cookie("organizationPartyId");
-            alert(cardCode+" "+token+" "+organizationPartyId);
 
             if(cardCode!='') {
+              alert(cardCode+" "+token+" "+organizationPartyId);
               $.ajax({
                 url: $rootScope.interfaceUrl + "cloudCardWithdraw",
                 type: "POST",
@@ -193,24 +98,27 @@ angular.module('starter.controllers', [])
                 },
                 success: function (result) {
                   alert(result.code+" "+result.msg+"　"+result.amount+" "+result.cardBalance);
-                  if(result.code=='200'){
-                    $state.go("tab.returnMess",{
-                      cardCode:cardCode,
-                      amount:amount,
-                      cardBalance:result.cardBalance
-                    });
-                  }
+                    if(result.code=='200'){
+                      $state.go("tab.returnMess",{
+                        cardCode:cardCode,
+                        amount:amount,
+                        cardBalance:result.cardBalance
+                      });
+                    }else{
+                      alert(result.msg);
+                      $.apply(function () {
+                        $scope.msg=result.msg;
+                      });
+                    }
                 }
               });
+
             }
 
           }, function(error) {
             console.log("An error happened -> " + error);
           });
 
-        }
-
-      });
     };
   })
 
@@ -228,13 +136,17 @@ angular.module('starter.controllers', [])
    * Date 2016-11-19
    * */
   .controller("RechargeExampleController", function($scope, $state, $cordovaBarcodeScanner, $rootScope) {
+      var token=$.cookie("token");
+      var organizationPartyId=$.cookie("organizationPartyId");
+
+      if(token==null){
+        $state.go("login");
+      }
 
       $scope.scanBarcode = function() {
          $cordovaBarcodeScanner.scan().then(function(imageData) {
 
           var cardCode=imageData.text;                // 扫到的数据
-          var token=$.cookie("token");
-          var organizationPartyId=$.cookie("organizationPartyId");
 
           alert(cardCode+" "+token+" "+organizationPartyId);
 
@@ -248,8 +160,13 @@ angular.module('starter.controllers', [])
                 "organizationPartyId":organizationPartyId
               },
               success: function (result) {
-                  alert(result.code+" "+result.msg);
+                  alert(result.code+" "+result.msg+" "+result.token);
                   alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
+
+                  // $.removeCookie("token");                //删除旧token
+                  // $.cookie("token",result.token,{
+                  //   expires:7//七天                       //植入新token
+                  // });
 
                   if(result.code=='200'){
                       if(result.isActivated=='Y'){        //已激活，那就到充值页面
@@ -283,15 +200,30 @@ angular.module('starter.controllers', [])
    * Date 2016-11-19
    * */
   .controller('RechargeCtrl', function($scope, $state, $stateParams, $rootScope) {
+    var token=$.cookie("token");
+    var organizationPartyId=$.cookie("organizationPartyId");
+    if(token==null){
+      $state.go("login");
+    }
+
     $scope.cardCode = $stateParams.cardCode;
     $scope.cardName = $stateParams.cardName;
     $scope.cardImg = $stateParams.cardImg;
     $scope.cardBalance = $stateParams.cardBalance;
 
+    //金额必须大于0的数字
+    $scope.money=10;
+    $("input[name='money']").keyup(function(){
+        if(parseFloat($(this).val())<=0){
+          alert("输入金额不合法，请重新输入！！");
+          $(this).val("");
+          history.go(0);
+        }
+    });
+
     $scope.recharge=function (money,cardCode,cardName,cardBalance) {
       if(parseFloat(money)>0){
-        var token=$.cookie("token");
-        var organizationPartyId=$.cookie("organizationPartyId");
+
         alert(cardCode+" "+token+" "+organizationPartyId);
         $.ajax({
           url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
@@ -303,15 +235,18 @@ angular.module('starter.controllers', [])
             "amount":money
           },
           success: function (result) {
-            console.log(result.code+" "+result.msg+" "+parseFloat(money)+parseFloat(cardBalance));
-            if(result.code=='200'){
-              $state.go("tab.returnChongZhiMess",{
-                cardCode:cardCode,
-                cardName:cardName,
-                money:money,
-                amount:parseFloat(money)+parseFloat(cardBalance)
-              });
-            }
+            alert(result.code+" "+result.msg+" "+parseFloat(money)+parseFloat(cardBalance) +" "+result.token);
+
+              if(result.code=='200'){
+                $state.go("tab.returnChongZhiMess",{
+                  cardCode:cardCode,
+                  cardName:cardName,
+                  money:money,
+                  amount:parseFloat(money)+parseFloat(cardBalance)
+                });
+              }else{
+                $scope.msg=result.msg;l
+              }
           }
         });
       }
@@ -333,14 +268,43 @@ angular.module('starter.controllers', [])
    * Date 2016-11-19
    * */
   .controller('ActivateCtrl', function($scope, $state, $stateParams, $rootScope) {
+    var token=$.cookie("token");
+    var organizationPartyId=$.cookie("organizationPartyId");
+    if(token==null){
+      $state.go("login");
+    }
+
     $scope.cardCode = $stateParams.cardCode;
     $scope.cardName = $stateParams.cardName;
     $scope.cardImg = $stateParams.cardImg;
     $scope.cardBalance = $stateParams.cardBalance;
 
+    //开卡验证
+    //金额必须大于0的数字,电话号码要有效
+    $("input[name='money']").keyup(function(){
+      if(parseFloat($(this).val())<=0){
+        alert("输入金额不合法，请重新输入！！");
+        $(this).val("");
+        history.go(0);
+      }
+    });
+
+    $("#kaInputPhone").blur(function(){
+      var phone=$(this).val();
+      //验证手机号码
+      var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+      if(phone){
+        if (!phoneReg.test(phone)) {
+          alert("手机号码有误");
+          $(this).val("");
+          history.go(0);
+        }
+      }
+    });
+
+
     $scope.activate=function (money,cardCode,kaInputPhone,cardName) {
-      var token=$.cookie("token");
-      var organizationPartyId=$.cookie("organizationPartyId");
+
       alert(cardCode+" "+token+" "+organizationPartyId);
       $.ajax({
         url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
@@ -353,16 +317,25 @@ angular.module('starter.controllers', [])
           "teleNumber":kaInputPhone
         },
         success: function (result) {
-          alert(result.code+" "+result.msg);
-          if(result.code=='200'){
-            alert("开卡成功！"+cardCode+",充值金额为："+parseFloat(money));
-            $state.go("tab.kaika",{
-              cardCode:cardCode,
-              cardName:cardName,
-              money:money,
-              kaInputPhone:kaInputPhone
-            });
-          }
+          alert(result.code+" "+result.msg+" "+result.token);
+
+            if(result.code=='200'){
+              alert("开卡成功！"+cardCode+",充值金额为："+parseFloat(money));
+
+              // $.removeCookie("token");                         //删除旧token
+              // $.cookie("token",result.token,{
+              //   expires:7//七天                                //植入新token
+              // });
+
+              $state.go("tab.kaika",{
+                cardCode:cardCode,
+                cardName:cardName,
+                money:money,
+                kaInputPhone:kaInputPhone
+              });
+            }else{
+              $scope.msg=result.msg;
+            }
         }
       });
     }
@@ -382,7 +355,7 @@ angular.module('starter.controllers', [])
    * Author LN
    * Date 2016-11-15
    * */
-  .controller('LoginCtrl', function($scope,$interval,$rootScope,$http) {
+  .controller('loginCtrl', function($scope,$interval,$rootScope,$http) {
     // $scope.tel='15910989807';
     $scope.codeBtn='获取验证码';
     $scope.user={"tel":"17092363583"};
@@ -472,4 +445,18 @@ angular.module('starter.controllers', [])
       });
     }
   })
+
+  /*
+   * Desc 登录
+   * Author LN
+   * Date 2016-11-21
+   * */
+  .controller('settingCtrl', function($scope,$state) {
+      $scope.outLogin=function () {
+        $.cookie('token', null);
+        $.cookie('organizationPartyId', null);
+        $state.go("login");
+      }
+  })
+
 ;

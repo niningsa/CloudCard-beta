@@ -12,9 +12,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
 
-    $rootScope.interfaceUrl="http://192.168.0.109:8080/cloudcard/control/";   //全局： 接口 URL
-    $rootScope.token=$.cookie("token");                                       //全局： token
-    $rootScope.organizationPartyId=$.cookie("organizationPartyId");           //全局： 商家 partyId
+    $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/";   //全局： 接口 URL
+    // $rootScope.token=$.cookie("token");                                       //全局： token
+    // $rootScope.organizationPartyId=$.cookie("organizationPartyId");           //全局： 商家 partyId
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -96,17 +96,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }
   })
 
-  .state('tab.xiaofe', {
-    url: '/xiaofe/:imageData',
-    cache: false,
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-xiaofe.html',
-        controller: 'xiaofeCtrl'
-      }
-    }
-  })
-
   .state('tab.recharge', {
     url: '/recharge/:cardCode/:cardName/:cardImg/:cardBalance',
     cache: false,
@@ -154,7 +143,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.returnChongZhiMess', {
       url: '/returnChongZhiMess/:cardCode/:cardName/:money/:amount',
       views: {
-        'tab-dash': {
+        'c': {
           templateUrl: 'templates/tab-returnChongZhiMess.html',
           controller: 'returnChongZhiMessCtrl'
         }
@@ -164,8 +153,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('login', {
        url: '/login',
        templateUrl: "templates/login.html",
-       controller:'LoginCtrl'
+       controller:'loginCtrl'
   })
+
+  .state('tab.setting', {
+       url: '/setting',
+       cache: false,
+       views: {
+          'tab-setting': {
+            templateUrl: 'templates/tab-setting.html',
+            controller: 'settingCtrl'
+          }
+       }
+  })
+
+
   ;
 
   // if none of the above states are matched, use this as the fallback

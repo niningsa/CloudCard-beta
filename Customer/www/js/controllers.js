@@ -205,7 +205,7 @@ angular.module('starter.controllers', [])
           return str.join("&");
         }
       }).success(function (result) {
-        console.log(result.code+" "+result.msg);
+          // console.log(result);
           if(result.code=='500'){
                 $scope.msg=result.msg;
           }else{
@@ -244,7 +244,7 @@ angular.module('starter.controllers', [])
           "captcha":$scope.user.identifyCode
         },
         success: function(result){
-          console.log(result.code+" "+result.msg);
+          // console.log(result.code+" "+result.msg);
           if(result.code=='200'){
             $scope.$apply(function () {
               $scope.msg="";

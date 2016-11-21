@@ -2,27 +2,27 @@
 	<ion-content class="">
 		<div class="charInfo">
 			<div class="topType">开卡</div>
-
-			<div class="list">
-				<label class="item">
-					<span class="input-label" style="float: left;">卡名：</span>
-          <span ng-bind="cardName"></span>
-				</label>
-        <label class="item">
-					<span class="input-label" style="float: left;">电话号码：</span>
-          <input ng-model="cardCode" type="hidden"/>
-					<input type="text" id = "kaInputPhone" class="form-control"	ng-model="kaInputPhone" style="width:150px"  placeholder="请输入电话号码">
-				</label>
-				<label class="item">
-					<span class="input-label" style="float: left;">预存金额：</span>
-					<input type="text" id="kaInputMoney" class="form-control" style="width:150px" ng-model="money"  placeholder="请输入金额">
-				</label>
-			</div>
-			<div class="list" style="top: 20px;text-align: center;">
-				<!-- <a href="#/tab/kaika"> -->
-					<button  class="button button-positive"  ng-click="activate(money,cardCode,kaInputPhone,cardName)" style="width: 80%">确定</button>
-				<!-- </a> -->
-	  	</div>
+      <form name="kaiKaForm">
+        <div class="list">
+          <label class="item">
+            <span class="input-label" style="float: left;">卡名：</span>
+            <span ng-bind="cardName"></span>
+          </label>
+          <label class="item">
+            <span class="input-label" style="float: left;">电话号码：</span>
+            <input ng-model="cardCode" type="hidden"/>
+            <input type="text" id = "kaInputPhone" class="form-control" name="kaInputPhone"	ng-model="kaInputPhone" style="width:150px"  placeholder="请输入电话号码" required>
+          </label>
+          <label class="item">
+            <span class="input-label" style="float: left;">预存金额：</span>
+            <input type="number" id="kaInputMoney" class="form-control" name="money" style="width:150px" ng-model="money"  placeholder="请输入金额" required>
+          </label>
+        </div>
+        <div class="list" style="top: 20px;text-align: center;">
+            <button  class="button button-positive"  ng-click="activate(money,cardCode,kaInputPhone,cardName)" style="width: 80%" ng-disabled="kaiKaForm.kaInputPhone.$error.required || kaiKaForm.money.$error.required">确定</button>
+        </div>
+        <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
+      </form>
 
 			</div>
 		</div>

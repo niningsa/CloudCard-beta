@@ -2,24 +2,27 @@
 	<ion-content class="">
 		<div class="charInfo">
 			<div class="topType">充卡</div>
-			<div class="list">
-        <label class="item">
-          <span class="input-label" style="float: left;">卡名：</span>
-          <span ng-bind="cardName"></span>
-        </label>
-        <label class="item">
-          <span class="input-label" style="float: left;">余额：</span>
-          <span ng-bind="cardBalance"></span>
-        </label>
-				<label class="item">
-          <input ng-model="cardCode" type="hidden"/>
-					<span class="input-label" style="float: left;">金额：</span>
-					<input type="text" ng-model="money" class="form-control" style="width:150px" id="name" placeholder="请输入金额">
-				</label>
-			</div>
-			<div class="list" style="top: 20px;text-align: center;">
-				<button ng-click="recharge(money,cardCode,cardName,cardBalance)" class="button button-positive" style="width: 80%">确定</button>
-			</div>
+      <form name="rechargeForm">
+        <div class="list">
+          <label class="item">
+            <span class="input-label" style="float: left;">卡名：</span>
+            <span ng-bind="cardName"></span>
+          </label>
+          <label class="item">
+            <span class="input-label" style="float: left;">余额：</span>
+            <span ng-bind="cardBalance"></span>
+          </label>
+          <label class="item">
+            <input ng-model="cardCode" type="hidden"/>
+            <span class="input-label" style="float: left;">金额：</span>
+            <input type="number" ng-model="money" class="form-control" style="width:150px" name="money" placeholder="请输入金额" required>
+          </label>
+        </div>
+        <div class="list" style="top: 20px;text-align: center;">
+          <button ng-click="recharge(money,cardCode,cardName,cardBalance)" class="button button-positive" style="width: 80%" ng-disabled="rechargeForm.money.$error.required">确定</button>
+        </div>
+        <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
+      </form>
 		</div>
 	</ion-content>
 </ion-view>
