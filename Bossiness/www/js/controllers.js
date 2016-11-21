@@ -245,7 +245,7 @@
                   amount:parseFloat(money)+parseFloat(cardBalance)
                 });
               }else{
-                $scope.msg=result.msg;l
+                $scope.msg=result.msg;
               }
           }
         });
