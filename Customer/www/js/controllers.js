@@ -174,9 +174,9 @@ angular.module('starter.controllers', [])
 //获取验证码
 .controller('LoginCtrl', function($scope,$interval,$rootScope,$http) {
   // $scope.tel='15910989807';
-  $scope.user={
-    tel:"18702104254"
-  };
+  //$scope.user={
+  //  tel:"18702104254"
+  //};
   $scope.codeBtn='获取验证码';
 
   $scope.getIdentifyCode=function (tel) {
