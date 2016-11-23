@@ -14,7 +14,11 @@ angular.module('starter.services', [])
         type: "POST",
         url: $rootScope.interfaceUrl+"myCloudCards",
         async: false,
-        data: {"token": token},
+        data: {
+          "token": token,
+          "viewIndex": 0,
+          "viewSize": 200
+        },
         // dataType: "json",
         dataFilter: function(data){
           console.log("raw data: "+data);
@@ -69,8 +73,6 @@ angular.module('starter.services', [])
   return {
     all: function() {
 
-      var chats;
-      var that = this;
       var token=$.cookie("token");
       var organizationPartyId=$.cookie("organizationPartyId");
       if(token!=null) {
@@ -82,7 +84,7 @@ angular.module('starter.services', [])
             "token": token,
             "organizationPartyId": organizationPartyId,
             "viewIndex": 0,
-            "viewSize": 20
+            "viewSize": 200
           },
           // dataType: "json",
           dataFilter: function (data) {
@@ -95,7 +97,7 @@ angular.module('starter.services', [])
           },
           success: function (data) {
             var paymentList = data.paymentList || [];
-            that.chats = $.map(paymentList, function (o) {
+            cardDetail = $.map(paymentList, function (o) {
               return {
                 storeName: o.storeName,
                 cardBalance: o.amount,
@@ -113,8 +115,8 @@ angular.module('starter.services', [])
       }else{
         $state.go("login");
       }
-      console.table(that.chats );
-      return that.chats;
+      console.table(cardDetail );
+      return cardDetail;
     },
     remove: function(chat) {
       chats.splice(chats.indexOf(chat), 1);
