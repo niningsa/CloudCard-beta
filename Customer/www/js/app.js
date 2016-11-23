@@ -122,6 +122,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
   })
 
+
+
     //用户的退出和检查更新
     .state('setting', {
           url: '/setting',

@@ -10,6 +10,10 @@ angular.module('starter.controllers', [])
 
 .controller('ChatsCtrl', function($scope, Chats) {
   $scope.chats = Chats.all();
+    $scope.doRefresh = function() {
+      $scope.chats = Chats.all();
+      $scope.$broadcast("scroll.refreshComplete");
+    };
     //alert( $scope.chats[0].lastText);
   $scope.remove = function(chat) {
     Chats.remove(chat);
@@ -138,12 +142,18 @@ angular.module('starter.controllers', [])
 
 .controller('CardDetailCtrl', function($scope,CardDetail,$rootScope) {
  $scope.cardDetail = CardDetail.all();
+    $scope.doRefresh = function() {
+      $scope.cardDetail = CardDetail.all();
+      $scope.$broadcast("scroll.refreshComplete");
 
-})
+    };
+
+
+  })
 
 
   //退出登录
-.controller('loginOutController', function($scope,CardDetail,$rootScope,$state) {
+.controller('loginOutController', function($scope,CardDetail,$rootScope,$state,$ionicPopup) {
     $scope.loginOut=function(){
       //退出登录时清除cookie;
         var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
@@ -151,12 +161,26 @@ angular.module('starter.controllers', [])
           for (var i = keys.length; i--;)
             document.cookie=keys[i]+'=0;expires=' + new Date( 0).toUTCString()
         }
-      $state.go("login");
+      $ionicPopup.confirm({
+        title:"退出",
+        template:"是否退出要退出登录???",
+        okText:"确定",
+        cancelText:"取消"
+      })
+        .then(function(res){
+          if(res){
+            $state.go("login");
+          }
+        })
+
     }
 
 
 })
+
+
   //返回首页
+
 .controller('returnController', function($scope,CardDetail,$rootScope,$state) {
     $scope.return=function(){
 

@@ -3,20 +3,48 @@ Create tabs with an icon and label, using the tabs-positive style.
 Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
-<ion-tabs class="tabs-icon-top tabs-color-active-positive">
-
-  <!-- Dashboard Tab -->
-  <ion-tab title="我的卡" icon-off="ion-card" icon-on="ion-card" href="#/tab/chats">
-    <ion-nav-view name="tab-chats"></ion-nav-view>
-  </ion-tab>
-
-  <!-- Account Tab -->
-  <ion-tab title="账单" icon-off="ion-clipboard" icon-on="ion-clipboard" href="#/tab/account">
-    <ion-nav-view name="tab-account"></ion-nav-view>
-  </ion-tab>
-  <ion-tab title="设置" icon-off="ion-clipboard" icon-on="ion-clipboard" href="#/setting">
-    <ion-nav-view name="setting"></ion-nav-view>
-  </ion-tab>
 
 
-</ion-tabs>
+<ion-side-menus>
+  <ion-side-menu-content class="calm-bg">
+
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+
+
+    <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
+      <!-- Dashboard Tab -->
+      <ion-tab title="我的卡" icon-off="ion-card" icon-on="ion-card" href="#/tab/chats">
+        <ion-nav-view name="tab-chats"></ion-nav-view>
+      </ion-tab>
+
+      <!-- Account Tab -->
+      <ion-tab title="账单" icon-off="ion-clipboard" icon-on="ion-clipboard" href="#/tab/account">
+        <ion-nav-view name="tab-account"></ion-nav-view>
+      </ion-tab>
+      <ion-tab title="设置" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/setting">
+        <ion-nav-view name="setting"></ion-nav-view>
+      </ion-tab>
+
+
+    </ion-tabs>
+
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left" width="150">
+
+    <!--<div id="cloud"><img src="img/cardCloud.png"></div>-->
+    <div id="tc" ng-controller="loginOutController" ng-click="loginOut()"> 退出登录</div>
+
+    <div id="gx" class="item-avatar" >版本更新</div>
+
+    <div id="about">关于我们</div>
+
+    <div id="fh" ng-controller="returnController" ng-click="return()">返回</div>
+  </ion-side-menu>
+
+
+</ion-side-menus>
