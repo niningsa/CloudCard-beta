@@ -143,7 +143,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.returnChongZhiMess', {
       url: '/returnChongZhiMess/:cardCode/:cardName/:money/:amount',
       views: {
-        'c': {
+        'tab-dash': {
           templateUrl: 'templates/tab-returnChongZhiMess.html',
           controller: 'returnChongZhiMessCtrl'
         }

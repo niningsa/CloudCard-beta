@@ -81,12 +81,14 @@
     });
 
     $scope.scanBarcode = function(amount) {
+
       //用于点击确定按钮跳转
           $cordovaBarcodeScanner.scan().then(function(imageData) {
+            $scope.msg="";                          //清空错误提示
             var cardCode=imageData.text;
 
             if(cardCode!='') {
-              alert(cardCode+" "+token+" "+organizationPartyId);
+              // alert(cardCode+" "+token+" "+organizationPartyId);
               $.ajax({
                 url: $rootScope.interfaceUrl + "cloudCardWithdraw",
                 type: "POST",
@@ -97,7 +99,7 @@
                   "amount":amount
                 },
                 success: function (result) {
-                  alert(result.code+" "+result.msg+"　"+result.amount+" "+result.cardBalance);
+                  // alert(result.code+" "+result.msg+"　"+result.amount+" "+result.cardBalance);
                     if(result.code=='200'){
                       $state.go("tab.returnMess",{
                         cardCode:cardCode,
@@ -105,8 +107,7 @@
                         cardBalance:result.cardBalance
                       });
                     }else{
-                      alert(result.msg);
-                      $.apply(function () {
+                      $scope.$apply(function () {
                         $scope.msg=result.msg;
                       });
                     }
@@ -148,7 +149,7 @@
 
           var cardCode=imageData.text;                // 扫到的数据
 
-          alert(cardCode+" "+token+" "+organizationPartyId);
+          // alert(cardCode+" "+token+" "+organizationPartyId);
 
           if(cardCode!='') {
             $.ajax({
@@ -160,8 +161,8 @@
                 "organizationPartyId":organizationPartyId
               },
               success: function (result) {
-                  alert(result.code+" "+result.msg+" "+result.token);
-                  alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
+                  // alert(result.code+" "+result.msg+" "+result.token);
+                  // alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
 
                   // $.removeCookie("token");                //删除旧token
                   // $.cookie("token",result.token,{
@@ -177,7 +178,7 @@
                           cardImg:result.cardImg
                         });
                       }else{                              //到开发页面
-                        alert(result.cardCode);
+                        // alert(result.cardCode);
                         $state.go("tab.activate",{
                           cardCode: cardCode,
                           cardName:result.cardName,
@@ -212,7 +213,6 @@
     $scope.cardBalance = $stateParams.cardBalance;
 
     //金额必须大于0的数字
-    $scope.money=10;
     $("input[name='money']").keyup(function(){
         if(parseFloat($(this).val())<=0){
           alert("输入金额不合法，请重新输入！！");
@@ -224,7 +224,7 @@
     $scope.recharge=function (money,cardCode,cardName,cardBalance) {
       if(parseFloat(money)>0){
 
-        alert(cardCode+" "+token+" "+organizationPartyId);
+        // alert(cardCode+" "+token+" "+organizationPartyId);
         $.ajax({
           url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
           type: "POST",
@@ -235,7 +235,7 @@
             "amount":money
           },
           success: function (result) {
-            alert(result.code+" "+result.msg+" "+parseFloat(money)+parseFloat(cardBalance) +" "+result.token);
+            // alert(result.code+" "+result.msg+" "+parseFloat(money)+parseFloat(cardBalance) +" "+result.token);
 
               if(result.code=='200'){
                 $state.go("tab.returnChongZhiMess",{
@@ -245,7 +245,9 @@
                   amount:parseFloat(money)+parseFloat(cardBalance)
                 });
               }else{
-                $scope.msg=result.msg;
+                $scope.$apply(function () {
+                  $scope.msg=result.msg;
+                });
               }
           }
         });
@@ -305,7 +307,7 @@
 
     $scope.activate=function (money,cardCode,kaInputPhone,cardName) {
 
-      alert(cardCode+" "+token+" "+organizationPartyId);
+      // alert(cardCode+" "+token+" "+organizationPartyId);
       $.ajax({
         url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
         type: "POST",
@@ -317,10 +319,10 @@
           "teleNumber":kaInputPhone
         },
         success: function (result) {
-          alert(result.code+" "+result.msg+" "+result.token);
+          // alert(result.code+" "+result.msg);
 
             if(result.code=='200'){
-              alert("开卡成功！"+cardCode+",充值金额为："+parseFloat(money));
+              // alert("开卡成功！"+cardCode+",充值金额为："+parseFloat(money));
 
               // $.removeCookie("token");                         //删除旧token
               // $.cookie("token",result.token,{
@@ -334,7 +336,9 @@
                 kaInputPhone:kaInputPhone
               });
             }else{
-              $scope.msg=result.msg;
+              $scope.$apply(function () {
+                $scope.msg=result.msg;
+              });
             }
         }
       });
@@ -358,7 +362,7 @@
   .controller('loginCtrl', function($scope,$interval,$rootScope,$http) {
     // $scope.tel='15910989807';
     $scope.codeBtn='获取验证码';
-    $scope.user={"tel":"17092363583"};
+    $scope.user={"tel":"","identifyCode":""};
 
     $scope.getIdentifyCode=function (tel) {
       $scope.msg="";//先清空错误提示
@@ -447,15 +451,17 @@
   })
 
   /*
-   * Desc 登录
+   * Desc 退出
    * Author LN
    * Date 2016-11-21
    * */
   .controller('settingCtrl', function($scope,$state) {
       $scope.outLogin=function () {
-        $.cookie('token', null);
-        $.cookie('organizationPartyId', null);
-        $state.go("login");
+        if(confirm("确认是否要退出？？")){
+          $.cookie('token', null);
+          $.cookie('organizationPartyId', null);
+          $state.go("login");
+        }
       }
   })
 
