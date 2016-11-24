@@ -73,5 +73,6 @@ text-decoration:none;
   width: 60%;
 }
 
-
-
+.cardCloud{
+  background: url('../img/cardCloud.png') no-repeat -30px center;height:110px;
+}
