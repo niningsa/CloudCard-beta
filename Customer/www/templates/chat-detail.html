@@ -4,8 +4,12 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="">
+<ion-view view-title="卡信息">
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.chats"></a>
+  </ion-nav-buttons>
   <ion-content class="padding">
+
     <div class="charInfo">
       <div class="chartext" style="display: none">卡id： {{cardId}}</div>
       <div class="chartext" style="display: none">卡二维码： {{cardCode}}</div>

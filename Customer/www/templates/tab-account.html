@@ -1,12 +1,16 @@
 <ion-view view-title="账单">
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.chats"></a>
+  </ion-nav-buttons>
   <ion-content>
     <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     <ion-list>
+
       <ion-item class="item-remove-animate" ng-repeat="chat in cardDetail" type="item-text-wrap">
 
         <h2>{{chat.storeName}}</h2>
         <!--通过三目运算符来放置符号-->
-       <p >消费：<b>{{chat.type=='1'? '+'+chat.cardBalance:'-'+chat.cardBalance}}</b>元 </b> </p>
+       <p class="badge bar-left badge-balanced" ><b>{{chat.type=='1'? '充值: +'+chat.cardBalance:'支付: -'+chat.cardBalance}}</b> 元 </b> </p>
        <p>类型：<span> {{chat.typeDesc}}</span></p>
        <p>时间：<span> {{chat.transDate | date:'yyyy-MM-dd' }}</span></p>
       </ion-item>

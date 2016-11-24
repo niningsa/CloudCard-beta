@@ -16,7 +16,7 @@
                   <input type="button" class="btn btn-primary" ng-value="codeBtn" ng-click="getIdentifyCode(user.tel)" ng-disabled="codeBtnDisable">
               </div>
               <div class="loginbox-submit">
-                  <input type="submit" class="btn btn-primary btn-block" value="Login" ng-disabled="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">
+                  <input type="submit" class="btn btn-primary btn-block" value="登录" ng-disabled="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">
               </div>
               <div ng-show="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">
                 <span style="width:300px;display: block;text-align: center;font-weight: bold;color: red;">请输入完整的信息！！</span>

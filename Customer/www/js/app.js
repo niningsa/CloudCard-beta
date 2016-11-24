@@ -69,12 +69,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       isCache:true
     }
     })
-    //解决页面不刷新的操作
-  //.state('tab.chats', {
-  //    url: '/chats',
-  //    templateUrl: 'templates/tab-chats.html',
-  //    controller: 'ChatsCtrl'
-  //  })
+
     //从卡中将卡Id和金额传进去
     .state('tab.chat-detail', {
       url: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
@@ -124,12 +119,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 
 
-    //用户的退出和检查更新
-    .state('setting', {
-          url: '/setting',
-          templateUrl: 'templates/setting.html'
-          //controller: 'settingCtrl'
 
+
+    .state('tab.setting', {
+      url: '/setting',
+      cache: false,
+      views: {
+        'tab-setting': {
+          templateUrl: 'templates/tab-setting.html',
+          controller: 'settingCtrl'
+        }
+      }
     })
   .state('login', {
     url: '/login',

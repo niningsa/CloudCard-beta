@@ -51,12 +51,16 @@ angular.module('starter.controllers', [])
 
 
 //授权的controller
-.controller('inputCtrl', function($scope, $stateParams,$rootScope,$http,Chats) {
+.controller('inputCtrl', function($scope, $stateParams,$rootScope,$http,Chats,$state) {
    $scope.cardId  =$stateParams.cardId;
    $scope.cardBalance  =$stateParams.cardBalance;
    $scope.cardName  =$stateParams.cardName;
+   $scope.cardCode  =$stateParams.cardCode;
     var token=$.cookie("token");
-  $("body").off("click").on("click","#powerfrom", function() {
+
+
+
+  $("body").off("click", "#powerfrom").on("click","#powerfrom", function() {
     $other_tel=$("#other_tel").val();
     $other_cardId=$("#other_cardId").val();
     $other_money=$("#other_money").val();
@@ -123,8 +127,19 @@ angular.module('starter.controllers', [])
         },
         success: function(data){
           console.log(data);
-          //授权成功，传入必要的参数，跳转到授权成功的查看页面
-          window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
+          if(data.code==500){
+            alert("授权失败,"+data.msg);
+          }
+          //跳转到登录的页面
+          if(data.code==400){
+            $state.go("login");
+          }
+          if(data.code==200){
+            //授权成功，传入必要的参数，跳转到授权成功的查看页面
+            window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
+          }
+
+
           //window.location.href="http://"+location.host+"#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
         },
         error:function (e) {
@@ -142,8 +157,10 @@ angular.module('starter.controllers', [])
 
 .controller('CardDetailCtrl', function($scope,CardDetail,$rootScope) {
  $scope.cardDetail = CardDetail.all();
+  //下拉刷新的功能
     $scope.doRefresh = function() {
       $scope.cardDetail = CardDetail.all();
+      //下拉刷新完成后提示转圈消失
       $scope.$broadcast("scroll.refreshComplete");
 
     };
@@ -153,30 +170,51 @@ angular.module('starter.controllers', [])
 
 
   //退出登录
-.controller('loginOutController', function($scope,CardDetail,$rootScope,$state,$ionicPopup) {
-    $scope.loginOut=function(){
-      //退出登录时清除cookie;
-        var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
-        if (keys) {
-          for (var i = keys.length; i--;)
-            document.cookie=keys[i]+'=0;expires=' + new Date( 0).toUTCString()
-        }
+//.controller('loginOutController', function($scope,CardDetail,$rootScope,$state,$ionicPopup) {
+//    $scope.loginOut=function(){
+//      //退出登录时清除cookie;
+//        var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
+//        if (keys) {
+//          for (var i = keys.length; i--;)
+//            document.cookie=keys[i]+'=0;expires=' + new Date( 0).toUTCString()
+//        }
+//      $ionicPopup.confirm({
+//        title:"退出",
+//        template:"是否退出要退出登录???",
+//        okText:"确定",
+//        cancelText:"取消"
+//      })
+//        .then(function(res){
+//          if(res){
+//            $state.go("login");
+//          }
+//        })
+//
+//    }
+//
+//
+//})
+
+//退出登录
+  .controller('settingCtrl', function($scope,$state,$ionicPopup) {
+    $scope.outLogin=function () {
+
       $ionicPopup.confirm({
-        title:"退出",
-        template:"是否退出要退出登录???",
-        okText:"确定",
-        cancelText:"取消"
-      })
+          title:"退出",
+          template:"是否退出要退出登录",
+          okText:"确定",
+          cancelText:"取消"
+        })
         .then(function(res){
           if(res){
+            $.cookie('token', null);
+            $.cookie('organizationPartyId', null);
             $state.go("login");
           }
         })
 
     }
-
-
-})
+  })
 
 
   //返回首页
