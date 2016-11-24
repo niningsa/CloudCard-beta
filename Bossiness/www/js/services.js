@@ -3,8 +3,7 @@ angular.module('starter.services', [])
 .factory('Chats', function($rootScope, $state) {
   var chats;
   return {
-    all: function() {
-
+    all: function(amountType) {
         var token=$.cookie("token");
         var organizationPartyId=$.cookie("organizationPartyId");
 
@@ -16,7 +15,7 @@ angular.module('starter.services', [])
             data: {
               "token": token,
               "organizationPartyId": organizationPartyId,
-              "type":"0",  //0-全部， 1-充值，2-支付
+              "type":amountType,  //0-全部， 1-充值，2-支付
               "viewIndex":0,
               "viewSize":200
             },
@@ -29,6 +28,7 @@ angular.module('starter.services', [])
                     customerName: o.customerName,
                     amount: o.amount,
                     typeDesc: o.typeDesc,
+                    type: o.type,
                     transDate: o.transDate
                   }
                 });
