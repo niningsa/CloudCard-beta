@@ -12,25 +12,50 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
-  </component>
-  <component name="DaemonCodeAnalyzer">
-    <disable_hints />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="Customer" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1176" max-vertical-offset="2227">
-              <caret line="79" column="50" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="50" />
-              <folding />
+            <state relative-caret-position="1659">
+              <caret line="81" column="14" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="50" />
+              <folding>
+                <marker date="1479895512059" expanded="true" signature="122:532" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="158:528" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="334:457" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="484:524" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="609:3954" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="1397:1638" ph="//..." />
+                <marker date="1479895512059" expanded="true" signature="1727:1808" ph="{&quot;url&quot;: '/tab'...}" />
+                <marker date="1479895512059" expanded="true" signature="1878:2027" ph="{&quot;url&quot;: '/dash'...}" />
+                <marker date="1479895512059" expanded="true" signature="1909:2023" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="1929:2017" ph="{&quot;templateUrl&quot;: 'templates/tab-dash.html'...}" />
+                <marker date="1479895512059" expanded="true" signature="2063:2290" ph="{&quot;url&quot;: '/chats'...}" />
+                <marker date="1479895512059" expanded="true" signature="2099:2226" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="2122:2218" ph="{&quot;templateUrl&quot;: 'templates/tab-chats.html'...}" />
+                <marker date="1479895512059" expanded="true" signature="2258:2284" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="2296:2467" ph="//..." />
+                <marker date="1479895512059" expanded="true" signature="2498:2763" ph="{&quot;url&quot;: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe'...}" />
+                <marker date="1479895512059" expanded="true" signature="2623:2757" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="2646:2749" ph="{&quot;templateUrl&quot;: 'templates/chat-detail.html'...}" />
+                <marker date="1479895512059" expanded="true" signature="2792:3030" ph="{&quot;url&quot;: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode'...}" />
+                <marker date="1479895512059" expanded="true" signature="2893:3024" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="2916:3016" ph="{&quot;templateUrl&quot;: 'templates/tab-cardinput.html'...}" />
+                <marker date="1479895512059" expanded="true" signature="3071:3287" ph="{&quot;url&quot;: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate'...}" />
+                <marker date="1479895512059" expanded="true" signature="3152:3281" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="3175:3273" ph="{&quot;templateUrl&quot;: 'templates/tab-getpower.html'...}" />
+                <marker date="1479895512059" expanded="true" signature="3323:3551" ph="{&quot;url&quot;: '/account'...}" />
+                <marker date="1479895512059" expanded="true" signature="3357:3483" ph="{...}" />
+                <marker date="1479895512059" expanded="true" signature="3380:3477" ph="{&quot;templateUrl&quot;: 'templates/tab-account.html'...}" />
+                <marker date="1479895512059" expanded="true" signature="3517:3547" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -38,17 +63,17 @@
       <file leaf-file-name="tab-getpower.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/tab-getpower.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="646">
+            <state relative-caret-position="155">
               <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chat-detail.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="chat-detail.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/templates/chat-detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="425">
+            <state relative-caret-position="210">
               <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
               <folding />
             </state>
@@ -58,7 +83,7 @@
       <file leaf-file-name="tab-cardinput.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/tab-cardinput.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="663">
+            <state relative-caret-position="84">
               <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
               <folding>
                 <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
@@ -71,18 +96,24 @@
       <file leaf-file-name="tab-chats.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/tab-chats.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="374">
-              <caret line="5" column="41" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="41" />
-              <folding />
+            <state relative-caret-position="105">
+              <caret line="6" column="41" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="41" />
+              <folding>
+                <marker date="1479895512088" expanded="false" signature="250:261" ph="..." />
+                <marker date="1479895512088" expanded="true" signature="281:617" ph="..." />
+                <marker date="1479895512088" expanded="false" signature="451:462" ph="..." />
+                <marker date="1479895512088" expanded="true" signature="463:604" ph="..." />
+                <marker date="1479895512088" expanded="true" signature="538:592" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.25982532" vertical-offset="748" max-vertical-offset="2142">
-              <caret line="37" column="32" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+            <state relative-caret-position="2285">
+              <caret line="161" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -91,9 +122,15 @@
       <file leaf-file-name="services.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/services.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="2805">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="168">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding>
+                <marker date="1479895512074" expanded="true" signature="86:343" ph="{...}" />
+                <marker date="1479895512074" expanded="true" signature="100:343" ph="{...}" />
+                <marker date="1479895512074" expanded="true" signature="122:343" ph="{...}" />
+                <marker date="1479895512074" expanded="true" signature="3162:3169" ph="{...}" />
+                <marker date="1479895512074" expanded="true" signature="3162:3450" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,8 +150,11 @@
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
@@ -145,146 +185,16 @@
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -297,406 +207,33 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="editorconfig.notification" value="Applied .editorconfig settings" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="editor.config.accepted" value="true" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Attests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Customer" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <method />
-    </configuration>
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
-      <module name="" />
-      <setting name="vmparams" value="" />
-      <setting name="cmdLine" value="run-app" />
-      <setting name="depsClasspath" value="false" />
-      <setting name="passParentEnv" value="true" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <setting name="launchBrowser" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Customer" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="TARGET" value="" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Nosetests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Customer" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JarApplication" factoryName="JAR Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
       <node-options />
       <gulpfile />
       <tasks />
+      <arguments />
       <pass-parent-envs>true</pass-parent-envs>
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
-      <option name="BCName" value="" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="FlashPlayerDebugger.exe" />
-        </LauncherParameters>
-      </option>
-      <option name="moduleName" value="" />
-      <option name="trusted" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Customer" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
-      <option name="BCName" value="" />
-      <option name="IOSSimulatorSdkPath" value="" />
-      <option name="adlOptions" value="" />
-      <option name="airProgramParameters" value="" />
-      <option name="appDescriptorForEmulator" value="Android" />
-      <option name="debugTransport" value="USB" />
-      <option name="debuggerSdkRaw" value="BC SDK" />
-      <option name="emulator" value="NexusOne" />
-      <option name="emulatorAdlOptions" value="" />
-      <option name="fastPackaging" value="true" />
-      <option name="fullScreenHeight" value="0" />
-      <option name="fullScreenWidth" value="0" />
-      <option name="launchUrl" value="false" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="FlashPlayerDebugger.exe" />
-        </LauncherParameters>
-      </option>
-      <option name="mobileRunTarget" value="Emulator" />
-      <option name="moduleName" value="" />
-      <option name="overriddenMainClass" value="" />
-      <option name="overriddenOutputFileName" value="" />
-      <option name="overrideMainClass" value="false" />
-      <option name="runTrusted" value="true" />
-      <option name="screenDpi" value="0" />
-      <option name="screenHeight" value="0" />
-      <option name="screenWidth" value="0" />
-      <option name="url" value="http://" />
-      <option name="usbDebugPort" value="7936" />
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Customer" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="py.test">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Customer" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="testToRun" value="" />
-      <option name="keywords" value="" />
-      <option name="params" value="" />
-      <option name="USE_PARAM" value="false" />
-      <option name="USE_KEYWORD" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list />
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Customer" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="myFilePath" />
-      <option name="GLUE" />
-      <option name="myNameFilter" />
-      <option name="myGeneratedName" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <list size="0" />
   </component>
-  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="550283b9-5d5b-4661-bfd2-826cce2af435" name="Default" comment="" />
       <created>1478660345999</created>
       <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
       <updated>1478660345999</updated>
       <workItem from="1478660346697" duration="4293000" />
       <workItem from="1478741886087" duration="10831000" />
@@ -704,11 +241,12 @@
       <workItem from="1478841532712" duration="915000" />
       <workItem from="1479262464604" duration="25281000" />
       <workItem from="1479534012250" duration="334000" />
+      <workItem from="1479959794833" duration="2254000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41709000" />
+    <option name="totallyTimeSpent" value="43963000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -731,63 +269,63 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1378" height="744" extended-state="1" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924962" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18300654" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23748103" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924962" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23731343" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18300654" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924962" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924962" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24980111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924962" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18300654" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23731343" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -801,11 +339,6 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <option name="myTodoPanelSettings">
-      <TodoPanelSettings />
-    </option>
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
@@ -813,15 +346,44 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1176" max-vertical-offset="2227">
+        <state relative-caret-position="1659">
           <caret line="79" column="50" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="50" />
-          <folding />
+          <folding>
+            <marker date="1479895512059" expanded="true" signature="122:532" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="158:528" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="334:457" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="484:524" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="609:3954" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1397:1638" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="1727:1808" ph="{&quot;url&quot;: '/tab'...}" />
+            <marker date="1479895512059" expanded="true" signature="1878:2027" ph="{&quot;url&quot;: '/dash'...}" />
+            <marker date="1479895512059" expanded="true" signature="1909:2023" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1929:2017" ph="{&quot;templateUrl&quot;: 'templates/tab-dash.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2063:2290" ph="{&quot;url&quot;: '/chats'...}" />
+            <marker date="1479895512059" expanded="true" signature="2099:2226" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2122:2218" ph="{&quot;templateUrl&quot;: 'templates/tab-chats.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2258:2284" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2296:2467" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="2498:2763" ph="{&quot;url&quot;: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe'...}" />
+            <marker date="1479895512059" expanded="true" signature="2623:2757" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2646:2749" ph="{&quot;templateUrl&quot;: 'templates/chat-detail.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2792:3030" ph="{&quot;url&quot;: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode'...}" />
+            <marker date="1479895512059" expanded="true" signature="2893:3024" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2916:3016" ph="{&quot;templateUrl&quot;: 'templates/tab-cardinput.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3071:3287" ph="{&quot;url&quot;: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate'...}" />
+            <marker date="1479895512059" expanded="true" signature="3152:3281" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3175:3273" ph="{&quot;templateUrl&quot;: 'templates/tab-getpower.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3323:3551" ph="{&quot;url&quot;: '/account'...}" />
+            <marker date="1479895512059" expanded="true" signature="3357:3483" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3380:3477" ph="{&quot;templateUrl&quot;: 'templates/tab-account.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3517:3547" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/tab-getpower.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="646">
+        <state relative-caret-position="399">
           <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
           <folding />
         </state>
@@ -829,7 +391,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/chat-detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="425">
+        <state relative-caret-position="210">
           <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
           <folding />
         </state>
@@ -837,7 +399,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/tab-cardinput.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="663">
+        <state relative-caret-position="84">
           <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
           <folding>
             <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
@@ -848,15 +410,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/tab-chats.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="374">
+        <state relative-caret-position="105">
           <caret line="5" column="41" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="41" />
-          <folding />
+          <folding>
+            <marker date="1479895512088" expanded="false" signature="250:261" ph="..." />
+            <marker date="1479895512088" expanded="true" signature="281:617" ph="..." />
+            <marker date="1479895512088" expanded="false" signature="451:462" ph="..." />
+            <marker date="1479895512088" expanded="true" signature="463:604" ph="..." />
+            <marker date="1479895512088" expanded="true" signature="538:592" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2142">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -864,30 +432,165 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="2805">
+        <state relative-caret-position="168">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
+          <folding>
+            <marker date="1479895512074" expanded="true" signature="86:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="100:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="122:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3169" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3450" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1343" max-vertical-offset="2210">
-          <caret line="79" column="37" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="37" />
+        <state relative-caret-position="0">
+          <caret line="79" column="50" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="50" />
+          <folding>
+            <marker date="1479895512059" expanded="true" signature="122:532" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="158:528" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="334:457" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="484:524" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="609:3954" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1397:1638" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="1727:1808" ph="{&quot;url&quot;: '/tab'...}" />
+            <marker date="1479895512059" expanded="true" signature="1878:2027" ph="{&quot;url&quot;: '/dash'...}" />
+            <marker date="1479895512059" expanded="true" signature="1909:2023" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1929:2017" ph="{&quot;templateUrl&quot;: 'templates/tab-dash.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2063:2290" ph="{&quot;url&quot;: '/chats'...}" />
+            <marker date="1479895512059" expanded="true" signature="2099:2226" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2122:2218" ph="{&quot;templateUrl&quot;: 'templates/tab-chats.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2258:2284" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2296:2467" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="2498:2763" ph="{&quot;url&quot;: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe'...}" />
+            <marker date="1479895512059" expanded="true" signature="2623:2757" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2646:2749" ph="{&quot;templateUrl&quot;: 'templates/chat-detail.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2792:3030" ph="{&quot;url&quot;: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode'...}" />
+            <marker date="1479895512059" expanded="true" signature="2893:3024" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2916:3016" ph="{&quot;templateUrl&quot;: 'templates/tab-cardinput.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3071:3287" ph="{&quot;url&quot;: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate'...}" />
+            <marker date="1479895512059" expanded="true" signature="3152:3281" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3175:3273" ph="{&quot;templateUrl&quot;: 'templates/tab-getpower.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3323:3551" ph="{&quot;url&quot;: '/account'...}" />
+            <marker date="1479895512059" expanded="true" signature="3357:3483" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3380:3477" ph="{&quot;templateUrl&quot;: 'templates/tab-account.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3517:3547" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-getpower.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/chat-detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-cardinput.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+          <folding>
+            <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#2;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-chats.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="5" column="41" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="41" />
+          <folding>
+            <marker date="1479895512088" expanded="false" signature="250:261" ph="..." />
+            <marker date="1479895512088" expanded="true" signature="281:617" ph="..." />
+            <marker date="1479895512088" expanded="false" signature="451:462" ph="..." />
+            <marker date="1479895512088" expanded="true" signature="463:604" ph="..." />
+            <marker date="1479895512088" expanded="true" signature="538:592" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <marker date="1479895512074" expanded="true" signature="86:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="100:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="122:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3169" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3450" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="79" column="37" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="37" />
+          <folding>
+            <marker date="1479895512059" expanded="true" signature="122:532" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="158:528" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="334:457" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="484:524" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="609:3954" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1397:1638" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="1727:1808" ph="{&quot;url&quot;: '/tab'...}" />
+            <marker date="1479895512059" expanded="true" signature="1878:2027" ph="{&quot;url&quot;: '/dash'...}" />
+            <marker date="1479895512059" expanded="true" signature="1909:2023" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1929:2017" ph="{&quot;templateUrl&quot;: 'templates/tab-dash.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2063:2290" ph="{&quot;url&quot;: '/chats'...}" />
+            <marker date="1479895512059" expanded="true" signature="2099:2226" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2122:2218" ph="{&quot;templateUrl&quot;: 'templates/tab-chats.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2258:2284" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2296:2467" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="2498:2763" ph="{&quot;url&quot;: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe'...}" />
+            <marker date="1479895512059" expanded="true" signature="2623:2757" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2646:2749" ph="{&quot;templateUrl&quot;: 'templates/chat-detail.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2792:3030" ph="{&quot;url&quot;: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode'...}" />
+            <marker date="1479895512059" expanded="true" signature="2893:3024" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2916:3016" ph="{&quot;templateUrl&quot;: 'templates/tab-cardinput.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3071:3287" ph="{&quot;url&quot;: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate'...}" />
+            <marker date="1479895512059" expanded="true" signature="3152:3281" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3175:3273" ph="{&quot;templateUrl&quot;: 'templates/tab-getpower.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3323:3551" ph="{&quot;url&quot;: '/account'...}" />
+            <marker date="1479895512059" expanded="true" signature="3357:3483" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3380:3477" ph="{&quot;templateUrl&quot;: 'templates/tab-account.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3517:3547" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/chat-detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="391">
+        <state relative-caret-position="0">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
@@ -895,7 +598,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="1836">
+        <state relative-caret-position="0">
           <caret line="20" column="41" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="41" />
           <folding />
         </state>
@@ -903,30 +606,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="2805">
+        <state relative-caret-position="0">
           <caret line="28" column="24" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="24" />
-          <folding />
+          <folding>
+            <marker date="1479895512074" expanded="true" signature="86:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="100:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="122:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3169" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3450" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1431" max-vertical-offset="2730">
+        <state relative-caret-position="0">
           <caret line="79" column="37" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="37" />
-          <folding />
+          <folding>
+            <marker date="1479895512059" expanded="true" signature="122:532" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="158:528" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="334:457" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="484:524" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="609:3954" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1397:1638" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="1727:1808" ph="{&quot;url&quot;: '/tab'...}" />
+            <marker date="1479895512059" expanded="true" signature="1878:2027" ph="{&quot;url&quot;: '/dash'...}" />
+            <marker date="1479895512059" expanded="true" signature="1909:2023" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1929:2017" ph="{&quot;templateUrl&quot;: 'templates/tab-dash.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2063:2290" ph="{&quot;url&quot;: '/chats'...}" />
+            <marker date="1479895512059" expanded="true" signature="2099:2226" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2122:2218" ph="{&quot;templateUrl&quot;: 'templates/tab-chats.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2258:2284" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2296:2467" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="2498:2763" ph="{&quot;url&quot;: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe'...}" />
+            <marker date="1479895512059" expanded="true" signature="2623:2757" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2646:2749" ph="{&quot;templateUrl&quot;: 'templates/chat-detail.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2792:3030" ph="{&quot;url&quot;: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode'...}" />
+            <marker date="1479895512059" expanded="true" signature="2893:3024" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2916:3016" ph="{&quot;templateUrl&quot;: 'templates/tab-cardinput.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3071:3287" ph="{&quot;url&quot;: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate'...}" />
+            <marker date="1479895512059" expanded="true" signature="3152:3281" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3175:3273" ph="{&quot;templateUrl&quot;: 'templates/tab-getpower.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3323:3551" ph="{&quot;url&quot;: '/account'...}" />
+            <marker date="1479895512059" expanded="true" signature="3357:3483" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3380:3477" ph="{&quot;templateUrl&quot;: 'templates/tab-account.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3517:3547" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1491">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/chat-detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="189" max-vertical-offset="483">
+        <state relative-caret-position="0">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
@@ -934,7 +672,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="318" max-vertical-offset="2268">
+        <state relative-caret-position="0">
           <caret line="20" column="41" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="41" />
           <folding />
         </state>
@@ -942,30 +680,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="441" max-vertical-offset="3465">
+        <state relative-caret-position="0">
           <caret line="28" column="24" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="24" />
-          <folding />
+          <folding>
+            <marker date="1479895512074" expanded="true" signature="86:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="100:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="122:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3169" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3450" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1431" max-vertical-offset="2730">
+        <state relative-caret-position="0">
           <caret line="79" column="37" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="37" />
-          <folding />
+          <folding>
+            <marker date="1479895512059" expanded="true" signature="122:532" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="158:528" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="334:457" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="484:524" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="609:3954" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1397:1638" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="1727:1808" ph="{&quot;url&quot;: '/tab'...}" />
+            <marker date="1479895512059" expanded="true" signature="1878:2027" ph="{&quot;url&quot;: '/dash'...}" />
+            <marker date="1479895512059" expanded="true" signature="1909:2023" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1929:2017" ph="{&quot;templateUrl&quot;: 'templates/tab-dash.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2063:2290" ph="{&quot;url&quot;: '/chats'...}" />
+            <marker date="1479895512059" expanded="true" signature="2099:2226" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2122:2218" ph="{&quot;templateUrl&quot;: 'templates/tab-chats.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2258:2284" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2296:2467" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="2498:2763" ph="{&quot;url&quot;: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe'...}" />
+            <marker date="1479895512059" expanded="true" signature="2623:2757" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2646:2749" ph="{&quot;templateUrl&quot;: 'templates/chat-detail.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2792:3030" ph="{&quot;url&quot;: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode'...}" />
+            <marker date="1479895512059" expanded="true" signature="2893:3024" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2916:3016" ph="{&quot;templateUrl&quot;: 'templates/tab-cardinput.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3071:3287" ph="{&quot;url&quot;: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate'...}" />
+            <marker date="1479895512059" expanded="true" signature="3152:3281" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3175:3273" ph="{&quot;templateUrl&quot;: 'templates/tab-getpower.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3323:3551" ph="{&quot;url&quot;: '/account'...}" />
+            <marker date="1479895512059" expanded="true" signature="3357:3483" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3380:3477" ph="{&quot;templateUrl&quot;: 'templates/tab-account.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3517:3547" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1491">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/chat-detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="189" max-vertical-offset="483">
+        <state relative-caret-position="0">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
@@ -973,7 +746,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="318" max-vertical-offset="2268">
+        <state relative-caret-position="0">
           <caret line="20" column="41" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="41" />
           <folding />
         </state>
@@ -981,23 +754,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="441" max-vertical-offset="3465">
+        <state relative-caret-position="0">
           <caret line="28" column="24" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="24" />
-          <folding />
+          <folding>
+            <marker date="1479895512074" expanded="true" signature="86:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="100:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="122:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3169" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3450" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="945" max-vertical-offset="2730">
+        <state relative-caret-position="0">
           <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-          <folding />
+          <folding>
+            <marker date="1479895512059" expanded="true" signature="122:532" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="158:528" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="334:457" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="484:524" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="609:3954" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1397:1638" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="1727:1808" ph="{&quot;url&quot;: '/tab'...}" />
+            <marker date="1479895512059" expanded="true" signature="1878:2027" ph="{&quot;url&quot;: '/dash'...}" />
+            <marker date="1479895512059" expanded="true" signature="1909:2023" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1929:2017" ph="{&quot;templateUrl&quot;: 'templates/tab-dash.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2063:2290" ph="{&quot;url&quot;: '/chats'...}" />
+            <marker date="1479895512059" expanded="true" signature="2099:2226" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2122:2218" ph="{&quot;templateUrl&quot;: 'templates/tab-chats.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2258:2284" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2296:2467" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="2498:2763" ph="{&quot;url&quot;: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe'...}" />
+            <marker date="1479895512059" expanded="true" signature="2623:2757" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2646:2749" ph="{&quot;templateUrl&quot;: 'templates/chat-detail.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2792:3030" ph="{&quot;url&quot;: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode'...}" />
+            <marker date="1479895512059" expanded="true" signature="2893:3024" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2916:3016" ph="{&quot;templateUrl&quot;: 'templates/tab-cardinput.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3071:3287" ph="{&quot;url&quot;: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate'...}" />
+            <marker date="1479895512059" expanded="true" signature="3152:3281" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3175:3273" ph="{&quot;templateUrl&quot;: 'templates/tab-getpower.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3323:3551" ph="{&quot;url&quot;: '/account'...}" />
+            <marker date="1479895512059" expanded="true" signature="3357:3483" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3380:3477" ph="{&quot;templateUrl&quot;: 'templates/tab-account.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3517:3547" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/chat-detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="294" max-vertical-offset="462">
+        <state relative-caret-position="0">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
@@ -1005,7 +813,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2205">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1013,81 +821,114 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3176" max-vertical-offset="3864">
+        <state relative-caret-position="0">
           <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-          <folding />
+          <folding>
+            <marker date="1479895512074" expanded="true" signature="86:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="100:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="122:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3169" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3450" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/tabs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="625">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="483">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/tab-account.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="289">
+        <state relative-caret-position="0">
           <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1491">
+        <state relative-caret-position="0">
           <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.5172415" vertical-offset="262" max-vertical-offset="782">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/style.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8232446" vertical-offset="0" max-vertical-offset="816">
+        <state relative-caret-position="0">
           <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="2805">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="168">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding>
+            <marker date="1479895512074" expanded="true" signature="86:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="100:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="122:343" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3169" ph="{...}" />
+            <marker date="1479895512074" expanded="true" signature="3162:3450" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1176" max-vertical-offset="2227">
-          <caret line="79" column="50" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/chat-detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="425">
-          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-          <folding />
+        <state relative-caret-position="1659">
+          <caret line="81" column="14" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="50" />
+          <folding>
+            <marker date="1479895512059" expanded="true" signature="122:532" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="158:528" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="334:457" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="484:524" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="609:3954" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1397:1638" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="1727:1808" ph="{&quot;url&quot;: '/tab'...}" />
+            <marker date="1479895512059" expanded="true" signature="1878:2027" ph="{&quot;url&quot;: '/dash'...}" />
+            <marker date="1479895512059" expanded="true" signature="1909:2023" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="1929:2017" ph="{&quot;templateUrl&quot;: 'templates/tab-dash.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2063:2290" ph="{&quot;url&quot;: '/chats'...}" />
+            <marker date="1479895512059" expanded="true" signature="2099:2226" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2122:2218" ph="{&quot;templateUrl&quot;: 'templates/tab-chats.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2258:2284" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2296:2467" ph="//..." />
+            <marker date="1479895512059" expanded="true" signature="2498:2763" ph="{&quot;url&quot;: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe'...}" />
+            <marker date="1479895512059" expanded="true" signature="2623:2757" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2646:2749" ph="{&quot;templateUrl&quot;: 'templates/chat-detail.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="2792:3030" ph="{&quot;url&quot;: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode'...}" />
+            <marker date="1479895512059" expanded="true" signature="2893:3024" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="2916:3016" ph="{&quot;templateUrl&quot;: 'templates/tab-cardinput.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3071:3287" ph="{&quot;url&quot;: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate'...}" />
+            <marker date="1479895512059" expanded="true" signature="3152:3281" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3175:3273" ph="{&quot;templateUrl&quot;: 'templates/tab-getpower.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3323:3551" ph="{&quot;url&quot;: '/account'...}" />
+            <marker date="1479895512059" expanded="true" signature="3357:3483" ph="{...}" />
+            <marker date="1479895512059" expanded="true" signature="3380:3477" ph="{&quot;templateUrl&quot;: 'templates/tab-account.html'...}" />
+            <marker date="1479895512059" expanded="true" signature="3517:3547" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/tab-cardinput.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="663">
+        <state relative-caret-position="84">
           <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
           <folding>
             <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
@@ -1096,26 +937,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tab-getpower.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="646">
-          <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/tab-chats.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="374">
-          <caret line="5" column="41" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="41" />
-          <folding />
+        <state relative-caret-position="105">
+          <caret line="6" column="41" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="41" />
+          <folding>
+            <marker date="1479895512088" expanded="false" signature="250:261" ph="..." />
+            <marker date="1479895512088" expanded="true" signature="281:617" ph="..." />
+            <marker date="1479895512088" expanded="false" signature="451:462" ph="..." />
+            <marker date="1479895512088" expanded="true" signature="463:604" ph="..." />
+            <marker date="1479895512088" expanded="true" signature="538:592" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.25982532" vertical-offset="748" max-vertical-offset="2142">
-          <caret line="37" column="32" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+        <state relative-caret-position="2285">
+          <caret line="161" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-getpower.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/chat-detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
           <folding />
         </state>
       </provider>

@@ -1,4 +1,8 @@
 <ion-view view-title="充卡">
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.dash"></a>
+  </ion-nav-buttons>
 	<ion-content class="">
 		<div class="charInfo">
       <form name="rechargeForm">
@@ -14,13 +18,39 @@
           <label class="item">
             <input ng-model="cardCode" type="hidden"/>
             <span class="input-label" style="float: left;">金额：</span>
-            <input type="number" ng-model="money" class="form-control" style="width:150px" name="money" placeholder="请输入金额" required>
+           <!-- <input type="number" ng-model="money" class="form-control" style="width:150px" name="money" placeholder="请输入金额" required>-->
+
+            <!--<select name="money" ng-model="money" ng-options="m for m in moneys" required>-->
+              <!--<option value="">&#45;&#45; 请选择 &#45;&#45;</option>-->
+            <!--</select>-->
+            <!--元-->
+          </label>
+          <label class="item">
+            <div class="row padding-left-50">
+              <div class="col-20">
+                <button class="button button-balanced" ng-click="recharge(100,cardCode,cardName,cardBalance)">100元</button>
+              </div>
+              <div class="col-offset-10"></div>
+              <div class="col-20">
+                <button class="button button-balanced" ng-click="recharge(200,cardCode,cardName,cardBalance)">200元</button>
+              </div>
+              <div class="col-offset-10"></div>
+              <div class="col-20">
+                <button class="button button-balanced" ng-click="recharge(300,cardCode,cardName,cardBalance)">300元</button>
+              </div>
+            </div>
+            <div class="row padding-left-50 padding-top-10">
+              <div class="col-20">
+                <button class="button button-balanced" ng-click="recharge(500,cardCode,cardName,cardBalance)">500元</button>
+              </div>
+            </div>
+
           </label>
         </div>
         <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
-        <div class="list" style="top: 20px;text-align: center;">
-          <button ng-click="recharge(money,cardCode,cardName,cardBalance)" class="button button-positive" style="width: 80%" ng-disabled="rechargeForm.money.$error.required">确定</button>
-        </div>
+        <!--<div class="list" style="top: 20px;text-align: center;">-->
+          <!--<button ng-click="recharge(money,cardCode,cardName,cardBalance)" class="button button-positive" style="width: 80%" ng-disabled="rechargeForm.money.$error.required">确定</button>-->
+        <!--</div>-->
       </form>
 		</div>
 	</ion-content>
