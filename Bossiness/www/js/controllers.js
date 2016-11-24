@@ -2,8 +2,6 @@
 
   //首页
   .controller('DashCtrl', function($scope, $state) {
-    $("#zkmoney").height(window.innerHeight*0.6); //heqiao
-
     var token=$.cookie("token");
     if(token==null){
       $state.go("login");
@@ -20,7 +18,7 @@
     var token=$.cookie("token");
     var organizationPartyId=$.cookie("organizationPartyId");
 
-    var charts = Chats.all();                                              // 商家账单
+    var charts = Chats.all(0);                                              // 商家账单
     $scope.Chats = charts;
 
     if(token==''){
@@ -50,10 +48,46 @@
       $scope.balance=result.balance;                                      //	卖卡余额
     });
 
-    //刷新操作
+    //下拉刷新操作
     $scope.doRefresh = function() {
-      // history.go(0);
+      $("#amountType").val(0);                                            //刷新的同时，将下拉变为全部
+
+      var charts = Chats.all(0);                                           // 商家账单
+      $scope.Chats = charts;
+
+      $http({
+        method: "POST",
+        url: $rootScope.interfaceUrl+"getLimitAndPresellInfo",
+        data: {
+          "token": token,
+          "organizationPartyId":organizationPartyId
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },   // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+        transformRequest: function(obj) {                                   // 参数是对象的话，需要把参数转成序列化的形式
+          var str = [];
+          for (var p in obj) {
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          }
+          return str.join("&");
+        }
+      }).success(function (result) {
+        console.table(result);
+
+        $scope.presellAmount=result.presellAmount;                          //	已卖出金额
+        $scope.limitAmount=result.limitAmount;                              //	卖卡限额
+        $scope.balance=result.balance;                                      //	卖卡余额
+      });
+
+      $scope.$broadcast("scroll.refreshComplete");
     };
+
+
+    //下拉列表分类显示
+    $scope.change = function(amountType){
+      var charts = Chats.all(amountType);                                   // 商家账单
+      $scope.Chats = charts;
+    }
+
   })
 
 
@@ -70,21 +104,24 @@
       $state.go("login");
     }
 
-    //金额必须大于0的数字
-    $("input[name='amount']").keyup(function(){
-      var amount=$(this).val();
-      if(parseFloat(amount)<=0){
-        alert("输入金额不合法，请重新输入！！");
-        $(this).val("");
-        history.go(0);
-      }
-    });
-
     $scope.scanBarcode = function(amount) {
+      $scope.msg='';
+      var reg = /^(([1-9]\d{0,9})|0)(\.\d{1,3})?$/;
 
-      //用于点击确定按钮跳转
+      //金额必须大于0的数字..痛苦 0_o||
+      if(!reg.test(amount)){
+        $scope.msg='输入金额不合法，请重新输入！！';
+        $("input[name='amount']").val("");
+      }else{
+        if(parseFloat(amount)<=0){
+          $scope.msg='输入金额不合法，请重新输入！！';
+          $("input[name='amount']").val("");
+        }else{
+          // 扫描
           $cordovaBarcodeScanner.scan().then(function(imageData) {
-            $scope.msg="";                          //清空错误提示
+            $scope.msg="";
+            $scope.save=true;
+            //清空错误提示
             var cardCode=imageData.text;
 
             if(cardCode!='') {
@@ -109,6 +146,7 @@
                     }else{
                       $scope.$apply(function () {
                         $scope.msg=result.msg;
+                        $scope.save=false;
                       });
                     }
                 }
@@ -119,6 +157,10 @@
           }, function(error) {
             console.log("An error happened -> " + error);
           });
+
+        }
+      }
+
 
     };
   })
@@ -164,11 +206,6 @@
                   // alert(result.code+" "+result.msg+" "+result.token);
                   // alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
 
-                  // $.removeCookie("token");                //删除旧token
-                  // $.cookie("token",result.token,{
-                  //   expires:7//七天                       //植入新token
-                  // });
-
                   if(result.code=='200'){
                       if(result.isActivated=='Y'){        //已激活，那就到充值页面
                         $state.go("tab.recharge",{
@@ -212,17 +249,9 @@
     $scope.cardImg = $stateParams.cardImg;
     $scope.cardBalance = $stateParams.cardBalance;
 
-    //金额必须大于0的数字
-    $("input[name='money']").keyup(function(){
-        if(parseFloat($(this).val())<=0){
-          alert("输入金额不合法，请重新输入！！");
-          $(this).val("");
-          history.go(0);
-        }
-    });
+    // $scope.moneys = [100,200,500,1000,1500,2000,2500,3000];
 
     $scope.recharge=function (money,cardCode,cardName,cardBalance) {
-      if(parseFloat(money)>0){
 
         // alert(cardCode+" "+token+" "+organizationPartyId);
         $.ajax({
@@ -252,7 +281,6 @@
           }
         });
       }
-    }
   })
 
   //充值成功后，页面初始化
@@ -281,67 +309,50 @@
     $scope.cardImg = $stateParams.cardImg;
     $scope.cardBalance = $stateParams.cardBalance;
 
-    //开卡验证
-    //金额必须大于0的数字,电话号码要有效
-    $("input[name='money']").keyup(function(){
-      if(parseFloat($(this).val())<=0){
-        alert("输入金额不合法，请重新输入！！");
-        $(this).val("");
-        history.go(0);
-      }
-    });
-
-    $("#kaInputPhone").blur(function(){
-      var phone=$(this).val();
+    $scope.activate=function (money,cardCode,kaInputPhone,cardName) {
       //验证手机号码
       var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-      if(phone){
-        if (!phoneReg.test(phone)) {
-          alert("手机号码有误");
-          $(this).val("");
-          history.go(0);
-        }
+      if(!phoneReg.test(kaInputPhone)){
+        $scope.msg="请输入正确的电话号码！";
+      }else{
+        // 提交开卡请求
+        $.ajax({
+          url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
+          type: "POST",
+          data: {
+            "cardCode": cardCode,
+            "token": token,
+            "organizationPartyId":organizationPartyId,
+            "amount":money,
+            "teleNumber":kaInputPhone
+          },
+          success: function (result) {
+            // alert(result.code+" "+result.msg);
+
+              if(result.code=='200'){
+                // alert("开卡成功！"+cardCode+",充值金额为："+parseFloat(money));
+
+                // $.removeCookie("token");                         //删除旧token
+                // $.cookie("token",result.token,{
+                //   expires:7//七天                                //植入新token
+                // });
+
+                $state.go("tab.kaika",{
+                  cardCode:cardCode,
+                  cardName:cardName,
+                  money:money,
+                  kaInputPhone:kaInputPhone
+                });
+              }else{
+                $scope.$apply(function () {
+                  $scope.msg=result.msg;
+                });
+              }
+          }
+        });
       }
-    });
-
-
-    $scope.activate=function (money,cardCode,kaInputPhone,cardName) {
 
       // alert(cardCode+" "+token+" "+organizationPartyId);
-      $.ajax({
-        url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
-        type: "POST",
-        data: {
-          "cardCode": cardCode,
-          "token": token,
-          "organizationPartyId":organizationPartyId,
-          "amount":money,
-          "teleNumber":kaInputPhone
-        },
-        success: function (result) {
-          // alert(result.code+" "+result.msg);
-
-            if(result.code=='200'){
-              // alert("开卡成功！"+cardCode+",充值金额为："+parseFloat(money));
-
-              // $.removeCookie("token");                         //删除旧token
-              // $.cookie("token",result.token,{
-              //   expires:7//七天                                //植入新token
-              // });
-
-              $state.go("tab.kaika",{
-                cardCode:cardCode,
-                cardName:cardName,
-                money:money,
-                kaInputPhone:kaInputPhone
-              });
-            }else{
-              $scope.$apply(function () {
-                $scope.msg=result.msg;
-              });
-            }
-        }
-      });
     }
   })
 
@@ -455,13 +466,19 @@
    * Author LN
    * Date 2016-11-21
    * */
-  .controller('settingCtrl', function($scope,$state) {
+  .controller('settingCtrl', function($scope,$state,$ionicPopup) {
       $scope.outLogin=function () {
-        if(confirm("确认是否要退出？？")){
-          $.cookie('token', null);
-          $.cookie('organizationPartyId', null);
-          $state.go("login");
-        }
+
+        $ionicPopup.confirm({
+          title:"退出",
+          template:"是否要退出登录?",
+          cancelText:"取消",
+          okText:"确定"
+        }).then(function(res){
+          if(res){
+            $state.go("login");
+          }
+        })
       }
   })
 
