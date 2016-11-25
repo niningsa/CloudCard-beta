@@ -1,6 +1,10 @@
   angular.module('starter.controllers', [])
 
-  //首页
+  /*
+   * Desc 首页登录判断
+   * Author LN
+   * Date 2016-11-20
+   * */
   .controller('DashCtrl', function($scope, $state) {
     var token=$.cookie("token");
     if(token==null){
@@ -178,7 +182,7 @@
    * Author LN
    * Date 2016-11-19
    * */
-  .controller("RechargeExampleController", function($scope, $state, $cordovaBarcodeScanner, $rootScope) {
+  .controller("RechargeExampleController", function($scope, $state, $cordovaBarcodeScanner, $rootScope, $ionicPopup) {
       var token=$.cookie("token");
       var organizationPartyId=$.cookie("organizationPartyId");
 
@@ -223,6 +227,11 @@
                           cardImg:result.cardImg
                         });
                       }
+                  }else{
+                    $ionicPopup.alert({
+                      title: '温馨提示',
+                      template: result.msg
+                    });
                   }
               }
             });
@@ -370,10 +379,16 @@
    * Author LN
    * Date 2016-11-15
    * */
-  .controller('loginCtrl', function($scope,$interval,$rootScope,$http) {
+  .controller('loginCtrl', function($scope, $interval, $rootScope, $http, $state) {
+    $scope.$on('$ionicView.beforeEnter', function() {                           // 这个玩意儿不错，刚加载执行的广播通知方法
+      $scope.user={"identifyCode":""};                                          // 退出登录后，清空验证码
+      if($.cookie("token")!=null || $.cookie("organizationPartyId")!=null){     // 登录成功了，按物理返回键，就别想重新登录
+        $state.go("tab.dash");
+      }
+    });
+
     // $scope.tel='15910989807';
     $scope.codeBtn='获取验证码';
-    $scope.user={"tel":"","identifyCode":""};
 
     $scope.getIdentifyCode=function (tel) {
       $scope.msg="";//先清空错误提示
@@ -427,6 +442,7 @@
   * Date 2016-11-15
   * */
   .controller('login', function($scope,$state,$rootScope) {
+
     $scope.cloudCardLogin=function () {
       console.log($scope.user.tel+" "+$scope.user.identifyCode);
       $.ajax({
@@ -467,8 +483,11 @@
    * Date 2016-11-21
    * */
   .controller('settingCtrl', function($scope,$state,$ionicPopup) {
-      $scope.outLogin=function () {
+      if($.cookie("token")==null || $.cookie("organizationPartyId")==null){
+        $state.go("login");
+      }
 
+      $scope.outLogin=function () {
         $ionicPopup.confirm({
           title:"退出",
           template:"是否要退出登录?",
@@ -476,6 +495,8 @@
           okText:"确定"
         }).then(function(res){
           if(res){
+            $.cookie("token",null);
+            $.cookie("organizationPartyId",null);
             $state.go("login");
           }
         })

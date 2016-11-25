@@ -18,15 +18,7 @@
 
     <div class="list">
       <ion-list>
-      <ion-item class="item-remove-animate" ng-repeat="chat in Chats | orderBy:'transDate':true" type="item-text-wrap">
-        <!--<div>-->
-          <!--<b>{{chat.typeDesc =='充值'?'+'+chat.typeDesc:'-'+chat.typeDesc}}</b>-->
-          <!--<span ng-bind="chat.customerName"></span>-->
-          <!--<span style="display:block;font-size: 20px;text-align: right;" ng-bind="chat.amount"></span>-->
-        <!--</div>-->
-        <!--<p >-->
-         <!--<span ng-bind="chat.transDate"></span>-->
-        <!--</p>-->
+      <ion-item class="item-remove-animate" collection-repeat="chat in Chats | orderBy:'transDate':true" type="item-text-wrap">
         <div>
             <i class="badge bar-light badge-balanced">{{chat.typeDesc}} {{chat.typeDesc =='充值'?'+ '+chat.amount:'- '+chat.amount}}</i>
             <b ng-bind="chat.customerName"></b>
