@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
 
 
 //授权的controller
-.controller('inputCtrl', function($scope, $stateParams,$rootScope,$http,Chats,$state) {
+.controller('inputCtrl', function($scope, $stateParams,$rootScope,$http,Chats,$state,$ionicPopup) {
    $scope.cardId  =$stateParams.cardId;
    $scope.cardBalance  =$stateParams.cardBalance;
    $scope.cardName  =$stateParams.cardName;
@@ -68,40 +68,68 @@ angular.module('starter.controllers', [])
     $other_endDate=$("#other_endDate").val();
 
     var flag =true;
-    if ($other_endDate == null | $other_endDate ==''){
-      alert("请将时间填写完整");
-        //var nowtime = new Date();
-        //$other_endDate = nowtime.toLocaleDateString().replace('/','-').replace('/','-');
-      return false;
-    }
-    if ($other_startDate == null | $other_startDate ==''){
-      //var nowtime2 = new Date();
-      //$other_endDate = nowtime2.toLocaleDateString().replace('/','-').replace('/','-');
-      alert("请将时间填写完整");
-      return false;
-    }
-    if($other_startDate > $other_endDate ){
-      alert("截止时间应大于授权时间");
-      return false;
-    }
+
     //验证手机号是否合法
     var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
 
     if (!phoneReg.test($other_tel)) {
-      alert("请输入正确的手机号码");
+      $ionicPopup.alert({
+        title:"温馨提示",
+        template:"请输入正确的手机号码",
+        okText:"确定",
+      })
           flag = false;
      }
     //正则验证输入金额是否合法
      var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
      if (moneyReg.test($other_money)) {
-        if(parseInt($other_money) > parseInt($scope.cardBalance)){
-          alert("授权金额大于可用金额");
+        if(parseFloat($other_money) > parseFloat($scope.cardBalance)){
+
+          $ionicPopup.alert({
+            title:"温馨提示",
+            template:"授权金额大于可用金额",
+            okText:"确定",
+          })
           flag = false;
         }
      }else{
-          alert("金额输入有误,请重新输入");
+       $ionicPopup.alert({
+         title:"温馨提示",
+         template:"金额输入有误,请重新输入",
+         okText:"确定",
+
+       })
           flag = false;
      }
+
+    if ($other_endDate == null | $other_endDate ==''){
+      $ionicPopup.alert({
+        title:"温馨提示",
+        template:"请将时间填写完整",
+        okText:"确定",
+      })
+      //var nowtime = new Date();
+      //$other_endDate = nowtime.toLocaleDateString().replace('/','-').replace('/','-');
+      flag = false;
+    }
+    if ($other_startDate == null | $other_startDate ==''){
+      //var nowtime2 = new Date();
+      //$other_endDate = nowtime2.toLocaleDateString().replace('/','-').replace('/','-');
+      $ionicPopup.alert({
+        title:"温馨提示",
+        template:"请将时间填写完整",
+        okText:"确定",
+      })
+      flag = false;
+    }
+    if($other_startDate > $other_endDate ){
+      $ionicPopup.alert({
+        title:"温馨提示",
+        template:"截止时间应大于授权时间",
+        okText:"确定",
+      })
+      flag = false;
+    }
     if(flag){
       $.ajax({
         type: "POST",
@@ -128,7 +156,13 @@ angular.module('starter.controllers', [])
         success: function(data){
           console.log(data);
           if(data.code==500){
-            alert("授权失败,"+data.msg);
+            $ionicPopup.alert({
+              title:"温馨提示",
+              template:data.msg,
+              okText:"确定",
+
+            })
+            //alert("授权失败,"+data.msg);
           }
           //跳转到登录的页面
           if(data.code==400){
@@ -156,7 +190,8 @@ angular.module('starter.controllers', [])
 
 
 .controller('CardDetailCtrl', function($scope,CardDetail,$rootScope) {
- $scope.cardDetail = CardDetail.all();
+  $("#amountType").val(0);
+  $scope.cardDetail = CardDetail.all(0);
   //下拉刷新的功能
     $scope.doRefresh = function() {
       $scope.cardDetail = CardDetail.all();
@@ -164,7 +199,12 @@ angular.module('starter.controllers', [])
       $scope.$broadcast("scroll.refreshComplete");
 
     };
-
+  //下拉列表分类显示
+  $scope.change = function(amountType){
+    console.log(amountType);
+    var cardDetail = CardDetail.all(amountType);                                   // 商家账单
+    $scope.cardDetail = cardDetail;
+  }
 
   })
 

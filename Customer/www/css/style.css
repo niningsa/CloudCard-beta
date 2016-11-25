@@ -76,3 +76,15 @@ text-decoration:none;
 .cardCloud{
   background: url('../img/cardCloud.png') no-repeat -30px center;height:110px;
 }
+.moeny1{
+  width:100%;
+  height:40px;  /*设置div的大小*/
+  background: url('../img/timg2.jpg');
+  text-align: center;        /*文字水平居中对齐*/
+  line-height: 40px;        /*设置文字行距等于div的高度*/
+  overflow:hidden;
+}
+#amountType{
+  width: 200px;
+  color: darkgrey;
+}

@@ -71,7 +71,7 @@ angular.module('starter.services', [])
 .factory('CardDetail', function($rootScope,$state) {
 
   return {
-    all: function() {
+    all: function(amountType) {
 
       var token=$.cookie("token");
       var organizationPartyId=$.cookie("organizationPartyId");
@@ -83,8 +83,9 @@ angular.module('starter.services', [])
           data: {
             "token": token,
             "organizationPartyId": organizationPartyId,
+            "type":amountType,  //0-全部， 1-充值，2-支付
             "viewIndex": 0,
-            "viewSize": 200
+            "viewSize": 2000
           },
           // dataType: "json",
           dataFilter: function (data) {
