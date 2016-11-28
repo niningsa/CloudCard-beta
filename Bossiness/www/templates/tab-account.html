@@ -6,13 +6,18 @@
     <div class="padding">
     	<div id="moeny1" class="moeny1" style="height: 60%;width: 100%">已卖:<strong ng-bind="presellAmount"></strong>元</div>
     	<div style="height: 40%;text-align: center" class="money4">
-    		限额:<strong ng-bind="limitAmount"></strong>元&nbsp;&nbsp;&nbsp;&nbsp;
-    		余额:<strong ng-bind="balance"></strong>元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <select id="amountType" ng-change="change(amountType)" ng-model="amountType">
-            <option value="0" ng-selected="true">全部</option>
-            <option value="1">充值</option>
-            <option value="2">消费</option>
-          </select>
+        卖卡限额:<strong ng-bind="limitAmount"></strong>元&nbsp;&nbsp;&nbsp;&nbsp;
+    		卖卡余额:<strong ng-bind="balance"></strong>元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <!--<select id="amountType" ng-change="change(amountType)" ng-model="amountType">-->
+            <!--<option value="0" ng-selected="true">全部</option>-->
+            <!--<option value="1">充值</option>-->
+            <!--<option value="2">消费</option>-->
+          <!--</select>-->
+        <div>
+          <label class="widget-buttons">
+            <ion-radio class="calm fc-widget-content" ng-repeat="item in items" ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">{{item.value}}</ion-radio>
+          </label>
+        </div>
     	</div>
     </div>
 

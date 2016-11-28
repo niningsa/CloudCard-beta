@@ -19,6 +19,13 @@
    * Date 2016-11-20
    * */
   .controller('AccountCtrl', function($scope, $rootScope, $http, $state, Chats) {
+    $scope.items=[
+      {text:"0",value:"全部"},
+      {text:"1",value:"充值"},
+      {text:"2",value:"支付"}
+    ];
+    $scope.ret={choice:'0'};
+
     var token=$.cookie("token");
     var organizationPartyId=$.cookie("organizationPartyId");
 
@@ -246,49 +253,61 @@
    * Author LN
    * Date 2016-11-19
    * */
-  .controller('RechargeCtrl', function($scope, $state, $stateParams, $rootScope) {
+  .controller('RechargeCtrl', function($scope, $state, $stateParams, $rootScope, $ionicLoading, $timeout) {
     var token=$.cookie("token");
     var organizationPartyId=$.cookie("organizationPartyId");
     if(token==null){
       $state.go("login");
     }
 
+    //页面信息初始化
     $scope.cardCode = $stateParams.cardCode;
     $scope.cardName = $stateParams.cardName;
     $scope.cardImg = $stateParams.cardImg;
     $scope.cardBalance = $stateParams.cardBalance;
 
-    // $scope.moneys = [100,200,500,1000,1500,2000,2500,3000];
+    //单选按钮初始化
+    $scope.items=['100','200','300','500'];
+    $scope.ret={choice:'100'};
 
     $scope.recharge=function (money,cardCode,cardName,cardBalance) {
-
         // alert(cardCode+" "+token+" "+organizationPartyId);
-        $.ajax({
-          url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
-          type: "POST",
-          data: {
-            "cardCode": cardCode,
-            "token": token,
-            "organizationPartyId":organizationPartyId,
-            "amount":money
-          },
-          success: function (result) {
-            // alert(result.code+" "+result.msg+" "+parseFloat(money)+parseFloat(cardBalance) +" "+result.token);
-
-              if(result.code=='200'){
-                $state.go("tab.returnChongZhiMess",{
-                  cardCode:cardCode,
-                  cardName:cardName,
-                  money:money,
-                  amount:parseFloat(money)+parseFloat(cardBalance)
-                });
-              }else{
-                $scope.$apply(function () {
-                  $scope.msg=result.msg;
-                });
-              }
-          }
+        $ionicLoading.show({
+          template:"金额充值中,请稍后...."
         });
+
+        $scope.sub=true;
+        $timeout(function () {
+            $.ajax({
+              url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
+              type: "POST",
+              data: {
+                "cardCode": cardCode,
+                "token": token,
+                "organizationPartyId":organizationPartyId,
+                "amount":money
+              },
+              success: function (result) {
+                // alert(result.code+" "+result.msg+" "+parseFloat(money)+parseFloat(cardBalance) +" "+result.token);
+
+                  if(result.code=='200'){
+                    $ionicLoading.hide();
+                    $state.go("tab.returnChongZhiMess",{
+                      cardCode:cardCode,
+                      cardName:cardName,
+                      money:money,
+                      amount:parseFloat(money)+parseFloat(cardBalance)
+                    });
+                  }else{
+                    $scope.$apply(function () {
+                      $scope.msg=result.msg;
+                      $scope.sub=false;
+                      $ionicLoading.hide();
+                    });
+                  }
+              }
+            });
+        },0);
       }
   })
 
@@ -306,7 +325,7 @@
    * Author LN
    * Date 2016-11-19
    * */
-  .controller('ActivateCtrl', function($scope, $state, $stateParams, $rootScope) {
+  .controller('ActivateCtrl', function($scope, $state, $stateParams, $rootScope, $ionicLoading, $timeout) {
     var token=$.cookie("token");
     var organizationPartyId=$.cookie("organizationPartyId");
     if(token==null){
@@ -318,47 +337,61 @@
     $scope.cardImg = $stateParams.cardImg;
     $scope.cardBalance = $stateParams.cardBalance;
 
+    $scope.items=['100','200','300','500'];
+    $scope.ret={choice:'100'};
+
     $scope.activate=function (money,cardCode,kaInputPhone,cardName) {
       //验证手机号码
       var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
       if(!phoneReg.test(kaInputPhone)){
         $scope.msg="请输入正确的电话号码！";
       }else{
-        // 提交开卡请求
-        $.ajax({
-          url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
-          type: "POST",
-          data: {
-            "cardCode": cardCode,
-            "token": token,
-            "organizationPartyId":organizationPartyId,
-            "amount":money,
-            "teleNumber":kaInputPhone
-          },
-          success: function (result) {
-            // alert(result.code+" "+result.msg);
 
-              if(result.code=='200'){
-                // alert("开卡成功！"+cardCode+",充值金额为："+parseFloat(money));
-
-                // $.removeCookie("token");                         //删除旧token
-                // $.cookie("token",result.token,{
-                //   expires:7//七天                                //植入新token
-                // });
-
-                $state.go("tab.kaika",{
-                  cardCode:cardCode,
-                  cardName:cardName,
-                  money:money,
-                  kaInputPhone:kaInputPhone
-                });
-              }else{
-                $scope.$apply(function () {
-                  $scope.msg=result.msg;
-                });
-              }
-          }
+        $ionicLoading.show({
+          template:"开卡中,请稍后...."
         });
+        // 提交开卡请求
+        $scope.sub=true;
+
+        $timeout(function () {
+
+            $.ajax({
+              url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
+              type: "POST",
+              data: {
+                "cardCode": cardCode,
+                "token": token,
+                "organizationPartyId":organizationPartyId,
+                "amount":money,
+                "teleNumber":kaInputPhone
+              },
+              success: function (result) {
+                // alert(result.code+" "+result.msg);
+
+                  if(result.code=='200'){
+                    // alert("开卡成功！"+cardCode+",充值金额为："+parseFloat(money));
+
+                    // $.removeCookie("token");                         //删除旧token
+                    // $.cookie("token",result.token,{
+                    //   expires:7//七天                                //植入新token
+                    // });
+                    $ionicLoading.hide();
+                    $state.go("tab.kaika",{
+                      cardCode:cardCode,
+                      cardName:cardName,
+                      money:money,
+                      kaInputPhone:kaInputPhone
+                    });
+                  }else{
+                    $scope.sub=false;
+                    $ionicLoading.hide();
+                    $scope.$apply(function () {
+                      $scope.msg=result.msg;
+                    });
+                  }
+              }
+            });
+        },0);
       }
 
       // alert(cardCode+" "+token+" "+organizationPartyId);
@@ -487,7 +520,7 @@
         $state.go("login");
       }
 
-      $scope.outLogin=function () {
+      $scope.exitLogin=function () {
         $ionicPopup.confirm({
           title:"退出",
           template:"是否要退出登录?",
@@ -501,6 +534,7 @@
           }
         })
       }
+
   })
 
 ;

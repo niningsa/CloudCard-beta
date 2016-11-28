@@ -3,54 +3,58 @@
   <ion-nav-buttons side="left">
     <a class="button icon ion-ios-undo ui-sref="tab.dash"></a>
   </ion-nav-buttons>
-	<ion-content class="">
+	<ion-content>
 
 		<div class="charInfo">
       <form name="kaiKaForm">
         <div class="list">
           <label class="item">
-            <span class="input-label" style="float: left;">卡名：</span>
-            <span ng-bind="cardName"></span>
+            <span class="input-label" style="float: left;">店铺卡名：</span>
+            <strong ng-bind="cardName"></strong>
           </label>
           <label class="item">
             <span class="input-label" style="float: left;">电话号码：</span>
-            <input ng-model="cardCode" type="hidden"/>
-            <input type="text" id = "kaInputPhone" class="form-control" name="kaInputPhone"	ng-model="kaInputPhone" style="width:150px"  placeholder="请输入电话号码" required>
+            <input type="text" id = "kaInputPhone" class="form-control" name="kaInputPhone"	ng-model="kaInputPhone" style="width:180px"  placeholder="请输入电话号码" required>
           </label>
           <label class="item">
             <span class="input-label" style="float: left;">预存金额：</span>
             <!--<input id="kaInputMoney" class="form-control" name="money" style="width:150px" ng-model="money"  placeholder="请输入金额" required>-->
+            <strong>{{ret.choice}}元</strong>
           </label>
+          <!--<label class="item">-->
+            <!--<div class="row padding-left-50">-->
+              <!--<div class="col-20">-->
+                <!--<button class="button button-balanced" ng-click="activate(100,cardCode,kaInputPhone,cardName)" ng-disabled="kaiKaForm.kaInputPhone.$error.required">100元</button>-->
+              <!--</div>-->
+              <!--<div class="col-offset-10"></div>-->
+              <!--<div class="col-20">-->
+                <!--<button class="button button-balanced" ng-click="activate(200,cardCode,kaInputPhone,cardName)" ng-disabled="kaiKaForm.kaInputPhone.$error.required">200元</button>-->
+              <!--</div>-->
+              <!--<div class="col-offset-10"></div>-->
+              <!--<div class="col-20">-->
+                <!--<button class="button button-balanced" ng-click="activate(300,cardCode,kaInputPhone,cardName)" ng-disabled="kaiKaForm.kaInputPhone.$error.required">300元</button>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row padding-left-50  padding-top-10">-->
+              <!--<div class="col-20">-->
+                <!--<button class="button button-balanced" ng-click="activate(500,cardCode,kaInputPhone,cardName)" ng-disabled="kaiKaForm.kaInputPhone.$error.required">500元</button>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</label>-->
           <label class="item">
-            <div class="row padding-left-50">
-              <div class="col-20">
-                <button class="button button-balanced" ng-click="activate(100,cardCode,kaInputPhone,cardName)" ng-disabled="kaiKaForm.kaInputPhone.$error.required">100元</button>
-              </div>
-              <div class="col-offset-10"></div>
-              <div class="col-20">
-                <button class="button button-balanced" ng-click="activate(200,cardCode,kaInputPhone,cardName)" ng-disabled="kaiKaForm.kaInputPhone.$error.required">200元</button>
-              </div>
-              <div class="col-offset-10"></div>
-              <div class="col-20">
-                <button class="button button-balanced" ng-click="activate(300,cardCode,kaInputPhone,cardName)" ng-disabled="kaiKaForm.kaInputPhone.$error.required">300元</button>
-              </div>
-            </div>
-            <div class="row padding-left-50  padding-top-10">
-              <div class="col-20">
-                <button class="button button-balanced" ng-click="activate(500,cardCode,kaInputPhone,cardName)" ng-disabled="kaiKaForm.kaInputPhone.$error.required">100元</button>
-              </div>
-            </div>
+            <ion-radio class="balanced"  ng-repeat="item in items" ng-model="ret.choice" ng-value="item">
+              ￥{{item}} 元
+            </ion-radio>
           </label>
         </div>
         <div>
           <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
         </div>
-        <!--<div class="list" style="top: 20px;text-align: center;">-->
-            <!--<button  class="button button-positive"  ng-click="activate(money,cardCode,kaInputPhone,cardName)" style="width: 80%" ng-disabled="save">确定</button>-->
-        <!--</div>-->
+        <div class="list" style="top: 20px;text-align: center;">
+            <button  class="button button-positive"  ng-click="activate(ret.choice,cardCode,kaInputPhone,cardName)" style="width: 80%" ng-disabled="sub">确定</button>
+        </div>
       </form>
 
 			</div>
-		</div>
 	</ion-content>
 </ion-view>
