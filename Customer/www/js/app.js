@@ -82,6 +82,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
+   //到卡授权的其他页面
   .state('tab.cardinput', {
       url: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode',
       cache: false,
@@ -92,13 +93,36 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+
+
+    //授权的默认界面
+  .state('tab.accredit', {
+      url: '/accredit/:cardId/:cardBalance/:cardName/:cardCode',
+      cache: false,
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-accredit.html',
+          controller: 'inputAccreditCtrl'
+        }
+      }
+    })
 //用户授权成功的页面
   .state('tab.cardreturn', {
-      url: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate',
+      url: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate/:cardName',
       views: {
         'tab-chats': {
           templateUrl: 'templates/tab-getpower.html',
           controller: 'DashCtrl'
+        }
+      }
+    })
+    //默认方式授权成功的页面
+  .state('tab.cardreturnsuccess', {
+      url: '/cardreturnsuccess/:teleNumber/:amount/:day/:cardName',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-accreditSuccess.html',
+          controller: 'DashAccreditCtrl'
         }
       }
     })

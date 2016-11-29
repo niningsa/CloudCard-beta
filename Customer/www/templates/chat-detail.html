@@ -20,5 +20,13 @@
      <div class="fontstyle" id="sq"></div>
    </div>
 
+    <div ng-show="shouQuan" ng-click="sq('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
+          <button class="button button-positive" style="width: 100%">授权</button>
+    </div>
+
+    <div ng-show="jieChu" ng-click="jc('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
+     <button class="button button-block button-assertive"> 解除授权</button>
+    </div>
+
   </ion-content>
 </ion-view>
