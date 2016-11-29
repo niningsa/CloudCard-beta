@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
     //  jQuery('#sq').html('该卡已被授权,你可以<a href="#/tab/revokeCardAuth/'+$stateParams.cardId+'/'+$stateParams.cardBalance+'/'+$stateParams.cardName+'/'+$stateParams.cardCode+'/'+$stateParams.isAuthToOthers+'/'+$scope.isAuthToMe+'">解除授权</a>');
     //
     //}
-
+   //绑定事件判断到底是应该解除授权还是授权
     if($stateParams.isAuthToOthers=='N' & $scope.isAuthToMe=='N'){
       $scope.shouQuan=true;
       $scope.jieChu=false;
