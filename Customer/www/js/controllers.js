@@ -1,11 +1,21 @@
 angular.module('starter.controllers', [])
 
+  //其他授权的方式
 .controller('DashCtrl', function($scope,$stateParams) {
 
     $scope.teleNumber = $stateParams.teleNumber;
     $scope.amount = $stateParams.amount;
     $scope.fromDate = $stateParams.fromDate;
     $scope.thruDate = $stateParams.thruDate;
+    $scope.cardName = $stateParams.cardName;
+  })
+  //默认授权的方式
+.controller('DashAccreditCtrl', function($scope,$stateParams) {
+
+    $scope.teleNumber = $stateParams.teleNumber;
+    $scope.amount = $stateParams.amount;
+    $scope.day = $stateParams.day;
+    $scope.cardName = $stateParams.cardName;
   })
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -20,7 +30,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, Chats,$state,$ionicPopup,$rootScope) {
     $scope.cardId = $stateParams.cardId;
     $scope.cardBalance = $stateParams.cardBalance;
     $scope.cardName = $stateParams.cardName;
@@ -34,19 +44,84 @@ angular.module('starter.controllers', [])
   //  将客户的cardCode放入生成的二维码中
    jQuery('#output').qrcode($stateParams.cardCode);
     //根据是否授权来控制授权按钮的显示与否
+    //if($stateParams.isAuthToOthers=='N' & $scope.isAuthToMe=='N'){
+    //  //jQuery('#sq').html('你可以<a href="#/tab/cardinput/'+$stateParams.cardId+'/'+$stateParams.cardBalance+'/'+$stateParams.cardName+'/'+$stateParams.cardCode+'">授权</a>给你好友！');
+    //  jQuery('#sq').html('你可以<a href="#/tab/accredit/'+$stateParams.cardId+'/'+$stateParams.cardBalance+'/'+$stateParams.cardName+'/'+$stateParams.cardCode+'">授权</a>给你好友！');
+    //}else{
+    //  jQuery('#sq').html('该卡已被授权,你可以<a href="#/tab/revokeCardAuth/'+$stateParams.cardId+'/'+$stateParams.cardBalance+'/'+$stateParams.cardName+'/'+$stateParams.cardCode+'/'+$stateParams.isAuthToOthers+'/'+$scope.isAuthToMe+'">解除授权</a>');
+    //
+    //}
+
     if($stateParams.isAuthToOthers=='N' & $scope.isAuthToMe=='N'){
-      jQuery('#sq').html('你可以<a href="#/tab/cardinput/'+$stateParams.cardId+'/'+$stateParams.cardBalance+'/'+$stateParams.cardName+'/'+$stateParams.cardCode+'">授权</a>给你好友！');
+      $scope.shouQuan=true;
+      $scope.jieChu=false;
     }else{
-      jQuery('#sq').html('该卡已被授权');
-
+      $scope.shouQuan=false;
+      $scope.jieChu=true;
     }
+    //卡授权
+    $scope.sq=function(cardId,cardBalance,cardName,cardCode){
+      window.location.href="#/tab/accredit/"+cardId+"/"+cardBalance+"/"+cardName+"/"+cardCode;
+    };
+  //卡解除授权
+  $scope.jc=function(cardId,cardBalance,cardName,cardCode){
+    var token=$.cookie("token");
+    $.ajax({
+      type: "POST",
+      url: $rootScope.interfaceUrl+"revokeCardAuth",
+      async: false,
+      data: {
+        "token":token,
+        "cardId":$scope.cardId
+        //"amount":$other_money,
+        //"cardCode": $scope.cardCode,
+        //"cardName": $scope.cardName,
+      },
+      dataFilter: function(data){
+        console.log("raw data: "+data);
+        var idx =  data.indexOf("//");
+        if(data && /^\s*\/\/.*/.test(data) && idx>-1){
+          data = data.substring(idx+2);
+        }
+        return data;
+      },
+      success: function(data){
+        console.log(data);
+        if(data.code==500){
+          $ionicPopup.alert({
+            title:"温馨提示",
+            template:data.msg,
+            okText:"确定",
 
-  //  jQuery('#output').qrcode({
-  //     render: "table", //table方式
-  //     width: 200, //宽度
-  //     height:200, //高度
-  //     text: "www.helloweba.com" //任意内容
-  // });
+          })
+        }
+        //跳转到登录的页面
+        if(data.code==400){
+          $state.go("login");
+        }
+        if(data.code==200){
+
+          $ionicPopup.alert({
+            title:"温馨提示",
+            template:"解卡成功",
+            okText:"确定",
+          })
+            .then(function(res){
+          if(res){
+            $state.go("tab.chats");
+          }
+        })
+          //授权成功，传入必要的参数，跳转到授权成功的查看页面
+          //window.location.href="#/tab/chats/"+$scope.cardId+"/"+$scope.cardBalance+"/"+$scope.cardName+"/"+$scope.cardCode+"/"+ $scope.isAuthToOthers+"/"+$scope.isAuthToMe;
+        }
+      },
+      error:function (e) {
+        console.log(e);
+      }
+    });
+  };
+
+
 })
 
 
@@ -162,7 +237,6 @@ angular.module('starter.controllers', [])
               okText:"确定",
 
             })
-            //alert("授权失败,"+data.msg);
           }
           //跳转到登录的页面
           if(data.code==400){
@@ -170,7 +244,7 @@ angular.module('starter.controllers', [])
           }
           if(data.code==200){
             //授权成功，传入必要的参数，跳转到授权成功的查看页面
-            window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
+            window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate+"/"+$scope.cardName;
           }
 
 
@@ -189,8 +263,128 @@ angular.module('starter.controllers', [])
 })
 
 
+  //授权的默认界面
+
+  .controller('inputAccreditCtrl', function($scope, $stateParams,$rootScope,$http,Chats,$state,$ionicPopup) {
+    $scope.cardId  =$stateParams.cardId;
+    $scope.cardBalance  =$stateParams.cardBalance;
+    $scope.cardName  =$stateParams.cardName;
+    $scope.cardCode  =$stateParams.cardCode;
+    var token=$.cookie("token");
+
+    $scope.daylist = [
+      { text: "一天", value: "1" },
+      { text: "永久", value: "0" }
+
+    ];
+    //给默认的初始值
+    $scope.ret={choice:'1'};
+
+    $("body").off("click", "#powerfrom").on("click","#powerfrom", function() {
+      $other_tel=$("#other_tel").val();
+      $other_cardId=$("#other_cardId").val();
+      $other_money=$("#other_money").val();
+      $day=$("#day").val();
+      var flag =true;
+
+      //验证手机号是否合法
+      var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+
+      if (!phoneReg.test($other_tel)) {
+        $ionicPopup.alert({
+          title:"温馨提示",
+          template:"请输入正确的手机号码",
+          okText:"确定",
+        })
+        flag = false;
+      }
+      //正则验证输入金额是否合法
+      var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
+      if (moneyReg.test($other_money)) {
+        if(parseFloat($other_money) > parseFloat($scope.cardBalance)){
+
+          $ionicPopup.alert({
+            title:"温馨提示",
+            template:"授权金额大于可用金额",
+            okText:"确定",
+          })
+          flag = false;
+        }
+      }else{
+        $ionicPopup.alert({
+          title:"温馨提示",
+          template:"金额输入有误,请重新输入",
+          okText:"确定",
+
+        })
+        flag = false;
+      }
+
+      if(flag){
+        $.ajax({
+          type: "POST",
+          url: $rootScope.interfaceUrl+"createCardAuth",
+          async: false,
+          data: {
+            "token":token,
+            "cardId":$other_cardId,
+            "teleNumber":$other_tel,
+            //"amount":$other_money,//默认授权的金额默认先不填，为了保证金额的正确性
+            "day":$day
+          },
+          dataFilter: function(data){
+            console.log("raw data: "+data);
+            var idx =  data.indexOf("//");
+            if(data && /^\s*\/\/.*/.test(data) && idx>-1){
+              data = data.substring(idx+2);
+            }
+            return data;
+          },
+          success: function(data){
+            console.log(data);
+            if(data.code==500){
+              $ionicPopup.alert({
+                title:"温馨提示",
+                template:data.msg,
+                okText:"确定",
+
+              })
+              //alert("授权失败,"+data.msg);
+            }
+            //跳转到登录的页面
+            if(data.code==400){
+              $state.go("login");
+            }
+            if(data.code==200){
+              //授权成功，传入必要的参数，跳转到授权成功的查看页面
+              window.location.href="#/tab/cardreturnsuccess/"+$other_tel+"/"+$other_money+"/"+$day+"/"+$scope.cardName;
+            }
+
+
+            //window.location.href="http://"+location.host+"#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
+          },
+          error:function (e) {
+            console.log(e);
+
+            window.location.href="#/tab/cardinput";
+          }
+        });
+
+
+      };
+    });
+  })
+
+  //账单信息
 .controller('CardDetailCtrl', function($scope,CardDetail,$rootScope) {
-  $("#amountType").val(0);
+  $scope.items=[
+    {text:"0",value:"全部"},
+    {text:"1",value:"充值"},
+    {text:"2",value:"支付"}
+  ];
+  $scope.ret={choice:'0'};
+
+  //$("#amountType").val(0);
   $scope.cardDetail = CardDetail.all(0);
   //下拉刷新的功能
     $scope.doRefresh = function() {

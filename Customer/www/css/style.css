@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
 
 .charInfo{
-	margin: 40px auto;
+	margin: 30px auto;
 	/* background: red; */
 	text-align: center;
 	width: 80%;
@@ -11,6 +11,22 @@
 	text-align: left;
 	margin-bottom: 30px;
 	margin-left: 10px;
+}
+
+.stime{
+  font-size: 18px;
+  font-family: '华文行楷';
+}
+#stype{
+  font-size: 18px;
+  font-family: '华文行楷';
+  color: blue;
+}
+
+#other{
+	text-align: right;
+  float: right;
+  margin: 20px auto;
 }
 a:link{
 text-decoration:none;
@@ -52,14 +68,17 @@ text-decoration:none;
   font-size: 20px;
   padding: 20px;
 }
+#shouquan{
+  text-align:center;
+  font-family: 华文楷体;
+  font-size: 18px;
+
+}
 .powerbutton >input{
 	font-family: 宋体;
 }
 
-.fontstyle{
-	text-align:center;
-	 bottom: 0px;
-}
+
 
 .char_style{
 	height: 120px;
@@ -77,6 +96,14 @@ text-decoration:none;
   background: url('../img/cardCloud.png') no-repeat -30px center;height:110px;
 }
 .moeny1{
+  width:100%;
+  height:40px;  /*设置div的大小*/
+  background: url('../img/timg2.jpg');
+  text-align: center;        /*文字水平居中对齐*/
+  line-height: 40px;        /*设置文字行距等于div的高度*/
+  overflow:hidden;
+}
+#moeny1{
   width:100%;
   height:40px;  /*设置div的大小*/
   background: url('../img/timg2.jpg');
