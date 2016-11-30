@@ -386,6 +386,7 @@ angular.module('starter.controllers', [])
 
   //$("#amountType").val(0);
   $scope.cardDetail = CardDetail.all(0);
+  $scope.cardDetails = CardDetail.all(0);
   //下拉刷新的功能
     $scope.doRefresh = function() {
       $scope.cardDetail = CardDetail.all();
@@ -393,11 +394,24 @@ angular.module('starter.controllers', [])
       $scope.$broadcast("scroll.refreshComplete");
 
     };
-  //下拉列表分类显示
+  //下拉列表分类显示，这种方式主要是通过后台去查询，这样做可以实现效果但是如果数据量比较大的话就会导致系统卡
+  //$scope.change = function(amountType){
+  //  console.log(amountType);
+  //  var cardDetail = CardDetail.all(amountType);                                   // 商家账单
+  //  $scope.cardDetail = cardDetail;
+  //}
+  //下拉列表分类显示，查询全部是请求后台，按照类型去查询的时候就使用_.filter在查询出来的数据进行过滤
   $scope.change = function(amountType){
-    console.log(amountType);
-    var cardDetail = CardDetail.all(amountType);                                   // 商家账单
-    $scope.cardDetail = cardDetail;
+    //第一次查询全部的时候调用后台去查询一下
+    if("0" == amountType){
+      $scope.cardDetail = CardDetail.all(amountType);
+    }else{
+      //-.filter  lodash实现过滤，利用第一次查询的数据第二次做筛选
+      $scope.cardDetail =  _.filter($scope.cardDetails, function(o){  //提高效率（从缓存中过滤数据，不用请求后台，好屌）
+        return o.type==amountType;
+      });
+    }
+
   }
 
   })

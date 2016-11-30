@@ -141,10 +141,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
   })
 
-
-
-
-
+//设置的页面，退出登录
     .state('tab.setting', {
       url: '/setting',
       cache: false,
@@ -157,6 +154,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     })
   .state('login', {
     url: '/login',
+    cache: false,
     templateUrl: "templates/login.html",
     controller:'LoginCtrl'
   });
