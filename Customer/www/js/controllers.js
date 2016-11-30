@@ -382,14 +382,18 @@ angular.module('starter.controllers', [])
     {text:"1",value:"充值"},
     {text:"2",value:"支付"}
   ];
+  //默认选择全部
   $scope.ret={choice:'0'};
+
 
   //$("#amountType").val(0);
   $scope.cardDetail = CardDetail.all(0);
   $scope.cardDetails = CardDetail.all(0);
   //下拉刷新的功能
     $scope.doRefresh = function() {
-      $scope.cardDetail = CardDetail.all();
+      //下拉刷新的时候选中全部
+      $scope.ret={choice:'0'};
+      $scope.cardDetail = CardDetail.all(0);
       //下拉刷新完成后提示转圈消失
       $scope.$broadcast("scroll.refreshComplete");
 
