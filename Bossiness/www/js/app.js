@@ -53,7 +53,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   })
 
   // Each tab has its own nav history stack:
-  .state('tab.dash', {
+  .state('tab.dash', {  //继承tab
     url: '/dash',
     views: {
       'tab-dash': {
@@ -65,7 +65,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
   .state('tab.receivables', {
     url: '/receivables',
-    cache: false,
+    cache: false,  //清除缓存
     views: {
       'tab-dash': {
         templateUrl: 'templates/tab-xiaofe.html',
@@ -78,16 +78,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.account', {
     url: '/account',
     cache: false,
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  })
-
-  .state('tab.accountType', {
-    url: '/account/:typeId',
     views: {
       'tab-account': {
         templateUrl: 'templates/tab-account.html',
@@ -152,6 +142,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
   .state('login', {
        url: '/login',
+       cache: false,
        templateUrl: "templates/login.html",
        controller:'loginCtrl'
   })

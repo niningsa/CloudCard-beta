@@ -4,33 +4,29 @@
     <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 
     <div class="padding">
-    	<div id="moeny1" class="moeny1" style="height: 60%;width: 100%">已卖:<strong ng-bind="presellAmount"></strong>元</div>
+    	<!--<div id="moeny1" class="moeny1" style="height: 60%;width: 100%">已卖:<strong ng-bind="presellAmount"></strong>元</div>-->
     	<div style="height: 40%;text-align: center" class="money4">
-        卖卡限额:<strong ng-bind="limitAmount"></strong>元&nbsp;&nbsp;&nbsp;&nbsp;
-    		卖卡余额:<strong ng-bind="balance"></strong>元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <!--<select id="amountType" ng-change="change(amountType)" ng-model="amountType">-->
-            <!--<option value="0" ng-selected="true">全部</option>-->
-            <!--<option value="1">充值</option>-->
-            <!--<option value="2">消费</option>-->
-          <!--</select>-->
-        <div>
+        已卖金额：<strong ng-bind="presellAmount"></strong>元<br>
+        卖卡限额：<strong ng-bind="limitAmount"></strong>元&nbsp;&nbsp;
+    		卖卡余额：<strong ng-bind="balance"></strong>元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <label class="widget-buttons">
-            <ion-radio class="calm fc-widget-content" ng-repeat="item in items" ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">{{item.value}}</ion-radio>
+            <ion-radio class="calm" ng-repeat="item in items" ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">{{item.value}}</ion-radio>
           </label>
-        </div>
     	</div>
     </div>
 
     <div class="list">
       <ion-list>
-      <ion-item class="item-remove-animate" collection-repeat="chat in Chats | orderBy:'transDate':true" type="item-text-wrap">
-        <div>
-            <i class="badge bar-light badge-balanced">{{chat.typeDesc}} {{chat.typeDesc =='充值'?'+ '+chat.amount:'- '+chat.amount}}</i>
-            <b ng-bind="chat.customerName"></b>
-            <p>
-              <span ng-bind="chat.transDate"></span>
-            </p>
-        </div>
+      <ion-item class="item-icon-right" collection-repeat="chat in Chats">
+          <!--<i class="badge bar-light badge-balanced">{{chat.typeDesc}} {{chat.type =='1'?'+ '+chat.amount:'- '+chat.amount}}</i>-->
+          <i class="badge badge-balanced" ng-bind="chat.typeDesc =='充值'?'- '+chat.amount:'+ '+chat.amount"></i>
+          <strong ng-bind="chat.customerName"></strong>
+          <span ng-bind="chat.typeDesc=='充值'?'支出':'收款'"></span>
+          <p>
+            <span ng-bind="chat.transDate"></span>
+          </p>
+          <!--<i class="icon balanced" ng-bind="chat.type =='1'?'+'+chat.amount:'-'+chat.amount"></i>-->
+
       </ion-item>
     </ion-list>
     </div>
