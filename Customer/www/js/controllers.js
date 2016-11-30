@@ -18,7 +18,8 @@ angular.module('starter.controllers', [])
     $scope.cardName = $stateParams.cardName;
   })
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('ChatsCtrl', function($scope, Chats,$state) {
+
   $scope.chats = Chats.all();
     $scope.doRefresh = function() {
       $scope.chats = Chats.all();
@@ -486,11 +487,18 @@ angular.module('starter.controllers', [])
 
 
 //获取验证码
-.controller('LoginCtrl', function($scope,$interval,$rootScope,$http) {
+.controller('LoginCtrl', function($scope,$interval,$rootScope,$http,$state) {
   // $scope.tel='15910989807';
   //$scope.user={
   //  tel:"18702104254"
   //};
+  //为了让安卓手机按返回时不跳到登陆页面，判断tooken
+  $scope.$on('$ionicView.beforeEnter', function () {                           // 这个玩意儿不错，刚加载执行的广播通知方法
+    $scope.user = {"identifyCode": ""};                                          // 退出登录后，清空验证码
+    if ($.cookie("token") != null || $.cookie("organizationPartyId") != null) {     // 登录成功了，按物理返回键，就别想重新登录
+      $state.go("tab.chats");
+    }
+  });
   $scope.codeBtn='获取验证码';
 
   $scope.getIdentifyCode=function (tel) {

@@ -112,6 +112,7 @@ text-decoration:none;
   text-align: center;        /*文字水平居中对齐*/
   overflow:hidden;
 }
+
 #amountType{
   width: 200px;
   color: darkgrey;
