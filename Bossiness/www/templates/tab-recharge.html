@@ -4,49 +4,42 @@
     <a class="button icon ion-ios-undo" ui-sref="tab.dash"></a>
   </ion-nav-buttons>
 	<ion-content class="">
-		<div class="charInfo">
+		<div>
       <form name="rechargeForm">
-        <div class="list">
+        <div class="list card">
           <label class="item">
-            <span class="input-label" style="float: left;">卡名：</span>
+            <span  style="float: left;padding-right: 5px">卡名：</span>
             <strong ng-bind="cardName"></strong>
           </label>
           <label class="item">
-            <span class="input-label" style="float: left;">余额：</span>
+            <span  style="float: left;padding-right: 5px">余额：</span>
             <strong ng-bind="cardBalance"></strong>
           </label>
           <label class="item">
             <input ng-model="cardCode" type="hidden"/>
-            <span class="input-label" style="float: left;">金额：</span>
+            <span  style="float: left;padding-right: 5px">充值：</span>
             <strong>{{ret.choice}}元</strong>
           </label>
-          <!--<label class="item">-->
-            <!--<div class="row padding-left-50">-->
-              <!--<div class="col-20">-->
-                <!--<button class="button button-balanced" ng-click="recharge(100,cardCode,cardName,cardBalance)">100元</button>-->
-              <!--</div>-->
-              <!--<div class="col-offset-10"></div>-->
-              <!--<div class="col-20">-->
-                <!--<button class="button button-balanced" ng-click="recharge(200,cardCode,cardName,cardBalance)">200元</button>-->
-              <!--</div>-->
-              <!--<div class="col-offset-10"></div>-->
-              <!--<div class="col-20">-->
-                <!--<button class="button button-balanced" ng-click="recharge(300,cardCode,cardName,cardBalance)">300元</button>-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<div class="row padding-left-50 padding-top-10">-->
-              <!--<div class="col-20">-->
-                <!--<button class="button button-balanced" ng-click="recharge(500,cardCode,cardName,cardBalance)">500元</button>-->
-              <!--</div>-->
-            <!--</div>-->
 
-          <!--</label>-->
-          <label class="item">
-              <ion-radio class="balanced fc-widget-content" ng-repeat="item in items" ng-model="ret.choice" ng-value="item">
-                ￥{{item}} 元
+          <label class="item margin-bottom-10 margin-top-0 text-center" style="border: 0px">
+            <span class="widget-buttons">
+              <ion-radio class="balanced" style="border: 1px solid limegreen;border-radius: 6px;margin: 5px 10px 5px 10px;" ng-model="ret.choice" ng-value="100">
+                100元
               </ion-radio>
+              <ion-radio class="balanced" style="border: 1px solid limegreen;border-radius: 6px;margin: 5px 10px 5px 10px;" ng-model="ret.choice" ng-value="200">
+                200元
+              </ion-radio>
+              <br>
+              <ion-radio class="balanced" style="border: 1px solid limegreen;border-radius: 6px;margin: 5px 10px 5px 10px;" ng-model="ret.choice" ng-value="300">
+                300元
+              </ion-radio>
+              <ion-radio class="balanced" style="border: 1px solid limegreen;border-radius: 6px;margin: 5px 10px 5px 10px;" ng-model="ret.choice" ng-value="500">
+                500元
+              </ion-radio>
+            </span>
+
           </label>
-          <label class="item">
+          <label class="item text-center">
             <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
             <button ng-click="recharge(ret.choice,cardCode,cardName,cardBalance)" class="button button-positive" style="width: 80%" ng-disabled="sub">确定</button>
           </label>

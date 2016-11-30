@@ -55,7 +55,7 @@ angular.module('starter.services', [])
       }
       return null;
     },
-    select: function(type) {
+    selects: function(type) {
       return _.filter(chats, function(o) { return o.type==type;});
     }
   };
