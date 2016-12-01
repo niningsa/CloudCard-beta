@@ -59,11 +59,12 @@ angular.module('starter.controllers', [])
       $scope.presellAmount = result.presellAmount;                          //	已卖出金额
       $scope.limitAmount = result.limitAmount;                              //	卖卡限额
       $scope.balance = result.balance;                                      //	卖卡余额
+      $scope.settlementAmount = result.settlementAmount;                    //	跨店消费待结算金额
     });
 
     //下拉刷新操作
     $scope.doRefresh = function () {
-      $("#amountType").val(0);                                             //刷新的同时，将下拉变为全部
+      $scope.ret = {choice: '0'};                                           //刷新的同时，将下拉变为全部
 
       var charts = Chats.all(0);                                           // 商家账单
       $scope.Chats = charts;
@@ -88,6 +89,7 @@ angular.module('starter.controllers', [])
         $scope.presellAmount = result.presellAmount;                        //	已卖出金额
         $scope.limitAmount = result.limitAmount;                            //	卖卡限额
         $scope.balance = result.balance;                                    //	卖卡余额
+        $scope.settlementAmount = result.settlementAmount;                  //	跨店消费待结算金额
       });
 
       $scope.$broadcast("scroll.refreshComplete");
@@ -214,6 +216,7 @@ angular.module('starter.controllers', [])
       });
 
       $timeout(function () {
+
           $cordovaBarcodeScanner.scan().then(function (imageData) {
             $ionicLoading.hide();
             var cardCode = imageData.text;                                  // 扫到的数据
@@ -431,9 +434,9 @@ angular.module('starter.controllers', [])
    * Date 2016-11-15
    * */
   .controller('loginCtrl', function ($scope, $interval, $rootScope, $http, $state) {
-    $scope.$on('$ionicView.beforeEnter', function () {                           // 这个玩意儿不错，刚加载执行的广播通知方法
-      $scope.user = {"identifyCode": ""};                                          // 退出登录后，清空验证码
-      if ($.cookie("token") != null || $.cookie("organizationPartyId") != null) {     // 登录成功了，按物理返回键，就别想重新登录
+    $scope.$on('$ionicView.beforeEnter', function () {                              // 这个玩意儿不错，刚加载执行的广播通知方法
+      $scope.user = {"identifyCode": ""};                                           // 退出登录后，清空验证码
+      if ($.cookie("token") != null || $.cookie("organizationPartyId") != null) {   // 登录成功了，按物理返回键，就别想重新登录
         $state.go("tab.dash");
       }
     });
@@ -450,8 +453,8 @@ angular.module('starter.controllers', [])
           data: {
             "teleNumber": tel
           },
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}, // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
-          transformRequest: function (obj) {                                 // 参数是对象的话，需要把参数转成序列化的形式
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},         // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+          transformRequest: function (obj) {                                      // 参数是对象的话，需要把参数转成序列化的形式
             var str = [];
             for (var p in obj) {
               str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
