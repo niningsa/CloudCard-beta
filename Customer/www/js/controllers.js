@@ -388,13 +388,16 @@ angular.module('starter.controllers', [])
 
 
   //$("#amountType").val(0);
-  $scope.cardDetail = CardDetail.all(0);
+
   $scope.cardDetails = CardDetail.all(0);
+  $scope.cardDetail = $scope.cardDetails;
+
   //下拉刷新的功能
     $scope.doRefresh = function() {
       //下拉刷新的时候选中全部
       $scope.ret={choice:'0'};
-      $scope.cardDetail = CardDetail.all(0);
+      $scope.cardDetails = CardDetail.all(0);
+      $scope.cardDetail = $scope.cardDetails;
       //下拉刷新完成后提示转圈消失
       $scope.$broadcast("scroll.refreshComplete");
 
@@ -409,7 +412,7 @@ angular.module('starter.controllers', [])
   $scope.change = function(amountType){
     //第一次查询全部的时候调用后台去查询一下
     if("0" == amountType){
-      $scope.cardDetail = CardDetail.all(amountType);
+      $scope.cardDetail = $scope.cardDetails;
     }else{
       //-.filter  lodash实现过滤，利用第一次查询的数据第二次做筛选
       $scope.cardDetail =  _.filter($scope.cardDetails, function(o){  //提高效率（从缓存中过滤数据，不用请求后台，好屌）
