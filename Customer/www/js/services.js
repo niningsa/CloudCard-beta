@@ -122,13 +122,53 @@ angular.module('starter.services', [])
     remove: function(chat) {
       chats.splice(chats.indexOf(chat), 1);
     },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
-        }
+    get: function(cardId,amountType) {
+      var token=$.cookie("token");
+      var organizationPartyId=$.cookie("organizationPartyId");
+      if(token!=null) {
+        $.ajax({
+          type: "POST",
+          url: $rootScope.interfaceUrl + "getUserPayment",
+          async: false,
+          data: {
+            "token": token,
+            "organizationPartyId": organizationPartyId,
+            "type":amountType,  //0-全部， 1-充值，2-支付
+            "cardId":cardId,
+            "viewIndex": 0,
+            "viewSize": 2000
+          },
+          // dataType: "json",
+          dataFilter: function (data) {
+            console.log("raw data: " + data);
+            var idx = data.indexOf("//");
+            if (data && /^\s*\/\/.*/.test(data) && idx > -1) {
+              data = data.substring(idx + 2);
+            }
+            return data;
+          },
+          success: function (data) {
+            var paymentList = data.paymentList || [];
+            cardDetail = $.map(paymentList, function (o) {
+              return {
+                storeName: o.storeName,
+                cardBalance: o.amount,
+                type: o.type,
+                typeDesc: o.typeDesc,
+                transDate: o.transDate
+
+              }
+            });
+          },
+          error: function (e) {
+            console.log(e);
+          }
+        });
+      }else{
+        $state.go("login");
       }
-      return null;
+      console.table(cardDetail );
+      return cardDetail;
     }
   };
 })

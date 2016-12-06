@@ -31,6 +31,50 @@ angular.module('starter.controllers', [])
   };
 })
 
+
+  //分账单的页面查询
+
+  .controller('subBillCtrl', function($scope, CardDetail,$state,$rootScope,$stateParams) {
+    $scope.cardId = $stateParams.cardId;
+    $scope.cardDetail= CardDetail.get($scope.cardId);
+    $scope.items=[
+      {text:"0",value:"全部"},
+      {text:"1",value:"充值"},
+      {text:"2",value:"支付"}
+    ];
+    //默认选择全部
+    $scope.ret={choice:'0'};
+
+    $scope.cardDetails = CardDetail.get($scope.cardId);
+    $scope.cardDetail = $scope.cardDetails;
+
+    //下拉刷新的功能
+    $scope.doRefresh = function() {
+      //下拉刷新的时候选中全部
+      $scope.ret={choice:'0'};
+      $scope.cardDetails = CardDetail.get($scope.cardId);
+      $scope.cardDetail = $scope.cardDetails;
+      //下拉刷新完成后提示转圈消失
+      $scope.$broadcast("scroll.refreshComplete");
+
+    };
+
+    //下拉列表分类显示，查询全部是请求后台，按照类型去查询的时候就使用_.filter在查询出来的数据进行过滤
+    $scope.change = function(amountType){
+      //第一次查询全部的时候调用后台去查询一下
+      if("0" == amountType){
+        $scope.cardDetail = $scope.cardDetails;
+      }else{
+        //-.filter  lodash实现过滤，利用第一次查询的数据第二次做筛选
+        $scope.cardDetail =  _.filter($scope.cardDetails, function(o){  //提高效率（从缓存中过滤数据，不用请求后台，好屌）
+          return o.type==amountType;
+        });
+      }
+
+    }
+  })
+
+
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats,$state,$ionicPopup,$rootScope) {
     $scope.cardId = $stateParams.cardId;
     $scope.cardBalance = $stateParams.cardBalance;
