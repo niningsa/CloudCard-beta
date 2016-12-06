@@ -1,13 +1,27 @@
 /* Empty. Add your own CSS if you like */
 
 .charInfo{
+  padding-top:20px;
+	margin: 4px auto;
+	/* background: red; */
+	text-align: center;
+	width: 80%;
+	height: 80%;
+}
+.cardinputInfo{
 	margin: 30px auto;
 	/* background: red; */
 	text-align: center;
 	width: 80%;
 	height: 80%;
 }
+
+.al{
+  filter:alpha(opacity=70);  -moz-opacity:0.7;  -khtml-opacity: 0.7;  opacity: 0.7;
+  background:  url('../img/bg1_2.jpg') no-repeat;
+}
 .chartext{
+  font-size: 20px;
 	text-align: left;
 	margin-bottom: 30px;
 	margin-left: 10px;
@@ -15,11 +29,9 @@
 
 .stime{
   font-size: 18px;
-  font-family: '华文行楷';
 }
 #stype{
   font-size: 18px;
-  font-family: '华文行楷';
   color: blue;
 }
 
@@ -116,4 +128,11 @@ text-decoration:none;
 #amountType{
   width: 200px;
   color: darkgrey;
+}
+#zd{
+height: 20px;
+}
+#zandan{
+  height: 20px;
+  float: right;
 }

@@ -13,19 +13,33 @@
     <div class="charInfo">
       <div class="chartext" style="display: none">卡id： {{cardId}}</div>
       <div class="chartext" style="display: none">卡二维码： {{cardCode}}</div>
-     <div class="chartext">{{cardName}}： {{cardBalance}} 元</div>
-      <div id="output"></div>
+     <div class="chartext"><strong>{{cardName}}： {{cardBalance}}</strong> 元</div>
+      <div id="output" class="item"></div>
+      <div>该条码用于商家扫描</div>
 	  <br/>
 
      <div class="fontstyle" id="sq"></div>
    </div>
 
-    <div ng-show="shouQuan" ng-click="sq('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
-          <button class="button button-positive" style="width: 100%">授权</button>
+  <div style="text-align: center">
+    <span  ng-click="sq('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
+      <button  class="button button-balanced" style="width: 35%">充值</button>
+    </span>
+    <span  ng-click="sq('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
+      <button  class="button button-calm" style="width: 35%">消费</button>
+    </span>
+
+  </div>
+    <div style="padding: 10px;text-align: center">
+      <span  ng-show="shouQuan" ng-click="sq('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
+      <button  class="button button-positive" style="width: 74%">授权他人使用</button>
+    </span>
     </div>
     <!--解除授权的绑定事件-->
-    <div ng-show="jieChu" ng-click="jc('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
-     <button class="button button-block button-assertive"> 解除授权</button>
+    <div style="text-align: center" >
+      <span ng-show="jieChu" ng-click="jc('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
+        <button class="button button-assertive" style="width: 72%"> 解除授权</button>
+      </span>
     </div>
 
   </ion-content>

@@ -1,16 +1,16 @@
-<ion-view view-title="消费记录">
+<ion-view view-title="分账单查询">
   <ion-nav-buttons side="left">
     <a class="button icon ion-ios-undo" ui-sref="tab.chats"></a>
   </ion-nav-buttons>
   <ion-content>
     <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     <!--<div id="moeny1" class="moeny1" style="height: 60%;width: 100%">账单类型-->
-      <!--<select id="amountType" ng-change="change(amountType)" ng-model="amountType">-->
-        <!--<option value="0" ng-selected="true">全部</option>-->
-        <!--<option value="1">充值</option>-->
-        <!--<option value="2">消费</option>-->
-      <!--</select>-->
-      <!--<ion-radio class="calm fc-widget-content" ng-repeat="item in items" ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">{{item.value}}</ion-radio>-->
+    <!--<select id="amountType" ng-change="change(amountType)" ng-model="amountType">-->
+    <!--<option value="0" ng-selected="true">全部</option>-->
+    <!--<option value="1">充值</option>-->
+    <!--<option value="2">消费</option>-->
+    <!--</select>-->
+    <!--<ion-radio class="calm fc-widget-content" ng-repeat="item in items" ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">{{item.value}}</ion-radio>-->
 
     <!--</div>-->
     <div>
@@ -22,9 +22,9 @@
       <ion-item class="item-remove-animate" collection-repeat="chat in cardDetail" type="item-text-wrap">
         <h2 ng-bind="chat.storeName"></h2>
         <!--通过三目运算符来放置符号-->
-       <p class="badge bar-left badge-balanced" ><b>{{chat.type=='1'? '+'+chat.cardBalance:'-'+chat.cardBalance}}</b> 元 </b> </p>
-       <p>类型：<span ng-bind="chat.typeDesc"> </span></p>
-       <p>时间：<span ng-bind="chat.transDate"> </span></p>
+        <p class="badge bar-left badge-balanced" ><b>{{chat.type=='1'? '+'+chat.cardBalance:'-'+chat.cardBalance}}</b> 元 </b> </p>
+        <p>类型：<span ng-bind="chat.typeDesc"> </span></p>
+        <p>时间：<span ng-bind="chat.transDate"> </span></p>
       </ion-item>
     </ion-list>
 
