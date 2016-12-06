@@ -10,8 +10,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 .run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
 
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
 
     $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/";   //全局： 服务器接口 URL
     // $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/";    //全局： 测试接口 URL
@@ -27,6 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
   });
 })
 
@@ -159,7 +158,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
           }
        }
   })
-
 
   ;
 

@@ -5,12 +5,11 @@ angular.module('starter.controllers', [])
  * Author LN
  * Date 2016-11-20
  * */
-  .controller('DashCtrl', function ($scope, $state) {
+  .controller('DashCtrl', function ($scope, $state, $rootScope) {
     var token = $.cookie("token");
     if (token == null) {
       $state.go("login");
     }
-
   })
 
 
@@ -22,7 +21,7 @@ angular.module('starter.controllers', [])
   .controller('AccountCtrl', function ($scope, $rootScope, $http, $state, Chats) {
     $scope.items = [
       {text: "0", value: "全部"},
-      {text: "1", value: "支出"},
+      {text: "1", value: "充值"},
       {text: "2", value: "收款"}
     ];
     $scope.ret = {choice: '0'};
@@ -496,6 +495,64 @@ angular.module('starter.controllers', [])
    * Date 2016-11-15
    * */
   .controller('login', function ($scope, $state, $rootScope) {
+    // 当设备就绪时
+    var onDeviceReady = function () {
+      initiateUI();
+    };
+
+    //初始化jpush
+    var initiateUI = function () {
+      try {
+        window.plugins.jPushPlugin.init();
+        getRegistrationID();
+        if (device.platform != "Android") {
+          window.plugins.jPushPlugin.setDebugModeFromIos();
+          window.plugins.jPushPlugin.setApplicationIconBadgeNumber(0);
+        } else {
+          window.plugins.jPushPlugin.setDebugMode(true);
+          window.plugins.jPushPlugin.setStatisticsOpen(true);
+        }
+      } catch (exception) {
+        console.log(exception);
+      }
+    };
+
+    // 获取RegistrationID
+    var getRegistrationID = function () {
+      window.plugins.jPushPlugin.getRegistrationID(function (data) {
+        try {
+          if (data.length == 0) {
+            window.setTimeout(getRegistrationID, 1000);
+          }else{
+            var token = $.cookie("token");
+            // alert(device.platform+" "+data+" "+token);
+
+            // 极光推送设备注册
+            $.ajax({
+              url: $rootScope.interfaceUrl + "regJpushRegId",
+              type: "POST",
+              data: {
+                "token":token,
+                "regId":data,
+                "deviceType":device.platform,
+                "appType":"biz"
+              },
+              success: function (result) {
+                alert(result.code+" "+result.msg);
+                $.cookie("registrationId", data, {
+                  expires: 7
+                });
+                alert($.cookie("registrationId"));
+              }
+            });
+          }
+
+        } catch (exception) {
+          alert(exception);
+        }
+      });
+    };
+
 
     $scope.cloudCardLogin = function () {
       console.log($scope.user.tel + " " + $scope.user.identifyCode);
@@ -520,7 +577,10 @@ angular.module('starter.controllers', [])
               expires: 7
             });
 
+            // 添加对回调函数的监听
+            document.addEventListener("deviceready", onDeviceReady, false);
             $state.go("tab.dash");
+
           } else {
             $scope.$apply(function () {
               $scope.msg = result.msg;
@@ -536,7 +596,7 @@ angular.module('starter.controllers', [])
    * Author LN
    * Date 2016-11-21
    * */
-  .controller('settingCtrl', function ($scope, $state, $ionicPopup) {
+  .controller('settingCtrl', function ($scope, $state, $ionicPopup, $rootScope) {
     if ($.cookie("token") == null || $.cookie("organizationPartyId") == null) {
       $state.go("login");
     }
@@ -549,8 +609,28 @@ angular.module('starter.controllers', [])
         okText: "确定"
       }).then(function (res) {
         if (res) {
+
+          var token =  $.cookie("token");
+          var registrationId =  $.cookie("registrationId");
+          // // 极光推送删除设备ID
+          if(token!=null && registrationId!=null){
+            alert(token+" "+registrationId);
+            $.ajax({
+              url: $rootScope.interfaceUrl + "removeJpushRegId",
+              type: "POST",
+              data: {
+                "token":token,
+                "regId":registrationId
+              },
+              success: function (result) {
+                alert(result.code+" "+result.msg);
+              }
+            });
+          }
+
           $.cookie("token", null);
           $.cookie("organizationPartyId", null);
+          $.cookie("registrationId", null);
           $state.go("login");
         }
       })
