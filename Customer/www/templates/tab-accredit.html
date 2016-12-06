@@ -5,16 +5,16 @@
 
 
   <ion-content class="padding">
-<div id="other"><a href="#/tab/cardinput/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}">其他方式</a></div><br/>
-    <div class="charInfo">
-      <div class="chartext">{{cardName}}：{{cardBalance}} 元</div>
+<div id="other"><a href="#/tab/cardinput/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}">其他方式授权</a></div><br/>
+    <div class="cardinputInfo">
+      <div class="chartext"><strong>{{cardName}}：{{cardBalance}}</strong> 元</div>
       <div class="list">
         <label class=" item-input" style="display: none">
           <span class="input-label">卡id：</span>
           <input id="other_cardId" class="form-control" type="text" value="{{cardId}}"/>
         </label>
         <label class="">
-          <span class="input-label ">电话号码：</span>
+          <span class="stime">被授权号码：</span>
           <input id="other_tel" type="text" class="form-control"/>
         </label><br/>
         <label class="">
@@ -35,7 +35,7 @@
 
       </div>
       <div class="powerbutton">
-        <button id="powerfrom" class="button button-positive" style="width: 100%">授权</button>
+        <button id="powerfrom" class="button button-positive" style="width: 100%">默认授权</button>
       </div>
 
     </div>

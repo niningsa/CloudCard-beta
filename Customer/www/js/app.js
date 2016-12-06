@@ -66,11 +66,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       },
     cache:false,
-      params:{
+    params:{
       isCache:true
     }
     })
 
+    //分账单的页面查询
+    .state('tab.subBill', {
+      url: '/subBill/:cardId',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-subBill.html',
+          controller: 'subBillCtrl'
+        }
+      }
+    })
     //从卡中将卡Id和金额传进去
     .state('tab.chat-detail', {
       url: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
