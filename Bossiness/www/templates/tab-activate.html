@@ -1,5 +1,5 @@
 <ion-view view-title="开卡">
-  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <ion-nav-bar class="bar-dark"></ion-nav-bar>
   <ion-nav-buttons side="left">
     <a class="button icon ion-ios-undo" ui-sref="tab.dash"></a>
   </ion-nav-buttons>
@@ -14,7 +14,7 @@
           </label>
           <label class="item">
             <span style="float: left;padding-right: 5px" >电话号码：</span>
-            <input type="text" id = "kaInputPhone" class="form-control" name="kaInputPhone"	ng-model="kaInputPhone" style="width:180px;"  placeholder="请输入电话号码" required>
+            <input type="number" id = "kaInputPhone" class="form-control" name="kaInputPhone"	ng-model="kaInputPhone" style="width:180px;"  placeholder="请输入电话号码" required>
           </label>
           <label class="item">
             <input ng-model="cardCode" type="hidden"/>

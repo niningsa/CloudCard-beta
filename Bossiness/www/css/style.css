@@ -42,10 +42,9 @@ Empty. Add your own CSS if you like
 .money4{
 	/* background: #EE6435; */
 	background: url('../img/timg2.jpg');
-	line-height: 46px;
+	line-height: 30px;
 	overflow:hidden;
 }
-
 
 .al{
 	filter:alpha(opacity=70);  -moz-opacity:0.7;  -khtml-opacity: 0.7;  opacity: 0.7;

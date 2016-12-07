@@ -11,10 +11,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   $ionicPlatform.ready(function() {
 
 
-    $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/";   //全局： 服务器接口 URL
-    // $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/";    //全局： 测试接口 URL
-    // $rootScope.token=$.cookie("token");                                       //全局： token
-    // $rootScope.organizationPartyId=$.cookie("organizationPartyId");           //全局： 商家 partyId
+    $rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/";   //全局： 以后正式服务器接口 URL
+    // $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/";        //全局： 服务器接口 URL
+    // $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/";      //全局： 测试接口 URL
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
