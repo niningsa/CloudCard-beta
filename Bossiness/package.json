@@ -24,7 +24,7 @@
     "cordova-plugin-camera" ,
     "cordova-plugin-media-capture" ,
     "phonegap-plugin-barcodescanner",
-    "jpush-phonegap-plugin",
+    "jpush-phonegap-plugin"
   ],
   "cordovaPlatforms": []
 }
