@@ -16,17 +16,18 @@
      <div class="chartext"><strong>{{cardName}}： {{cardBalance}}</strong> 元</div>
       <div id="output" class="item"></div>
       <div>该条码用于商家扫描</div>
+
 	  <br/>
 
      <div class="fontstyle" id="sq"></div>
    </div>
 
   <div style="text-align: center">
-    <span  ng-click="sq('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
+    <span  >
       <button  class="button button-balanced" style="width: 35%">充值</button>
     </span>
-    <span  ng-click="sq('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
-      <button  class="button button-calm" style="width: 35%">消费</button>
+    <span  ng-controller="scanPaymentController">
+      <button  class="button button-calm" style="width: 35%"  ng-click="scanBarcode()">扫码消费</button>
     </span>
 
   </div>

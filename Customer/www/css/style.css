@@ -28,13 +28,17 @@
 }
 
 .stime{
-  font-size: 18px;
+  font-size: 16px;
+  padding: 7px 10px 7px 0px;
 }
 #stype{
-  font-size: 18px;
+  font-size: 16px;
   color: blue;
 }
+.dy{
+  padding-right: 18px;
 
+}
 #other{
 	text-align: right;
   float: right;
@@ -123,6 +127,14 @@ text-decoration:none;
   background: url('../img/timg2.jpg');
   text-align: center;        /*文字水平居中对齐*/
   overflow:hidden;
+}
+
+#identifyCode{
+  width: 52%;
+display: inline-block
+}
+#codebtn{
+  float: right;
 }
 
 #amountType{

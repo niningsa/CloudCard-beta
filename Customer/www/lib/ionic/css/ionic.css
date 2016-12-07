@@ -8274,7 +8274,7 @@ input:checked + .checkbox-icon:after {
 
 .item-radio .item-content {
   /* give some room to the right for the checkmark icon */
-  padding-right: 64px; }
+  padding-right: 40px; }
 
 .item-radio .radio-icon {
   /* checkmark icon will be hidden by default */

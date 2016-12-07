@@ -11,9 +11,8 @@
                   <input type="text" class="form-control" placeholder="手机号" name="tel" ng-model="user.tel" required />
               </div>
               <div class="loginbox-textbox">
-                  <input type="text" class="form-control" placeholder="验证码" name="identifyCode" ng-model="user.identifyCode" required/>
-                  <br>
-                  <input type="button" class="btn btn-primary" ng-value="codeBtn" ng-click="getIdentifyCode(user.tel)" ng-disabled="codeBtnDisable">
+                    <input type="text" id="identifyCode" class="form-control " placeholder="验证码" name="identifyCode" ng-model="user.identifyCode" required/>
+                    <input type="button" id="codebtn" class="btn btn-primary" ng-value="codeBtn" ng-click="getIdentifyCode(user.tel)" ng-disabled="codeBtnDisable">
               </div>
               <div class="loginbox-submit">
                   <input type="submit" class="btn btn-primary btn-block" value="登录" ng-disabled="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">

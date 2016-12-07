@@ -18,7 +18,7 @@ angular.module('starter.controllers', [])
     $scope.cardName = $stateParams.cardName;
   })
 
-.controller('ChatsCtrl', function($scope, Chats,$state) {
+.controller('ChatsCtrl', function($scope, Chats,$state,$rootScope) {
 
   $scope.chats = Chats.all();
     $scope.doRefresh = function() {
@@ -29,6 +29,8 @@ angular.module('starter.controllers', [])
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
+
+
 })
 
 
@@ -496,7 +498,9 @@ angular.module('starter.controllers', [])
 //})
 
 //退出登录
-  .controller('settingCtrl', function($scope,$state,$ionicPopup) {
+  .controller('settingCtrl', function($scope,$state,$ionicPopup,$rootScope) {
+    var token=$.cookie("token");
+    var registrationID=$.cookie("registrationID");
     $scope.outLogin=function () {
 
       $ionicPopup.confirm({
@@ -507,9 +511,31 @@ angular.module('starter.controllers', [])
         })
         .then(function(res){
           if(res){
+
             $.cookie('token', null);
             $.cookie('organizationPartyId', null);
-            $state.go("login");
+            //极光推送开始
+            //退出时销毁极光推送的registrationID
+            $.ajax(
+              { url: $rootScope.interfaceUrl+"removeJpushRegId",
+                type:"POST",
+                data: {
+                  "token":token,
+                  "regId":registrationID
+                },
+                success: function(result){
+                  //alert(result.msg);
+                }
+              });
+
+
+            // 获取RegistrationID
+
+
+
+
+            //极光推送结束
+            $state.go("login");//跳转到登录页面
           }
         })
 
@@ -551,39 +577,6 @@ angular.module('starter.controllers', [])
   $scope.getIdentifyCode=function (tel) {
     $scope.msg="";//先清空错误提示
     if(tel){
-      /*
-      $.ajax({
-          url: $rootScope.interfaceUrl+"getLoginCaptcha",
-          type:"POST",
-          data: {
-              "teleNumber":tel
-          },
-          success: function(result){
-              console.log(result.code+" "+result.msg);
-              $scope.$apply(function () {
-                if(result.code=='500'){
-                  $scope.msg=result.msg;
-                }else{
-
-                    //倒计时
-                    $scope.n=10;
-                    $scope.codeBtn="获取中 "+$scope.n+" 秒";
-                    var time=$interval(function () {
-                        $scope.n--;
-                        $scope.codeBtn="获取中 "+$scope.n+" 秒";
-                        if($scope.n==0){
-                            $interval.cancel(time); // 取消定时任务
-                            $scope.codeBtn='获取验证码';
-                            $scope.codeBtnDisable=false;
-                        }
-                    },1000);
-                    $scope.codeBtnDisable=true;
-                }
-              });
-
-          }
-      });
-      */
       $http({
         method: "POST",
         url: $rootScope.interfaceUrl+"getLoginCaptcha",
@@ -647,6 +640,74 @@ angular.module('starter.controllers', [])
             $.cookie("token",result.token,{
               expires:7
             });
+            //调用极光推送
+            //极光推送开始
+
+            // 当设备就绪时
+            var onDeviceReady = function () {
+              $scope.message += "JPushPlugin:Device ready!";
+              initiateUI();
+            };
+
+            // 获取RegistrationID
+            var getRegistrationID = function () {
+              window.plugins.jPushPlugin.getRegistrationID(function (data) {
+                try {
+                  console.log("JPushPlugin:registrationID is " + data);
+
+                  if (data.length == 0) {
+                    var t1 = window.setTimeout(getRegistrationID, 1000);
+                  }else{
+                    //调用极光推送的接口
+                    //alert(data+"ssss"+device.platform);
+                    //将极光的registrationID放入到cookie
+                    $.cookie("registrationID",data,{
+                      expires:7
+                    });
+                    $.ajax(
+                      { url: $rootScope.interfaceUrl+"regJpushRegId",
+                        type:"POST",
+                        data: {
+                          "token":result.token,
+                          "regId":data,
+                          "deviceType":device.platform,
+                          "appType":"biz"
+
+                        },
+                        success: function(result){
+                          //极光推送后台数据获取
+                        }
+                      });
+                  }
+                  $scope.message += "JPushPlugin:registrationID is " + data;
+                  $scope.registrationID = data;
+                } catch (exception) {
+                  console.log(exception);
+                }
+              });
+
+            };
+            //初始化jpush
+            var initiateUI = function () {
+              try {
+                window.plugins.jPushPlugin.init();
+                getRegistrationID();
+                if (device.platform != "Android") {
+                  window.plugins.jPushPlugin.setDebugModeFromIos();
+                  window.plugins.jPushPlugin.setApplicationIconBadgeNumber(0);
+                } else {
+                  window.plugins.jPushPlugin.setDebugMode(true);
+                  window.plugins.jPushPlugin.setStatisticsOpen(true);
+                }
+                $scope.message += '初始化成功! \r\n';
+              } catch (exception) {
+                console.log(exception);
+              }
+            };
+
+            // 添加对回调函数的监听
+            document.addEventListener("deviceready", onDeviceReady, false);
+            //极光推送结束
             $state.go("tab.chats");
             // location.href="http://"+location.host+"/#/tab/chats";
           }else{
@@ -659,6 +720,75 @@ angular.module('starter.controllers', [])
 
     }
 })
+
+
+
+//扫码消费
+  .controller("scanPaymentController", function ($scope, $state, $cordovaBarcodeScanner, $rootScope, $ionicPopup, $ionicLoading, $timeout) {
+    var token = $.cookie("token");
+    var organizationPartyId = $.cookie("organizationPartyId");
+
+    if (token == null) {
+      $state.go("login");
+    }
+
+    $scope.scanBarcode = function () {
+      $ionicLoading.show({
+        template: "正在调摄像头,请稍后...."
+      });
+
+      $timeout(function () {
+
+        $cordovaBarcodeScanner.scan().then(function (imageData) {
+          $ionicLoading.hide();
+          var cardCode = imageData.text;                                  // 扫到的数据
+           //alert(cardCode);
+          // alert(cardCode+" "+token+" "+organizationPartyId);
+
+          //if (cardCode != '') {
+          //  $.ajax({
+          //    url: $rootScope.interfaceUrl + "getCardInfoByCode",
+          //    type: "POST",
+          //    data: {
+          //      "cardCode": cardCode,
+          //      "token": token,
+          //      "organizationPartyId": organizationPartyId
+          //    },
+          //    success: function (result) {
+          //      // alert(result.code+" "+result.msg+" "+result.token);
+          //      // alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
+          //
+          //      if (result.code == '200') {
+          //        if (result.isActivated == 'Y') {                        //已激活，那就到充值页面
+          //          $state.go("tab.recharge", {
+          //            cardCode: cardCode,
+          //            cardName: result.cardName,
+          //            cardBalance: result.cardBalance,
+          //            cardImg: result.cardImg
+          //          });
+          //        } else {                                                //到开卡页面
+          //          // alert(result.cardCode);
+          //          $state.go("tab.activate", {
+          //            cardCode: cardCode,
+          //            cardName: result.cardName,
+          //            cardBalance: result.cardBalance,
+          //            cardImg: result.cardImg
+          //          });
+          //        }
+          //      } else {
+          //        $ionicPopup.alert({
+          //          title: '温馨提示',
+          //          template: result.msg
+          //        });
+          //      }
+          //    }
+          //  });
+          //}
+        });
+
+      },1000);
+    };
+  })
 
 ;
 

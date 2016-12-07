@@ -16,7 +16,7 @@
         <label class="">
           <span class="stime">被授权号码：</span>
           <input id="other_tel" type="text" class="form-control"/>
-        </label><br/>
+        </label>
         <label class="">
           <span class="input-label" style="display: none">授权金额：</span>
           <input id="other_money" style="display: none" type="text" value="{{cardBalance}}" class="form-control"/>
@@ -28,7 +28,7 @@
 
         </label><br/>
         <label class="item">
-          <ion-radio class="balanced fc-widget-content" ng-repeat="item in daylist" ng-model="ret.choice" ng-value="item.value">
+          <ion-radio class="balanced fc-widget-content dy" ng-repeat="item in daylist" ng-model="ret.choice" ng-value="item.value">
             {{item.text}}
           </ion-radio>
         </label>
