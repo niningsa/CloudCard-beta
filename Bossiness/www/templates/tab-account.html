@@ -6,10 +6,11 @@
     <div class="padding">
     	<!--<div id="moeny1" class="moeny1" style="height: 60%;width: 100%">已卖:<strong ng-bind="presellAmount"></strong>元</div>-->
     	<div style="height: 40%;text-align: center" class="money4">
-        总共卖卡金额：<strong ng-bind="presellAmount"></strong>元<br>
-        跨店消费待结算金额：<strong ng-bind="settlementAmount"></strong>元<br>
-        卖卡额度：<strong ng-bind="limitAmount"></strong>元&nbsp;&nbsp;
-    		已卖卡金额：<strong ng-bind="balance"></strong>元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="amount">总卖卡金额：</span><strong ng-bind="presellAmount"></strong>元<br>
+        <span class="amount">跨店消费待结算金额：</span><strong ng-bind="settlementAmount"></strong>元<br>
+        <span class="amount">卖卡额度：</span><strong ng-bind="limitAmount"></strong>元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="amount"> 卖卡余额：</span><strong ng-bind="balance"></strong>元<br>
+        <span class="amount">负债金额：</span><strong ng-bind="liabilities"></strong>元<br>
           <label class="widget-buttons">
             <ion-radio class="calm" ng-repeat="item in items" ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">{{item.value}}</ion-radio>
           </label>

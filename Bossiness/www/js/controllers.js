@@ -55,10 +55,11 @@ angular.module('starter.controllers', [])
       }
     }).success(function (result) {
 
-      $scope.presellAmount = result.presellAmount;                          //	已卖出金额
+      $scope.presellAmount = result.presellAmount;                          //	总共卖卡金额
       $scope.limitAmount = result.limitAmount;                              //	卖卡限额
       $scope.balance = result.balance;                                      //	卖卡余额
       $scope.settlementAmount = result.settlementAmount;                    //	跨店消费待结算金额
+      $scope.liabilities = result.liabilities;                              //	负债金额（卖出去还未消费的卡总额）
     });
 
     //下拉刷新操作
@@ -85,10 +86,11 @@ angular.module('starter.controllers', [])
         }
       }).success(function (result) {
 
-        $scope.presellAmount = result.presellAmount;                        //	已卖出金额
-        $scope.limitAmount = result.limitAmount;                            //	卖卡限额
-        $scope.balance = result.balance;                                    //	卖卡余额
-        $scope.settlementAmount = result.settlementAmount;                  //	跨店消费待结算金额
+        $scope.presellAmount = result.presellAmount;                          //	总共卖卡金额
+        $scope.limitAmount = result.limitAmount;                              //	卖卡限额
+        $scope.balance = result.balance;                                      //	卖卡余额
+        $scope.settlementAmount = result.settlementAmount;                    //	跨店消费待结算金额
+        $scope.liabilities = result.liabilities;                              //	负债金额（卖出去还未消费的卡总额）
       });
 
       $scope.$broadcast("scroll.refreshComplete");
@@ -181,7 +183,7 @@ angular.module('starter.controllers', [])
               console.log("An error happened -> " + error);
             });
 
-          },1000);
+          }, 1000);
         }
       }
     };
@@ -216,54 +218,54 @@ angular.module('starter.controllers', [])
 
       $timeout(function () {
 
-          $cordovaBarcodeScanner.scan().then(function (imageData) {
-            $ionicLoading.hide();
-            var cardCode = imageData.text;                                  // 扫到的数据
+        $cordovaBarcodeScanner.scan().then(function (imageData) {
+          $ionicLoading.hide();
+          var cardCode = imageData.text;                                  // 扫到的数据
 
-            // alert(cardCode+" "+token+" "+organizationPartyId);
+          // alert(cardCode+" "+token+" "+organizationPartyId);
 
-            if (cardCode != '') {
-              $.ajax({
-                url: $rootScope.interfaceUrl + "getCardInfoByCode",
-                type: "POST",
-                data: {
-                  "cardCode": cardCode,
-                  "token": token,
-                  "organizationPartyId": organizationPartyId
-                },
-                success: function (result) {
-                  // alert(result.code+" "+result.msg+" "+result.token);
-                  // alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
+          if (cardCode != '') {
+            $.ajax({
+              url: $rootScope.interfaceUrl + "getCardInfoByCode",
+              type: "POST",
+              data: {
+                "cardCode": cardCode,
+                "token": token,
+                "organizationPartyId": organizationPartyId
+              },
+              success: function (result) {
+                // alert(result.code+" "+result.msg+" "+result.token);
+                // alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
 
-                  if (result.code == '200') {
-                    if (result.isActivated == 'Y') {                        //已激活，那就到充值页面
-                      $state.go("tab.recharge", {
-                        cardCode: cardCode,
-                        cardName: result.cardName,
-                        cardBalance: result.cardBalance,
-                        cardImg: result.cardImg
-                      });
-                    } else {                                                //到开卡页面
-                      // alert(result.cardCode);
-                      $state.go("tab.activate", {
-                        cardCode: cardCode,
-                        cardName: result.cardName,
-                        cardBalance: result.cardBalance,
-                        cardImg: result.cardImg
-                      });
-                    }
-                  } else {
-                    $ionicPopup.alert({
-                      title: '温馨提示',
-                      template: result.msg
+                if (result.code == '200') {
+                  if (result.isActivated == 'Y') {                        //已激活，那就到充值页面
+                    $state.go("tab.recharge", {
+                      cardCode: cardCode,
+                      cardName: result.cardName,
+                      cardBalance: result.cardBalance,
+                      cardImg: result.cardImg
+                    });
+                  } else {                                                //到开卡页面
+                    // alert(result.cardCode);
+                    $state.go("tab.activate", {
+                      cardCode: cardCode,
+                      cardName: result.cardName,
+                      cardBalance: result.cardBalance,
+                      cardImg: result.cardImg
                     });
                   }
+                } else {
+                  $ionicPopup.alert({
+                    title: '温馨提示',
+                    template: result.msg
+                  });
                 }
-              });
-            }
-          });
+              }
+            });
+          }
+        });
 
-      },1000);
+      }, 1000);
     };
   })
 
@@ -523,7 +525,7 @@ angular.module('starter.controllers', [])
         try {
           if (data.length == 0) {
             window.setTimeout(getRegistrationID, 1000);
-          }else{
+          } else {
             var token = $.cookie("token");
             // alert(device.platform+" "+data+" "+token);
 
@@ -532,10 +534,10 @@ angular.module('starter.controllers', [])
               url: $rootScope.interfaceUrl + "regJpushRegId",
               type: "POST",
               data: {
-                "token":token,
-                "regId":data,
-                "deviceType":device.platform,
-                "appType":"biz"
+                "token": token,
+                "regId": data,
+                "deviceType": device.platform,
+                "appType": "biz"
               },
               success: function (result) {
                 // alert(result.code+" "+result.msg);
@@ -610,17 +612,17 @@ angular.module('starter.controllers', [])
       }).then(function (res) {
         if (res) {
 
-          var token =  $.cookie("token");
-          var registrationId =  $.cookie("registrationId");
+          var token = $.cookie("token");
+          var registrationId = $.cookie("registrationId");
           // // 极光推送删除设备ID
-          if(token!=null && registrationId!=null){
+          if (token != null && registrationId != null) {
             // alert(token+" "+registrationId);
             $.ajax({
               url: $rootScope.interfaceUrl + "removeJpushRegId",
               type: "POST",
               data: {
-                "token":token,
-                "regId":registrationId
+                "token": token,
+                "regId": registrationId
               },
               success: function (result) {
                 // alert(result.code+" "+result.msg);
