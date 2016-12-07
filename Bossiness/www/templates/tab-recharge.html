@@ -9,16 +9,16 @@
         <div class="list card">
           <label class="item">
             <span  style="float: left;padding-right: 5px">卡名：</span>
-            <strong ng-bind="cardName"></strong>
+            <span ng-bind="cardName"></span>
           </label>
           <label class="item">
             <span  style="float: left;padding-right: 5px">余额：</span>
-            <strong ng-bind="cardBalance"></strong>
+            <span ng-bind="cardBalance"></span>
           </label>
           <label class="item">
             <input ng-model="cardCode" type="hidden"/>
             <span  style="float: left;padding-right: 5px">充值：</span>
-            <strong>{{ret.choice}}元</strong>
+            <span>{{ret.choice}}元</span>
           </label>
 
           <label class="item margin-bottom-10 margin-top-0 text-center" style="border: 0px">

@@ -26,9 +26,10 @@
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.0"/>
   <plugin name="cordova-plugin-statusbar" spec="~2.2.0"/>
   <plugin name="ionic-plugin-keyboard" spec="~2.2.1"/>
-  <plugin name="cordova-plugin-camera" />
-  <plugin name="cordova-plugin-media-capture" />
-  <plugin name="phonegap-plugin-barcodescanner" />
+  <plugin name="cordova-plugin-camera" spec="~2.3.0" />
+  <plugin name="cordova-plugin-media-capture" spec="~1.4.0" />
+  <plugin name="phonegap-plugin-barcodescanner" spec="~4.0.1" />
+  <plugin name="jpush-phonegap-plugin" spec="~2.2.7" />
 
   <platform name="android">
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>

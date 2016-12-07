@@ -538,11 +538,11 @@ angular.module('starter.controllers', [])
                 "appType":"biz"
               },
               success: function (result) {
-                alert(result.code+" "+result.msg);
+                // alert(result.code+" "+result.msg);
                 $.cookie("registrationId", data, {
                   expires: 7
                 });
-                alert($.cookie("registrationId"));
+                // alert($.cookie("registrationId"));
               }
             });
           }
@@ -614,7 +614,7 @@ angular.module('starter.controllers', [])
           var registrationId =  $.cookie("registrationId");
           // // 极光推送删除设备ID
           if(token!=null && registrationId!=null){
-            alert(token+" "+registrationId);
+            // alert(token+" "+registrationId);
             $.ajax({
               url: $rootScope.interfaceUrl + "removeJpushRegId",
               type: "POST",
@@ -623,7 +623,7 @@ angular.module('starter.controllers', [])
                 "regId":registrationId
               },
               success: function (result) {
-                alert(result.code+" "+result.msg);
+                // alert(result.code+" "+result.msg);
               }
             });
           }
