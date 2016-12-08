@@ -26,7 +26,7 @@
 
   <div style="text-align: center">
     <span  >
-      <a  class="button button-balanced" style="width: 35%" href="#tab/recharge/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}/{{isAuthToOthers}}/{{isAuthToMe}}">充值</a>
+      <a  class="button button-balanced" style="width: 40%" href="#tab/recharge/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}/{{isAuthToOthers}}/{{isAuthToMe}}">充值</a>
     </span>
     <span  ng-controller="scanPaymentController">
       <button  class="button button-calm" style="width: 40%"  ng-click="scanBarcode()">扫码消费</button>
@@ -39,7 +39,7 @@
     </span>
 
       <span ng-show="zhuanKa" >
-        <button class="button button-dark" style="width: 40%" ng-click="sellCard('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')"> 转卡</button>
+        <button class="button button-dark" style="width: 40%" ng-click="sellCard('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}','{{isAuthToOthers}}','{{isAuthToMe}}')"> 转卡</button>
       </span>
 
        <span ng-show="jieChu" ng-click="jc('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
