@@ -117,7 +117,7 @@ angular.module('starter.controllers', [])
 
     }
   //转卡的操作
-  $scope.sellCard=function(cardId,cardBalance,cardName,cardCode){
+  $scope.sellCard=function(cardId,cardBalance,cardName,cardCode,isAuthToOthers,isAuthToMe){
     window.location.href="#/tab/sellCard/"+cardId+"/"+cardBalance+"/"+cardName+"/"+cardCode+"/"+isAuthToOthers+"/"+isAuthToMe;
   }
     //卡授权
