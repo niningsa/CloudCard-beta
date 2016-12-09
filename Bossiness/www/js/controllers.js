@@ -393,10 +393,6 @@ angular.module('starter.controllers', [])
               if (result.code == '200') {
                 // alert("开卡成功！"+cardCode+",充值金额为："+parseFloat(money));
 
-                // $.removeCookie("token");                         //删除旧token
-                // $.cookie("token",result.token,{
-                //   expires:7//七天                                //植入新token
-                // });
                 $ionicLoading.hide();
                 $state.go("tab.kaika", {
                   cardCode: cardCode,
