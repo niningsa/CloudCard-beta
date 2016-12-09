@@ -78,3 +78,14 @@ Empty. Add your own CSS if you like
 .cardCloud{
   background: url('../img/cardCloud.png') no-repeat -30px center;height:110px;
 }
+
+
+.item .badge{
+  top: 26px;
+}
+
+.badge{
+  font-size:18px!important;
+  font-weight:400;
+  padding:3px 6px 22px 6px;
+}

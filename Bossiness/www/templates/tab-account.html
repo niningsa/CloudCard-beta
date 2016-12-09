@@ -1,5 +1,8 @@
 <ion-view view-title="账单">
   <ion-nav-bar class="bar-dark"></ion-nav-bar>
+  <ion-nav-buttons side="right">
+    <a class="button icon ion-ios-gear" ui-sref="setting"></a>
+  </ion-nav-buttons>
   <ion-content>
     <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 
@@ -21,7 +24,7 @@
       <ion-list>
       <ion-item class="item-icon-right" collection-repeat="chat in Chats">
           <!--<i class="badge bar-light badge-balanced">{{chat.typeDesc}} {{chat.type =='1'?'+ '+chat.amount:'- '+chat.amount}}</i>-->
-          <i class="badge badge-balanced" ng-bind="chat.typeDesc =='充值'?'- '+chat.amount:'+ '+chat.amount"></i>
+          <i ng-class="chat.typeDesc =='充值'?'badge badge-balanced':'badge badge-assertive'" ng-bind="chat.typeDesc =='充值'?'- '+chat.amount:'+ '+chat.amount"></i>
           <strong ng-bind="chat.customerName"></strong>
           <span ng-bind="chat.typeDesc=='充值'?'支出':'收款'"></span>
           <p>
