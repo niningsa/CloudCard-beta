@@ -9,6 +9,15 @@ angular.module('starter.controllers', [])
     $scope.thruDate = $stateParams.thruDate;
     $scope.cardName = $stateParams.cardName;
   })
+
+  //C端跳转成功页面的传值
+.controller('paymentSuccessCtrl', function($scope,$stateParams) {
+
+    $scope.type = $stateParams.type;
+    $scope.cardId = $stateParams.cardId;
+    $scope.amount = $stateParams.amount;
+    $scope.cardBalance = $stateParams.cardBalance;
+  })
   //默认授权的方式
 .controller('DashAccreditCtrl', function($scope,$stateParams) {
 
@@ -645,9 +654,71 @@ angular.module('starter.controllers', [])
 
             // 当设备就绪时
             var onDeviceReady = function () {
-              $scope.message += "JPushPlugin:Device ready!";
+              //$scope.message += "JPushPlugin:Device ready!";
               initiateUI();
             };
+
+            // 打开通知的回调函数
+            var onOpenNotification = function (event) {
+              try {
+                var alertContent;
+                if (device.platform == "Android") {
+                  alertContent = window.plugins.jPushPlugin.openNotification.alert;
+                } else {
+                  alertContent = event.aps.alert;
+                }
+                //$scope.message = alertContent;
+                //alert(alertContent+"打开通知后的跳转页面");
+              } catch (exception) {
+                console.log("JPushPlugin:onOpenNotification" + exception);
+              }
+            };
+            // 接收到通知时的回调函数
+            var onReceiveNotification = function (event) {
+              try {
+                var alertContent;
+                if (device.platform == "Android") {
+                  alertContent = window.plugins.jPushPlugin.receiveNotification.alert;
+                } else {
+                  alertContent = event.aps.alert;
+                }
+                $scope.message = alertContent;
+                //$scope.notificationResult = alertContent;
+                //alert($scope.message+"接受通知");
+              } catch (exception) {
+                console.log(exception)
+              }
+            };
+
+            // 接收到消息时的回调函数
+            var onReceiveMessage = function (event) {
+              try {
+                var message;
+                if (device.platform == "Android") {
+                  message = window.plugins.jPushPlugin.receiveMessage.message;
+                } else {
+                  message = event.content;
+                }
+                $scope.message = message;
+                $scope.messageResult = message;
+                //alert($scope.message+"接受消息");
+                try{
+                  var ret = JSON.parse($scope.message);
+                }catch (e){
+                  alert("解析失败");
+                }
+                $state.go("tab.paymentSuccess",{
+                  "type":ret.type,
+                  "cardId":ret.cardId,
+                  "amount":ret.amount,
+                  "cardBalance":ret.cardBalance
+                });
+
+              } catch (exception) {
+                console.log("JPushPlugin:onReceiveMessage-->" + exception);
+              }
+            };
+
 
             // 获取RegistrationID
             var getRegistrationID = function () {
@@ -671,7 +742,7 @@ angular.module('starter.controllers', [])
                           "token":result.token,
                           "regId":data,
                           "deviceType":device.platform,
-                          "appType":"biz"
+                          "appType":"user"
 
                         },
                         success: function(result){
@@ -679,7 +750,7 @@ angular.module('starter.controllers', [])
                         }
                       });
                   }
-                  $scope.message += "JPushPlugin:registrationID is " + data;
+                  //$scope.message += "JPushPlugin:registrationID is " + data;
                   $scope.registrationID = data;
                 } catch (exception) {
                   console.log(exception);
@@ -699,7 +770,8 @@ angular.module('starter.controllers', [])
                   window.plugins.jPushPlugin.setDebugMode(true);
                   window.plugins.jPushPlugin.setStatisticsOpen(true);
                 }
-                $scope.message += '初始化成功! \r\n';
+                //$scope.message += '初始化成功! \r\n';
+
               } catch (exception) {
                 console.log(exception);
               }
@@ -707,6 +779,9 @@ angular.module('starter.controllers', [])
 
             // 添加对回调函数的监听
             document.addEventListener("deviceready", onDeviceReady, false);
+            document.addEventListener("jpush.openNotification", onOpenNotification, false);
+            document.addEventListener("jpush.receiveNotification", onReceiveNotification, false);
+            document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
             //极光推送结束
             $state.go("tab.chats");
             // location.href="http://"+location.host+"/#/tab/chats";
@@ -742,9 +817,15 @@ angular.module('starter.controllers', [])
         $cordovaBarcodeScanner.scan().then(function (imageData) {
           $ionicLoading.hide();
           var cardCode = imageData.text;                                  // 扫到的数据
-           //alert(cardCode);
+           alert(cardCode);
           // alert(cardCode+" "+token+" "+organizationPartyId);
-
+//测试页面的跳转
+          if(cardCode != ''){
+            $state.go("tab.payment", {
+                          cardCode: cardCode,
+                          cardName: "王大人的店"
+                        });
+          }
           //if (cardCode != '') {
           //  $.ajax({
           //    url: $rootScope.interfaceUrl + "getCardInfoByCode",
@@ -788,6 +869,24 @@ angular.module('starter.controllers', [])
 
       },1000);
     };
+  })
+
+
+//调到向商家付款的页面
+  .controller('paymentController', function ($scope, $state, $stateParams, $rootScope, $ionicLoading, $timeout) {
+    var token = $.cookie("token");
+    var organizationPartyId = $.cookie("organizationPartyId");
+    if (token == null) {
+      $state.go("login");
+    }
+
+    //页面信息初始化
+    $scope.cardCode = $stateParams.cardCode;
+    $scope.cardName = $stateParams.cardName;
+
+    $scope.paymentMethod=function(amount){
+     alert(amount);
+    }
   })
 
 ;

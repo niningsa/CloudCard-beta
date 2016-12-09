@@ -1,0 +1,37 @@
+<ion-view view-title="支付">
+  <ion-content class="padding">
+    <div class="charInfo">
+      <div class="chartext" ng-bind="type=='payment'?'支付成功':'充值成功'"></div>
+
+      <div class="list">
+        <!--<label class="item item-input al">-->
+          <!--<span class="input-label">卡ID：</span>-->
+          <!--<strong><span ng-bind="cardId"></span></strong>-->
+        <!--</label>-->
+        <label class="item item-input al">
+          <span class="input-label">消费类型：</span>
+          <strong><span ng-bind="type=='payment'?'支付':'充值'"></span></strong>
+        </label>
+
+        <label class="item item-input al">
+          <span class="input-label">消费金额：</span>
+          <strong><span ng-bind="amount"></span> 元</strong>
+        </label>
+        <label class="item item-input al">
+          <span class="input-label">当前余额：</span>
+          <strong><span ng-bind="cardBalance"></span> 元</strong>
+        </label>
+
+
+
+      </div>
+      <div class="powerbutton">
+        <a href="#/tab/chats">
+          <button id="tocard" class="button button-positive" style="width: 100%">退回首页</button>
+        </a>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>
+

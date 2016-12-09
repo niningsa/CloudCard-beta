@@ -6,6 +6,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
     //$rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
     //$rootScope.interfaceUrl="https://kayunka.c1337y.com/cloudcard/control/"; //接口前一截一样的
+    //$rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/"; //接口前一截一样的
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -15,6 +16,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+
+
+
   });
 })
 
@@ -152,6 +157,30 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       }
   })
 
+
+//B端收费成功后C端跳转页面
+  .state('tab.paymentSuccess', {
+    url: '/paymentSuccess/:type/:cardId/:amount/:cardBalance',
+    cache: false,
+    views: {
+      'tab-chats': {
+        templateUrl: 'templates/tab-paymentSuccess.html',
+        controller: 'paymentSuccessCtrl'
+      }
+    }
+  })
+
+    //扫一扫支付的页面
+    .state('tab.payment', {
+      url: '/payment/:cardCode/:cardName',
+      cache: false,
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-payment.html',
+          controller: 'paymentController'
+        }
+      }
+    })
 //设置的页面，退出登录
     .state('setting', {
       url: '/setting',

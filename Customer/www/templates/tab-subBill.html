@@ -22,7 +22,8 @@
       <ion-item class="item-remove-animate" collection-repeat="chat in cardDetail" type="item-text-wrap">
         <h2 ng-bind="chat.storeName"></h2>
         <!--通过三目运算符来放置符号-->
-        <p class="badge bar-left badge-balanced" ><b>{{chat.type=='1'? '+'+chat.cardBalance:'-'+chat.cardBalance}}</b> 元 </b> </p>
+        <!--<p class="badge bar-left badge-balanced" ><b>{{chat.type=='1'? '+'+chat.cardBalance:'-'+chat.cardBalance}}</b> 元 </b> </p>-->
+        <i ng-class="chat.type=='1'?'badge badge-assertive':'badge badge-balanced'"><b>{{chat.type=='1'? '+ '+chat.cardBalance:'- '+chat.cardBalance}}</b></b> </i>
         <p>类型：<span ng-bind="chat.typeDesc"> </span></p>
         <p>时间：<span ng-bind="chat.transDate"> </span></p>
       </ion-item>

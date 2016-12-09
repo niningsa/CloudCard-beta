@@ -14,7 +14,7 @@
           <input id="other_cardId" class="form-control" type="text" value="{{cardId}}"/>
         </label>
         <label class="">
-          <span class="stime">被授权号码：</span>
+          <span class="stime">被授权手机：</span>
           <input id="other_tel" type="text" class="form-control"/>
         </label>
         <label class="">
@@ -28,14 +28,21 @@
 
         </label><br/>
         <label class="item">
-          <ion-radio class="balanced fc-widget-content dy" ng-repeat="item in daylist" ng-model="ret.choice" ng-value="item.value">
+          <!--<ion-radio class="balanced fc-widget-content dy" ng-repeat="item in daylist" ng-model="ret.choice" ng-value="item.value">
             {{item.text}}
+          </ion-radio>
+          -->
+          <ion-radio class="positive" style="border: 1px solid blue;border-radius: 6px;margin: 5px 10px 5px 10px;" ng-model="ret.choice" ng-value="1">
+            一天
+          </ion-radio>
+          <ion-radio class="positive" style="border: 1px solid blue;border-radius: 6px;margin: 5px 10px 5px 10px;" ng-model="ret.choice" ng-value="0">
+            永久
           </ion-radio>
         </label>
 
       </div>
       <div class="powerbutton">
-        <button id="powerfrom" class="button button-positive" style="width: 100%">默认授权</button>
+        <button id="powerfrom" class="button button-positive" style="width: 100%">确认授权</button>
       </div>
 
     </div>
