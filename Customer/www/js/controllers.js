@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
     $scope.items=[
       {text:"0",value:"全部"},
       {text:"1",value:"充值"},
-      {text:"2",value:"支付"}
+      {text:"2",value:"消费"}
     ];
     //默认选择全部
     $scope.ret={choice:'0'};
@@ -436,7 +436,7 @@ angular.module('starter.controllers', [])
   $scope.items=[
     {text:"0",value:"全部"},
     {text:"1",value:"充值"},
-    {text:"2",value:"支付"}
+    {text:"2",value:"消费"}
   ];
   //默认选择全部
   $scope.ret={choice:'0'};
@@ -823,7 +823,7 @@ angular.module('starter.controllers', [])
           if(cardCode != ''){
             $state.go("tab.payment", {
                           cardCode: cardCode,
-                          cardName: "王大人的店"
+                          cardName: "咖啡店"
                         });
           }
           //if (cardCode != '') {
