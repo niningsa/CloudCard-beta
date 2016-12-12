@@ -8,6 +8,10 @@
   <ion-nav-buttons side="left">
     <a class="button icon ion-ios-undo" ui-sref="tab.chats"></a>
   </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+    <a class="button icon ion-clipboard"  ui-sref="tab.subBill" title="分账单">分账单</a>
+  </ion-nav-buttons>
   <ion-content class="padding">
 
     <div style="text-align: center;padding-top: 20px">
@@ -22,24 +26,32 @@
 
   <div style="text-align: center">
     <span  >
-      <button  class="button button-balanced" style="width: 35%">充值</button>
+      <button  class="button button-balanced" style="width: 40%">充值</button>
     </span>
     <span  ng-controller="scanPaymentController">
-      <button  class="button button-calm" style="width: 35%"  ng-click="scanBarcode()">扫码消费</button>
+      <button  class="button button-calm" style="width: 40%"  ng-click="scanBarcode()">扫码消费</button>
     </span>
 
   </div>
-    <div style="padding: 10px;text-align: center">
+    <div style="padding-top: 15px;text-align: center">
       <span  ng-show="shouQuan" ng-click="sq('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
-      <button  class="button button-positive" style="width: 74%">授权他人使用</button>
+      <button  class="button button-positive" style="width: 40%">授权他人用</button>
     </span>
+
+      <span ng-show="zhuanKa" >
+        <button class="button button-dark" style="width: 40%"> 转卡</button>
+      </span>
+
+       <span ng-show="jieChu" ng-click="jc('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
+        <button class="button button-assertive" style="width: 81%"> 解除授权</button>
+      </span>
     </div>
     <!--解除授权的绑定事件-->
     <div style="text-align: center" >
-      <span ng-show="jieChu" ng-click="jc('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
-        <button class="button button-assertive" style="width: 72%"> 解除授权</button>
-      </span>
-    </div>
 
+
+
+
+    </div>
   </ion-content>
 </ion-view>

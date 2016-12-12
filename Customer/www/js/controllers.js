@@ -111,9 +111,15 @@ angular.module('starter.controllers', [])
     if($stateParams.isAuthToOthers=='N' & $scope.isAuthToMe=='N'){
       $scope.shouQuan=true;
       $scope.jieChu=false;
-    }else{
+      $scope.zhuanKa=true;
+
+    }else if($stateParams.isAuthToOthers=='Y'){//卡主人可以解除授权
       $scope.shouQuan=false;
       $scope.jieChu=true;
+    }else{
+      $scope.shouQuan=false;
+      $scope.jieChu=false;
+
     }
     //卡授权
     $scope.sq=function(cardId,cardBalance,cardName,cardCode){
@@ -194,7 +200,7 @@ angular.module('starter.controllers', [])
   $("body").off("click", "#powerfrom").on("click","#powerfrom", function() {
     $other_tel=$("#other_tel").val();
     $other_cardId=$("#other_cardId").val();
-    $other_money=$("#other_money").val();
+    //$other_money=$("#other_money").val();
     $other_startDate=$("#other_startDate").val();
     $other_endDate=$("#other_endDate").val();
 
@@ -212,26 +218,26 @@ angular.module('starter.controllers', [])
           flag = false;
      }
     //正则验证输入金额是否合法
-     var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
-     if (moneyReg.test($other_money)) {
-        if(parseFloat($other_money) > parseFloat($scope.cardBalance)){
-
-          $ionicPopup.alert({
-            title:"温馨提示",
-            template:"授权金额大于可用金额",
-            okText:"确定",
-          })
-          flag = false;
-        }
-     }else{
-       $ionicPopup.alert({
-         title:"温馨提示",
-         template:"金额输入有误,请重新输入",
-         okText:"确定",
-
-       })
-          flag = false;
-     }
+    // var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
+    // if (moneyReg.test($other_money)) {
+    //    if(parseFloat($other_money) > parseFloat($scope.cardBalance)){
+    //
+    //      $ionicPopup.alert({
+    //        title:"温馨提示",
+    //        template:"授权金额大于可用金额",
+    //        okText:"确定",
+    //      })
+    //      flag = false;
+    //    }
+    // }else{
+    //   $ionicPopup.alert({
+    //     title:"温馨提示",
+    //     template:"金额输入有误,请重新输入",
+    //     okText:"确定",
+    //
+    //   })
+    //      flag = false;
+    // }
 
     if ($other_endDate == null | $other_endDate ==''){
       $ionicPopup.alert({
@@ -272,7 +278,7 @@ angular.module('starter.controllers', [])
          "token":token,
           "cardId":$other_cardId,
           "teleNumber":$other_tel,
-          "amount":$other_money,
+          //"amount":$other_money,
           "fromDate":$other_startDate,
           "thruDate":$other_endDate
         },
@@ -300,7 +306,7 @@ angular.module('starter.controllers', [])
           }
           if(data.code==200){
             //授权成功，传入必要的参数，跳转到授权成功的查看页面
-            window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate+"/"+$scope.cardName;
+            window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$scope.cardBalance+"/"+$other_startDate+"/"+$other_endDate+"/"+$scope.cardName;
           }
 
 
@@ -817,7 +823,7 @@ angular.module('starter.controllers', [])
         $cordovaBarcodeScanner.scan().then(function (imageData) {
           $ionicLoading.hide();
           var cardCode = imageData.text;                                  // 扫到的数据
-           alert(cardCode);
+           //alert(cardCode);
           // alert(cardCode+" "+token+" "+organizationPartyId);
 //测试页面的跳转
           if(cardCode != ''){
@@ -884,9 +890,23 @@ angular.module('starter.controllers', [])
     $scope.cardCode = $stateParams.cardCode;
     $scope.cardName = $stateParams.cardName;
 
-    $scope.paymentMethod=function(amount){
-     alert(amount);
+    $scope.paymentMethod=function(amount) {
+      alert(amount);
+      $scope.msg = '';
+      var reg = /^(([1-9]\d{0,9})|0)(\.\d{1,3})?$/;
+
+      //金额必须大于0的数字..痛苦 0_o||
+      if (!reg.test(amount)) {
+        $scope.msg = '输入金额不合法，请重新输入！！';
+        $("input[name='amount']").val("");
+      } else {
+        if (parseFloat(amount) <= 0) {
+          $scope.msg = '输入金额不合法，请重新输入！！';
+          $("input[name='amount']").val("");
+        }
+      }
     }
+
   })
 
 ;
