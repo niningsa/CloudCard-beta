@@ -168,3 +168,11 @@ height: 20px;
   padding:3px 6px 22px 6px;
 }
 
+.item-content.disable-pointer-events{
+  padding-right: 40px;
+}
+
+.prompt{
+  color: red;
+  font-size: 80px;
+}

@@ -188,12 +188,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       templateUrl: 'templates/tab-setting.html',
       controller: 'settingCtrl'
     })
-  .state('login', {
-    url: '/login',
-    cache: false,
-    templateUrl: "templates/login.html",
-    controller:'LoginCtrl'
-  });
+
+    .state('login', {
+      url: '/login',
+      cache: false,
+      templateUrl: "templates/login.html",
+      controller:'LoginCtrl'
+    })
+
+
+    .state('tab.recharge', {
+      url: '/recharge/:cardBalance/:cardName/:cardCode',
+      cache: false,
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-recharge.html',
+          controller: 'rechargeCtrl'
+        }
+      }
+    });
 
 
 

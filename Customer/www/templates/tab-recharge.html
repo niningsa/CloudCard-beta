@@ -1,0 +1,59 @@
+<ion-view view-title="充卡">
+  <!--<ion-nav-bar class="bar-positive"></ion-nav-bar>-->
+<!--  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.dash"></a>
+  </ion-nav-buttons>-->
+	<ion-content class="">
+		<div>
+      <form name="rechargeForm">
+        <div class="list card">
+          <!--<div class="item">-->
+            <!--<span  style="float: left;padding-right: 5px">卡名：</span>-->
+            <!--<span ng-bind="cardName"></span>-->
+          <!--</div>-->
+          <!--<div class="item">-->
+            <!--<span  style="float: left;padding-right: 5px">余额：</span>-->
+            <!--<span ng-bind="cardBalance"></span>-->
+          <!--</div>-->
+          <div class="item">
+            <input ng-model="cardCode" type="hidden"/>
+            <span  style="float: left;padding-right: 5px">充值金额：</span>
+            <span>{{ret.choice}}元</span>
+          </div>
+
+          <div class="item text-center" style="border:0px;padding:0px 0px 30px 15px">
+            <span class="widget-buttons">
+              <ion-radio class="balanced" style="border: 1px solid limegreen;border-radius: 6px;margin: 5px 10px 5px 10px;" ng-model="ret.choice" ng-value="100">
+                100元
+              </ion-radio>
+              <ion-radio class="balanced" style="border: 1px solid limegreen;border-radius: 6px;margin: 5px 10px 5px 10px;" ng-model="ret.choice" ng-value="200">
+                200元
+              </ion-radio>
+              <br>
+              <ion-radio class="balanced" style="border: 1px solid limegreen;border-radius: 6px;margin: 5px 10px 5px 10px;" ng-model="ret.choice" ng-value="300">
+                300元
+              </ion-radio>
+              <ion-radio class="balanced" style="border: 1px solid limegreen;border-radius: 6px;margin: 5px 10px 5px 10px;" ng-model="ret.choice" ng-value="500">
+                500元
+              </ion-radio>
+            </span>
+
+          </div>
+          <a class="item item-avatar item-icon-right" ng-click="alipay(ret.choice)">
+            <img src="img/zhiFuBao.png">
+            <h2>支付宝充值</h2>
+            <p class="prompt">请安装支付宝钱包的后使用</p>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+          <a class="item item-avatar item-icon-right">
+            <img src="img/weiXin.png">
+            <h2>微信充值</h2>
+            <p style="color:#7A7A7A" class="prompt">请先安装微信客户端后使用</p>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+
+        </div>
+      </form>
+		</div>
+	</ion-content>
+</ion-view>
