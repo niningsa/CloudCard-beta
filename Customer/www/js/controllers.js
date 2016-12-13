@@ -34,11 +34,6 @@ angular.module('starter.controllers', [])
       $scope.chats = Chats.all();
       $scope.$broadcast("scroll.refreshComplete");
     };
-    //alert( $scope.chats[0].lastText);
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-
 
 })
 
@@ -583,7 +578,7 @@ angular.module('starter.controllers', [])
   //为了让安卓手机按返回时不跳到登陆页面，判断tooken
   $scope.$on('$ionicView.beforeEnter', function () {                           // 这个玩意儿不错，刚加载执行的广播通知方法
     $scope.user = {"identifyCode": ""};                                          // 退出登录后，清空验证码
-    if ($.cookie("token") != null || $.cookie("organizationPartyId") != null) {     // 登录成功了，按物理返回键，就别想重新登录
+    if ($.cookie("token") != null) { // 登录成功了，按物理返回键，就别想重新登录
       $state.go("tab.chats");
     }
   });
@@ -655,140 +650,7 @@ angular.module('starter.controllers', [])
             $.cookie("token",result.token,{
               expires:7
             });
-            //调用极光推送
-            //极光推送开始
 
-            // 当设备就绪时
-            var onDeviceReady = function () {
-              //$scope.message += "JPushPlugin:Device ready!";
-              initiateUI();
-            };
-
-            // 打开通知的回调函数
-            var onOpenNotification = function (event) {
-              try {
-                var alertContent;
-                if (device.platform == "Android") {
-                  alertContent = window.plugins.jPushPlugin.openNotification.alert;
-                } else {
-                  alertContent = event.aps.alert;
-                }
-                //$scope.message = alertContent;
-                //alert(alertContent+"打开通知后的跳转页面");
-              } catch (exception) {
-                console.log("JPushPlugin:onOpenNotification" + exception);
-              }
-            };
-            // 接收到通知时的回调函数
-            var onReceiveNotification = function (event) {
-              try {
-                var alertContent;
-                if (device.platform == "Android") {
-                  alertContent = window.plugins.jPushPlugin.receiveNotification.alert;
-                } else {
-                  alertContent = event.aps.alert;
-                }
-                $scope.message = alertContent;
-                //$scope.notificationResult = alertContent;
-                //alert($scope.message+"接受通知");
-              } catch (exception) {
-                console.log(exception)
-              }
-            };
-
-            // 接收到消息时的回调函数
-            var onReceiveMessage = function (event) {
-              try {
-                var message;
-                if (device.platform == "Android") {
-                  message = window.plugins.jPushPlugin.receiveMessage.message;
-                } else {
-                  message = event.content;
-                }
-                $scope.message = message;
-                $scope.messageResult = message;
-                //alert($scope.message+"接受消息");
-                try{
-                  var ret = JSON.parse($scope.message);
-                }catch (e){
-                  alert("解析失败");
-                }
-                $state.go("tab.paymentSuccess",{
-                  "type":ret.type,
-                  "cardId":ret.cardId,
-                  "amount":ret.amount,
-                  "cardBalance":ret.cardBalance
-                });
-
-              } catch (exception) {
-                console.log("JPushPlugin:onReceiveMessage-->" + exception);
-              }
-            };
-
-
-            // 获取RegistrationID
-            var getRegistrationID = function () {
-              window.plugins.jPushPlugin.getRegistrationID(function (data) {
-                try {
-                  console.log("JPushPlugin:registrationID is " + data);
-
-                  if (data.length == 0) {
-                    var t1 = window.setTimeout(getRegistrationID, 1000);
-                  }else{
-                    //调用极光推送的接口
-                    //alert(data+"ssss"+device.platform);
-                    //将极光的registrationID放入到cookie
-                    $.cookie("registrationID",data,{
-                      expires:7
-                    });
-                    $.ajax(
-                      { url: $rootScope.interfaceUrl+"regJpushRegId",
-                        type:"POST",
-                        data: {
-                          "token":result.token,
-                          "regId":data,
-                          "deviceType":device.platform,
-                          "appType":"user"
-
-                        },
-                        success: function(result){
-                          //极光推送后台数据获取
-                        }
-                      });
-                  }
-                  //$scope.message += "JPushPlugin:registrationID is " + data;
-                  $scope.registrationID = data;
-                } catch (exception) {
-                  console.log(exception);
-                }
-              });
-
-            };
-            //初始化jpush
-            var initiateUI = function () {
-              try {
-                window.plugins.jPushPlugin.init();
-                getRegistrationID();
-                if (device.platform != "Android") {
-                  window.plugins.jPushPlugin.setDebugModeFromIos();
-                  window.plugins.jPushPlugin.setApplicationIconBadgeNumber(0);
-                } else {
-                  window.plugins.jPushPlugin.setDebugMode(true);
-                  window.plugins.jPushPlugin.setStatisticsOpen(true);
-                }
-                //$scope.message += '初始化成功! \r\n';
-
-              } catch (exception) {
-                console.log(exception);
-              }
-            };
-
-            // 添加对回调函数的监听
-            document.addEventListener("deviceready", onDeviceReady, false);
-            document.addEventListener("jpush.openNotification", onOpenNotification, false);
-            document.addEventListener("jpush.receiveNotification", onReceiveNotification, false);
-            document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
-            //极光推送结束
             $state.go("tab.chats");
             // location.href="http://"+location.host+"/#/tab/chats";
           }else{
