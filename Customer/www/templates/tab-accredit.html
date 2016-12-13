@@ -5,7 +5,7 @@
 
 
   <ion-content class="padding">
-<div id="other"><a href="#/tab/cardinput/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}">其他方式授权</a></div><br/>
+<div id="other"><a href="#/tab/chats/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}/{{isAuthToOthers}}/{{isAuthToMe}}">其他方式授权</a></div><br/>
     <div class="cardinputInfo">
       <div class="chartext"><strong>{{cardName}}：{{cardBalance}}</strong> 元</div>
       <div class="list">
@@ -39,7 +39,14 @@
             永久
           </ion-radio>
         </label>
-
+        <label class=" item-input" style="display: none">
+          <span class="input-label">isAuthToOthers：</span>
+          <input id="isAuthToOthers" class="form-control" type="text" value="{{isAuthToOthers}}"/>
+        </label>
+        <label class=" item-input" style="display: none">
+          <span class="input-label">isAuthToOthers：</span>
+          <input id="isAuthToMe" class="form-control" type="text" value="{{isAuthToMe}}"/>
+        </label>
       </div>
       <div class="powerbutton">
         <button id="powerfrom" class="button button-positive" style="width: 100%">确认授权</button>

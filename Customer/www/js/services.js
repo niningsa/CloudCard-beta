@@ -9,6 +9,7 @@ angular.module('starter.services', [])
       var chats;
       var that = this;
       var token=$.cookie("token");
+
       if(token){
       $.ajax({
         type: "POST",

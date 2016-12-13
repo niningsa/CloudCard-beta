@@ -116,9 +116,13 @@ angular.module('starter.controllers', [])
       $scope.jieChu=false;
 
     }
+  //转卡的操作
+  $scope.sellCard=function(cardId,cardBalance,cardName,cardCode){
+    window.location.href="#/tab/sellCard/"+cardId+"/"+cardBalance+"/"+cardName+"/"+cardCode;
+  }
     //卡授权
-    $scope.sq=function(cardId,cardBalance,cardName,cardCode){
-      window.location.href="#/tab/accredit/"+cardId+"/"+cardBalance+"/"+cardName+"/"+cardCode;
+    $scope.sq=function(cardId,cardBalance,cardName,cardCode,isAuthToOthers,isAuthToMe){
+      window.location.href="#/tab/accredit/"+cardId+"/"+cardBalance+"/"+cardName+"/"+cardCode+"/"+isAuthToOthers+"/"+isAuthToMe;
     };
   //卡解除授权
   $scope.jc=function(cardId,cardBalance,cardName,cardCode){
@@ -320,6 +324,13 @@ angular.module('starter.controllers', [])
 })
 
 
+  //转卡页面的传值
+  .controller('inputsellCardCtrl', function($scope, $stateParams,$rootScope,$http,Chats,$state,$ionicPopup) {
+    $scope.cardId = $stateParams.cardId;
+    $scope.cardBalance = $stateParams.cardBalance;
+    $scope.cardName = $stateParams.cardName;
+    $scope.cardCode = $stateParams.cardCode;
+  })
   //授权的默认界面
 
   .controller('inputAccreditCtrl', function($scope, $stateParams,$rootScope,$http,Chats,$state,$ionicPopup) {
@@ -327,6 +338,8 @@ angular.module('starter.controllers', [])
     $scope.cardBalance  =$stateParams.cardBalance;
     $scope.cardName  =$stateParams.cardName;
     $scope.cardCode  =$stateParams.cardCode;
+    $scope.isAuthToOthers  =$stateParams.isAuthToOthers;
+    $scope.isAuthToMe  =$stateParams.isAuthToMe;
     var token=$.cookie("token");
 
     $scope.daylist = [

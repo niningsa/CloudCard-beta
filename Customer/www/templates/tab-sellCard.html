@@ -1,0 +1,26 @@
+<ion-view view-title="转卡">
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" href="#/tab/accredit/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}"></a>
+  </ion-nav-buttons>
+
+  <ion-content class="padding">
+    <div class="cardinputInfo">
+      <div class="chartext"><strong>{{cardName}}：{{cardBalance}}</strong> 元</div>
+      <div class="list">
+        <label class=" item-input" style="display: none">
+          <span class="input-label">卡id：</span>
+          <input id="other_cardId" class="form-control" type="text" value="{{cardId}}"/>
+        </label>
+        <label class="">
+          <span class="stime">转卡手机：</span>
+          <input id="other_tel" type="number" class="form-control"/>
+        </label>
+
+      </div>
+      <div class="powerbutton">
+        <button id="powerfrom" class="button button-positive" style="width: 100%">确认转卡</button>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>
