@@ -198,7 +198,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 
     .state('tab.recharge', {
-      url: '/recharge/:cardBalance/:cardName/:cardCode',
+      url: '/recharge/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
         'tab-chats': {
