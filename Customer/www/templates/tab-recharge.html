@@ -1,9 +1,9 @@
 <ion-view view-title="充卡">
-  <!--<ion-nav-bar class="bar-positive"></ion-nav-bar>-->
-<!--  <ion-nav-buttons side="left">
-    <a class="button icon ion-ios-undo" ui-sref="tab.dash"></a>
-  </ion-nav-buttons>-->
-	<ion-content class="">
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" href="#tab/chats/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}/{{isAuthToOthers}}/{{isAuthToMe}}"></a>
+  </ion-nav-buttons>
+	<ion-content>
 		<div>
       <form name="rechargeForm">
         <div class="list card">
@@ -45,7 +45,7 @@
             <p class="prompt">请安装支付宝钱包的后使用</p>
             <i class="icon ion-ios-arrow-right"></i>
           </a>
-          <a class="item item-avatar item-icon-right">
+          <a class="item item-avatar item-icon-right" ng-click="weiXin(ret.choice)">
             <img src="img/weiXin.png">
             <h2>微信充值</h2>
             <p style="color:#7A7A7A" class="prompt">请先安装微信客户端后使用</p>

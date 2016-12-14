@@ -27,7 +27,7 @@ angular.module('starter.controllers', [])
     $scope.cardName = $stateParams.cardName;
   })
 
-.controller('ChatsCtrl', function($scope, Chats,$state,$rootScope) {
+.controller('ChatsCtrl', function($scope, Chats,$state, $rootScope, $ionicScrollDelegate) {
 
   $scope.chats = Chats.all();
     $scope.doRefresh = function() {
@@ -751,9 +751,12 @@ angular.module('starter.controllers', [])
    * */
   .controller('rechargeCtrl', function ($scope, $stateParams) {
     //页面信息初始化
-    $scope.cardCode = $stateParams.cardCode;
-    $scope.cardName = $stateParams.cardName;
+    $scope.cardId = $stateParams.cardId;
     $scope.cardBalance = $stateParams.cardBalance;
+    $scope.cardName = $stateParams.cardName;
+    $scope.cardCode  =$stateParams.cardCode;
+    $scope.isAuthToOthers  =$stateParams.isAuthToOthers;
+    $scope.isAuthToMe  =$stateParams.isAuthToMe;
 
     //单选按钮初始化
     $scope.ret = {choice: '100'};
@@ -792,7 +795,27 @@ angular.module('starter.controllers', [])
           duration: 500
         });
       });
-    }
+    };
+
+    $scope.weiXin=function (choice) {
+      alert("微信支付。。。"+choice);
+      navigator.weixin.pay({
+        "seller":"007slm@163.com",
+        "subject":"x51",
+        "body":"x5企业版",
+        "price":"0.01",
+        "tradeNo":"123456",
+        "timeout":"30m",
+        "notifyUrl":"wwww.justep.com"
+      },function(msgCode){
+        alert(msgCode);
+      },function(msg){
+        alert(msg);
+      })
+
+
+
+    };
 
   })
 
