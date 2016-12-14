@@ -10,7 +10,7 @@
   </ion-nav-buttons>
 
   <ion-nav-buttons side="right">
-    <a class="button icon ion-clipboard"  ui-sref="tab.subBill" title="分账单">分账单</a>
+    <a class="button icon ion-clipboard"  href="#/tab/subBill/{{cardId}}" title="分账单" >分账单</a>
   </ion-nav-buttons>
   <ion-content class="padding">
 
@@ -34,12 +34,12 @@
 
   </div>
     <div style="padding-top: 15px;text-align: center">
-      <span  ng-show="shouQuan" ng-click="sq('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
+      <span  ng-show="shouQuan" ng-click="sq('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}','{{isAuthToOthers}}','{{isAuthToMe}}')">
       <button  class="button button-positive" style="width: 40%">授权他人用</button>
     </span>
 
       <span ng-show="zhuanKa" >
-        <button class="button button-dark" style="width: 40%"> 转卡</button>
+        <button class="button button-dark" style="width: 40%" ng-click="sellCard('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')"> 转卡</button>
       </span>
 
        <span ng-show="jieChu" ng-click="jc('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
