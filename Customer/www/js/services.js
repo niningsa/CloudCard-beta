@@ -9,11 +9,11 @@ angular.module('starter.services', [])
       var chats;
       var that = this;
       var token=$.cookie("token");
-
       if(token){
       $.ajax({
         type: "POST",
-        url: $rootScope.interfaceUrl+"myCloudCards",
+        //url: "http://121.40.214.81:8080/cloudcard/control/myCloudCards",先给写死，暂解燃眉之极
+        url:$rootScope.interfaceUrl+"myCloudCards",
         async: false,
         data: {
           "token": token,
@@ -44,6 +44,7 @@ angular.module('starter.services', [])
             }});
         },
         error:function (e) {
+          alert("粗大事了，"+e.message)
           console.log(e);
         }
       });
@@ -73,7 +74,6 @@ angular.module('starter.services', [])
 
   return {
     all: function(amountType) {
-
       var token=$.cookie("token");
       var organizationPartyId=$.cookie("organizationPartyId");
       if(token!=null) {

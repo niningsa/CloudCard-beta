@@ -118,7 +118,7 @@ angular.module('starter.controllers', [])
     }
   //转卡的操作
   $scope.sellCard=function(cardId,cardBalance,cardName,cardCode){
-    window.location.href="#/tab/sellCard/"+cardId+"/"+cardBalance+"/"+cardName+"/"+cardCode;
+    window.location.href="#/tab/sellCard/"+cardId+"/"+cardBalance+"/"+cardName+"/"+cardCode+"/"+isAuthToOthers+"/"+isAuthToMe;
   }
     //卡授权
     $scope.sq=function(cardId,cardBalance,cardName,cardCode,isAuthToOthers,isAuthToMe){
@@ -192,6 +192,8 @@ angular.module('starter.controllers', [])
    $scope.cardBalance  =$stateParams.cardBalance;
    $scope.cardName  =$stateParams.cardName;
    $scope.cardCode  =$stateParams.cardCode;
+   $scope.isAuthToOthers  =$stateParams.isAuthToOthers;
+   $scope.isAuthToMe  =$stateParams.isAuthToMe;
     var token=$.cookie("token");
 
 
@@ -270,10 +272,8 @@ angular.module('starter.controllers', [])
       $.ajax({
         type: "POST",
         url: $rootScope.interfaceUrl+"createCardAuth",
-        //url:"http://192.168.0.109:8080/cloudcard/control/createCardAuth",
         async: false,
         data: {
-          //"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjbG91ZGNhcmQiLCJkZWxlZ2F0b3JOYW1lIjoiZGVmYXVsdCIsImV4cCI6MTQ4MDA1NTgwMCwidXNlciI6IkNDMTAwMDAiLCJpYXQiOjE0Nzg3NTk4MDB9.razjBCaXNa3rLsS_-kF8YglW4I01VteRClvpC0TbnPs",
          "token":token,
           "cardId":$other_cardId,
           "teleNumber":$other_tel,
@@ -309,7 +309,6 @@ angular.module('starter.controllers', [])
           }
 
 
-          //window.location.href="http://"+location.host+"#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
         },
         error:function (e) {
           console.log(e);
@@ -330,6 +329,8 @@ angular.module('starter.controllers', [])
     $scope.cardBalance = $stateParams.cardBalance;
     $scope.cardName = $stateParams.cardName;
     $scope.cardCode = $stateParams.cardCode;
+    $scope.isAuthToOthers  =$stateParams.isAuthToOthers;
+    $scope.isAuthToMe  =$stateParams.isAuthToMe;
   })
   //授权的默认界面
 
@@ -430,8 +431,6 @@ angular.module('starter.controllers', [])
               window.location.href="#/tab/cardreturnsuccess/"+$other_tel+"/"+$other_money+"/"+$day+"/"+$scope.cardName;
             }
 
-
-            //window.location.href="http://"+location.host+"#/tab/cardreturn/"+$other_tel+"/"+$other_money+"/"+$other_startDate+"/"+$other_endDate;
           },
           error:function (e) {
             console.log(e);
@@ -494,31 +493,7 @@ angular.module('starter.controllers', [])
   })
 
 
-  //退出登录
-//.controller('loginOutController', function($scope,CardDetail,$rootScope,$state,$ionicPopup) {
-//    $scope.loginOut=function(){
-//      //退出登录时清除cookie;
-//        var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
-//        if (keys) {
-//          for (var i = keys.length; i--;)
-//            document.cookie=keys[i]+'=0;expires=' + new Date( 0).toUTCString()
-//        }
-//      $ionicPopup.confirm({
-//        title:"退出",
-//        template:"是否退出要退出登录???",
-//        okText:"确定",
-//        cancelText:"取消"
-//      })
-//        .then(function(res){
-//          if(res){
-//            $state.go("login");
-//          }
-//        })
-//
-//    }
-//
-//
-//})
+
 
 //退出登录
   .controller('settingCtrl', function($scope,$state,$ionicPopup,$rootScope) {
@@ -551,13 +526,6 @@ angular.module('starter.controllers', [])
                 }
               });
 
-
-            // 获取RegistrationID
-
-
-
-
-            //极光推送结束
             $state.go("login");//跳转到登录页面
           }
         })
@@ -566,16 +534,6 @@ angular.module('starter.controllers', [])
   })
 
 
-  //返回首页
-
-.controller('returnController', function($scope,CardDetail,$rootScope,$state) {
-    $scope.return=function(){
-
-      $state.go("tab.chats");
-    }
-
-
-})
 
 
 

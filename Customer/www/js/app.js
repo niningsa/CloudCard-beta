@@ -1,13 +1,149 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova'])
 
 .run(function($ionicPlatform,$rootScope,$state) {
+  //当设备运行的时候就执行
+  $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
+  //$rootScope.interfaceUrl="http://192.168.3.13:8080/cloudcard/control/"; //接口前一截一样的
+  //$rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
+  //$rootScope.interfaceUrl="https://kayunka.c1337y.com/cloudcard/control/"; //接口前一截一样的
+  //$rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/"; //接口前一截一样的
+
+  //调用极光推送
+  //极光推送开始
+
+  // 当设备就绪时
+  var onDeviceReady = function () {
+    //$scope.message += "JPushPlugin:Device ready!";
+    initiateUI();
+  };
+
+  // 打开通知的回调函数
+  var onOpenNotification = function (event) {
+    try {
+      var alertContent;
+      if (device.platform == "Android") {
+        alertContent = window.plugins.jPushPlugin.openNotification.alert;
+      } else {
+        alertContent = event.aps.alert;
+      }
+      //$scope.message = alertContent;
+      //alert(alertContent+"打开通知后的跳转页面");
+    } catch (exception) {
+      console.log("JPushPlugin:onOpenNotification" + exception);
+    }
+  };
+  // 接收到通知时的回调函数
+  var onReceiveNotification = function (event) {
+    try {
+      var alertContent;
+      if (device.platform == "Android") {
+        alertContent = window.plugins.jPushPlugin.receiveNotification.alert;
+      } else {
+        alertContent = event.aps.alert;
+      }
+      //$scope.message = alertContent;
+      //$scope.notificationResult = alertContent;
+      //alert($scope.message+"接受通知");
+    } catch (exception) {
+      console.log(exception)
+    }
+  };
+
+  // 接收到消息时的回调函数
+  var onReceiveMessage = function (event) {
+    try {
+      var message;
+      if (device.platform == "Android") {
+        message = window.plugins.jPushPlugin.receiveMessage.message;
+      } else {
+        message = event.content;
+      }
+      //$scope.message = message;
+      //$scope.messageResult = message;
+      //alert($scope.message+"接受消息");
+      try{
+        //var ret = JSON.parse($scope.message);
+        var ret = JSON.parse(message);
+      }catch (e){
+        alert("解析失败");
+      }
+      $state.go("tab.paymentSuccess",{
+        "type":ret.type,
+        "cardId":ret.cardId,
+        "amount":ret.amount,
+        "cardBalance":ret.cardBalance
+      });
+
+    } catch (exception) {
+      console.log("JPushPlugin:onReceiveMessage-->" + exception);
+    }
+  };
+
+
+  // 获取RegistrationID
+  var getRegistrationID = function () {
+    window.plugins.jPushPlugin.getRegistrationID(function (data) {
+      try {
+        console.log("JPushPlugin:registrationID is " + data);
+
+        if (data.length == 0) {
+          var t1 = window.setTimeout(getRegistrationID, 1000);
+        }else{
+          //调用极光推送的接口
+          //alert(data+"ssss"+device.platform);
+          //将极光的registrationID放入到cookie
+          $.cookie("registrationID",data,{
+            expires:7
+          });
+          $.ajax(
+            { url: $rootScope.interfaceUrl+"regJpushRegId",
+              type:"POST",
+              data: {
+                "token":result.token,
+                "regId":data,
+                "deviceType":device.platform,
+                "appType":"user"
+
+              },
+              success: function(result){
+                //极光推送后台数据获取
+              }
+            });
+        }
+        //$scope.message += "JPushPlugin:registrationID is " + data;
+        //$scope.registrationID = data;
+      } catch (exception) {
+        console.log(exception);
+      }
+    });
+
+  };
+  //初始化jpush
+  var initiateUI = function () {
+    try {
+      window.plugins.jPushPlugin.init();
+      getRegistrationID();
+      if (device.platform != "Android") {
+        window.plugins.jPushPlugin.setDebugModeFromIos();
+        window.plugins.jPushPlugin.setApplicationIconBadgeNumber(0);
+      } else {
+        window.plugins.jPushPlugin.setDebugMode(true);
+        window.plugins.jPushPlugin.setStatisticsOpen(true);
+      }
+      //$scope.message += '初始化成功! \r\n';
+
+    } catch (exception) {
+      console.log(exception);
+    }
+  };
+
+  // 添加对回调函数的监听
+  document.addEventListener("deviceready", onDeviceReady, false);
+  document.addEventListener("jpush.openNotification", onOpenNotification, false);
+  document.addEventListener("jpush.receiveNotification", onReceiveNotification, false);
+  document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
+  //极光推送结束
   $ionicPlatform.ready(function() {
-
-    $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
-    //$rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
-    //$rootScope.interfaceUrl="https://kayunka.c1337y.com/cloudcard/control/"; //接口前一截一样的
-    //$rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/"; //接口前一截一样的
-
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
@@ -16,145 +152,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
-    //调用极光推送
-    //极光推送开始
-
-    // 当设备就绪时
-    var onDeviceReady = function () {
-      //$scope.message += "JPushPlugin:Device ready!";
-      initiateUI();
-    };
-
-    // 打开通知的回调函数
-    var onOpenNotification = function (event) {
-      try {
-        var alertContent;
-        if (device.platform == "Android") {
-          alertContent = window.plugins.jPushPlugin.openNotification.alert;
-        } else {
-          alertContent = event.aps.alert;
-        }
-        //$scope.message = alertContent;
-        //alert(alertContent+"打开通知后的跳转页面");
-      } catch (exception) {
-        console.log("JPushPlugin:onOpenNotification" + exception);
-      }
-    };
-    // 接收到通知时的回调函数
-    var onReceiveNotification = function (event) {
-      try {
-        var alertContent;
-        if (device.platform == "Android") {
-          alertContent = window.plugins.jPushPlugin.receiveNotification.alert;
-        } else {
-          alertContent = event.aps.alert;
-        }
-        //$scope.message = alertContent;
-        //$scope.notificationResult = alertContent;
-        //alert($scope.message+"接受通知");
-      } catch (exception) {
-        console.log(exception)
-      }
-    };
-
-    // 接收到消息时的回调函数
-    var onReceiveMessage = function (event) {
-      try {
-        var message;
-        if (device.platform == "Android") {
-          message = window.plugins.jPushPlugin.receiveMessage.message;
-        } else {
-          message = event.content;
-        }
-        //$scope.message = message;
-        //$scope.messageResult = message;
-        //alert($scope.message+"接受消息");
-        try{
-          //var ret = JSON.parse($scope.message);
-          var ret = JSON.parse(message);
-        }catch (e){
-          alert("解析失败");
-        }
-        $state.go("tab.paymentSuccess",{
-          "type":ret.type,
-          "cardId":ret.cardId,
-          "amount":ret.amount,
-          "cardBalance":ret.cardBalance
-        });
-
-      } catch (exception) {
-        console.log("JPushPlugin:onReceiveMessage-->" + exception);
-      }
-    };
-
-
-    // 获取RegistrationID
-    var getRegistrationID = function () {
-      window.plugins.jPushPlugin.getRegistrationID(function (data) {
-        try {
-          console.log("JPushPlugin:registrationID is " + data);
-
-          if (data.length == 0) {
-            var t1 = window.setTimeout(getRegistrationID, 1000);
-          }else{
-            //调用极光推送的接口
-            //alert(data+"ssss"+device.platform);
-            //将极光的registrationID放入到cookie
-            $.cookie("registrationID",data,{
-              expires:7
-            });
-            $.ajax(
-              { url: $rootScope.interfaceUrl+"regJpushRegId",
-                type:"POST",
-                data: {
-                  "token":result.token,
-                  "regId":data,
-                  "deviceType":device.platform,
-                  "appType":"user"
-
-                },
-                success: function(result){
-                  //极光推送后台数据获取
-                }
-              });
-          }
-          //$scope.message += "JPushPlugin:registrationID is " + data;
-          //$scope.registrationID = data;
-        } catch (exception) {
-          console.log(exception);
-        }
-      });
-
-    };
-    //初始化jpush
-    var initiateUI = function () {
-      try {
-        window.plugins.jPushPlugin.init();
-        getRegistrationID();
-        if (device.platform != "Android") {
-          window.plugins.jPushPlugin.setDebugModeFromIos();
-          window.plugins.jPushPlugin.setApplicationIconBadgeNumber(0);
-        } else {
-          window.plugins.jPushPlugin.setDebugMode(true);
-          window.plugins.jPushPlugin.setStatisticsOpen(true);
-        }
-        //$scope.message += '初始化成功! \r\n';
-
-      } catch (exception) {
-        console.log(exception);
-      }
-    };
-
-    // 添加对回调函数的监听
-    document.addEventListener("deviceready", onDeviceReady, false);
-    document.addEventListener("jpush.openNotification", onOpenNotification, false);
-    document.addEventListener("jpush.receiveNotification", onReceiveNotification, false);
-    document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
-    //极光推送结束
 
 
 
   });
+
+
+
 })
 
 .config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
@@ -234,7 +238,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
    //到卡授权的其他页面
   .state('tab.cardinput', {
-      url: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode',
+      url: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
         'tab-chats': {
@@ -259,7 +263,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     //转卡页面的跳转
     .state('tab.sellCard', {
-      url: '/sellCard/:cardId/:cardBalance/:cardName/:cardCode',
+      url: '/sellCard/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
         'tab-chats': {
