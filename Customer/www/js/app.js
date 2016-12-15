@@ -95,20 +95,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
           $.cookie("registrationID",data,{
             expires:7
           });
-          $.ajax(
-            { url: $rootScope.interfaceUrl+"regJpushRegId",
-              type:"POST",
-              data: {
-                "token":result.token,
-                "regId":data,
-                "deviceType":device.platform,
-                "appType":"user"
+          $.cookie("platform",device.platform,{
+            expires:7
+          });
 
-              },
-              success: function(result){
-                //极光推送后台数据获取
-              }
-            });
         }
         //$scope.message += "JPushPlugin:registrationID is " + data;
         //$scope.registrationID = data;

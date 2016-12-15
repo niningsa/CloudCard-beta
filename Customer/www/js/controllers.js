@@ -603,6 +603,7 @@ angular.module('starter.controllers', [])
 
  //登录
 .controller('login', function($scope,$rootScope,$state) {
+
     $scope.cloudCardLogin=function () {
       console.log($scope.user.tel+" "+$scope.user.identifyCode);
       $.ajax({
@@ -615,6 +616,8 @@ angular.module('starter.controllers', [])
         success: function(result){
           // console.log(result.code+" "+result.msg);
           if(result.code=='200'){
+            var registrationID=$.cookie("registrationID");
+            var platform=$.cookie("platform");
             $scope.$apply(function () {
               $scope.msg="";
             });
@@ -622,7 +625,19 @@ angular.module('starter.controllers', [])
             $.cookie("token",result.token,{
               expires:7
             });
-
+            $.ajax(
+              { url: $rootScope.interfaceUrl+"regJpushRegId",
+                type:"POST",
+                data: {
+                  "token":result.token,
+                  "regId":registrationID,
+                  "deviceType":platform,
+                  "appType":"user"
+                },
+                success: function(result){
+                  //极光推送后台数据获取
+                }
+              });
             $state.go("tab.chats");
             // location.href="http://"+location.host+"/#/tab/chats";
           }else{
