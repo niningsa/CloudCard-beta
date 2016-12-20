@@ -2,9 +2,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 .run(function($ionicPlatform,$rootScope,$state) {
   //当设备运行的时候就执行
-  $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
+  //$rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="http://192.168.3.13:8080/cloudcard/control/"; //接口前一截一样的
-  //$rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
+  $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="https://kayunka.c1337y.com/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/"; //接口前一截一样的
 
@@ -263,6 +263,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       }
     })
 
+
+      //转卡成功的页面跳转
+    .state('tab.sellCardSuccess', {
+      url: '/sellCardSuccess/:cardBalance/:cardName/:tel',
+      cache: false,
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-sellCardSuccess.html',
+          controller: 'sellCardSuccessCtrl'
+        }
+      }
+    })
 //用户授权成功的页面
   .state('tab.cardreturn', {
       url: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate/:cardName',
@@ -311,9 +323,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }
   })
 
+    //c端扫码消费成功之后的页面跳转
+  .state('tab.userPaymentSuccess', {
+    url: '/userPaymentSuccess/:storeName/:amount/:cardBalance/:type',
+    cache: false,
+    views: {
+      'tab-chats': {
+        templateUrl: 'templates/tab-userPaymentSuccess.html',
+        controller: 'userPaymentSuccessCtrl'
+      }
+    }
+  })
+
+
+
     //扫一扫支付的页面
     .state('tab.payment', {
-      url: '/payment/:cardCode/:cardName',
+      url: '/payment/:qrCode/:storeName/:storeId/:storeImgUrl/:cardId',
       cache: false,
       views: {
         'tab-chats': {

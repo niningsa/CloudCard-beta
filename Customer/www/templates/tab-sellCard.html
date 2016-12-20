@@ -6,19 +6,24 @@
   <ion-content class="padding">
     <div class="cardinputInfo">
       <div class="chartext"><strong>{{cardName}}：{{cardBalance}}</strong> 元</div>
-      <div class="list">
+
+      <form ng-controller="inputsellCardCtrl" name="sellForm">
         <label class=" item-input" style="display: none">
           <span class="input-label">卡id：</span>
           <input id="other_cardId" class="form-control" type="text" value="{{cardId}}"/>
+          <input id="cardName" name="cardName" class="form-control" type="text" value="{{cardName}}"/>
+          <input id="cardBalance" name="cardBalance" class="form-control" type="text" value="{{cardBalance}}"/>
         </label>
-        <label class="">
-          <span class="stime">转卡手机：</span>
-          <input id="other_tel" type="number" class="form-control"/>
+
+        <label class="item">
+          <span class="input-label" style="float: left;">转卡手机：</span>
+          <input id="telphone"  class="form-control" type="number"	ng-model="telphone" name="telphone" style="width:150px" placeholder="请输入手机号" required>
         </label>
-      </div>
-      <div class="powerbutton">
-        <button id="powerfrom" class="button button-positive" style="width: 100%">确认转卡</button>
-      </div>
+        <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;">...</span>
+        <div id="sellCard" style="top: 20px;text-align: center;" >
+          <button  class="button button-positive" style="width: 100%" ng-click="sellCard(cardName,cardBalance)" ng-disabled="sellForm.telphone.$error.required">确认转卡</button>
+        </div>
+      </form>
 
     </div>
   </ion-content>

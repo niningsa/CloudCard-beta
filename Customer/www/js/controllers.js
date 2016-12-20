@@ -18,6 +18,22 @@ angular.module('starter.controllers', [])
     $scope.amount = $stateParams.amount;
     $scope.cardBalance = $stateParams.cardBalance;
   })
+  //转卡成功后的跳转页面
+.controller('sellCardSuccessCtrl', function($scope,$stateParams) {
+
+    $scope.cardBalance = $stateParams.cardBalance;
+    $scope.cardName = $stateParams.cardName;
+    $scope.tel = $stateParams.tel;
+  })
+  //c端扫码消费成功之后的页面跳转
+.controller('userPaymentSuccessCtrl', function($scope,$stateParams) {
+
+
+    $scope.storeName = $stateParams.storeName;
+    $scope.amount = $stateParams.amount;
+    $scope.cardBalance = $stateParams.cardBalance;
+    $scope.type = $stateParams.type;
+  })
   //默认授权的方式
 .controller('DashAccreditCtrl', function($scope,$stateParams) {
 
@@ -329,6 +345,29 @@ angular.module('starter.controllers', [])
     $scope.cardCode = $stateParams.cardCode;
     $scope.isAuthToOthers  =$stateParams.isAuthToOthers;
     $scope.isAuthToMe  =$stateParams.isAuthToMe;
+
+    $scope.sellCard=function(cardName,cardBalance){
+      var tel=$("#telphone").val();
+      var flag =true;
+      //验证手机号是否合法
+      var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+
+      if (!phoneReg.test(tel)) {
+        $scope.msg = '手机号码输入有误，请重新输入！！';
+        //$("#telphone").val(" ");
+        flag = false;
+      }
+
+      if(flag){
+        alert("校验成功了");
+        $state.go("tab.sellCardSuccess",{
+          "cardBalance":cardBalance,
+          "cardName":cardName,
+          "tel":tel
+        });
+      }
+
+    }
   })
   //授权的默认界面
 
@@ -654,72 +693,50 @@ angular.module('starter.controllers', [])
 
 
 //扫码消费
-  .controller("scanPaymentController", function ($scope, $state, $cordovaBarcodeScanner, $rootScope, $ionicPopup, $ionicLoading, $timeout) {
+  .controller("scanPaymentController", function ($scope, $state, $cordovaBarcodeScanner, $rootScope, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
     var token = $.cookie("token");
-    var organizationPartyId = $.cookie("organizationPartyId");
-
+    $scope.cardId = $stateParams.cardId;
     if (token == null) {
       $state.go("login");
     }
-
     $scope.scanBarcode = function () {
       $ionicLoading.show({
         template: "正在调摄像头,请稍后...."
       });
-
       $timeout(function () {
-
         $cordovaBarcodeScanner.scan().then(function (imageData) {
           $ionicLoading.hide();
+          $scope.msg = "";
           var cardCode = imageData.text;                                  // 扫到的数据
-           //alert(cardCode);
-          // alert(cardCode+" "+token+" "+organizationPartyId);
-//测试页面的跳转
-          if(cardCode != ''){
-            $state.go("tab.payment", {
-                          cardCode: cardCode,
-                          cardName: "咖啡店"
+          if (cardCode != '') {
+            $.ajax({
+              url: $rootScope.interfaceUrl + "getStoreInfoByQRcode",
+              type: "POST",
+              data: {
+                "token": token,
+                "qrCode": cardCode
+              },
+              success: function (result) {
+                 //alert(result.msg+" "+result.storeName+" "+result.storeId+" "+result.storeImgUrl);
+                if (result.code == '200') {
+                  $state.go("tab.payment", {
+                          qrCode: cardCode,
+                          storeName: result.storeName,
+                          storeId: result.storeId,
+                          storeImgUrl: result.storeImgUrl,
+                          cardId: $scope.cardId
                         });
+                } else {
+                  $ionicPopup.alert({
+                    title: '温馨提示',
+                    template: result.msg
+                  });
+                }
+              }
+            });
           }
-          //if (cardCode != '') {
-          //  $.ajax({
-          //    url: $rootScope.interfaceUrl + "getCardInfoByCode",
-          //    type: "POST",
-          //    data: {
-          //      "cardCode": cardCode,
-          //      "token": token,
-          //      "organizationPartyId": organizationPartyId
-          //    },
-          //    success: function (result) {
-          //      // alert(result.code+" "+result.msg+" "+result.token);
-          //      // alert(result.isActivated+" "+result.cardName+" "+result.cardId+" "+result.cardBalance);
-          //
-          //      if (result.code == '200') {
-          //        if (result.isActivated == 'Y') {                        //已激活，那就到充值页面
-          //          $state.go("tab.recharge", {
-          //            cardCode: cardCode,
-          //            cardName: result.cardName,
-          //            cardBalance: result.cardBalance,
-          //            cardImg: result.cardImg
-          //          });
-          //        } else {                                                //到开卡页面
-          //          // alert(result.cardCode);
-          //          $state.go("tab.activate", {
-          //            cardCode: cardCode,
-          //            cardName: result.cardName,
-          //            cardBalance: result.cardBalance,
-          //            cardImg: result.cardImg
-          //          });
-          //        }
-          //      } else {
-          //        $ionicPopup.alert({
-          //          title: '温馨提示',
-          //          template: result.msg
-          //        });
-          //      }
-          //    }
-          //  });
-          //}
+        }, function (error) {
+          console.log("An error happened -> " + error);
         });
 
       },1000);
@@ -728,19 +745,20 @@ angular.module('starter.controllers', [])
 
 
 //调到向商家付款的页面
-  .controller('paymentController', function ($scope, $state, $stateParams, $rootScope, $ionicLoading, $timeout) {
+  .controller('paymentController', function ($scope, $state, $stateParams, $rootScope, $ionicLoading, $ionicPopup) {
     var token = $.cookie("token");
-    var organizationPartyId = $.cookie("organizationPartyId");
     if (token == null) {
       $state.go("login");
     }
 
     //页面信息初始化
-    $scope.cardCode = $stateParams.cardCode;
-    $scope.cardName = $stateParams.cardName;
+    $scope.qrCode = $stateParams.qrCode;
+    $scope.storeName = $stateParams.storeName;
+    $scope.storeId = $stateParams.storeId;
+    $scope.storeImgUrl = $stateParams.storeImgUrl;
+    $scope.cardId = $stateParams.cardId;
 
     $scope.paymentMethod=function(amount) {
-      alert(amount);
       $scope.msg = '';
       var reg = /^(([1-9]\d{0,9})|0)(\.\d{1,3})?$/;
 
@@ -752,6 +770,41 @@ angular.module('starter.controllers', [])
         if (parseFloat(amount) <= 0) {
           $scope.msg = '输入金额不合法，请重新输入！！';
           $("input[name='amount']").val("");
+        }else {
+          $state.go("tab.userPaymentSuccess", {
+                    storeName: "咖啡店",
+                    amount:amount,
+                    cardBalance: 1200,
+                    "type": "payment"
+                  });
+          //$.ajax({
+          //  url: $rootScope.interfaceUrl + "customerWithdraw",
+          //  type: "POST",
+          //  data: {
+          //    "token": token,
+          //    "storeId": $stateParams.storeId,
+          //    "qrCode": $stateParams.qrCode,
+          //    "amount": $stateParams.amount,
+          //    "cardId": $stateParams.cardId
+          //  },
+          //  success: function (result) {
+          //    //alert(result.msg+" "+result.storeName+" "+result.storeId+" "+result.storeImgUrl);
+          //    if (result.code == '200') {
+          //      $state.go("tab.userPaymentSuccess", {
+          //        storeName: result.storeName,
+          //        amount: result.amount,
+          //        cardBalance: result.cardBalance,
+          //        "type": "payment"
+          //      });
+          //    } else {
+          //      $ionicPopup.alert({
+          //        title: '温馨提示',
+          //        template: result.msg
+          //      });
+          //    }
+          //  }
+          //});
+
         }
       }
     }
