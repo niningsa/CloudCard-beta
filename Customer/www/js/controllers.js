@@ -359,7 +359,6 @@ angular.module('starter.controllers', [])
       }
 
       if(flag){
-        alert("校验成功了");
         $state.go("tab.sellCardSuccess",{
           "cardBalance":cardBalance,
           "cardName":cardName,
