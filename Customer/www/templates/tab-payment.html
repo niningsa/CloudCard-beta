@@ -1,11 +1,18 @@
 <ion-view view-title="向商家付款">
   <ion-nav-buttons side="left">
-    <a class="button icon ion-ios-undo" href="#/tab/accredit/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}"></a>
+    <a class="button icon ion-ios-undo" ui-sref="tab.chats"></a>
   </ion-nav-buttons>
   <ion-content class="padding">
     <div class="charInfo">
       <div class="paymentTitle">向商家付款</div>
-      <div class="chartextPayment">商家名称:<strong ng-bind="cardName"></strong> </div>
+      <div class="chartextPayment"><strong ng-bind="storeName"></strong> </div>
+      <div  ng-bind="storeId" id="storeId" style="display: none"></div>
+      <div ng-bind="qrCode" id="strCode" style="display: none"></div>
+      <div ng-bind="cardId" id="cardId" style="display: none"></div>
+      <!--这里是展示商家卡的图片-->
+      <!--<div class="item item-image">-->
+        <!--<img src="{{storeImgUrl}}">-->
+      <!--</div>-->
       <form name="paymentForm"  ng-controller="paymentController">
           <label class="item">
             <span class="input-label" style="float: left;">金额：</span>
@@ -13,7 +20,7 @@
           </label>
         <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;">...</span>
         <div class="list" style="top: 20px;text-align: center;">
-          <button id="xiaofefrom" ng-click="paymentMethod(amount)" class="button button-positive" style="width: 80%" ng-disabled="paymentForm.amount.$error.required">确定</button>
+          <button id="xiaofefrom" ng-click="paymentMethod(amount)" class="button button-positive" style="width: 100%" ng-disabled="paymentForm.amount.$error.required">确定</button>
         </div>
       </form>
 
