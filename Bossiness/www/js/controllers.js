@@ -5,7 +5,7 @@ angular.module('starter.controllers', [])
  * Author LN
  * Date 2016-11-20
  * */
-  .controller('DashCtrl', function ($scope, $state, $rootScope) {
+  .controller('DashCtrl', function ($scope, $state) {
     var token = $.cookie("token");
     if (token == null) {
       $state.go("login");
