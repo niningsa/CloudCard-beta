@@ -770,39 +770,32 @@ angular.module('starter.controllers', [])
           $scope.msg = '输入金额不合法，请重新输入！！';
           $("input[name='amount']").val("");
         }else {
-          $state.go("tab.userPaymentSuccess", {
-                    storeName: "咖啡店",
-                    amount:amount,
-                    cardBalance: 1200,
-                    "type": "payment"
-                  });
-          //$.ajax({
-          //  url: $rootScope.interfaceUrl + "customerWithdraw",
-          //  type: "POST",
-          //  data: {
-          //    "token": token,
-          //    "storeId": $stateParams.storeId,
-          //    "qrCode": $stateParams.qrCode,
-          //    "amount": $stateParams.amount,
-          //    "cardId": $stateParams.cardId
-          //  },
-          //  success: function (result) {
-          //    //alert(result.msg+" "+result.storeName+" "+result.storeId+" "+result.storeImgUrl);
-          //    if (result.code == '200') {
-          //      $state.go("tab.userPaymentSuccess", {
-          //        storeName: result.storeName,
-          //        amount: result.amount,
-          //        cardBalance: result.cardBalance,
-          //        "type": "payment"
-          //      });
-          //    } else {
-          //      $ionicPopup.alert({
-          //        title: '温馨提示',
-          //        template: result.msg
-          //      });
-          //    }
-          //  }
-          //});
+          $.ajax({
+            url: $rootScope.interfaceUrl + "customerWithdraw",
+            type: "POST",
+            data: {
+              "token": token,
+              "qrCode": $stateParams.qrCode,
+              "amount":amount,
+              "cardId": $stateParams.cardId
+            },
+            success: function (result) {
+              //alert(result.msg+" "+result.storeName+" "+result.cardBalance+" "+"支付成功");
+              if (result.code == '200') {
+                $state.go("tab.userPaymentSuccess", {
+                  storeName: result.storeName,
+                  amount: result.amount,
+                  cardBalance: result.cardBalance,
+                  "type": "payment"
+                });
+              } else {
+                $ionicPopup.alert({
+                  title: '温馨提示',
+                  template: result.msg
+                });
+              }
+            }
+          });
 
         }
       }
