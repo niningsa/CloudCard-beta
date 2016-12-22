@@ -541,6 +541,19 @@ angular.module('starter.controllers', [])
                   expires: 7
                 });
                 // alert($.cookie("registrationId"));
+                // 设置别名和标签
+                // alert($.cookie("organizationPartyId"));
+                $scope.formData = {};
+                $scope.formData.tags1 = $.cookie("organizationPartyId");
+                try {
+                  var tags = [];
+                  tags.push($scope.formData.tags1);
+
+                  window.plugins.jPushPlugin.setTagsWithAlias(tags, $scope.formData.alias);
+                  document.addEventListener("jpush.setTagsWithAlias", onTagsWithAlias, false);
+                } catch (exception) {
+                  console.log(exception);
+                }
               }
             });
           }
@@ -551,6 +564,20 @@ angular.module('starter.controllers', [])
       });
     };
 
+    // 设置标签和别名
+    var onTagsWithAlias = function (event) {
+      try {
+        $scope.message += "onTagsWithAlias";
+        var result = "result code:" + event.resultCode + " ";
+        result += "tags:" + event.tags + " ";
+        result += "alias:" + event.alias + " ";
+        $scope.message += result;
+        $scope.tagAliasResult = result;
+        // alert(result);
+      } catch (exception) {
+        console.log(exception)
+      }
+    };
 
     $scope.cloudCardLogin = function () {
       console.log($scope.user.tel + " " + $scope.user.identifyCode);
@@ -629,6 +656,20 @@ angular.module('starter.controllers', [])
           $.cookie("token", null);
           $.cookie("organizationPartyId", null);
           $.cookie("registrationId", null);
+
+          // 设置别名和标签
+          $scope.formData = {};
+          $scope.formData.tags1 = 'overTags';
+          try {
+            var tags = [];
+            tags.push($scope.formData.tags1);
+
+            window.plugins.jPushPlugin.setTagsWithAlias(tags, $scope.formData.alias);
+            alert("设置别名OK！");
+          } catch (exception) {
+            alert("设置别名错误！");
+            console.log(exception);
+          }
           $state.go("login");
         }
       })
