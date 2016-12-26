@@ -8,20 +8,33 @@
     <div class="list">
       <label class="item item-input">
         <span class="input-label">商铺名称：</span>
-        <input type="text">
+        <input type="text" placeholder="请输入店铺名称">
       </label>
       <label class="item item-input">
         <span class="input-label">电话号码：</span>
-        <input type="text">
+        <input type="text" placeholder="请输入电话号码">
       </label>
       <label class="item item-input item-button-right">
         <span class="input-label">营业执照：</span>
-        <img id="imageFile"  src=""  width="100px" height="100px"/>
-        <button class="button button-balanced margin-top-30">拍照</button>
+        <input type="text" placeholder="请输入营业执照号码">
       </label>
+
       <label class="item item-input">
         <span class="input-label">支付方式：</span>
-        <input type="text">
+        <span>{{ret.choice}}</span>
+      </label>
+
+      <label class="item margin-bottom-10 margin-top-0 text-center" style="border: 0px">
+              <ion-radio class="balanced" ng-model="ret.choice" ng-value="alipay">
+                支付宝
+              </ion-radio>
+              <ion-radio class="balanced" ng-model="ret.choice" ng-value="bankCard">
+                银行卡
+              </ion-radio>
+              <ion-radio class="balanced" ng-model="ret.choice" ng-value="weiXin">
+                微信
+              </ion-radio>
+
       </label>
     </div>
     <div class="padding">
