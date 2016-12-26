@@ -1,0 +1,36 @@
+<ion-view view-title="申请商家">
+  <ion-nav-bar class="bar-dark"></ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="login"></a>
+  </ion-nav-buttons>
+  <ion-content>
+    <form name="regForm" ng-submit="applySeller()">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">商铺名称：</span>
+        <input type="text">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">电话号码：</span>
+        <input type="text">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">营业执照：</span>
+        <input type="file">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">支付方式：</span>
+        <input type="text">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">地理位置：</span>
+        <input type="text">
+      </label>
+    </div>
+    <div class="padding">
+      <button class="button button-block button-positive">确认申请</button>
+    </div>
+    <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
+    </form>
+  </ion-content>
+</ion-view>
