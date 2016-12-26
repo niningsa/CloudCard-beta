@@ -153,6 +153,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
        controller: 'settingCtrl'
   })
 
+  .state('applySeller', {
+       url: '/applySeller',
+       cache: false,
+       templateUrl: 'templates/applySeller.html',
+       controller: 'applySellerCtrl'
+  })
+
   ;
 
   // if none of the above states are matched, use this as the fallback

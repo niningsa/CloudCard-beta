@@ -15,6 +15,9 @@
               <div class="loginbox-submit">
                   <input type="submit" class="btn btn-primary btn-block" value="登 录" ng-disabled="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">
               </div>
+              <div class="loginbox-submit">
+                  <a class="btn btn-primary btn-block" ui-sref="applySeller">申请商家</a>
+              </div>
               <div ng-show="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">
                 <span style="width:300px;display: block;text-align: center;font-weight: bold;color: red;">请输入完整的信息！！</span>
               </div>
