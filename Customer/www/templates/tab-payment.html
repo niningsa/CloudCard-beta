@@ -3,7 +3,8 @@
     <a class="button icon ion-ios-undo" ui-sref="tab.chats"></a>
   </ion-nav-buttons>
   <ion-content class="padding">
-    <div class="charInfo">
+    <div class="charInfoPayment">
+      <div class="cardinputInfo">
       <div class="paymentTitle">向商家付款</div>
       <div class="chartextPayment"><strong ng-bind="storeName"></strong> </div>
       <div  ng-bind="storeId" id="storeId" style="display: none"></div>
@@ -23,7 +24,7 @@
           <button id="xiaofefrom" ng-click="paymentMethod(amount)" class="button button-positive" style="width: 100%" ng-disabled="paymentForm.amount.$error.required">确定</button>
         </div>
       </form>
-
+    </div>
     </div>
   </ion-content>
 </ion-view>

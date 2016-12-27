@@ -44,7 +44,7 @@ angular.module('starter.services', [])
             }});
         },
         error:function (e) {
-          alert("粗大事了，"+e.message)
+          alert("手机网络已中断，请尝试开启网络!!")
           console.log(e);
         }
       });
