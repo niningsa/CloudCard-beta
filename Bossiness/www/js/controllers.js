@@ -677,11 +677,121 @@ angular.module('starter.controllers', [])
 
   })
 
-  .controller('applySellerCtrl', function ($scope) {
+  .controller('applySellerCtrl', function ($scope, $ionicLoading, $ionicPopup, $state, Banks, applySellerService) {
 
     $scope.applySeller = function () {
+      applySellerService.getCurrentPosition();
+      var latitude = localStorage.getItem('latitude');                      // 纬度
+      var longitude = localStorage.getItem('longitude');                    // 经度
+      // alert(latitude+" "+longitude);
 
+      if(typeof($scope.boss.businessName) == "undefined" || typeof ($scope.boss.phone) == 'undefined' ||  typeof ($scope.boss.businessLicence) == 'undefined'){
+        $ionicLoading.show({
+          duration : 1500,
+          template : "信息填写不完整！"
+        });
+      }else{
+        //验证手机号码
+        var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+        if (!phoneReg.test($scope.boss.phone)) {
+          $ionicLoading.show({
+            duration : 1500,
+            template : "电话号码校验不正确！"
+          });
+        }else{
+
+          $ionicLoading.show({
+            template: '申请中...'
+          });
+
+          if ($scope.boss.payment!='bankCard') {
+            $scope.boss.bankName = '';
+          }
+
+         /* applySellerService.applySellerRegister(
+            $scope.boss.businessName,
+            $scope.boss.phone,
+            $scope.boss.businessLicence,
+            $scope.boss.payment,
+            $scope.boss.alipayAccount,
+            $scope.boss.wxAccount,
+            $scope.bk.bankName,
+            $scope.boss.bankCard
+          ).success(function(data) {
+            // 申请成功
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '申请成功',
+              template: '恭喜您申请成功，快快登录使用吧！'
+            });
+            alertPopup.then(function(res) {
+              //用户点击确认登录后跳转
+              $state.go("tab.account");
+            })
+
+          }).error(function(data) {
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '申请失败',
+              template: '请检查您填写的申请信息！'
+            });
+          });*/
+
+          /*if ($scope.boss.choice == 'alipay') {
+            alert("alipay:"+$scope.boss.alipayAccount);
+
+          }else if ($scope.boss.choice == 'weiXin') {
+            alert("weiXin"+$scope.boss.wxAccount);
+
+          }else{
+            alert("chard"+$scope.boss.bankCard+" "+$scope.boss.bankName);
+
+          }*/
+
+        }
+      }
     };
+
+    $scope.items = [
+      {text: "alipay", value: "支付宝", path: "img/zhiFuBao.png"},
+      {text: "weiXin", value: "微信", path: "img/weiXin.png"},
+      {text: "bankCard", value: "银行卡", path: "img/bank.png"}
+    ];
+
+    $scope.boss = {payment: 'alipay'};
+
+    $scope.alipay = true;
+    $scope.weiXiePay = false;
+    $scope.bankPay = false;
+
+    // 支付方式变更
+    $scope.changePayment = function (payment) {
+      if (payment=='weiXin') {
+        $scope.weiXinPay = true;
+        $scope.alipay = false;
+        $scope.bankPay = false;
+        $scope.boss.alipayAccount = '';
+        $scope.boss.bankCard = ''
+      }
+      if (payment=='bankCard') {
+        $scope.bankPay = true;
+        $scope.alipay = false;
+        $scope.weiXinPay = false;
+        $scope.boss.alipayAccount = '';
+        $scope.boss.wxAccount = '';
+
+        $scope.banks = Banks.all();
+        $scope.bk = {'bankName': '中国银行'};  // 不初始化一下，单选按钮就没值 0_o!!
+      }
+      if (payment == 'alipay') {
+        $scope.alipay = true;
+        $scope.weiXinPay = false;
+        $scope.bankPay = false;
+        $scope.boss.bankCard = '';
+        $scope.boss.wxAccount = '';
+      }
+    };
+
 
 
   })

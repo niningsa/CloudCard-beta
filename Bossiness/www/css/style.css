@@ -89,3 +89,7 @@ Empty. Add your own CSS if you like
   font-weight:400;
   padding:3px 6px 22px 6px;
 }
+
+label{
+  font-weight: inherit;
+}
