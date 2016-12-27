@@ -10,8 +10,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 .run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
 
-    $rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/";   //全局： 以后正式服务器接口 URL
-    // $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/";        //全局： 服务器接口 URL
+    // $rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/";   //全局： 以后正式服务器接口 URL
+    $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/";        //全局： 服务器接口 URL
     // $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/";      //全局： 测试接口 URL
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
