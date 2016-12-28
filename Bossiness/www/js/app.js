@@ -160,39 +160,61 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
        controller: 'applySellerCtrl'
   })
 
-    //我的圈子查看页面
-    .state('tab.myCircle', {
-      url: '/myCircle',
-      cache: false,
-      views: {
-        'tab-myCircle': {
-          templateUrl: 'templates/tab-myCircle.html',
-          controller: 'myCircleCtrl'
-        }
+  //我的圈子查看页面
+  .state('tab.myCircle', {
+    url: '/myCircle',
+    cache: false,
+    views: {
+      'tab-myCircle': {
+        templateUrl: 'templates/tab-myCircle.html',
+        controller: 'myCircleCtrl'
       }
-    })
-    //创建我的圈子
-    .state('tab.createCircle', {
-      url: '/createCircle',
-      cache: false,
-      views: {
-        'tab-myCircle': {
-          templateUrl: 'templates/tab-createCircle.html',
-          controller: 'createCircleCtrl'
-        }
+    }
+  })
+  //创建我的圈子
+  .state('tab.createCircle', {
+    url: '/createCircle',
+    cache: false,
+    views: {
+      'tab-myCircle': {
+        templateUrl: 'templates/tab-createCircle.html',
+        controller: 'createCircleCtrl'
       }
-    })
-    //创建我的圈子后的圈子的列表
-    .state('tab.circleList', {
-      url: '/circleList/:circleName',
-      cache: false,
-      views: {
-        'tab-myCircle': {
-          templateUrl: 'templates/tab-circleList.html',
-          controller: 'circleListCtrl'
-        }
+    }
+  })
+  //创建我的圈子后的圈子的列表
+  .state('tab.circleList', {
+    url: '/circleList/:circleName',
+    cache: false,
+    views: {
+      'tab-myCircle': {
+        templateUrl: 'templates/tab-circleList.html',
+        controller: 'circleListCtrl'
       }
-    })
+    }
+  })
+
+  .state('tab.circleFriend', {
+    url: '/circleFriend',
+    cache: false,
+    views: {
+      'tab-myCircle': {
+        templateUrl: 'templates/tab-circleFriend.html',
+        controller: 'circleFriendCtrl'
+      }
+    }
+  })
+
+  .state('tab.circleFriedDetail', {
+    url: '/circleFriedDetail',
+    cache: false,
+    views: {
+      'tab-myCircle': {
+        templateUrl: 'templates/tab-circleFriedDetail.html',
+        controller: 'circleFriedDetailCtrl'
+      }
+    }
+  })
 
   ;
 

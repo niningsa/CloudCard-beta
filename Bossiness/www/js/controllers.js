@@ -11,6 +11,38 @@ angular.module('starter.controllers', [])
       $state.go("login");
     }
   })
+
+/*
+ * Desc 圈友页面
+ * Author LN
+ * Date 2016-12-28
+ * */
+  .controller('circleFriendCtrl', function ($scope, Chats, $ionicPopup) {
+    $scope.Chats = Chats.all(0);
+      $scope.remove = function() {
+        $ionicPopup.confirm({
+          title: "删除",
+          template: "是否要删除圈友?",
+          cancelText: "取消",
+          okText: "确定"
+        }).then(function (res) {
+          if (res) {
+            alert("删了 ^_^ ");
+          }
+        });
+      };
+  })
+
+/*
+ * Desc 圈友消费详情
+ * Author LN
+ * Date 2016-12-28
+ * */
+  .controller('circleFriedDetailCtrl', function ($scope, Chats) {
+
+  })
+
+
   //我的圈子的控制层
   .controller('myCircleCtrl', function ($scope, $state,$stateParams) {
     $scope.circleName  =$stateParams.circleName;
