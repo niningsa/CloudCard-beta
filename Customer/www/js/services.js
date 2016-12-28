@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function($rootScope,$state) {
+.factory('Chats', function($rootScope,$state,$ionicPopup) {
 
 
 
@@ -44,7 +44,12 @@ angular.module('starter.services', [])
             }});
         },
         error:function (e) {
-          alert("手机网络已中断，请尝试开启网络!!")
+          $ionicPopup.alert({
+            title:"温馨提示",
+            template:"手机网络已中断，请尝试开启网络!!",
+            okText:"确定",
+
+          })
           console.log(e);
         }
       });
@@ -70,7 +75,7 @@ angular.module('starter.services', [])
 })
 
 //用户账单列表数据
-.factory('CardDetail', function($rootScope,$state) {
+.factory('CardDetail', function($rootScope,$state,$ionicPopup) {
 
   return {
     all: function(amountType) {
@@ -111,7 +116,12 @@ angular.module('starter.services', [])
             });
           },
           error: function (e) {
-            console.log(e);
+            $ionicPopup.alert({
+              title:"温馨提示",
+              template:"手机网络已中断，请尝试开启网络!!",
+              okText:"确定",
+
+            })
           }
         });
       }else{
@@ -162,7 +172,12 @@ angular.module('starter.services', [])
             });
           },
           error: function (e) {
-            console.log(e);
+            $ionicPopup.alert({
+              title:"温馨提示",
+              template:"手机网络已中断，请尝试开启网络!!",
+              okText:"确定",
+
+            })
           }
         });
       }else{

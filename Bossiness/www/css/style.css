@@ -64,7 +64,15 @@ Empty. Add your own CSS if you like
 	line-height: 90px;        /*设置文字行距等于div的高度*/
 	overflow:hidden;
 }
+#qname{
+  padding: 8px 0px 10px 0px;
+  font-size: 18px;
+}
 
+#cbackground{
+  width: 100%;
+  height: 100%;
+}
 .charInfo{
 	margin: 40px auto;
 	text-align: center;
@@ -92,4 +100,34 @@ Empty. Add your own CSS if you like
 
 label{
   font-weight: inherit;
+}
+.charInfoPayment{
+  padding-top:20px;
+  margin: 4px auto;
+  /* background: red; */
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background: url('../img/bg1.jpg') no-repeat;
+}
+.charInfoPayments{
+  padding-top:20px;
+  margin: 4px auto;
+  /* background: red; */
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background: url('../img/timg2.jpg') no-repeat;
+}
+.cardinputInfo{
+  margin: 30px auto;
+  /* background: red; */
+  text-align: center;
+  width: 90%;
+  height: 90%;
+}
+.char_style{
+  height: 120px;
+  padding: 0px;
+  margin: 0px;
 }

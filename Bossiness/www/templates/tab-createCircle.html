@@ -1,0 +1,23 @@
+<ion-view view-title="创建我的圈子">
+  <ion-nav-bar class="bar-dark"></ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.myCircle"></a>
+  </ion-nav-buttons>
+  <ion-content class="padding">
+    <div class="charInfoPayment">
+      <div class="cardinputInfo">
+        <form name="circleForm" ng-controller="createCircleCtrl">
+          <label class="item">
+            <span class="input-label" style="float: left;">圈名：</span>
+            <input   class="form-control" type="text"	ng-model="circleName" name="circleName" id="circleName" style="width:150px" placeholder="请输入名称"  required>
+          </label>
+
+          <!--<span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;">...</span>-->
+          <div class="list" style="top: 20px;text-align: center;">
+            <button ng-click="createMyCircle()"   class="button button-positive" style="width: 100%" ng-disabled="circleForm.circleName.$error.required">确定</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

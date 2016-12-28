@@ -11,6 +11,58 @@ angular.module('starter.controllers', [])
       $state.go("login");
     }
   })
+  //我的圈子的控制层
+  .controller('myCircleCtrl', function ($scope, $state,$stateParams) {
+    $scope.circleName  =$stateParams.circleName;
+    var token = $.cookie("token");
+    if (token == null) {
+      $state.go("login");
+    }
+  })
+  //创建我的圈子后的列表
+  .controller('circleListCtrl', function ($scope, $state,$stateParams,$ionicPopup) {
+    $scope.circleName  =$stateParams.circleName;
+    var token = $.cookie("token");
+    if (token == null) {
+      $state.go("login");
+    }
+
+    $scope.sendCircle=function(){
+      var telphone=$("#telphone").val();
+      var flag=true;
+      //验证手机号是否合法
+      var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+
+      if (!phoneReg.test(telphone)) {
+        $ionicPopup.alert({
+          title:"温馨提示",
+          template:"请输入正确的手机号码",
+          okText:"确定",
+        })
+        flag = false;
+      }
+      if(flag){
+         $state.go("tab.myCircle");
+      }
+    }
+  })
+  //创建我的圈子
+  .controller('createCircleCtrl', function ($scope, $state,$ionicPopup) {
+    var token = $.cookie("token");
+    if (token == null) {
+      $state.go("login");
+    }
+
+    $scope.createMyCircle=function(){
+      var circleName=$("#circleName").val();
+      var flag =true;
+      if(flag){
+        $state.go("tab.circleList",{
+          "circleName":circleName
+        });
+      }
+    }
+  })
 
 
   /*
