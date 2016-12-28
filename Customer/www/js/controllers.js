@@ -348,6 +348,8 @@ angular.module('starter.controllers', [])
 
     $scope.sellCard=function(cardName,cardBalance){
       var tel=$("#telphone").val();
+      var token=$.cookie("token");
+
       var flag =true;
       //验证手机号是否合法
       var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
@@ -357,14 +359,51 @@ angular.module('starter.controllers', [])
         //$("#telphone").val(" ");
         flag = false;
       }
+      $ionicPopup.confirm({
+          title:"转卡",
+          template:"是否确认转卡??",
+          okText:"确定",
+          cancelText:"取消"
+        })
+        .then(function(res){
+          if(res) {
+            if(flag){
+              $.ajax({
+                url:$rootScope.interfaceUrl+"modifyCardOwner",
+                type:"POST",
+                data: {
+                  "token":token,
+                  "teleNumber":tel,
+                  "cardId":$scope.cardId
+                },
+                success: function(result){
+                  console.log(result);
+                  if(result.code=="200"){
+                    $state.go("tab.sellCardSuccess",{
+                      "cardBalance":cardBalance,
+                      "cardName":cardName,
+                      "tel":tel
+                    });
+                  }
+                  if(result.code==500){
+                    $ionicPopup.alert({
+                      title:"温馨提示",
+                      template:data.msg,
+                      okText:"确定",
 
-      if(flag){
-        $state.go("tab.sellCardSuccess",{
-          "cardBalance":cardBalance,
-          "cardName":cardName,
-          "tel":tel
-        });
-      }
+                    })
+                    //alert("授权失败,"+data.msg);
+                  }
+                  //跳转到登录的页面
+                  if(result.code==400){
+                    $state.go("login");
+                  }
+                }
+              });
+            }
+          }
+          })
+
 
     }
   })
