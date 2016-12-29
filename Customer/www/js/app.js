@@ -2,9 +2,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 .run(function($ionicPlatform,$rootScope,$state) {
   //当设备运行的时候就执行
-  //$rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
+  $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="http://192.168.3.13:8080/cloudcard/control/"; //接口前一截一样的
-  $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
+  //$rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="https://kayunka.c1337y.com/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/"; //接口前一截一样的
 
@@ -67,12 +67,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       }catch (e){
         alert("解析失败");
       }
-      $state.go("tab.paymentSuccess",{
-        "type":ret.type,
-        "cardId":ret.cardId,
-        "amount":ret.amount,
-        "cardBalance":ret.cardBalance
-      });
+      if(ret.type=="chowner"){//这个是转卡的类型，转卡就不用跳转页面
+      }else{
+        $state.go("tab.paymentSuccess",{
+          "type":ret.type,
+          "cardId":ret.cardId,
+          "amount":ret.amount,
+          "cardBalance":ret.cardBalance
+        });
+
+      }
+
 
     } catch (exception) {
       console.log("JPushPlugin:onReceiveMessage-->" + exception);
