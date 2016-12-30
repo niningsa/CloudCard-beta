@@ -859,19 +859,35 @@ angular.module('starter.controllers', [])
 
     $scope.weiXin=function (choice) {
       alert("微信支付。。。"+choice);
-      navigator.weixin.pay({
-        "seller":"007slm@163.com",
-        "subject":"x51",
-        "body":"x5企业版",
-        "price":"0.01",
-        "tradeNo":"123456",
-        "timeout":"30m",
-        "notifyUrl":"wwww.justep.com"
-      },function(msgCode){
-        alert(msgCode);
-      },function(msg){
-        alert(msg);
-      })
+      $.ajax({
+        url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/wxPrepayOrder",
+        type:"POST",
+        data: {
+          "body":"chongzhi",
+          "totalFee":"1",
+          "tradeType":"APP"
+        },
+        success: function(result){
+          console.log(result);
+          var jsonwx = {
+            appid: result.appid,
+            noncestr: result.noncestr,
+            package: result.package,
+            partnerid: result.partnerid,
+            prepayid: result.prepayid,
+            sign: result.sign,
+            timestamp: result.timestamp
+          };
+
+          wxpay.payment(jsonwx, function (msg) {
+            if (msg) {
+              alert('微信支付成功');
+            }
+          }, function (error) {
+            alert("支付失败");
+          });
+        }
+      });
 
 
 

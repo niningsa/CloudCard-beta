@@ -771,8 +771,9 @@ angular.module('starter.controllers', [])
 
       if(typeof($scope.boss.businessName) == "undefined" || typeof ($scope.boss.phone) == 'undefined' ||  typeof ($scope.boss.businessLicence) == 'undefined'){
         $ionicLoading.show({
-          duration : 1500,
-          template : "信息填写不完整！"
+          noBackdrop: true,
+          template: '信息填写不完整',
+          duration: 1500
         });
       }else{
         //验证手机号码
