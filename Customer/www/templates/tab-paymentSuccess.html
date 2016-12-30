@@ -8,16 +8,20 @@
           <!--<span class="input-label">卡ID：</span>-->
           <!--<strong><span ng-bind="cardId"></span></strong>-->
         <!--</label>-->
-        <label class="item item-input">
+        <label class="item item-input al" >
           <span class="input-label">消费类型：</span>
           <strong><span ng-bind="type=='payment'?'支付':'充值'"></span></strong>
         </label>
+        <label class="item item-input al" ng-show="type=='recharge'?true:false" >
+          <span class="input-label">充值金额：</span>
+          <strong><span ng-bind="amount"></span> 元</strong>
+        </label>
 
-        <label class="item item-input">
+        <label class="item item-input al" ng-show="type=='payment'?true:false">
           <span class="input-label">消费金额：</span>
           <strong><span ng-bind="amount"></span> 元</strong>
         </label>
-        <label class="item item-input">
+        <label class="item item-input al">
           <span class="input-label">当前余额：</span>
           <strong><span ng-bind="cardBalance"></span> 元</strong>
         </label>

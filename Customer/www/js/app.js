@@ -67,12 +67,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       }catch (e){
         alert("解析失败");
       }
-      $state.go("tab.paymentSuccess",{
-        "type":ret.type,
-        "cardId":ret.cardId,
-        "amount":ret.amount,
-        "cardBalance":ret.cardBalance
-      });
+      if(ret.type=="chowner"){//这个是转卡的类型，转卡就不用跳转页面
+      }else{
+        $state.go("tab.paymentSuccess",{
+          "type":ret.type,
+          "cardId":ret.cardId,
+          "amount":ret.amount,
+          "cardBalance":ret.cardBalance
+        });
+
+      }
+
 
     } catch (exception) {
       console.log("JPushPlugin:onReceiveMessage-->" + exception);
