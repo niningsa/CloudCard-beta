@@ -848,7 +848,7 @@ angular.module('starter.controllers', [])
    * Author LN
    * Date 2016-12-12
    * */
-  .controller('rechargeCtrl', function ($scope, $stateParams) {
+  .controller('rechargeCtrl', function ($scope, $stateParams, $rootScope, $ionicLoading) {
     //页面信息初始化
     $scope.cardId = $stateParams.cardId;
     $scope.cardBalance = $stateParams.cardBalance;
@@ -861,73 +861,51 @@ angular.module('starter.controllers', [])
     $scope.ret = {choice: '100'};
 
     $scope.alipay=function (choice) {
-      alert("支付宝支付。。。"+choice);
-      var myDate = new Date();
-      var tradeNo = myDate.getTime();
-
-      var alipayClass = navigator.alipay;
-      
-      alipayClass.pay({
-        "partner":"2088521239967141",    //商户ID
-        "rsa_private":rsa,               //私钥
-        "rsa_public":pubRsa,                //公钥
-        "seller":"149610423@qq.com",    //收款支付宝账号或对应的支付宝唯一用户号
-        "subject":"共享停车",             //商品名称
-        "body":"共享停车支付宝支付",        //商品详情
-        "price":"0.01",                  //金额
-        "tradeNo":tradeNo,
-        "timeout":"30m",                 //超时设置
-        "notifyUrl":"http://cloudcard.ngrok.joinclub.cn/cloudcard/control/wxOrderNotify"
-      },function(resultStatus){
-        $ionicLoading.show({
-          template:"支付宝支付成功返回结果＝" + resultStatus,
-          noBackdrop: true,
-          duration: 500
+      $.ajax({
+          // url: $rootScope+"uniformOrder", // wxPrepayOrder
+          url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+          type:"POST",
+          data: {
+            "paymentType": "aliPay",
+            "cardId": "213213123",
+            "subject": "chongzhi",
+            "totalFee": "0.01",
+            "body": "充值"
+          },
+          success: function(result){
+            console.log(result.payInfo);
+            //第二步：调用支付插件
+            cordova.plugins.AliPay.pay(result.payInfo, function success(e){
+              // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            }, function error(e){
+              // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            });
+          }
         });
-
-
-      },function(message){
-        $ionicLoading.show({
-          template:"支付宝支付失败＝" + message,
-          noBackdrop: true,
-          duration: 500
-        });
-      });
     };
 
     $scope.weiXin=function (choice) {
-      alert("微信支付。。。"+choice);
       $.ajax({
-        url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/wxPrepayOrder",
-        type:"POST",
-        data: {
-          "body":"chongzhi",
-          "totalFee":"1",
-          "tradeType":"APP"
-        },
-        success: function(result){
-          console.log(result);
-          var jsonwx = {
-            appid: result.appid,
-            noncestr: result.noncestr,
-            package: result.package,
-            partnerid: result.partnerid,
-            prepayid: result.prepayid,
-            sign: result.sign,
-            timestamp: result.timestamp
-          };
-
-          wxpay.payment(jsonwx, function (msg) {
-            if (msg) {
-              alert('微信支付成功');
-            }
-          }, function (error) {
-            alert("支付失败");
-          });
-        }
-      });
-
-
+          // url: $rootScope+"uniformOrder", // wxPrepayOrder
+          url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+          type:"POST",
+          data: {
+            "paymentType": "wxPay",
+            "cardId": "213213123",
+            "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
+            "body": "chongzhi",           // 标题不能使用中文
+            "tradeType":"APP"
+          },
+          success: function(result){
+            console.log(result);
+            //第二步：调用支付插件
+            wxpay.payment(result, function success (e) {
+                // alert("成功了："+e);
+            }, function error (e) {
+                // alert("失败了："+e);
+            });
+          }
+        });
 
     };
 
