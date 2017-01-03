@@ -8,7 +8,19 @@
   <ion-nav-buttons side="left">
     <a class="button icon ion-ios-undo" ui-sref="tab.chats"></a>
   </ion-nav-buttons>
+  <!--<ion-nav-buttons side="left">-->
+     <!--<button class="button-icon ion-arrow-left-c" ng-click="backView()"></button>-->
+    <!--<a   ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item"><i class="icon ion-ios-arrow-back"></i>-->
+      <!--返回-->
+    <!--</a>-->
+  <!--</ion-nav-buttons>-->
+  <!--手机默认的支付-->
+  <!--<ion-nav-bar class="bar-stable">-->
+    <!--<ion-nav-back-button class="button-clear">-->
+      <!--<i class="icon ion-ios-arrow-back"></i> Back-->
+    <!--</ion-nav-back-button>-->
 
+  <!--</ion-nav-bar>-->
   <ion-nav-buttons side="right">
     <a class="button icon ion-clipboard"  href="#/tab/subBill/{{cardId}}" title="分账单" >分账单</a>
   </ion-nav-buttons>
@@ -45,13 +57,6 @@
        <span ng-show="jieChu" ng-click="jc('{{cardId}}','{{cardBalance}}','{{cardName}}','{{cardCode}}')">
         <button class="button button-assertive" style="width: 81%"> 解除授权</button>
       </span>
-    </div>
-    <!--解除授权的绑定事件-->
-    <div style="text-align: center" >
-
-
-
-
     </div>
   </ion-content>
 </ion-view>
