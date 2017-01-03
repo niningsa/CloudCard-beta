@@ -6,8 +6,7 @@ angular.module('starter.services', [])
 
   return {
     all: function() {
-      var chats;
-      var that = this;
+      var chats = [];
       var token=$.cookie("token");
       if(token){
       $.ajax({
@@ -30,18 +29,7 @@ angular.module('starter.services', [])
           return data;
         },
         success: function(data){
-          var cloudCardList = data.cloudCardList||[];
-          that.chats= $.map(cloudCardList, function(o){
-            return {
-              cardId: o.cardId,
-              cardName: o.cardName,
-              cardBalance: o.cardBalance,
-              cardImg: o.cardImg,
-              cardCode: o.cardCode,
-              isAuthToMe: o.isAuthToMe,
-              isAuthToOthers: o.isAuthToOthers
-
-            }});
+          chats = data.cloudCardList||[];
         },
         error:function (e) {
           $ionicPopup.alert({
@@ -56,20 +44,9 @@ angular.module('starter.services', [])
       }else{
         $state.go("login");
       }
-      console.table(that.chats );
+      console.table(chats );
       //console.table(that.chats[0].lastText );
-      return that.chats;
-    },
-    remove: function(chat) {
-      that.chats.splice(that.chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < that.chats.length; i++) {
-        if (that.chats[i].id === parseInt(chatId)) {
-          return that.chats[i];
-        }
-      }
-      return null;
+      return chats;
     }
   };
 })
