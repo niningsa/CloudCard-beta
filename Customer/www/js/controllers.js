@@ -520,7 +520,7 @@ angular.module('starter.controllers', [])
   })
 
   //账单信息
-.controller('CardDetailCtrl', function($scope,CardDetail,$rootScope) {
+.controller('CardDetailCtrl', function($scope,CardDetail,$rootScope,$ionicLoading,$timeout) {
 
   // $(".item-content.disable-pointer-events").css("padding-right","40px");
 
@@ -535,19 +535,44 @@ angular.module('starter.controllers', [])
 
   //$("#amountType").val(0);
 
-  $scope.cardDetails = CardDetail.all(0);
+  var viewSize=20;
+  $scope.cardDetails = CardDetail.all(0,viewSize);
+
   $scope.cardDetail = $scope.cardDetails;
 
   //下拉刷新的功能
     $scope.doRefresh = function() {
       //下拉刷新的时候选中全部
+      var viewSize=20000;
       $scope.ret={choice:'0'};
-      $scope.cardDetails = CardDetail.all(0);
+      $scope.cardDetails = CardDetail.all(0,viewSize);
       $scope.cardDetail = $scope.cardDetails;
       //下拉刷新完成后提示转圈消失
       $scope.$broadcast("scroll.refreshComplete");
 
     };
+  //上拉触发函数,总账单的下拉加载更多内容
+  $scope.loadMore = function () {
+    //这里使用定时器是为了缓存一下加载过程，防止加载过快
+    $scope.cardDetailsSS = CardDetail.all(0,20000);
+    if(viewSize<$scope.cardDetailsSS.length){//当页面显示的条数小于总条数是下拉加载才生效
+      $ionicLoading.show({
+        template: "正在加载...."
+      });
+      $timeout(function () {
+        $ionicLoading.hide();
+        viewSize+=20;
+        $scope.ret={choice:'0'};
+        $scope.cardDetails = CardDetail.all(0,viewSize);
+        $scope.cardDetail = $scope.cardDetails;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      }, 1000);
+    }else{
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    }
+
+  };
+
   //下拉列表分类显示，这种方式主要是通过后台去查询，这样做可以实现效果但是如果数据量比较大的话就会导致系统卡
   //$scope.change = function(amountType){
   //  console.log(amountType);
