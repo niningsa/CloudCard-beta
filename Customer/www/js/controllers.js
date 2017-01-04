@@ -535,9 +535,8 @@ angular.module('starter.controllers', [])
 
   //$("#amountType").val(0);
 
-  var viewSize=20;
+  var viewSize=20;//账单一开始默认加载20条数据
   $scope.cardDetails = CardDetail.all(0,viewSize);
-
   $scope.cardDetail = $scope.cardDetails;
 
   //下拉刷新的功能
@@ -552,24 +551,25 @@ angular.module('starter.controllers', [])
 
     };
   //上拉触发函数,总账单的下拉加载更多内容
-  $scope.loadMore = function () {
-    //这里使用定时器是为了缓存一下加载过程，防止加载过快
-    $scope.cardDetailsSS = CardDetail.all(0,20000);
-    if(viewSize<$scope.cardDetailsSS.length){//当页面显示的条数小于总条数是下拉加载才生效
-      $ionicLoading.show({
-        template: "正在加载...."
-      });
-      $timeout(function () {
-        $ionicLoading.hide();
-        viewSize+=20;
-        $scope.ret={choice:'0'};
-        $scope.cardDetails = CardDetail.all(0,viewSize);
-        $scope.cardDetail = $scope.cardDetails;
+     $scope.loadMore = function () {
+      //这里使用定时器是为了缓存一下加载过程，防止加载过快
+      $scope.cardDetailsSS = CardDetail.all(0, 20000);
+      if (viewSize < $scope.cardDetailsSS.length) {//当页面显示的条数小于总条数是下拉加载才生效
+        $ionicLoading.show({
+          template: "正在加载数据...."
+        });
+        $timeout(function () {
+          $ionicLoading.hide();
+          viewSize += 20;
+          $scope.ret = {choice: '0'};
+          $scope.cardDetails = CardDetail.all(0, viewSize);
+          $scope.cardDetail = $scope.cardDetails;
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        }, 1000);
+      } else {
+        //结束加载的转圈
         $scope.$broadcast('scroll.infiniteScrollComplete');
-      }, 1000);
-    }else{
-      $scope.$broadcast('scroll.infiniteScrollComplete');
-    }
+      }
 
   };
 

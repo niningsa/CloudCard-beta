@@ -32,6 +32,7 @@
        <p>时间：<span ng-bind="chat.transDate"> </span></p>
       </ion-item>
     </ion-list>
+    <!--上拉加载更多的数据-->
     <ion-infinite-scroll on-infinite="loadMore()" distance="1%">
     </ion-infinite-scroll>
   </ion-content>
