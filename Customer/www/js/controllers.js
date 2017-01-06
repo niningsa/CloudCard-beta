@@ -581,15 +581,32 @@ angular.module('starter.controllers', [])
   //}
   //下拉列表分类显示，查询全部是请求后台，按照类型去查询的时候就使用_.filter在查询出来的数据进行过滤
   $scope.change = function(amountType){
+
     //第一次查询全部的时候调用后台去查询一下
-    if("0" == amountType){
-      $scope.cardDetail = $scope.cardDetails;
-    }else{
       //-.filter  lodash实现过滤，利用第一次查询的数据第二次做筛选
-      $scope.cardDetail =  _.filter($scope.cardDetails, function(o){  //提高效率（从缓存中过滤数据，不用请求后台，好屌）
-        return o.type==amountType;
-      });
-    }
+      //$scope.cardDetail =  _.filter($scope.cardDetails, function(o){  //提高效率（从缓存中过滤数据，不用请求后台，好屌）
+      //  return o.type==amountType;
+      //});
+      $scope.cardDetail = CardDetail.all(amountType, viewSize);
+      $scope.loadMore = function () {
+        //这里使用定时器是为了缓存一下加载过程，防止加载过快
+        $scope.cardDetailsSS = CardDetail.all(amountType, 20000);
+        if (viewSize < $scope.cardDetailsSS.length) {//当页面显示的条数小于总条数是下拉加载才生效
+          $ionicLoading.show({
+            template: "正在加载数据...."
+          });
+          $timeout(function () {
+            $ionicLoading.hide();
+            viewSize += 20;
+            $scope.cardDetails = CardDetail.all(amountType, viewSize);
+            $scope.cardDetail = $scope.cardDetails;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }, 1000);
+        } else {
+          //结束加载的转圈
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        }
+      };
 
   }
 
