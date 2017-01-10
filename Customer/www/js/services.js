@@ -55,8 +55,9 @@ angular.module('starter.services', [])
 .factory('CardDetail', function($rootScope,$state,$ionicPopup) {
 
   return {
-    all: function(amountType) {
+    all: function(amountType,viewSize) {
       var token=$.cookie("token");
+      //alert(viewSize);
       var organizationPartyId=$.cookie("organizationPartyId");
       if(token!=null) {
         $.ajax({
@@ -68,7 +69,7 @@ angular.module('starter.services', [])
             "organizationPartyId": organizationPartyId,
             "type":amountType,  //0-全部， 1-充值，2-支付
             "viewIndex": 0,
-            "viewSize": 2000
+            "viewSize": viewSize
           },
           // dataType: "json",
           dataFilter: function (data) {
