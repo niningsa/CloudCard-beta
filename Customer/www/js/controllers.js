@@ -859,16 +859,15 @@ angular.module('starter.controllers', [])
 
     //单选按钮初始化
     $scope.ret = {choice: '100'};
-
     $scope.alipay=function (choice) {
       $.ajax({
-          // url: $rootScope+"uniformOrder", // wxPrepayOrder
-          url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+          url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
+          // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
           type:"POST",
           data: {
             "paymentType": "aliPay",
             "cardId": "213213123",
-            "subject": "chongzhi",
+            "subject": "库胖-充值",
             "totalFee": "0.01",
             "body": "充值"
           },
@@ -886,14 +885,14 @@ angular.module('starter.controllers', [])
 
     $scope.weiXin=function (choice) {
       $.ajax({
-          // url: $rootScope+"uniformOrder", // wxPrepayOrder
-          url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+          url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
+          // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
           type:"POST",
           data: {
             "paymentType": "wxPay",
             "cardId": "213213123",
-            "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
-            "body": "chongzhi",           // 标题不能使用中文
+            "totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
+            "body": "库胖-充值",           // 标题不能使用中文
             "tradeType":"APP"
           },
           success: function(result){
