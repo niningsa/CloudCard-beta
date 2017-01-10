@@ -194,6 +194,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       }
     }
   })
+  //百度地图显示我的圈子定位
+    .state('tab.circle', {
+      url: '/circle',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-circle.html',
+          controller: 'circleCtrl'
+        }
+      }
+    })
 //我的卡页面查询列表
   .state('tab.chats', {
       url: '/chats',
