@@ -9,87 +9,99 @@ angular.module('starter.controllers', [])
     //  $scope.chats = Chats.all();
     //  $scope.$broadcast("scroll.refreshComplete");
     //};
-    baidu_location.getCurrentPosition(function(data){
-      var loc =  JSON.parse(data)
-      //alert(loc.longitude);
-      //alert(loc.latitude);
 
-      $scope.ret = {longitude:loc.longitude, latitude:loc.latitude};
-      $rootScope.longitude=loc.longitude;
-      $rootScope.latitude=loc.latitude;
-      //调用方法更具坐标来解析地址
-      $scope.getGeo();
-      var point=(loc.longitude,loc.latitude);
-      //$scope.ret = {longitude:121.419633, latitude:31.207256};
-      var map = new BMap.Map("allmap");                           // 创建Map实例
-      //如何放置自定义的marker
-      //var myIcon = new BMap.Icon("http://developer.baidu.com/map/jsdemo/img/fox.gif", new BMap.Size(300,157));
-      //var marker = new BMap.Marker(point,{icon:myIcon});                        // 创建标注
-      // 将标注添加到地图中
-      var points=[ {longitude:loc.longitude,latitude:loc.latitude},
-        {longitude:121.4196591,latitude:31.207529},
-        {longitude:121.4196796,latitude:31.207736},
-        {longitude:121.4196796,latitude:31.207634}];
-      //循环Json数组
-      for(var o in points){
-        var longitude=points[o].longitude;
-        var latitude=points[o].latitude;
-        var point = new BMap.Point(longitude,latitude);  // 创建点坐标
-        map.centerAndZoom(point,19);
-        var marker = new BMap.Marker(point);                        // 创建标注
-        map.addOverlay(marker);   // 将标注添加到地图中
-      }
 
-      var myLabel = new BMap.Label("上海班富", //为lable填写内容
-        {position:point}); //label的位置
-      myLabel.setStyle({ //给label设置样式，任意的CSS都是可以的
-        "color":"red", //颜色
-        "fontSize":"14px", //字号
-        "border":"0", //边
-        "height":"18px", //高度
-        " width":"25px" //宽
-      });
-      map.addOverlay(myLabel); //把label添加到地图上
+       baidu_location.getCurrentPosition(function (data) {
+         var loc = JSON.parse(data);
 
-      //将圆形扩状物加载到地图上
-      var circle = new BMap.Circle(point,30,{fillColor:"#22B2E7", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3,enableEditing:true});
-      map.addOverlay(circle); //增加圆
+         //$scope.ret = {longitude: loc.longitude, latitude: loc.latitude};
+         //$rootScope.longitude = loc.longitude;
+         //$rootScope.latitude = loc.latitude;
+         //调用方法更具坐标来解析地址
+         //var point = (loc.longitude, loc.latitude);//真实定位
+         var point = (121.419634, 31.207267);
+         //$scope.ret = {longitude:121.419633, latitude:31.207256};
+         var map = new BMap.Map("allmap");                           // 创建Map实例
+         //如何放置自定义的marker
+         //var myIcon = new BMap.Icon("http://developer.baidu.com/map/jsdemo/img/fox.gif", new BMap.Size(300,157));
+         //var marker = new BMap.Marker(point,{icon:myIcon});                        // 创建标注
+         // 将标注添加到地图中
+         var points = [
+           {longitude: 121.419634, latitude: 31.207267},
+           {longitude: 121.4196591, latitude: 31.207529},
+           {longitude: 121.4196796, latitude: 31.207736},
+           {longitude: 121.4196796, latitude: 31.207634}
+         ];
 
-      //创建信息窗口
-      var opts = {
-        width: 400,     // 信息窗口宽度
-        height: 120,     // 信息窗口高度
-        title: "坤哥",
-        message: ""
-      }
-      //var showInfo = "地址：" + data.nurseryInfo[item].Addresss + "<br/>" + "描述：" + data.nurseryInfo[item].BasicFacts + "<br/>面积：" + data.nurseryInfo[item].HouseArea + "<br/>地块个数:" + data.nurseryInfo[item].nurseryBlockCount;
-      var showInfo = "地址：" +'<a href="#">上海市长宁区中山西路</a>' + "<br/>" + "描述：相当棒"  + "<br/>面积：78m" + "<br/>地块个数:32个";
-      var infoWindow = new BMap.InfoWindow(showInfo, opts);  // 创建信息窗口对象
-      //如何给定位后的图片添加点击的事件
-      marker.addEventListener("click", function(){
-        //alert("精度是："+loc.longitude+"维度是："+loc.latitude);
-        var point = new BMap.Point(loc.longitude, loc.latitude);
-        map.centerAndZoom(point, 19);
-        marker.openInfoWindow(infoWindow, point); //开启信息窗口
-      })
+         //循环Json数组
+         for (var o in points) {
+           var longitude = points[o].longitude;
+           var latitude = points[o].latitude;
+           var point = new BMap.Point(longitude, latitude);  // 创建点坐标
+           map.centerAndZoom(point, 19);
+           var marker = new BMap.Marker(point);                        // 创建标注
+           map.addOverlay(marker);   // 将标注添加到地图中
+           (function(p, m){
+             m.addEventListener("click", function () {
+               // alert("精度是："+longitude+"维度是："+latitude);
+               m.openInfoWindow(infoWindow, p); //开启信息窗口
+             })
+           })(point, marker);
+         }
 
-    }, function(error){
-      alert("网络不可用，请打开网络!!");
-      switch (error.code) {
-        case error.PERMISSION_DENIED:
-          $rootScope.showAlert("请打开设备定位功能！");
-          break;
-        case error.POSITION_UNAVAILABLE:
-          $rootScope.showAlert("定位信息不可用！");
-          break;
-        case error.TIMEOUT:
-          $rootScope.showAlert("定位请求超时！");
-          break;
-        case error.UNKNOWN_ERROR:
-          $rootScope.showAlert("未知错误！");
-          break;
-      }
-    });
+
+         var myLabel = new BMap.Label("上海班富", //为lable填写内容
+           {position: point}); //label的位置
+         myLabel.setStyle({ //给label设置样式，任意的CSS都是可以的
+           "color": "red", //颜色
+           "fontSize": "12px", //字号
+           "border": "0", //边
+           "height": "20px", //高度
+           "width": "50px" //宽
+         });
+         map.addOverlay(myLabel); //把label添加到地图上
+
+         //将圆形扩状物加载到地图上
+         var circle = new BMap.Circle(point, 30, {
+           fillColor: "#22B2E7",
+           strokeWeight: 1,
+           fillOpacity: 0.3,
+           strokeOpacity: 0.3,
+           enableEditing: true
+         });
+         map.addOverlay(circle); //增加圆
+
+         //创建信息窗口
+         var opts = {
+           width: 400,     // 信息窗口宽度
+           height: 120,     // 信息窗口高度
+           title: "坤哥",
+           message: ""
+         }
+         //var showInfo = "地址：" + data.nurseryInfo[item].Addresss + "<br/>" + "描述：" + data.nurseryInfo[item].BasicFacts + "<br/>面积：" + data.nurseryInfo[item].HouseArea + "<br/>地块个数:" + data.nurseryInfo[item].nurseryBlockCount;
+         var showInfo = "地址：" + '<a href="#">上海市长宁区中山西路</a>' + "<br/>" + "描述：相当棒" + "<br/>面积：78m" + "<br/>地块个数:32个";
+         var infoWindow = new BMap.InfoWindow(showInfo, opts);  // 创建信息窗口对象
+         //如何给定位后的图片添加点击的事件
+
+
+       }, function (error) {
+         alert("网络不可用，请打开网络!!");
+         switch (error.code) {
+           case error.PERMISSION_DENIED:
+             $rootScope.showAlert("请打开设备定位功能！");
+             break;
+           case error.POSITION_UNAVAILABLE:
+             $rootScope.showAlert("定位信息不可用！");
+             break;
+           case error.TIMEOUT:
+             $rootScope.showAlert("定位请求超时！");
+             break;
+           case error.UNKNOWN_ERROR:
+             $rootScope.showAlert("未知错误！");
+             break;
+         }
+       });
+
   })
   //其他授权的方式
 .controller('DashCtrl', function($scope,$stateParams) {

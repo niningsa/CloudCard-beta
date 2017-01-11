@@ -1,10 +1,20 @@
 <ion-view view-title="我的圈子">
+  <ion-header-bar class="bar-subheader has-header">
+     <span  style="padding: 0px 40px 0px 90px" >
+      <a  class="button button-balanced" >付款码</a>
+    </span>
+    <span >
+      <button  class="button button-calm"  ng-click="scanBarcode()">扫一扫</button>
+    </span>
+  </ion-header-bar>
+  <ion-nav-buttons side="right">
+    <a class="button icon ion-clipboard"  href="#/tab/chats" title="我的卡" >我的卡</a>
+  </ion-nav-buttons>
+
   <ion-content>
     <ion-list>
-
-      <ion-item> 经度：{{ret.longitude}} 纬度：{{ret.latitude}}</ion-item>
       <ion-item>
-        <div id="allmap" style="height: 600px;"></div>
+        <div id="allmap" style="height: 800px;"></div>
       </ion-item>
     </ion-list>
   </ion-content>

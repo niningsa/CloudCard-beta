@@ -198,7 +198,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     .state('tab.circle', {
       url: '/circle',
       views: {
-        'tab-chats': {
+        'tab-circle': {
           templateUrl: 'templates/tab-circle.html',
           controller: 'circleCtrl'
         }
