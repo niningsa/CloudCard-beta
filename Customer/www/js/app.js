@@ -230,7 +230,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.chats', {
       url: '/chats',
       views: {
-        'tab-chats': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-chats.html',
           controller: 'ChatsCtrl'
         }
@@ -245,7 +245,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     .state('tab.subBill', {
       url: '/subBill/:cardId',
       views: {
-        'tab-chats': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-subBill.html',
           controller: 'subBillCtrl'
         }
@@ -256,7 +256,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
-        'tab-chats': {
+        'tab-circleMap': {
           templateUrl: 'templates/chat-detail.html',
           controller: 'ChatDetailCtrl'
         }
@@ -268,7 +268,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
-        'tab-chats': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-cardinput.html',
           controller: 'inputCtrl'
         }
@@ -281,7 +281,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/accredit/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
-        'tab-chats': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-accredit.html',
           controller: 'inputAccreditCtrl'
         }
@@ -293,7 +293,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/sellCard/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
-        'tab-chats': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-sellCard.html',
           controller: 'inputsellCardCtrl'
         }
@@ -306,7 +306,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/sellCardSuccess/:cardBalance/:cardName/:tel',
       cache: false,
       views: {
-        'tab-chats': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-sellCardSuccess.html',
           controller: 'sellCardSuccessCtrl'
         }
@@ -316,7 +316,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.cardreturn', {
       url: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate/:cardName',
       views: {
-        'tab-chats': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-getpower.html',
           controller: 'DashCtrl'
         }
@@ -326,7 +326,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.cardreturnsuccess', {
       url: '/cardreturnsuccess/:teleNumber/:amount/:day/:cardName',
       views: {
-        'tab-chats': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-accreditSuccess.html',
           controller: 'DashAccreditCtrl'
         }
@@ -353,7 +353,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/paymentSuccess/:type/:cardId/:amount/:cardBalance',
     cache: false,
     views: {
-      'tab-chats': {
+      'tab-circleMap': {
         templateUrl: 'templates/tab-paymentSuccess.html',
         controller: 'paymentSuccessCtrl'
       }
@@ -365,7 +365,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/userPaymentSuccess/:storeName/:amount/:cardBalance/:type',
     cache: false,
     views: {
-      'tab-chats': {
+      'tab-circleMap': {
         templateUrl: 'templates/tab-userPaymentSuccess.html',
         controller: 'userPaymentSuccessCtrl'
       }
@@ -379,7 +379,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/payment/:qrCode/:storeName/:storeId/:storeImgUrl/:cardId',
       cache: false,
       views: {
-        'tab-chats': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-payment.html',
           controller: 'paymentController'
         }
@@ -405,7 +405,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/recharge/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
-        'tab-chats': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-recharge.html',
           controller: 'rechargeCtrl'
         }

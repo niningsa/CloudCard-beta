@@ -10,7 +10,7 @@
   <ion-nav-buttons side="right">
     <a class="button icon ion-clipboard"  href="#/tab/chats" title="我的卡" >我的卡</a>
   </ion-nav-buttons>
-
+  </ion-nav-buttons>
   <ion-content>
     <ion-list>
       <ion-item>
@@ -23,9 +23,18 @@
     <!--</div>-->
     <div style="padding: 0px 20px 0px 100px">
       <div >
+
         <i class="icon ion-ios-body positive"></i>
-        <span>名称: </span ><span ng-bind="storeName=='Y'"><a ui-sref="tab.myCircle" ng-bind="storeName"></a></span>
-        <span>名称: </span ><span ng-bind="storeName=='N'"><a ui-sref="tab.shop" ng-bind="storeName"></a></span>
+        <span ng-show="circleLeader=='Y'?true:false">圈主名称:
+        <a ui-sref="tab.myCircle" ng-bind="storeName"></a>
+        </span >
+
+
+        <span ng-show="circleLeader=='N'?true:false">店铺名称:
+        <a ui-sref="tab.shop" ng-bind="storeName"></a>
+        </span >
+        <!--<i class="icon ion-close-circled positive" style="padding: 0px 2px 0px 80px;width: 20px;height: 20px"></i>-->
+        <span style="padding: 0px 20px 0px 40px;color: blue" ng-click="diglogHide()">隐藏</span>
       </div>
       <div>
         <i class="icon ion-ios-telephone positive"></i>

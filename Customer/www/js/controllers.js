@@ -13,6 +13,10 @@ angular.module('starter.controllers', [])
   .controller('circleMapCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
     //用于显示圈子或者店铺的详细的信息
     $scope.storeInfo = false;
+    //隐藏footer
+    $scope.diglogHide=function(){
+      $scope.storeInfo = false;
+    }
 
     navigator.geolocation.getCurrentPosition(function (data) {
 
@@ -32,7 +36,7 @@ angular.module('starter.controllers', [])
         {longitude: 121.419634, latitude: 31.207267,storeName:"南塘包子铺",circleLeader:'Y',telphone:"18772115070",address:"上海市长宁区"},
         {longitude: 121.4196591, latitude: 31.207529,storeName:"庆丰包子铺",circleLeader:'N',telphone:"18772114254",address:"上海市长宁区"},
         {longitude: 121.4196796, latitude: 31.207736,storeName:"大众包子铺",circleLeader:'N',telphone:"1877211123",address:"上海市长宁区"},
-        {longitude: 121.4196796, latitude: 31.207634,storeName:"香飘飘包子铺",circleLeader:'N',telphone:"18772118884",address:"上海市长宁区"}
+        {longitude: 121.4196796, latitude: 31.207634,storeName:"香飘飘",circleLeader:'Y',telphone:"18772118884",address:"上海市长宁区"}
       ];
 
       //循环Json数组
@@ -43,46 +47,53 @@ angular.module('starter.controllers', [])
         var circleLeader = points[o].circleLeader;
         var telphone = points[o].telphone;
         var address = points[o].address;
-
         var point = new BMap.Point(longitude, latitude);  // 创建点坐标
         map.centerAndZoom(point, 19);
         var marker = new BMap.Marker(point);                        // 创建标注
         map.addOverlay(marker);   // 将标注添加到地图中
+
+        if(circleLeader=='Y'){
+          var myLabel = new BMap.Label(storeName, //为lable填写内容
+            {position: point}); //label的位置
+          myLabel.setStyle({ //给label设置样式，任意的CSS都是可以的
+            "color": "red", //颜色
+            "fontSize": "12px", //字号
+            "border": "0", //边
+            "height": "20px", //高度
+            "width": "50px" //宽
+          });
+          map.addOverlay(myLabel); //把label添加到地图上
+
+          //将圆形扩状物加载到地图上
+          var circle = new BMap.Circle(point, 30, {
+            fillColor: "#22B2E7",
+            strokeWeight: 1,
+            fillOpacity: 0.3,
+            strokeOpacity: 0.3,
+            enableEditing: true
+          });
+          map.addOverlay(circle); //增加圆
+
+        }
+
+
         (function(p, m,storeName,circleLeader,telphone,address){
 
           m.addEventListener("click", function () {
-            alert(storeName);
-            $scope.storeInfo = true;
+            $scope.$apply(function () {
+              $scope.storeInfo = true;
+              $scope.storeName = storeName;
+              $scope.circleLeader = circleLeader;
+              $scope.telphone = telphone;
+              $scope.address = address;
+            });
             // alert(p.lat);
-            $scope.storeName = storeName;
-            $scope.circleLeader = circleLeader;
-            $scope.telphone = telphone;
-            $scope.address = address;
+
           })
         })(point, marker,storeName,circleLeader,telphone,address);
       }
 
 
-      var myLabel = new BMap.Label("上海班富", //为lable填写内容
-        {position: point}); //label的位置
-      myLabel.setStyle({ //给label设置样式，任意的CSS都是可以的
-        "color": "red", //颜色
-        "fontSize": "12px", //字号
-        "border": "0", //边
-        "height": "20px", //高度
-        "width": "50px" //宽
-      });
-      map.addOverlay(myLabel); //把label添加到地图上
-
-      //将圆形扩状物加载到地图上
-      var circle = new BMap.Circle(point, 30, {
-        fillColor: "#22B2E7",
-        strokeWeight: 1,
-        fillOpacity: 0.3,
-        strokeOpacity: 0.3,
-        enableEditing: true
-      });
-      map.addOverlay(circle); //增加圆
 
     }, function (error) {
       alert("网络不可用，请打开网络!!");
@@ -849,7 +860,8 @@ angular.module('starter.controllers', [])
                   //极光推送后台数据获取
                 }
               });
-            $state.go("tab.chats");
+            //$state.go("tab.chats");
+            $state.go("tab.circleMap");
             // location.href="http://"+location.host+"/#/tab/chats";
           }else{
             $scope.$apply(function () {
