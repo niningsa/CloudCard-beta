@@ -160,30 +160,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
        controller: 'applySellerCtrl'
   })
 
-  //我的圈子查看页面
+/************************ Start 圈子 *********************************/
+
   .state('tab.myCircle', {
     url: '/myCircle',
     cache: false,
     views: {
       'tab-myCircle': {
-        templateUrl: 'templates/circle/tab-myCircle.html',
+        templateUrl: 'templates/circle/myCircle.html',
         controller: 'myCircleCtrl'
       }
     }
   })
 
-  //创建我的圈子
-  .state('tab.createCircle', {
-    url: '/createCircle',
-    cache: false,
-    views: {
-      'tab-myCircle': {
-        templateUrl: 'templates/tab-createCircle.html',
-        controller: 'createCircleCtrl'
-      }
-    }
-  })
-  //创建我的圈子后的圈子的列表
   .state('tab.circleList', {
     url: '/circleList/:circleName',
     cache: false,
@@ -222,12 +211,46 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     cache: false,
     views: {
       'tab-myCircle': {
-        templateUrl: 'templates/circle/tab-circleInfo.html',
+        templateUrl: 'templates/circle/circleInfo.html',
         controller: 'circleInfoCtrl'
       }
     }
   })
 
+  .state('tab.settleLayout', {
+    url: '/settleLayout',
+    cache: false,
+    views: {
+      'tab-myCircle': {
+        templateUrl: 'templates/circle/settleLayout.html',
+        controller: 'settleLayoutCtrl'
+      }
+    }
+  })
+
+  .state('tab.circeAccount', {
+    url: '/circeAccount',
+    cache: false,
+    views: {
+      'tab-myCircle': {
+        templateUrl: 'templates/circle/account.html',
+        controller: 'circeAccountCtrl'
+      }
+    }
+  })
+
+  .state('tab.createCircle', {
+    url: '/createCircle',
+    cache: false,
+    views: {
+      'tab-myCircle': {
+        templateUrl: 'templates/circle/createCircle.html',
+        controller: 'createCircleCtrl'
+      }
+    }
+  })
+
+/************************ End 圈子 *********************************/
   ;
 
   // if none of the above states are matched, use this as the fallback
