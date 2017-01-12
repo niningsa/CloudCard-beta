@@ -220,7 +220,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     .state('tab.shop', {
       url: '/shop',
       views: {
-        'tab-shop': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-shop.html',
           controller: 'shopCtrl'
         }

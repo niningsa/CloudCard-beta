@@ -21,18 +21,19 @@
   <ion-footer-bar class="has-subfooter stable-bg" style="height: 74px;display: inline" ng-show="storeInfo">
     <!--<div style="width: 200px;height:50px;padding: 0px 20px 0px 20px">-->
     <!--</div>-->
-    <div style="padding-left: 20px">
-      <div>
+    <div style="padding: 0px 20px 0px 100px">
+      <div >
         <i class="icon ion-ios-body positive"></i>
-        <span>名称: </span><a ui-sref="tab.myCircle">XXXXXXX</a>
+        <span>名称: </span ><span ng-bind="storeName=='Y'"><a ui-sref="tab.myCircle" ng-bind="storeName"></a></span>
+        <span>名称: </span ><span ng-bind="storeName=='N'"><a ui-sref="tab.shop" ng-bind="storeName"></a></span>
       </div>
       <div>
         <i class="icon ion-ios-telephone positive"></i>
-        <span>电话: </span><span>19776666636</span>
+        <span>电话: </span><span ng-bind="telphone"></span>
       </div>
       <div>
         <i class="icon ion-ios-location positive"></i>
-        <span>地址: </span><span>19776666636</span>
+        <span>地址: </span><span ng-bind="address"></span>
       </div>
     </div>
 

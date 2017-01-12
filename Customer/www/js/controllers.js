@@ -11,15 +11,11 @@ angular.module('starter.controllers', [])
   })
   //我的圈子的定位显示
   .controller('circleMapCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
+    //用于显示圈子或者店铺的详细的信息
     $scope.storeInfo = false;
 
-    //$scope.chats = Chats.all();
-    //$scope.doRefresh = function() {
-    //  $scope.chats = Chats.all();
-    //  $scope.$broadcast("scroll.refreshComplete");
-    //};
-
     navigator.geolocation.getCurrentPosition(function (data) {
+
       //var loc = JSON.parse(data);
       //alert(data.coords.longitude);
       //alert(data.coords.latitude);
@@ -33,32 +29,37 @@ angular.module('starter.controllers', [])
       //var marker = new BMap.Marker(point,{icon:myIcon});                        // 创建标注
       // 将标注添加到地图中
       var points = [
-        {longitude: 121.419634, latitude: 31.207267},
-        {longitude: 121.4196591, latitude: 31.207529},
-        {longitude: 121.4196796, latitude: 31.207736},
-        {longitude: 121.4196796, latitude: 31.207634}
+        {longitude: 121.419634, latitude: 31.207267,storeName:"南塘包子铺",circleLeader:'Y',telphone:"18772115070",address:"上海市长宁区"},
+        {longitude: 121.4196591, latitude: 31.207529,storeName:"庆丰包子铺",circleLeader:'N',telphone:"18772114254",address:"上海市长宁区"},
+        {longitude: 121.4196796, latitude: 31.207736,storeName:"大众包子铺",circleLeader:'N',telphone:"1877211123",address:"上海市长宁区"},
+        {longitude: 121.4196796, latitude: 31.207634,storeName:"香飘飘包子铺",circleLeader:'N',telphone:"18772118884",address:"上海市长宁区"}
       ];
 
       //循环Json数组
       for (var o in points) {
         var longitude = points[o].longitude;
         var latitude = points[o].latitude;
+        var storeName = points[o].storeName;
+        var circleLeader = points[o].circleLeader;
+        var telphone = points[o].telphone;
+        var address = points[o].address;
+
         var point = new BMap.Point(longitude, latitude);  // 创建点坐标
         map.centerAndZoom(point, 19);
         var marker = new BMap.Marker(point);                        // 创建标注
         map.addOverlay(marker);   // 将标注添加到地图中
-        (function(p, m){
+        (function(p, m,storeName,circleLeader,telphone,address){
+
           m.addEventListener("click", function () {
-             alert("精度是："+ longitude+"维度是："+ latitude);
-            //m.openInfoWindow(infoWindow, p); //开启信息窗口
-            // $state.go("tab.myCircle");
-            //window.location.href="#/tab/myCircle";
+            alert(storeName);
             $scope.storeInfo = true;
             // alert(p.lat);
-            $scope.longitude = 121.5;
-            $scope.latitude = 32.2;
+            $scope.storeName = storeName;
+            $scope.circleLeader = circleLeader;
+            $scope.telphone = telphone;
+            $scope.address = address;
           })
-        })(point, marker);
+        })(point, marker,storeName,circleLeader,telphone,address);
       }
 
 
@@ -83,33 +84,12 @@ angular.module('starter.controllers', [])
       });
       map.addOverlay(circle); //增加圆
 
-      //创建信息窗口
-      var opts = {
-        width: 400,     // 信息窗口宽度
-        height: 120,     // 信息窗口高度
-        title: "坤哥",
-        message: ""
-      }
-      //var showInfo = "地址：" + data.nurseryInfo[item].Addresss + "<br/>" + "描述：" + data.nurseryInfo[item].BasicFacts + "<br/>面积：" + data.nurseryInfo[item].HouseArea + "<br/>地块个数:" + data.nurseryInfo[item].nurseryBlockCount;
-      var showInfo = "店铺称：" + "<a href='http://www.baidu.com'  >南塘包子铺</a>" + "<br/>" + "描述：相当棒" + "<br/>面积：78m" + "<br/>地块个数:32个";
-      var infoWindow = new BMap.InfoWindow(showInfo, opts);  // 创建信息窗口对象
-      //如何给定位后的图片添加点击的事件  href='#tab/myCircle'
-
-
     }, function (error) {
       alert("网络不可用，请打开网络!!");
       console.log(error);
 
-    });
+    },{timeout: 30000, enableHighAccuracy: true, maximumAge: 75000});
 
-    //$("body").on("click", "#aa", function(){
-    //  alert(888);
-    //});
-    //document.getElementById('aa').onclick = function(){
-    //
-    // alert(888);
-    //
-    //};
 
   })
   //其他授权的方式
