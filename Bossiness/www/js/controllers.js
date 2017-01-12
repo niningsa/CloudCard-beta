@@ -1,11 +1,53 @@
 angular.module('starter.controllers', [])
 
 /*
- * Desc
+ * Desc 圈子账单
  * Author LN
  * Date 2017-1-12
  * */
-  .controller('circleInfoCtrl', function ($scope) {
+  .controller('circeAccountCtrl', function ($scope) {
+
+  })
+
+/*
+ * Desc 圈友结算页面
+ * Author LN
+ * Date 2017-1-12
+ * */
+  .controller('settleLayoutCtrl', function ($scope) {
+
+  })
+
+/*
+ * Desc 圈友详情
+ * Author LN
+ * Date 2017-1-12
+ * */
+  .controller('circleInfoCtrl', function ($scope, $ionicModal) {
+    $ionicModal.fromTemplateUrl('templates/circle/settleModal.html', function (modal) {
+      $scope.modal = modal;
+    }, {
+      animation: 'slide-in-up',
+      focusFirstInput: true
+    });
+
+    $scope.openSettle = function () {
+      $scope.modal.show();
+    };
+    $scope.closeModal = function () {
+      $scope.modal.hide();
+    };
+  })
+
+/*
+ * Desc 结算模态框
+ * Author LN
+ * Date 2017-1-12
+ * */
+  .controller('settleModalCtrl', function ($scope, $state) {
+    $scope.closeModal = function () {
+      $scope.modal.hide();
+    };
   })
 
 /*
@@ -86,8 +128,13 @@ angular.module('starter.controllers', [])
       }
     }
   })
-  //创建我的圈子
-  .controller('createCircleCtrl', function ($scope, $state,$ionicPopup) {
+
+/*
+ * Desc 创建我的圈子
+ * Author LN
+ * Date 2017-1-12
+ * */
+  .controller('createCircleCtrl', function ($scope, $state, $ionicPopup) {
     var token = $.cookie("token");
     if (token == null) {
       $state.go("login");

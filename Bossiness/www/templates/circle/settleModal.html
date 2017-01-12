@@ -1,27 +1,25 @@
-<ion-modal-view>
+<ion-modal-view ng-controller="settleModalCtrl">
   <ion-header-bar class="bar-positive">
-    <h1 class="title">ion-modal-view</h1>
+    <h1 class="title">结算单</h1>
     <a class="button" ng-click="closeModal()">关闭</a>
-
-    <a class="button" ng-click="finish();">完成</a>
   </ion-header-bar>
   <ion-content>
 
     <div class="padding">
       <div class="list">
         <label class="item item-input">
-          <span class="input-label">First Name</span>
+          <span class="input-label">结算金额</span>
           <input ng-model="newUser.firstName" type="text">
         </label>
         <label class="item item-input">
-          <span class="input-label">Last Name</span>
+          <span class="input-label">折扣</span>
           <input ng-model="newUser.lastName" type="text">
         </label>
-        <label class="item item-input">
-          <span class="input-label">Email</span>
-          <input ng-model="newUser.email" type="text">
+        <label class="item">
+          <span class="input-label">实际结算金额</span>
+          <strong style="color: red;font-size: 20px;padding: 10px;display: inline"> ￥12.00</strong>
         </label>
-        <button class="button button-full button-positive">Create</button>
+        <button class="button button-full button-positive">确定</button>
       </div>
     </div>
 
