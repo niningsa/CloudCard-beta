@@ -195,12 +195,34 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }
   })
   //百度地图显示我的圈子定位
-    .state('tab.circle', {
-      url: '/circle',
+    .state('tab.circleMap', {
+      url: '/circleMap',
       views: {
-        'tab-circle': {
-          templateUrl: 'templates/tab-circle.html',
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-circleMap.html',
           controller: 'circleCtrl'
+        }
+      }
+    })
+
+      //我的圈子的页面展示
+    .state('tab.myCircle', {
+      url: '/myCircle',
+      views: {
+        'tab-myCircle': {
+          templateUrl: 'templates/tab-myCircle.html',
+          controller: 'myCircleCtrl'
+        }
+      }
+    })
+
+      //店铺的展示页面
+    .state('tab.shop', {
+      url: '/shop',
+      views: {
+        'tab-shop': {
+          templateUrl: 'templates/tab-shop.html',
+          controller: 'shopCtrl'
         }
       }
     })
