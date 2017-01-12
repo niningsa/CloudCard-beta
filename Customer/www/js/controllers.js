@@ -11,7 +11,7 @@ angular.module('starter.controllers', [])
   })
   //我的圈子的定位显示
   .controller('circleMapCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
-
+    $scope.storeInfo = false;
 
     //$scope.chats = Chats.all();
     //$scope.doRefresh = function() {
@@ -53,6 +53,8 @@ angular.module('starter.controllers', [])
             //m.openInfoWindow(infoWindow, p); //开启信息窗口
             // $state.go("tab.myCircle");
             //window.location.href="#/tab/myCircle";
+            $scope.storeInfo = true;
+            // alert(p.lat);
             $scope.longitude = 121.5;
             $scope.latitude = 32.2;
           })

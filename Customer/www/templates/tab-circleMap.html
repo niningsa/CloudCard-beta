@@ -18,18 +18,23 @@
       </ion-item>
     </ion-list>
   </ion-content>
-  <ion-footer-bar class="has-subfooter stable-bg" style="border: 1px solid red;height: 84px;display: inline">
+  <ion-footer-bar class="has-subfooter stable-bg" style="height: 74px;display: inline" ng-show="storeInfo">
     <!--<div style="width: 200px;height:50px;padding: 0px 20px 0px 20px">-->
     <!--</div>-->
+    <div style="padding-left: 20px">
       <div>
-        <a ui-sref="tab.myCircle">我的资料</a>{{longitude}}
+        <i class="icon ion-ios-body positive"></i>
+        <span>名称: </span><a ui-sref="tab.myCircle">XXXXXXX</a>
       </div>
       <div>
-        <a ui-sref="tab.myCircle">我的资料</a>
+        <i class="icon ion-ios-telephone positive"></i>
+        <span>电话: </span><span>19776666636</span>
       </div>
       <div>
-        <a ui-sref="tab.myCircle">我的资料</a>
+        <i class="icon ion-ios-location positive"></i>
+        <span>地址: </span><span>19776666636</span>
       </div>
+    </div>
 
   </ion-footer-bar>
 </ion-view>
