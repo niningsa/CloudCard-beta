@@ -1,0 +1,29 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">ion-modal-view</h1>
+    <a class="button" ng-click="closeModal()">关闭</a>
+
+    <a class="button" ng-click="finish();">完成</a>
+  </ion-header-bar>
+  <ion-content>
+
+    <div class="padding">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">First Name</span>
+          <input ng-model="newUser.firstName" type="text">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Last Name</span>
+          <input ng-model="newUser.lastName" type="text">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input ng-model="newUser.email" type="text">
+        </label>
+        <button class="button button-full button-positive">Create</button>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-modal-view>

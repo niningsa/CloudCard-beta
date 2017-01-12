@@ -200,7 +200,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-circleMap.html',
-          controller: 'circleCtrl'
+          controller: 'circleMapCtrl'
         }
       }
     })
@@ -209,7 +209,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     .state('tab.myCircle', {
       url: '/myCircle',
       views: {
-        'tab-myCircle': {
+        'tab-circleMap': {
           templateUrl: 'templates/tab-myCircle.html',
           controller: 'myCircleCtrl'
         }

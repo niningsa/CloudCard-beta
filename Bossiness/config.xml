@@ -9,6 +9,19 @@
     </author>
   <content src="index.html"/>
   <access origin="*"/>
+
+  <!--定位插件使用-->
+  <!-- android 使用本插件 -->
+  <platform name="android">
+    <plugin name="cordova-plugin-baidu-geolocation" spec="https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation">
+      <variable name="API_KEY" value="zI9TV5wysdSQHyiYsFna3GSMQPHM6DOx" />
+    </plugin>
+  </platform>
+  <!-- iOS 使用官方插件 -->
+  <platform name="ios">
+    <plugin name="cordova-plugin-geolocation" spec="~2.4.1" />
+  </platform>
+
   <preference name="orientation" value="portrait" />
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>

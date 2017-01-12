@@ -1,0 +1,12 @@
+diff a/Customer/config.xml b/Customer/config.xml	(rejected hunks)
+@@ -9,6 +9,10 @@
+     </author>
+   <content src="index.html"/>
+   <access origin="*"/>
++  <!--引入只允许竖屏不允许横屏的文件开始-->
++  <pre name="code" class="html"/>
++  <preference name="orientation" value="portrait"/>
++  <!--引入只允许竖屏不允许横屏的文件结束-->
+   <preference name="webviewbounce" value="false"/>
+   <preference name="UIWebViewBounce" value="false"/>
+   <preference name="DisallowOverscroll" value="true"/>

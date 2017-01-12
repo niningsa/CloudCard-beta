@@ -128,3 +128,13 @@ label{
   padding: 0px;
   margin: 0px;
 }
+
+
+/* 圈友详情 */
+.circlebg {
+  background: url("../img/s-1.jpg") no-repeat center;
+  width: 100%;
+  height: 180px;
+  display: inline-block;
+}
+

@@ -18,9 +18,18 @@
       </ion-item>
     </ion-list>
   </ion-content>
-  <ion-footer-bar class="has-subfooter stable-bg" >
-    <div style="width: 200px;height:50px;padding: 0px 20px 0px 20px">
-      <a href="#/tab/myCircle">我的资料</a>
-    </div>
+  <ion-footer-bar class="has-subfooter stable-bg" style="border: 1px solid red;height: 84px;display: inline">
+    <!--<div style="width: 200px;height:50px;padding: 0px 20px 0px 20px">-->
+    <!--</div>-->
+      <div>
+        <a ui-sref="tab.myCircle">我的资料</a>{{longitude}}
+      </div>
+      <div>
+        <a ui-sref="tab.myCircle">我的资料</a>
+      </div>
+      <div>
+        <a ui-sref="tab.myCircle">我的资料</a>
+      </div>
+
   </ion-footer-bar>
 </ion-view>

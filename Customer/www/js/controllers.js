@@ -4,12 +4,14 @@ angular.module('starter.controllers', [])
   .controller('myCircleCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
 
   })
+
   //店铺的展示页面
   .controller('shopCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
 
   })
   //我的圈子的定位显示
-  .controller('circleCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
+  .controller('circleMapCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
+
 
     //$scope.chats = Chats.all();
     //$scope.doRefresh = function() {
@@ -49,7 +51,7 @@ angular.module('starter.controllers', [])
           m.addEventListener("click", function () {
              alert("精度是："+ longitude+"维度是："+ latitude);
             //m.openInfoWindow(infoWindow, p); //开启信息窗口
-            //$state.go("tab.myCircle");
+            // $state.go("tab.myCircle");
             //window.location.href="#/tab/myCircle";
             $scope.longitude = 121.5;
             $scope.latitude = 32.2;

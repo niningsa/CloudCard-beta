@@ -1,6 +1,14 @@
 angular.module('starter.controllers', [])
 
 /*
+ * Desc
+ * Author LN
+ * Date 2017-1-12
+ * */
+  .controller('circleInfoCtrl', function ($scope) {
+  })
+
+/*
  * Desc 首页登录判断
  * Author LN
  * Date 2016-11-20

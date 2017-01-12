@@ -166,11 +166,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     cache: false,
     views: {
       'tab-myCircle': {
-        templateUrl: 'templates/tab-myCircle.html',
+        templateUrl: 'templates/circle/tab-myCircle.html',
         controller: 'myCircleCtrl'
       }
     }
   })
+
   //创建我的圈子
   .state('tab.createCircle', {
     url: '/createCircle',
@@ -212,6 +213,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       'tab-myCircle': {
         templateUrl: 'templates/tab-circleFriedDetail.html',
         controller: 'circleFriedDetailCtrl'
+      }
+    }
+  })
+
+  .state('tab.circleInfo', {
+    url: '/circleInfo',
+    cache: false,
+    views: {
+      'tab-myCircle': {
+        templateUrl: 'templates/circle/tab-circleInfo.html',
+        controller: 'circleInfoCtrl'
       }
     }
   })
