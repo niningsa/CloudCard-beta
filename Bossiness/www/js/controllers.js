@@ -1,5 +1,6 @@
 angular.module('starter.controllers', [])
 
+/********************************************* Start 圈子 **************************************************/
 /*
  * Desc 圈子账单
  * Author LN
@@ -50,17 +51,6 @@ angular.module('starter.controllers', [])
     };
   })
 
-/*
- * Desc 首页登录判断
- * Author LN
- * Date 2016-11-20
- * */
-  .controller('DashCtrl', function ($scope, $state) {
-    var token = $.cookie("token");
-    if (token == null) {
-      $state.go("login");
-    }
-  })
 
 /*
  * Desc 圈友页面
@@ -92,8 +82,11 @@ angular.module('starter.controllers', [])
 
   })
 
-
-  //我的圈子的控制层
+/*
+ * Desc 圈友消费详情
+ * Author LN
+ * Date 2016-12-28
+ * */
   .controller('myCircleCtrl', function ($scope, $state,$stateParams) {
     $scope.circleName  =$stateParams.circleName;
     var token = $.cookie("token");
@@ -101,7 +94,12 @@ angular.module('starter.controllers', [])
       $state.go("login");
     }
   })
-  //创建我的圈子后的列表
+
+/*
+ * Desc 圈友消费详情
+ * Author LN
+ * Date 2016-12-28
+ * */
   .controller('circleListCtrl', function ($scope, $state,$stateParams,$ionicPopup) {
     $scope.circleName  =$stateParams.circleName;
     var token = $.cookie("token");
@@ -135,22 +133,24 @@ angular.module('starter.controllers', [])
  * Date 2017-1-12
  * */
   .controller('createCircleCtrl', function ($scope, $state, $ionicPopup) {
+    $scope.createCircle = function () {
+      $state.go("tab.createCircleSuccess");
+    };
+  })
+
+/********************************************* End 圈子 **************************************************/
+
+/*
+ * Desc 首页登录判断
+ * Author LN
+ * Date 2016-11-20
+ * */
+  .controller('DashCtrl', function ($scope, $state) {
     var token = $.cookie("token");
     if (token == null) {
       $state.go("login");
     }
-
-    $scope.createMyCircle=function(){
-      var circleName=$("#circleName").val();
-      var flag =true;
-      if(flag){
-        $state.go("tab.circleList",{
-          "circleName":circleName
-        });
-      }
-    }
   })
-
 
   /*
    * Desc 账单列表数据展示
