@@ -250,6 +250,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }
   })
 
+  .state('tab.createCircleSuccess', {
+    url: '/createCircleSuccess',
+    cache: false,
+    views: {
+      'tab-myCircle': {
+        templateUrl: 'templates/circle/createCircleSuccess.html'
+      }
+    }
+  })
+
+  .state('tab.inviteFriend', {
+    url: '/inviteFriend',
+    cache: false,
+    views: {
+      'tab-myCircle': {
+        templateUrl: 'templates/circle/inviteFriend.html'
+      }
+    }
+  })
+
+
 /************************ End 圈子 *********************************/
   ;
 
