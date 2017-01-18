@@ -2,32 +2,122 @@ angular.module('starter.controllers', [])
 
 //我的圈子的页面展示
   .controller('myCircleCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
+    $scope.mycards=function(){
+      $state.go("tab.myCircleCard");
+    }
+  })
 
+  //我的圈子的卡的展示页面
+  .controller('myCircleCardCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
+    $scope.chongZhi=function(){
+      //跳转到充值的页面
+      $state.go("tab.recharge",{
+        cardId:1001,
+        cardBalance:200,
+        cardName:"南塘包子店",
+        cardCode:123456,
+        isAuthToOthers:"N",
+        isAuthToMe:"N"
+      });
+    }
   })
 
   //店铺的展示页面
   .controller('shopCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
 
   })
+  //付款吗的展示页面
+  .controller('paymentCodeCtrl', function($scope,$state, $rootScope,$stateParams) {
+    $scope.telNumber=$stateParams.telNumber;
+    jQuery('#pcode').qrcode($stateParams.telNumber);
+  })
+  //根据Id查询卡
+  .controller('mycardCtrl', function($scope,mycards,$state, $rootScope,$stateParams) {
+    $scope.cards = mycards.all();
+    //cardId:cards.cardId,
+    //  storeId:cards.storeId,
+    //  storeName:cards.storeName,
+    //  cardName:cards.cardName,
+    //  cardBalance:cards.cardBalance,
+    //  qrCode:cards.qrCode,
+    //  storeImgUrl:cards.storeImgUrl
+  })
   //我的圈子的定位显示
-  .controller('circleMapCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
+  .controller('circleMapCtrl', function($scope,$state, $rootScope, $cordovaBarcodeScanner, $rootScope, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
     //用于显示圈子或者店铺的详细的信息
     $scope.storeInfo = false;
+    $scope.telNumber = 18772115070;
     //隐藏footer
     $scope.diglogHide=function(){
       $scope.storeInfo = false;
+      //$("#foot").css({
+      //  "display": "none",
+      //  "height":"0px"
+      //});
     }
 
+    //扫一扫的功能
+    $scope.scanBarcode=function(){
+      $ionicLoading.show({
+        template: "正在调摄像头,请稍后...."
+      });
+      $timeout(function () {
+        $cordovaBarcodeScanner.scan().then(function (imageData) {
+          $ionicLoading.hide();
+          $scope.msg = "";
+          var cardCode = imageData.text;                                  // 扫到的数据
+          if (cardCode != '') {
+            $state.go("tab.mycards");
+            //$.ajax({
+            //  url: $rootScope.interfaceUrl + "getStoreInfoByQRcode",
+            //  type: "POST",
+            //  data: {
+            //    "token": token,
+            //    "qrCode": cardCode
+            //  },
+            //  success: function (result) {
+            //    //alert(result.msg+" "+result.storeName+" "+result.storeId+" "+result.storeImgUrl);
+            //    if (result.code == '200') {
+            //      $state.go("tab.payment", {
+            //        qrCode: cardCode,
+            //        storeName: result.storeName,
+            //        storeId: result.storeId,
+            //        storeImgUrl: result.storeImgUrl,
+            //        cardId: $scope.cardId
+            //      });
+            //    } else {
+            //      $ionicPopup.alert({
+            //        title: '温馨提示',
+            //        template: result.msg
+            //      });
+            //    }
+            //  }
+            //});
+          }
+        }, function (error) {
+          console.log("An error happened -> " + error);
+        });
+
+      },1000);
+    }
+    //付款码
+    $scope.paymentCode=function(){
+      $state.go("tab.paymentCode",
+                {telNumber:$scope.telNumber});
+    }
+
+    //百度定位
     navigator.geolocation.getCurrentPosition(function (data) {
 
-      //var loc = JSON.parse(data);
-      //alert(data.coords.longitude);
-      //alert(data.coords.latitude);
-      //调用方法更具坐标来解析地址
-      //var point = (parseFloat(data.coords.longitude)+0.006486, parseFloat(data.coords.latitude)+0.006061);//真实定位
       var point = (121.419634, 31.207267);
       //$scope.ret = {longitude:121.419633, latitude:31.207256};
-      var map = new BMap.Map("allmap");                           // 创建Map实例
+      var map = new BMap.Map("allmap");
+      //var walking = new BMap.WalkingRoute(map, {renderOptions: {map: map, panel: "r-result", autoViewport: true}});
+      //walking.search("虹桥银城大厦", "龙峰大厦");
+
+      //var gpsPoint = new BMap.Point(data.coords.longitude, data.coords.latitude);  // 创建点坐标
+
+
       //如何放置自定义的marker
       //var myIcon = new BMap.Icon("http://developer.baidu.com/map/jsdemo/img/fox.gif", new BMap.Size(300,157));
       //var marker = new BMap.Marker(point,{icon:myIcon});                        // 创建标注
@@ -41,6 +131,8 @@ angular.module('starter.controllers', [])
 
       //循环Json数组
       for (var o in points) {
+        var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+
         var longitude = points[o].longitude;
         var latitude = points[o].latitude;
         var storeName = points[o].storeName;
@@ -49,8 +141,11 @@ angular.module('starter.controllers', [])
         var address = points[o].address;
         var point = new BMap.Point(longitude, latitude);  // 创建点坐标
         map.centerAndZoom(point, 19);
-        var marker = new BMap.Marker(point);                        // 创建标注
+        var marker = new BMap.Marker(point);
         map.addOverlay(marker);   // 将标注添加到地图中
+        map.addControl(ctrl_nav);//给地图添加缩放的按钮
+        map.enableScrollWheelZoom(true);
+        var geoc = new BMap.Geocoder();
 
         if(circleLeader=='Y'){
           var myLabel = new BMap.Label(storeName, //为lable填写内容
@@ -59,8 +154,8 @@ angular.module('starter.controllers', [])
             "color": "red", //颜色
             "fontSize": "12px", //字号
             "border": "0", //边
-            "height": "20px", //高度
-            "width": "50px" //宽
+            "height": "10px", //高度
+            "width": "20px" //宽
           });
           map.addOverlay(myLabel); //把label添加到地图上
 
@@ -76,10 +171,21 @@ angular.module('starter.controllers', [])
 
         }
 
-
+        //点击Marker将marker的值放进去
         (function(p, m,storeName,circleLeader,telphone,address){
 
           m.addEventListener("click", function () {
+
+            geoc.getLocation(p, function(rs){
+              console.log(rs);
+              var pois = rs.surroundingPois;
+              for(var i = 0; i < pois.length; i++) {
+                //var addComp = poi.addressComponents;
+                var titles = pois[i].title;
+                alert(titles);
+              }
+              //alert(addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+            });
             $scope.$apply(function () {
               $scope.storeInfo = true;
               $scope.storeName = storeName;
@@ -87,10 +193,10 @@ angular.module('starter.controllers', [])
               $scope.telphone = telphone;
               $scope.address = address;
             });
-            // alert(p.lat);
 
           })
-        })(point, marker,storeName,circleLeader,telphone,address);
+        })(point, marker,storeName
+          ,circleLeader,telphone,address);
       }
 
 
@@ -99,7 +205,7 @@ angular.module('starter.controllers', [])
       alert("网络不可用，请打开网络!!");
       console.log(error);
 
-    },{timeout: 30000, enableHighAccuracy: true, maximumAge: 75000});
+    },{timeout: 30000, enableHighAccuracy:true, maximumAge: 75000,coorType: 'bd09ll'});
 
 
   })
@@ -773,7 +879,8 @@ angular.module('starter.controllers', [])
   $scope.$on('$ionicView.beforeEnter', function () {                           // 这个玩意儿不错，刚加载执行的广播通知方法
     $scope.user = {"identifyCode": ""};                                          // 退出登录后，清空验证码
     if ($.cookie("token") != null) { // 登录成功了，按物理返回键，就别想重新登录
-      $state.go("tab.chats");
+      //$state.go("tab.chats");
+      $state.go("tab.circleMap");
     }
   });
   $scope.codeBtn='获取验证码';
@@ -939,7 +1046,7 @@ angular.module('starter.controllers', [])
     $scope.qrCode = $stateParams.qrCode;
     $scope.storeName = $stateParams.storeName;
     $scope.storeId = $stateParams.storeId;
-    $scope.storeImgUrl = $stateParams.storeImgUrl;
+    //$scope.storeImgUrl = $stateParams.storeImgUrl;//可能会存在转义字符
     $scope.cardId = $stateParams.cardId;
 
     $scope.paymentMethod=function(amount) {

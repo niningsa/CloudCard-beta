@@ -1,0 +1,23 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="付款码">
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.circleMap"></a>
+  </ion-nav-buttons>
+
+  <ion-content class="padding">
+
+    <div style="text-align: center;padding-top: 20px">
+      <div class="chartext" style="display: block">卡二维码： {{telNumber}}</div>
+      <div id="pcode" class="item"></div>
+      <div class="padding-20">该条码用于商家扫描</div>
+    </div>
+
+
+
+  </ion-content>
+</ion-view>

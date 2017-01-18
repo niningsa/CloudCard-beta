@@ -202,6 +202,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
           templateUrl: 'templates/tab-circleMap.html',
           controller: 'circleMapCtrl'
         }
+      },
+      cache:false,
+      params:{
+        isCache:true
+      }
+    })
+
+    //我的圈子的卡展示页面
+    .state('tab.myCircleCard', {
+      url: '/myCircleCard',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-myCircleCard.html',
+          controller: 'myCircleCardCtrl'
+        }
       }
     })
 
@@ -226,6 +241,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
+    //付款码的展示页面
+    .state('tab.paymentCode', {
+      url: '/paymentCode/:telNumber',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-paymentCode.html',
+          controller: 'paymentCodeCtrl'
+        }
+      }
+    })
 //我的卡页面查询列表
   .state('tab.chats', {
       url: '/chats',
@@ -233,6 +258,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         'tab-circleMap': {
           templateUrl: 'templates/tab-chats.html',
           controller: 'ChatsCtrl'
+        }
+      },
+    cache:false,
+    params:{
+      isCache:true
+    }
+    })
+    //根据Id查询某张卡
+  .state('tab.mycards', {
+      url: '/mycards',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-mycard.html',
+          controller: 'mycardCtrl'
         }
       },
     cache:false,
@@ -376,7 +415,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     //扫一扫支付的页面
     .state('tab.payment', {
-      url: '/payment/:qrCode/:storeName/:storeId/:storeImgUrl/:cardId',
+      //url: '/payment/:qrCode/:storeName/:storeId/:storeImgUrl/:cardId',
+      url: '/payment/:qrCode/:storeName/:storeId/:cardId',//这是写死的暂时先拿掉，存在转义字符
       cache: false,
       views: {
         'tab-circleMap': {
@@ -400,7 +440,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       controller:'LoginCtrl'
     })
 
-
+//充值页面
     .state('tab.recharge', {
       url: '/recharge/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,

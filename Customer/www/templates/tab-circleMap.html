@@ -1,10 +1,10 @@
-<ion-view view-title="我的圈子">
+<ion-view view-title="我的圈子" cache-view="false">
   <ion-header-bar class="bar-subheader has-header">
-     <span  style="padding: 0px 40px 0px 90px" >
-      <a  class="button button-balanced" >付款码</a>
-    </span>
-    <span >
-      <button  class="button button-calm"  ng-click="scanBarcode()">扫一扫</button>
+     <span style="padding: 0px 40px 0px 90px">
+      <button class="button button-calm" ng-click="paymentCode()">付款码</button>
+     </span>
+    <span>
+      <button class="button button-calm" ng-click="scanBarcode()">扫一扫</button>
     </span>
   </ion-header-bar>
   <ion-nav-buttons side="right">
@@ -18,12 +18,9 @@
       </ion-item>
     </ion-list>
   </ion-content>
-  <ion-footer-bar class="has-subfooter stable-bg" style="height: 74px;display: inline" ng-show="storeInfo">
-    <!--<div style="width: 200px;height:50px;padding: 0px 20px 0px 20px">-->
-    <!--</div>-->
+  <ion-footer-bar  class="has-subfooter stable-bg" style="height: 74px;display: inline" ng-show="storeInfo">
     <div style="padding: 0px 20px 0px 100px">
       <div >
-
         <i class="icon ion-ios-body positive"></i>
         <span ng-show="circleLeader=='Y'?true:false">圈主名称:
         <a ui-sref="tab.myCircle" ng-bind="storeName"></a>

@@ -182,4 +182,44 @@ angular.module('starter.services', [])
 
 })
 
+  .factory('mycards', function() {
+    // Some fake testing data
+    cards = [{
+      cardId:1000,
+      storeId:1,
+      storeName: '沙龙_l001_1',
+      cardName: '南塘包子铺',
+      cardBalance: '352',
+      qrCode: '18772115070',
+      storeImgUrl: 'img/yinhanka.png'
+    }, {
+      cardId:1001,
+      storeId:2,
+      storeName: '奶茶_l002_1',
+      cardName: '大庆包子铺',
+      cardBalance: '425',
+      qrCode: '18772114254',
+      storeImgUrl: 'img/yinhanka2.png'
+    }];
+
+    return {
+      all: function() {
+        // alert(chats);
+        return cards;
+      },
+      remove: function(chat) {
+        chats.splice(chats.indexOf(chat), 1);
+      },
+      get: function(chatId) {
+        for (var i = 0; i < chats.length; i++) {
+          if (chats[i].id === parseInt(chatId)) {
+            return chats[i];
+          }
+        }
+        return null;
+      }
+    };
+  });
+
+
 ;
