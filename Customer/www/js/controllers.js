@@ -176,16 +176,16 @@ angular.module('starter.controllers', [])
 
           m.addEventListener("click", function () {
 
-            geoc.getLocation(p, function(rs){
-              console.log(rs);
-              var pois = rs.surroundingPois;
-              for(var i = 0; i < pois.length; i++) {
-                //var addComp = poi.addressComponents;
-                var titles = pois[i].title;
-                alert(titles);
-              }
-              //alert(addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
-            });
+            //geoc.getLocation(p, function(rs){
+            //  console.log(rs);
+            //  var pois = rs.surroundingPois;
+            //  for(var i = 0; i < pois.length; i++) {
+            //    //var addComp = poi.addressComponents;
+            //    var titles = pois[i].title;
+            //    //alert(titles);
+            //  }
+            //  //alert(addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+            //});
             $scope.$apply(function () {
               $scope.storeInfo = true;
               $scope.storeName = storeName;
