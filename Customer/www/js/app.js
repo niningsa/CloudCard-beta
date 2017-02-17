@@ -170,6 +170,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
         $ionicConfigProvider.platform.ios.views.transition('ios');
         $ionicConfigProvider.platform.android.views.transition('android');
+        $ionicConfigProvider.views.swipeBackEnabled(false); // 防止ios左滑出现白屏
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -437,6 +438,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/login',
       cache: false,
       templateUrl: "templates/login.html",
+      controller:'LoginCtrl'
+    })
+    //注册页面的跳转
+    .state('toRegister', {
+      url: '/toRegister',
+      templateUrl: "templates/register.html",
       controller:'LoginCtrl'
     })
 

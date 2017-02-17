@@ -1,11 +1,53 @@
 angular.module('starter.controllers', [])
 
+
+  //c端注册功能
+  .controller('registerCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
+    $scope.cloudCardRegister=function () {
+      console.log($scope.user.tel+" "+$scope.user.identifyCode);
+
+      $state.go("login");
+      //这里需要将接口换成注册的接口
+      //$.ajax({
+      //  url: $rootScope.interfaceUrl+"userAppLogin",
+      //  type:"POST",
+      //  data: {
+      //    "teleNumber":$scope.user.tel,
+      //    "captcha":$scope.user.identifyCode
+      //  },
+      //  success: function(result){
+      //    // console.log(result.code+" "+result.msg);
+      //    //if(result.code=='200'){
+      //    //  var registrationID=$.cookie("registrationID");
+      //    //  var platform=$.cookie("platform");
+      //    //  $scope.$apply(function () {
+      //    //    $scope.msg="";
+      //    //  });
+      //    //  //将token 存入cookie 过期时间7天
+      //    //  $.cookie("token",result.token,{
+      //    //    expires:7
+      //    //  });
+      //    //
+      //    //  //$state.go("tab.chats");
+      //    //  $state.go("login");
+      //    //  // location.href="http://"+location.host+"/#/tab/chats";
+      //    //}else{
+      //    //  $scope.$apply(function () {
+      //    //    $scope.msg=result.msg;
+      //    //  });
+      //    //}
+      //  }
+      //});
+
+    }
+  })
 //我的圈子的页面展示
   .controller('myCircleCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {
     $scope.mycards=function(){
       $state.go("tab.myCircleCard");
     }
   })
+
 
   //我的圈子的卡的展示页面
   .controller('myCircleCardCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate) {

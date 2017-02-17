@@ -1,6 +1,7 @@
 ﻿<ion-view title="登录" hide-back-button="true">
   <ion-content class="padding">
     <div class="login-container animated fadeInDown">
+
         <div class="loginbox bg-white">
             <div class="loginbox-title"></div>
             <div class="cardCloud">
@@ -16,6 +17,9 @@
               </div>
               <div class="loginbox-submit">
                   <input type="submit" class="btn btn-primary btn-block" value="登录" ng-disabled="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">
+              </div>
+              <div class="rgs">
+                <a class="btn btn-primary btn-block" ui-sref="toRegister">注册</a>
               </div>
               <div ng-show="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">
                 <span style="width:300px;display: block;text-align: center;font-weight: bold;color: red;">请输入完整的信息！！</span>
