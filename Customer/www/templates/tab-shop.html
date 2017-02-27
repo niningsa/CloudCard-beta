@@ -6,28 +6,28 @@
   <ion-content>
     <div class="list">
       <div class="item item-divider" style="min-height:11px"></div>
-      <a class="item item-avatar" href="#">
-        <img src="img/adam.jpg">
-        <h2>南塘包子铺</h2>
+      <a class="item item-avatar">
+        <img src="{{storeImg}}">
+        <h2>{{storeName}}</h2>
         <p>。。。。。</p>
       </a>
 
       <div class="item item-divider" style="min-height:11px"></div>
       <a class="item item-icon-left item-icon-right" href="#">
         <i class="icon ion-ios-location positive"></i>
-        去这家店
+        {{storeAddress}}
         <i class="icon ion-ios-arrow-right" style="color:darkgrey;"></i>
       </a>
-      <a class="item item-icon-left item-icon-right" href="#">
-        <i class="icon ion-ios-cart positive"></i>
-        购物卡
-        <i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>
-      </a>
+      <!--<a class="item item-icon-left item-icon-right" href="#">-->
+        <!--<i class="icon ion-ios-cart positive"></i>-->
+        <!--购物卡-->
+        <!--<i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>-->
+      <!--</a>-->
       <div class="item item-divider" style="min-height:11px"></div>
       <div class="item item-icon-left" href="#">
         <i class="icon ion-ios-telephone positive"></i>
         联系方式
-        <span class="item-note">18776256255</span>
+        <span class="item-note">{{storeTeleNumber}}	</span>
       </div>
 
     </div>

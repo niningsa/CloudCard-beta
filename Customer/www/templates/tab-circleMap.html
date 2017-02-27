@@ -19,23 +19,23 @@
     </ion-list>
   </ion-content>
   <ion-footer-bar  class="has-subfooter stable-bg" style="height: 74px;display: inline" ng-show="storeInfo">
-    <div style="padding: 0px 20px 0px 100px">
+    <div style="padding: 0px 20px 0px 80px">
       <div >
         <i class="icon ion-ios-body positive"></i>
-        <span ng-show="circleLeader=='Y'?true:false">圈主名称:
-        <a ui-sref="tab.myCircle" ng-bind="storeName"></a>
+        <span ng-show="isGroupOwner=='Y'?true:false">圈主名称:
+        <a href="#tab/myCircle/{{storeId}}" ng-bind="storeName"></a>
         </span >
 
 
-        <span ng-show="circleLeader=='N'?true:false">店铺名称:
-        <a ui-sref="tab.shop" ng-bind="storeName"></a>
-        </span >
+        <span ng-show="isGroupOwner=='N'?true:false">店铺名称:
+        <a href="#tab/shop/{{storeId}}" ng-bind="storeName"></a>
+        </span>
         <!--<i class="icon ion-close-circled positive" style="padding: 0px 2px 0px 80px;width: 20px;height: 20px"></i>-->
-        <span style="padding: 0px 20px 0px 40px;color: blue" ng-click="diglogHide()">隐藏</span>
+        <span style="color: blue;float: right" ng-click="diglogHide()"> <i class="icon ion-close"></i></span>
       </div>
       <div>
         <i class="icon ion-ios-telephone positive"></i>
-        <span>电话: </span><span ng-bind="telphone"></span>
+        <span>联系方式: </span><span ng-bind="telNum"></span>
       </div>
       <div>
         <i class="icon ion-ios-location positive"></i>
