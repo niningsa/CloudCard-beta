@@ -4,78 +4,32 @@
     <a class="button icon ion-ios-undo" ui-sref="login"></a>
   </ion-nav-buttons>
   <ion-content>
-    <form name="regForm" novalidate="novalidate" ng-submit="applySeller()">
-    <div class="list">
-      <label class="item item-input">
+    <form name="regForm" ng-submit="applySeller()" ng-controller="registerCtrl">
+    <div class="list card">
+      <label class="item item-input item-stacked-label">
         <span class="input-label">商铺名称：</span>
         <input type="text" name="businessName" ng-model="boss.businessName" placeholder="请输入店铺名称" required>
       </label>
-      <label class="item item-input">
+      <label class="item item-input item-stacked-label">
         <span class="input-label">电话号码：</span>
-        <input type="text" name="phone" ng-model="boss.phone" placeholder="请输入电话号码" required>
+        <input type="text" name="phone" ng-model="boss.phone" placeholder="请输入电话号码">
       </label>
-      <label class="item item-input item-button-right">
-        <span class="input-label">营业执照：</span>
-        <input type="text" name="businessLicence" ng-model="boss.businessLicence" placeholder="请输入营业执照号码" required>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">店主姓名：</span>
+        <input type="text" name="businessUserName" ng-model="boss.businessUserName" placeholder="请输入店主姓名">
       </label>
-
-      <label class="item">
-        <!--<span class="input-label">支付方式：{{boss.choice=='alipay'?'支付宝':boss.choice=='weiXin'?'微信':'银行卡'}}</span>-->
-        <label class="item item-divider"><b>请选择支付方式</b></label>
-        <ion-radio class="dark"
-                   name="boss.payment"
-                   ng-repeat="item in items"
-                   ng-model="boss.payment"
-                   ng-change="changePayment(boss.payment)"
-                   ng-value="item.text"><img ng-src="{{item.path}}" > {{item.value}}</ion-radio>
-
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">店铺地址：</span>
+        <input type="text" name="businessAddr" ng-model="boss.businessAddr" placeholder="请输入店铺地址">
       </label>
 
-      <label class="item item-input item-button-right" ng-show="alipay">
-        <span class="input-label">支付宝账号：</span>
-        <input type="text" name="alipayAccount" ng-model="boss.alipayAccount" placeholder="请输入支付宝账号" required>
-      </label>
+        <div class="padding">
+          <button class="button button-block button-positive" type="submit">确认申请</button>
+        </div>
 
-      <label class="item item-input item-button-right" ng-show="weiXinPay">
-        <span class="input-label">微信账号：</span>
-        <input type="text" name="wxAccount" ng-model="boss.wxAccount" placeholder="请输入微信账号" required>
-      </label>
+        <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
+      </div>
 
-      <label class="item" ng-show="bankPay">
-        <!--<span class="input-label">银行名称：{{bk.bankName}}</span>-->
-        <label class="item item-divider"><b>请选择银行</b></label>
-        <ion-radio class="dark"
-                   name="boss.bankName"
-                   ng-repeat="bank in banks"
-                   ng-model="bk.bankName"
-                   ng-change="changeBank(bk.bankName)"
-                   ng-value="bank.name">
-          <img ng-src="{{bank.face}}" >
-          <span>{{bank.name}}</span>
-        </ion-radio>
-      </label>
-
-      <label class="item item-input item-button-right" ng-show="bankPay">
-        <span class="input-label">银行卡号：</span>
-        <input type="text" name="bankCard" ng-model="boss.bankCard" placeholder="请输入银行卡号" required>
-      </label>
-
-<!--
-      regForm.businessName.$error.required
-      || regForm.phone.$error.required
-      || regForm.businessLicence.$error.required
-      || boss.choice == 'alipay'
-      ? regForm.alipayAccount.$error.required: boss.choice == 'weiXin'
-      ? regForm.wxAccount.$error.required: regForm.bankCard.$error.required
-      -->
-    </div>
-    <div class="padding">
-      <button class="button button-block button-positive"
-      ng-disabled="boss.payment == 'alipay'
-      ? regForm.alipayAccount.$error.required: boss.payment == 'weiXin'
-      ? regForm.wxAccount.$error.required: regForm.bankCard.$error.required">确认申请</button>
-    </div>
-    <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
     </form>
   </ion-content>
 </ion-view>

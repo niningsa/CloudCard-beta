@@ -13,11 +13,11 @@
     <div class="card">
       <div class="item item-text-wrap">
         <span style="font-size: 20px;">待清算金额:</span>
-        <strong style="color: red;font-size: 20px;padding: 10px"> ￥12.00</strong>
+        <strong style="color: red;font-size: 20px;padding: 10px"> ￥<span ng-bind="settlementAmount"></span></strong>
       </div>
     </div>
     <div class="padding">
-      <a class="button button-positive" style="width: 49%"  ui-sref="tab.settleLayout">
+      <a class="button button-positive" style="width: 49%" ng-click="bizSettlementRequest()">
         催款
       </a>
       <button class="button button-positive" style="width: 49%">

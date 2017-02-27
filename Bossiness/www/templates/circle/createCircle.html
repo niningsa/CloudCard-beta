@@ -21,14 +21,16 @@
     <!--</div>-->
     <div class="list">
       <label class="item item-input">
-        <span class="input-label">圈字名称</span>
-        <input ng-model="newUser.firstName" type="text">
+        <span class="input-label">圈主名称</span>
+        <input ng-model="newUser.groupName" type="text">
       </label>
-      <label class="item item-input">
-        <span class="input-label">折扣信息</span>
-        <input ng-model="newUser.lastName" type="text">
-      </label>
-      <button class="button button-block button-positive" ng-click="createCircle()">确定</button>
+      <!--<label class="item item-input">-->
+        <!--<span class="input-label">折扣信息</span>-->
+        <!--<input ng-model="newUser.lastName" type="text">-->
+      <!--</label>-->
+    </div>
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="createGroup(newUser.groupName)">确定</button>
     </div>
   </ion-content>
 </ion-view>

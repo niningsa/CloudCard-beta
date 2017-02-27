@@ -13,21 +13,21 @@
     <!--<span class="circlebg"></span>-->
     <div class="list">
       <div class="item item-image">
-        <img src="img/s-1.jpg"/>
+        <img src="{{storeImg}}"/>
       </div>
       <div class="item item-text-wrap">
-        <strong style="color: red;font-size: 20px">老王抠脚店</strong>
+        <strong style="color: red;font-size: 20px" ng-bind="storeName"></strong>
         <div>
-          <div style="padding-top: 10px"><i class="icon ion-ios-telephone positive"></i> 18776256255</div>
-          <div style="padding-top: 10px"><i class="icon ion-ios-location positive"></i> 上海市长宁区东华垃圾收集厂1000号</div>
+          <div style="padding-top: 10px"><i class="icon ion-ios-telephone positive"></i> <span ng-bind="storeTeleNumber"></span></div>
+          <div style="padding-top: 10px"><i class="icon ion-ios-location positive"></i> <span ng-bind="storeAddress"></span></div>
         </div>
       </div>
 
       <div class="item">
-        <button class="button button-positive" style="width: 49%">
+        <button class="button button-positive" style="width: 49%" ng-show="isGroupOwner=='Y'" ng-click="bizFreezeGroupPartner(storeId)">
           冻结
         </button>
-        <button class="button button-positive" style="width: 49%">
+        <button ng-class="isGroupOwner=='Y'?'button button-positive':'button button-positive button-block'" ng-style="myObj"  ng-click="bizExitGroup(storeId, isGroupOwner)">
           退出圈子
         </button>
       </div>
@@ -35,15 +35,16 @@
 
 
   </ion-content>
-  <ion-footer-bar class="has-subfooter stable-bg" >
+  <ion-footer-bar class="has-subfooter stable-bg" ng-show="isGroupOwner=='Y'">
     <span style="padding: 10px">
       <span style="font-size: 20px;">清算金额:</span>
-      <strong style="color: red;font-size: 20px;padding: 10px"> ￥12.00</strong>
+      <strong style="color: red;font-size: 20px;padding: 10px"> ￥<span ng-bind="settlementAmount"></span></strong>
     </span>
     <h1 class="title">
     </h1>
     <div class="buttons">
-      <button class="button button-assertive" style="width: 100px" ng-click="openSettle()"> 结 算 </button>
+      <!--<button class="button button-assertive" ng-click="openSettle()" ng-hide="settlementAmount==0"> 结 算 </button>-->
+      <button class="button button-assertive" ng-click="openSettle(settlementAmount)"> 结 算 </button>
     </div>
   </ion-footer-bar>
 </ion-view>

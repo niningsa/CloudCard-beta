@@ -6,20 +6,20 @@
   <ion-content>
 
     <div class="padding">
-      <div class="list">
+      <div class="list" ng-init="actualSettlementAmount=0">
         <label class="item item-input">
           <span class="input-label">结算金额</span>
-          <input ng-model="newUser.firstName" type="text">
+          <input ng-model="actualSettlementAmount" type="text">
         </label>
-        <label class="item item-input">
-          <span class="input-label">折扣</span>
-          <input ng-model="newUser.lastName" type="text">
-        </label>
+        <!--<label class="item item-input">-->
+          <!--<span class="input-label">折扣</span>-->
+          <!--<input ng-model="discount" type="text">-->
+        <!--</label>-->
         <label class="item">
           <span class="input-label">实际结算金额</span>
-          <strong style="color: red;font-size: 20px;padding: 10px;display: inline"> ￥12.00</strong>
+          <strong style="color: red;font-size: 20px;padding: 10px;display: inline"> ￥<span ng-bind="actualSettlementAmount"></span></strong>
         </label>
-        <button class="button button-full button-positive">确定</button>
+        <button class="button button-full button-positive" ng-click="bizDoSettlement(actualSettlementAmount)">确定</button>
       </div>
     </div>
 

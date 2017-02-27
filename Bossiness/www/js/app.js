@@ -1,18 +1,11 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers', 'starter.services', 'circle.services', 'ngCordova'])
 
 .run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
 
     // $rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/";   //全局： 以后正式服务器接口 URL
-    $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/";        //全局： 服务器接口 URL
-    // $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/";      //全局： 测试接口 URL
+    // $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/";        //全局： 服务器接口 URL
+    $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/";      //全局： 测试接口 URL
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -20,7 +13,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     }
     if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
 
@@ -44,14 +36,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         $ionicConfigProvider.platform.android.views.transition('android');
   $stateProvider
 
-  // setup an abstract state for the tabs directive
   .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
   })
 
-  // Each tab has its own nav history stack:
   .state('tab.dash', {  //继承tab
     url: '/dash',
     views: {
@@ -155,123 +145,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
   .state('applySeller', {
        url: '/applySeller',
-       cache: false,
+       cache: true,
        templateUrl: 'templates/applySeller.html',
        controller: 'applySellerCtrl'
   })
 
-/************************ Start 圈子 *********************************/
 
-  .state('tab.myCircle', {
-    url: '/myCircle',
-    cache: false,
-    views: {
-      'tab-myCircle': {
-        templateUrl: 'templates/circle/myCircle.html',
-        controller: 'myCircleCtrl'
-      }
-    }
-  })
-
-  .state('tab.circleList', {
-    url: '/circleList/:circleName',
-    cache: false,
-    views: {
-      'tab-myCircle': {
-        templateUrl: 'templates/tab-circleList.html',
-        controller: 'circleListCtrl'
-      }
-    }
-  })
-
-  .state('tab.circleFriend', {
-    url: '/circleFriend',
-    cache: false,
-    views: {
-      'tab-myCircle': {
-        templateUrl: 'templates/tab-circleFriend.html',
-        controller: 'circleFriendCtrl'
-      }
-    }
-  })
-
-  .state('tab.circleFriedDetail', {
-    url: '/circleFriedDetail',
-    cache: false,
-    views: {
-      'tab-myCircle': {
-        templateUrl: 'templates/tab-circleFriedDetail.html',
-        controller: 'circleFriedDetailCtrl'
-      }
-    }
-  })
-
-  .state('tab.circleInfo', {
-    url: '/circleInfo',
-    cache: false,
-    views: {
-      'tab-myCircle': {
-        templateUrl: 'templates/circle/circleInfo.html',
-        controller: 'circleInfoCtrl'
-      }
-    }
-  })
-
-  .state('tab.settleLayout', {
-    url: '/settleLayout',
-    cache: false,
-    views: {
-      'tab-myCircle': {
-        templateUrl: 'templates/circle/settleLayout.html',
-        controller: 'settleLayoutCtrl'
-      }
-    }
-  })
-
-  .state('tab.circeAccount', {
-    url: '/circeAccount',
-    cache: false,
-    views: {
-      'tab-myCircle': {
-        templateUrl: 'templates/circle/account.html',
-        controller: 'circeAccountCtrl'
-      }
-    }
-  })
-
-  .state('tab.createCircle', {
-    url: '/createCircle',
-    cache: false,
-    views: {
-      'tab-myCircle': {
-        templateUrl: 'templates/circle/createCircle.html',
-        controller: 'createCircleCtrl'
-      }
-    }
-  })
-
-  .state('tab.createCircleSuccess', {
-    url: '/createCircleSuccess',
-    cache: false,
-    views: {
-      'tab-myCircle': {
-        templateUrl: 'templates/circle/createCircleSuccess.html'
-      }
-    }
-  })
-
-  .state('tab.inviteFriend', {
-    url: '/inviteFriend',
-    cache: false,
-    views: {
-      'tab-myCircle': {
-        templateUrl: 'templates/circle/inviteFriend.html'
-      }
-    }
-  })
-
-
-/************************ End 圈子 *********************************/
   ;
 
   // if none of the above states are matched, use this as the fallback

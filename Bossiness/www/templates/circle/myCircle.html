@@ -3,62 +3,23 @@
   <ion-nav-buttons side="right">
     <a class="button icon ion-ios-heart" ui-sref="setting"></a>
   </ion-nav-buttons>
-<!--
-  <ion-content class="padding content has-header ionic-pseudo" style="padding: 0px;margin: 0px">
-    <div class="list list-borderless">
-      <div class="item item-image">
-        <img src="img/bg10.jpg" height="180px">
-      </div>
-    </div>
-    <div class="padding">
-      <div id="qname">圈子名称：
-        <b>
-          <a ui-sref="tab.circleFriend">朋友圈</a>
-        </b>
-      </div>
-
-      <div>
-        <a class="button button-block button-balanced" href="#/tab/createCircle">创建圈子</a>
-      </div>
-      <div>
-        <a class="button button-block button-energized" href="#/tab/circleList/:{{circleName}}">邀请好友</a>
-      </div>
-      <div>
-        <a class="button button-block button-positive" ng-click="scanBarcode()">解散圈子</a>
-      </div>
-      <div >
-      <a class="button button-block button-calm" ng-click="quit()">退出圈子</a>
-    </div>
-    </div>
-  </ion-content>-->
-
-  <!--没有圈子-->
-  <!--<ion-content>-->
-    <!--<div class="card">-->
-      <!--<div class="item">-->
-        <!--您现在还没有圈子！-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="padding">-->
-      <!--<a class="button button-block button-balanced" ui-sref="tab.createCircle">创建圈子</a>-->
-    <!--</div>-->
-  <!--</ion-content>-->
-
   <!--有圈子-->
   <ion-content>
-    <div class="card">
-    <div class="item">
-    您现在还没有圈子！
-    </div>
-    </div>
-    <div class="padding">
-    <a class="button button-block button-balanced" ui-sref="tab.createCircle">创建圈子</a>
+    <div ng-show="isJoinGroup == 'N'">
+      <div class="card">
+        <div class="item">
+        您现在还没有圈子！
+        </div>
+      </div>
+      <div class="padding">
+        <a class="button button-block button-balanced" ui-sref="tab.createCircle">创建圈子</a>
+      </div>
     </div>
 
-    <div class="list">
-      <a class="item item-avatar" href="#">
+    <div class="list" ng-show="isJoinGroup == 'Y'">
+      <a class="item item-avatar">
         <img src="img/zhiFuBao.png">
-        <h2>老干妈盖浇饭</h2>
+        <h2 ng-bind="groupName"></h2>
         <p>。。。。。</p>
       </a>
       <div class="item item-divider" style="min-height:11px"></div>
@@ -66,51 +27,53 @@
         <!--跨店消费额<span class="item-note">10000</span>-->
       <!--</div>-->
       <div class="item" href="#">
-        <div>跨店消费额<span class="item-note">2299</span></div>
-        <div>已卖卡总额<span class="item-note">2299</span></div>
-        <div>已消费总额<span class="item-note">2299</span></div>
-        <div>消费金额<span class="item-note">2299</span></div>
-        <div>剩余额度<span class="item-note">2299</span></div>
-        <div>收益总额<span class="item-note">2299</span></div>
+        <div ng-show="isGroupOwner=='Y'">
+          <div>跨店消费额<span class="item-note" ng-bind="crossStoreAmount"></span></div>
+          <div>已卖卡总额<span class="item-note" ng-bind="presellAmount"></span></div>
+          <div>已消费总额<span class="item-note" ng-bind="totalConsumptionAmount"></span></div>
+          <div>剩余额度<span class="item-note" ng-bind="balance"></span></div>
+          <div>收益总额<span class="item-note" ng-bind="income"></span></div>
+        </div>
+        <div>清算金额<span class="item-note" ng-bind="settlementAmount"></span></div>
       </div>
 
       <div class="item item-divider item-icon-right"><strong>圈友</strong></div>
-      <a class="item item-avatar item-icon-right" ui-sref="tab.circleInfo">
-        <img src="img/ionics.png">
-        <h2>老王抠脚盖饭店</h2>
+      <a class="item item-avatar item-icon-right" ui-sref="tab.circleInfo({storeId:{{partner.storeId}},isGroupOwner:isGroupOwner})" ng-repeat="partner in partners">
+        <img src="img/zhiFuBao.png">
+        <h2 ng-bind="partner.storeName"></h2>
         <p>。。。。。</p>
         <i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>
       </a>
-     <a class="item item-avatar item-icon-right" ui-sref="tab.circleInfo">
-        <img src="img/ionics.png">
-        <h2>老沈抠鼻包子铺</h2>
-        <p>。。。。。</p>
-        <i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>
-      </a>
-     <a class="item item-avatar item-icon-right" ui-sref="tab.circleInfo">
-        <img src="img/ionics.png">
-        <h2>老金理发店</h2>
-        <p>。。。。。</p>
-        <i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>
-     </a>
-
     </div>
+
+    <div ng-hide="invitations == undefined">
+      <div class="item item-divider item-icon-right"><strong>邀请消息</strong></div>
+      <ion-list>
+        <ion-item ng-repeat="invitation in invitations" can-swipe="true">
+          <h2>{{$index+1}}、 {{invitation.fromName}} 邀请您加入圈子</h2>
+          <ion-option-button class="button-balanced" ng-click="bizAcceptGroupInvitation('Y',invitation.partyInvitationId)">接受</ion-option-button>
+          <ion-option-button class="button-assertive" ng-click="bizAcceptGroupInvitation('N',invitation.partyInvitationId)">拒绝</ion-option-button>
+        </ion-item>
+      </ion-list>
+    </div>
+
   </ion-content>
-  <!--<ion-footer-bar class="has-subfooter stable-bg" >-->
-    <!--<button class="button button-positive" style="width: 49%">-->
-      <!--邀请圈友-->
-    <!--</button>-->
-    <!--<button class="button button-positive" style="width: 49%">-->
-      <!--解散圈子-->
-    <!--</button>-->
-  <!--</ion-footer-bar>-->
-  <ion-footer-bar class="has-subfooter stable-bg" >
-    <a class="button button-positive" style="width: 45%"  ui-sref="tab.settleLayout">
-      结算
-    </a>
-    <button class="button button-positive" style="width: 45%">
-      退出圈子
-    </button>
+  <ion-footer-bar class="has-subfooter stable-bg" ng-show="isGroupOwner=='Y'">
+      <a class="button button-positive" style="width: 49%;" ui-sref="tab.circleInvitation">
+        邀请圈友
+      </a>
+      <a class="button button-positive" style="width: 49%" ng-click="bizDissolveGroup()">
+        解散圈子
+      </a>
+  </ion-footer-bar>
+
+  <ion-footer-bar class="has-subfooter stable-bg" ng-show="isGroupOwner=='N'">
+      <a class="button button-positive" style="width: 49%;" ui-sref="tab.circleInvitation">
+        结算
+      </a>
+      <a class="button button-positive" style="width: 49%" ng-click="bizDissolveGroup()">
+        退出圈子
+      </a>
   </ion-footer-bar>
 
 </ion-view>
