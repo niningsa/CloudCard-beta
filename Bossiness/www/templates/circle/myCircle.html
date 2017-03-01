@@ -18,9 +18,9 @@
 
     <div class="list" ng-show="isJoinGroup == 'Y'">
       <a class="item item-avatar">
-        <img src="img/zhiFuBao.png">
+        <img src="{{storeImg}}">
         <h2 ng-bind="groupName"></h2>
-        <p>。。。。。</p>
+        <p ng-bind="isGroupOwner=='Y'?'角色：圈主':'角色：圈友'"></p>
       </a>
       <div class="item item-divider" style="min-height:11px"></div>
       <!--<div class="item" href="#">-->
@@ -36,26 +36,27 @@
         </div>
         <div>清算金额<span class="item-note" ng-bind="settlementAmount"></span></div>
       </div>
-
       <div class="item item-divider item-icon-right"><strong>圈友</strong></div>
       <a class="item item-avatar item-icon-right" ui-sref="tab.circleInfo({storeId:{{partner.storeId}},isGroupOwner:isGroupOwner})" ng-repeat="partner in partners">
         <img src="img/zhiFuBao.png">
         <h2 ng-bind="partner.storeName"></h2>
-        <p>。。。。。</p>
+        <p ng-bind="partner.isGroupOwner=='Y'?'角色：圈主':'角色：圈友'"></p>
         <i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>
       </a>
+
     </div>
 
-    <div ng-hide="invitations == undefined">
-      <div class="item item-divider item-icon-right"><strong>邀请消息</strong></div>
-      <ion-list>
-        <ion-item ng-repeat="invitation in invitations" can-swipe="true">
-          <h2>{{$index+1}}、 {{invitation.fromName}} 邀请您加入圈子</h2>
-          <ion-option-button class="button-balanced" ng-click="bizAcceptGroupInvitation('Y',invitation.partyInvitationId)">接受</ion-option-button>
-          <ion-option-button class="button-assertive" ng-click="bizAcceptGroupInvitation('N',invitation.partyInvitationId)">拒绝</ion-option-button>
-        </ion-item>
-      </ion-list>
-    </div>
+      <div ng-hide="invitations == undefined">
+        <div class="item item-divider item-icon-right"><strong>邀请消息</strong></div>
+        <ion-list>
+          <ion-item ng-repeat="invitation in invitations" can-swipe="true" class="item-icon-right">
+            <h2>{{$index+1}}、 {{invitation.fromName}} 邀请您加入圈子</h2>
+            <i class="icon ion-arrow-move" style="color:darkgrey"></i>
+            <ion-option-button class="button-balanced" ng-click="bizAcceptGroupInvitation('Y',invitation.partyInvitationId)">接受</ion-option-button>
+            <ion-option-button class="button-assertive" ng-click="bizAcceptGroupInvitation('N',invitation.partyInvitationId)">拒绝</ion-option-button>
+          </ion-item>
+        </ion-list>
+      </div>
 
   </ion-content>
   <ion-footer-bar class="has-subfooter stable-bg" ng-show="isGroupOwner=='Y'">
@@ -67,13 +68,13 @@
       </a>
   </ion-footer-bar>
 
-  <ion-footer-bar class="has-subfooter stable-bg" ng-show="isGroupOwner=='N'">
-      <a class="button button-positive" style="width: 49%;" ui-sref="tab.circleInvitation">
+  <ion-footer-bar class="has-subfooter stable-bg" ng-show="isGroupOwner == 'N' && isJoinGroup == 'Y'">
+      <a class="button button-positive" style="width: 100%;" ui-sref="tab.settleLayout">
         结算
       </a>
-      <a class="button button-positive" style="width: 49%" ng-click="bizDissolveGroup()">
+      <!--<a class="button button-positive" style="width: 49%" ng-click="bizDissolveGroup()">
         退出圈子
-      </a>
+      </a>-->
   </ion-footer-bar>
 
 </ion-view>

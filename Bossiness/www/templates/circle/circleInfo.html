@@ -23,11 +23,20 @@
         </div>
       </div>
 
-      <div class="item">
-        <button class="button button-positive" style="width: 49%" ng-show="isGroupOwner=='Y'" ng-click="bizFreezeGroupPartner(storeId)">
-          冻结
+      <!--
+       isGroupOwner         当前登录人是不是圈主
+       isGroupOwners        点击查看的这个圈友是不是圈主
+       organizationPartyId  当前登录商家ID
+       storeId              点击查看的这个圈友id
+
+      1、圈主所有人的圈子都能退出、和冻结（自己的不行）
+      2、圈友没有冻结权限，退只能退自己的。
+      -->
+      <div class="item" ng-show="!(isGroupOwner == 'Y' && organizationPartyId == storeId)">
+        <button class="button button-positive" ng-show="isGroupOwner == 'Y'" style="width: 49%" ng-show="isGroupOwner=='Y'" ng-click="bizFreezeGroupPartner(storeId)">
+          冻结/解冻
         </button>
-        <button ng-class="isGroupOwner=='Y'?'button button-positive':'button button-positive button-block'" ng-style="myObj"  ng-click="bizExitGroup(storeId, isGroupOwner)">
+        <button ng-show="isGroupOwner == 'Y' || organizationPartyId == storeId" ng-class="isGroupOwner=='Y'?'button button-positive':'button button-positive button-block'" ng-style="myObj"  ng-click="bizExitGroup()">
           退出圈子
         </button>
       </div>
@@ -35,7 +44,7 @@
 
 
   </ion-content>
-  <ion-footer-bar class="has-subfooter stable-bg" ng-show="isGroupOwner=='Y'">
+  <ion-footer-bar class="has-subfooter stable-bg" ng-show="isGroupOwner != isGroupOwners && isGroupOwner=='Y'">
     <span style="padding: 10px">
       <span style="font-size: 20px;">清算金额:</span>
       <strong style="color: red;font-size: 20px;padding: 10px"> ￥<span ng-bind="settlementAmount"></span></strong>

@@ -18,7 +18,7 @@ angular.module('circle.services', [])
               "organizationPartyId": organizationPartyId
             },
             success: function (result) {
-              // console.log(result);
+              console.log(result);
               if (result.code == '200') {
                 deferred.resolve(result);
               } else {
@@ -355,7 +355,7 @@ angular.module('circle.services', [])
       },
 
       // 圈友确认结算
-      bizSettlementConfirm: function (storeId, settlementId, isConfirm) {
+      bizSettlementConfirm: function (settlementId, isConfirm) {
         var deferred = $q.defer();
         var promise = deferred.promise;
         $.ajax(
@@ -365,7 +365,6 @@ angular.module('circle.services', [])
             data: {
               "token": token,
               "organizationPartyId": organizationPartyId,
-              "storeId": storeId,
               "settlementId":settlementId,
               "isConfirm": isConfirm
             },

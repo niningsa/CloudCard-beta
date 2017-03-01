@@ -131,6 +131,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
 
   .state('login', {
        url: '/login',
+       params:{tel: null},
        cache: false,
        templateUrl: "templates/login.html",
        controller:'loginCtrl'

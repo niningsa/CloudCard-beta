@@ -429,7 +429,9 @@ angular.module('starter.controllers', [])
    * Author LN
    * Date 2016-11-15
    * */
-  .controller('loginCtrl', function ($scope, $interval, $rootScope, $http, $state) {
+  .controller('loginCtrl', function ($scope, $interval, $rootScope, $http, $state, $stateParams) {
+    $scope.telNum = $stateParams.tel;         // 此用于申请商家后 跳转到此 号码自动填充
+
     $scope.$on('$ionicView.beforeEnter', function () {                              // 这个玩意儿不错，刚加载执行的广播通知方法
       $scope.user = {"identifyCode": ""};                                           // 退出登录后，清空验证码
       if ($.cookie("token") != null || $.cookie("organizationPartyId") != null) {   // 登录成功了，按物理返回键，就别想重新登录
@@ -483,6 +485,7 @@ angular.module('starter.controllers', [])
         $scope.msg = "请输入您的手机号码！！"
       }
     };
+
   })
 
 
@@ -612,7 +615,7 @@ angular.module('starter.controllers', [])
           }
         }
       });
-    }
+    };
   })
 
   /*
@@ -720,7 +723,9 @@ angular.module('starter.controllers', [])
               });
               alertPopup.then(function(res) {
                 //用户点击确认登录后跳转
-                $state.go("login");
+                $state.go("login",{
+                  "tel":$scope.boss.phone
+                });
               })
 
             }).error(function(data) {

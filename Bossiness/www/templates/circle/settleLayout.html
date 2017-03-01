@@ -10,19 +10,36 @@
   </ion-nav-buttons>
 
   <ion-content>
-    <div class="card">
+
+
+    <div class="list">
+      <div ng-hide="settlementInfo.settlementId==undefined">
+      <!--<div>-->
+        <div class="item item-divider item-icon-right"><strong>结算消息</strong></div>
+        <div class="item">
+          <div>结算金额<span class="item-note" ng-bind="settlementInfo.settlementAmount"></span></div>
+          <div>实际结算金额<span class="item-note" ng-bind="settlementInfo.actualSettlementAmount"></span></div>
+        </div>
+        <div class="padding">
+          <a class="button button-positive" style="width: 49%" ng-click="bizSettlementConfirm('Y', settlementInfo.settlementId)">
+            确认
+          </a>
+          <button class="button button-assertive" style="width: 49%" ng-click="bizSettlementConfirm('N', settlementInfo.settlementId)">
+            拒绝
+          </button>
+        </div>
+      </div>
+
+      <div class="item item-divider item-icon-right"><strong>待清算</strong></div>
       <div class="item item-text-wrap">
         <span style="font-size: 20px;">待清算金额:</span>
-        <strong style="color: red;font-size: 20px;padding: 10px"> ￥<span ng-bind="settlementAmount"></span></strong>
+        <strong style="color: red;font-size: 20px;padding: 10px"> ￥<span ng-bind="settlementInfo.settlementAmount"></span></strong>
       </div>
-    </div>
-    <div class="padding">
-      <a class="button button-positive" style="width: 49%" ng-click="bizSettlementRequest()">
-        催款
-      </a>
-      <button class="button button-positive" style="width: 49%">
-        退出圈子
-      </button>
+      <div class="padding">
+        <a class="button button-positive button-block"  ng-click="bizSettlementRequest()">
+          催款
+        </a>
+      </div>
     </div>
   </ion-content>
 

@@ -7,7 +7,7 @@ angular.module('starter')
 
     .state('tab.myCircle', {
       url: '/myCircle',
-      cache: true,
+      cache: false,
       views: {
         'tab-myCircle': {
           templateUrl: 'templates/circle/myCircle.html',

@@ -4,12 +4,12 @@
         <div class="loginbox bg-white">
             <div class="loginbox-title"></div>
             <div class="cardCloud"></div>
-            <form name="loginForm" ng-submit="cloudCardLogin()" ng-controller="login">
+            <form name="loginForm" ng-submit="cloudCardLogin()" ng-init="user.tel = telNum" ng-controller="login">
               <div class="loginbox-textbox">
-                  <input type="number" class="form-control" style="border:1px solid #B2B2B2" placeholder="手机号" style="" name="tel" ng-model="user.tel" required/>
+                  <input class="form-control" style="border:1px solid #B2B2B2" placeholder="手机号" name="tel" ng-model="user.tel" required/>
               </div>
               <div class="loginbox-textbox">
-                  <input type="number" class="form-control" style="width: 40%;display: inline-block;border:1px solid #B2B2B2" placeholder="验证码" name="identifyCode" ng-model="user.identifyCode" required/>
+                  <input class="form-control" style="width: 40%;display: inline-block;border:1px solid #B2B2B2" placeholder="验证码" name="identifyCode" ng-model="user.identifyCode" required/>
                   <input type="button" class="btn btn-primary" style="float: right;" ng-value="codeBtn" ng-click="getIdentifyCode(user.tel)" ng-disabled="codeBtnDisable">
               </div>
               <div class="loginbox-submit">

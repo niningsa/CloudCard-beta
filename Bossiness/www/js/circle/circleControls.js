@@ -15,12 +15,44 @@ angular.module('circle.controllers', [])
    * Author LN
    * Date 2017-1-12
    * */
-  .controller('settleLayoutCtrl', function ($scope, amountService) {
+  .controller('settleLayoutCtrl', function ($scope, $ionicPopup, $state, amountService) {
+      var organizationPartyId = $.cookie("organizationPartyId"); // 当前登录商家ID
+
+      // 获取待确认结算信息
+      amountService.bizGetUnconfirmedSettlementInfo(organizationPartyId).success(function (data) {
+        $scope.settlementInfo = data;     // 待确认结算信息
+
+        // alert($scope.settlementInfo.settlementId+" "+$scope.settlementInfo.settlementAmount);
+      });
+
+      // 圈友确认结算
+      $scope.bizSettlementConfirm = function (confirm, settlementId) {
+        amountService.bizSettlementConfirm(settlementId, confirm).success(function (data) {
+          var alertPopup = $ionicPopup.alert({
+            title: '成功',
+            template: data.msg
+          });
+          alertPopup.then(function(res) {
+            $state.go("tab.myCircle");
+          });
+        }).error(function (data) {
+          var alertPopup = $ionicPopup.alert({
+            title: '失败',
+            template: data.msg
+          });
+          alertPopup.then(function(res) {
+            $state.go("tab.settleLayout");
+          });
+        });
+      };
+
+
+      // 催款
       $scope.bizSettlementRequest = function () {
         amountService.bizSettlementRequest().success(function (data) {
           var alertPopup = $ionicPopup.alert({
             title: '成功',
-            template: data.msg
+            template: "催款成功！"
           });
           alertPopup.then(function(res) {
             $state.go("tab.myCircle");
@@ -32,33 +64,34 @@ angular.module('circle.controllers', [])
   /*
    * Desc 结算模态框
    * Author LN
-   * Date 2017-1-12
+   * Date 2017-2-28
    * */
   .controller('settleModalCtrl', function ($scope, $rootScope, myCircleServece, amountService) {
     $scope.closeModal = function () {
       $scope.modal.hide();
     };
 
-
+    // 结算
     $scope.bizDoSettlement = function (actualSettlementAmount) {
-      myCircleServece.bizGetStoreInfo($scope.storeId).success(function (data) {
-        alert(actualSettlementAmount+" "+data.storeId+" "+data.settlementAmount);
-
-        amountService.bizDoSettlement(data.storeId, data.settlementAmount, actualSettlementAmount).success(function (data) {
-
-        });
+      // alert($scope.storeId+" "+$scope.settlementAmount+" "+actualSettlementAmount);
+      amountService.bizDoSettlement($scope.storeId, $scope.settlementAmount, actualSettlementAmount).success(function (data) {
+        $scope.modal.hide();
       });
     };
+
   })
 
   /*
    * Desc 圈友详情
    * Author LN
-   * Date 2017-1-12
+   * Date 2017-2-26
    * */
   .controller('circleInfoCtrl', function ($scope, $state, $ionicModal, $stateParams, $rootScope, $ionicPopup, myCircleServece) {
-    $scope.storeId = $stateParams.storeId;                    // 圈友ID
-    $scope.isGroupOwner = $stateParams.isGroupOwner;       // 是否是圈主
+    $scope.storeId = $stateParams.storeId;                        // 圈友ID
+    $scope.isGroupOwner = $stateParams.isGroupOwner;              // 当前登录人是否是圈主
+    $scope.organizationPartyId = $.cookie("organizationPartyId"); // 当前登录商家ID
+
+    // alert($.cookie("organizationPartyId")+" "+$scope.storeId+" "+($scope.isGroupOwner == 'Y' && $scope.organizationPartyId == $scope.storeId));
 
     if($scope.isGroupOwner == 'Y'){
       $scope.myObj = {"width" : "49%"};
@@ -72,6 +105,8 @@ angular.module('circle.controllers', [])
       $scope.storeAddress = data.storeAddress;            // 店铺地址
       $scope.storeTeleNumber = data.storeTeleNumber;			// 店铺联系电话（店主电话）
       $scope.settlementAmount = data.settlementAmount;		// 待结算金额
+      $scope.isFrozen = data.isFrozen;		                // 冻结状态
+      $scope.isGroupOwners = data.isGroupOwner;		        // 此圈友是否是圈主
     }).error(function (data) {
       var alertPopup = $ionicPopup.alert({
         title: '失败',
@@ -83,26 +118,29 @@ angular.module('circle.controllers', [])
     });
 
     // 退出圈子
-    $scope.bizExitGroup = function (storeId, isGroupOwner) {
-      if(isGroupOwner == 'Y'){ // 圈主踢出圈友时， 必须先对该圈友进行冻结, 然后结清未结算金额
-        $scope.bizFreezeGroupPartner(storeId);
-
-      }else{                   // 圈友主动发起退出操作的场景， 若有未结算金额时，也会给出错误提示。
-        myCircleServece.bizExitGroup(storeId).success(function (data) {
-          var alertPopup = $ionicPopup.alert({
-            title: '成功',
-            template: data.msg
-          });
-          alertPopup.then(function(res) {
-            $state.go("tab.myCircle");
-          });
-        }).error(function (data) {
-          var alertPopup = $ionicPopup.alert({
-            title: '失败',
-            template: data.msg
-          });
-        });
+    $scope.bizExitGroup = function () {
+      // 圈主踢出圈友时， 必须先对该圈友进行冻结, 然后结清未结算金额
+      // 圈友主动发起退出操作的场景， 若有未结算金额时，也会给出错误提示。
+      if($scope.isGroupOwner == 'Y'){
+        $scope.bizFreezeGroupPartner($scope.storeId);               // 冻结
+        myCircleServece.bizGetStoreInfo($scope.storeId);            // 结算
       }
+
+      myCircleServece.bizExitGroup($scope.storeId).success(function (data) {
+        var alertPopup = $ionicPopup.alert({
+          title: '成功',
+          template: "退出成功！"
+        });
+        alertPopup.then(function(res) {
+          $state.go("tab.myCircle");
+        });
+      }).error(function (data) {
+        var alertPopup = $ionicPopup.alert({
+          title: '失败',
+          template: data.msg
+        });
+      });
+
     };
 
     // 圈主冻结/解冻 圈友(冻结后 不允许再接收圈主的卡消费 )
@@ -110,7 +148,7 @@ angular.module('circle.controllers', [])
       myCircleServece.bizFreezeGroupPartner(storeId).success(function (data) {
         var alertPopup = $ionicPopup.alert({
           title: '成功',
-          template: data.msg
+          template: "操作成功！"
         });
         alertPopup.then(function(res) {
           $state.go("tab.myCircle");
@@ -137,16 +175,26 @@ angular.module('circle.controllers', [])
     $scope.closeModal = function () {
       $scope.modal.hide();
     };
+
+    // 模态框隐藏时，重新查看待清算金额
+    $scope.$on("modal.hidden", function() {
+      myCircleServece.bizGetStoreInfo($scope.storeId).success(function (data) {
+        $scope.settlementAmount = data.settlementAmount;
+      });
+    });
+
   })
 
 
   /*
-   * Desc 圈友消费详情
+   * Desc 圈友主页面
    * Author LN
    * Date 2017-2-26
    * */
   .controller('myCircleCtrl', function ($scope, $state, $stateParams, $ionicPopup, myCircleServece) {
     $scope.circleName  =$stateParams.circleName;
+    var organizationPartyId = $.cookie("organizationPartyId");
+
     var token = $.cookie("token");
     if (token == null) {
       $state.go("login");
@@ -154,10 +202,8 @@ angular.module('circle.controllers', [])
 
     // 我的圈子info
     myCircleServece.bizMyGroup().success(function (data) {
-      console.log(data);
       $scope.isJoinGroup	= data.isJoinGroup;		         	              // 是否已加入圈子
       $scope.isGroupOwner = data.isGroupOwner;	         	              // 是否为圈主
-      $scope.groupName = data.groupName;		                            // 圈主名
 
       $scope.crossStoreAmount = data.crossStoreAmount;		              // 跨店消费额，圈主卡 到 圈友店 消费总额，
       $scope.presellAmount = data.presellAmount;		                    // 已卖卡总额，圈主卖出的卡总金额
@@ -169,8 +215,11 @@ angular.module('circle.controllers', [])
 
     });
 
-    myCircleServece.bizGetStoreInfo($.cookie("organizationPartyId")).success(function (data) {
-      $scope.settlementAmount = data.settlementAmount;		// 待结算金额
+    // 页面数据展示
+    myCircleServece.bizGetStoreInfo(organizationPartyId).success(function (data) {
+      $scope.settlementAmount = data.settlementAmount;
+      $scope.storeImg = data.storeImg;
+      $scope.groupName = data.storeName;
     });
 
     // 圈主解散圈子
@@ -178,10 +227,10 @@ angular.module('circle.controllers', [])
       myCircleServece.bizDissolveGroup().success(function (data) {
         var alertPopup = $ionicPopup.alert({
           title: '成功',
-          template: data.msg
+          template: "解散成功！"
         });
         alertPopup.then(function(res) {
-          $state.go("tab.myCircle");
+          $state.go("tab.myCircle", {}, {reload: true});
         });
       }).error(function (data) {
         var alertPopup = $ionicPopup.alert({
@@ -199,10 +248,10 @@ angular.module('circle.controllers', [])
       myCircleServece.bizAcceptGroupInvitation(invitation, partyInvitationId).success(function (data) {
         var alertPopup = $ionicPopup.alert({
           title: '成功',
-          template: data.msg
+          template: "操作成功！"
         });
         alertPopup.then(function(res) {
-          $state.go("tab.myCircle");
+          $state.go("tab.myCircle", {}, {reload: true});      // 原页面跳转，需要刷新
         });
       }).error(function (data) {
         var alertPopup = $ionicPopup.alert({
