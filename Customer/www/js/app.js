@@ -2,9 +2,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 .run(function($ionicPlatform,$rootScope,$state) {
   //当设备运行的时候就执行
-  $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
+  //$rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="http://192.168.3.13:8080/cloudcard/control/"; //接口前一截一样的
-  // $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
+   $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="https://kayunka.c1337y.com/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/"; //接口前一截一样的
 
@@ -253,12 +253,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       }
     })
     //向商家买卡
-    .state('tab.addCard', {
-      url: '/addCard/:storeId/:qrCode/:chooseCardStatus',
+    .state('tab.addCircleCard', {
+      url: '/addCircleCard/:storeId/:qrCode/',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-addCard.html',
-          controller: 'addCardCtrl'
+          controller: 'addCircleCardCtrl'
+        }
+      }
+    })
+    //扫一扫后向商家买卡
+    .state('tab.scanAddCard', {
+      url: '/scanAddCard/:storeId/:qrCode',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-scanAddCard.html',
+          controller: 'scanAddCardCtrl'
         }
       }
     })

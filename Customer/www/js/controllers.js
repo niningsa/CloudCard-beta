@@ -62,7 +62,7 @@ angular.module('starter.controllers', [])
   .controller('cirCleCardRechargeCtrl', function($scope,$state, $rootScope,$stateParams) {
     $scope.storeId=$stateParams.storeId;
     $scope.cardId=$stateParams.cardId;
-    //支付宝和微信支付
+    //支付宝和微信充值
     //单选按钮初始化
     $scope.ret = {choice: '100'};
     $scope.alipay=function (choice) {
@@ -156,21 +156,19 @@ angular.module('starter.controllers', [])
       });
     }
 
-    //买卡，开卡
-    $scope.addCard=function(){
-      $state.go("tab.addCard",{
+    //买卡，开卡(圈子的卡)
+    $scope.addCircleCard=function(){
+      $state.go("tab.addCircleCard",{
         "storeId":$scope.storeId,
         "qrCode":$scope.qrCode,
-        "chooseCardStatus":'N'
       });
     }
   })
 
   //向商家买卡的业务处理
-  .controller('addCardCtrl', function($scope,$state, $rootScope,$cordovaBarcodeScanner, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
+  .controller('addCircleCardCtrl', function($scope,$state, $rootScope,$cordovaBarcodeScanner, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
     $scope.storeId = $stateParams.storeId;
     $scope.qrCode = $stateParams.qrCode;
-    $scope.chooseCardStatus = $stateParams.chooseCardStatus;
     var token=$.cookie("token");
     //这里是判断从扫一扫页面进入的还是从圈主圈友的页面进入的
     $scope.chooseCard=function() {
@@ -510,15 +508,108 @@ angular.module('starter.controllers', [])
     });
   }
   //JSON.parse($state.params.cloudCardList) 将对象转换为数组
-  //这是买卡的操作
-  $scope.addCard=function(qrCode){
-    $state.go("tab.addCard",{
+  //这是扫一扫买卡的操作
+  $scope.scanAddCard=function(qrCode){
+    $state.go("tab.scanAddCard",{
       "storeId":$scope.storeId,
       "qrCode":$scope.qrCode,
-      "chooseCardStatus":'Y'
     });
   }
   })
+  //扫一扫向商家购买圈子的卡的逻辑判断
+.controller('scanAddCardCtrl', function($scope,$stateParams,$state,$rootScope) {
+  $scope.storeId = $stateParams.storeId;
+  $scope.qrCode = $stateParams.qrCode;
+  var token = $.cookie("token");
+  $scope.chooseCard=function(){
+    $.ajax({
+      url: $rootScope.interfaceUrl+"userScanCodeGetCardAndStoreInfo",
+      type:"POST",
+      data: {
+        "token":token,
+        "qrCode":$scope.qrCode
+      },
+      success: function(result){
+        console.log(result);
+        if(result.code=='200'){
+          $scope.$apply(function () {
+            $scope.msg="";
+          });
+          //$scope.groupName=result.groupName;
+          //圈友
+          //$scope.cloudList=result.cloudCardList
+          $state.go("tab.chooseCard",
+            {
+              "storeId": result.storeId,
+              "storeName":result.storeName,
+              "qrCode":$scope.qrCode,
+              "cloudCardList":JSON.stringify(result.cloudCardList)
+            });
+        }else{
+          $scope.$apply(function () {
+            $scope.msg=result.msg;
+          });
+        }
+      }
+    });
+  }
+  //这里是通过扫一扫来买圈子的卡
+  $scope.ret = {choice: '100'};
+  $scope.alipay=function (choice,storeId) {
+    //alert(storeId);
+    $.ajax({
+      url: $rootScope.interfaceUrl+"purchaseCard", // wxPrepayOrder
+      // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+      type:"POST",
+      data: {
+        "paymentType": "aliPay",
+        "storeId": storeId,
+        "paymentService": "buyCard",
+        "subject": "库胖-充值",
+        "totalFee": "0.01",
+        "body": "充值"
+      },
+      success: function(result){
+        console.log(result.payInfo);
+        //第二步：调用支付插件
+        cordova.plugins.AliPay.pay(result.payInfo, function success(e){
+          // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+        }, function error(e){
+          // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+        });
+      }
+    });
+  };
+
+  $scope.weiXin=function (choice,storeId) {
+    //alert(storeId);
+    $.ajax({
+      url: $rootScope.interfaceUrl+"purchaseCard", // wxPrepayOrder
+      // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+      type:"POST",
+      data: {
+        "paymentType": "wxPay",
+        "storeId": storeId,
+        "paymentService": "buyCard",
+        "totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
+        "body": "库胖-充值",           // 标题不能使用中文
+        "tradeType":"APP"
+      },
+      success: function(result){
+        console.log(result);
+        //第二步：调用支付插件
+        wxpay.payment(result, function success (e) {
+          alert("成功了："+e);
+          //$state.go("myCircleCard",{"storeId":storeId});
+        }, function error (e) {
+          alert("失败了："+e);
+        });
+      }
+    });
+
+  };
+
+})
   //其他授权的方式
 .controller('DashCtrl', function($scope,$stateParams) {
     $scope.teleNumber = $stateParams.teleNumber;
