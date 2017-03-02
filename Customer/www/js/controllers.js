@@ -227,6 +227,7 @@ angular.module('starter.controllers', [])
           //第二步：调用支付插件
           cordova.plugins.AliPay.pay(result.payInfo, function success(e){
             // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            $state.go("myCircleCard",{"storeId":storeId});
           }, function error(e){
             // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
           });
@@ -253,6 +254,7 @@ angular.module('starter.controllers', [])
           //第二步：调用支付插件
           wxpay.payment(result, function success (e) {
             alert("成功了："+e);
+            $state.go("myCircleCard",{"storeId":storeId});
           }, function error (e) {
             alert("失败了："+e);
           });
