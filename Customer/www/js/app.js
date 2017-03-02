@@ -238,6 +238,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
+    //圈子卡的充值
+    .state('tab.cirCleCardRecharge', {
+      url: '/cirCleCardRecharge/:storeId/:cardId',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-cirCleCardRecharge.html',
+          controller: 'cirCleCardRechargeCtrl'
+
+        }
+      }
+    })
     //向商家买卡
     .state('tab.addCard', {
       url: '/addCard/:storeId/:qrCode/:chooseCardStatus',

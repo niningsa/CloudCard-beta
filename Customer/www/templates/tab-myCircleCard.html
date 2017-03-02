@@ -8,7 +8,7 @@
       <div class="list card" ng-repeat="chat in cloudList" style="border: 0px" class="char_style" >
         <div id="zd">   <h2>{{chat.cardName}}： <strong>{{chat.cardBalance}} 元{{storeName}}</strong> </h2> </div>
         <!--<a class="item" href="#/tab/payment/{{chat.cardCode}}/{{chat.storeName}}/{{chat.storeId}}/{{chat.cardId}}" style="border: 0px">-->
-        <a class="item" ng-click="chongZhi()" style="border: 0px">
+        <a class="item" ng-click="chongZhi('{{storeId}}','{{chat.cardId}}')" style="border: 0px">
           <div class="item item-image">
             <img src="{{chat.cardImg}}">
           </div>

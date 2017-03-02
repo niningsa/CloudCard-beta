@@ -58,6 +58,63 @@ angular.module('starter.controllers', [])
 
   })
 
+  //圈子卡的充值
+  .controller('cirCleCardRechargeCtrl', function($scope,$state, $rootScope,$stateParams) {
+    $scope.storeId=$stateParams.storeId;
+    $scope.cardId=$stateParams.cardId;
+    //支付宝和微信支付
+    //单选按钮初始化
+    $scope.ret = {choice: '100'};
+    $scope.alipay=function (choice) {
+      $.ajax({
+        url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
+        // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+        type:"POST",
+        data: {
+          "paymentType": "aliPay",
+          "cardId": "213213123",
+          "subject": "库胖-充值",
+          "totalFee": "0.01",
+          "body": "充值"
+        },
+        success: function(result){
+          console.log(result.payInfo);
+          //第二步：调用支付插件
+          cordova.plugins.AliPay.pay(result.payInfo, function success(e){
+            // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+          }, function error(e){
+            // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+          });
+        }
+      });
+    };
+
+    $scope.weiXin=function (choice) {
+      $.ajax({
+        url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
+        // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+        type:"POST",
+        data: {
+          "paymentType": "wxPay",
+          "cardId": "213213123",
+          "totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
+          "body": "库胖-充值",           // 标题不能使用中文
+          "tradeType":"APP"
+        },
+        success: function(result){
+          console.log(result);
+          //第二步：调用支付插件
+          wxpay.payment(result, function success (e) {
+            // alert("成功了："+e);
+          }, function error (e) {
+            // alert("失败了："+e);
+          });
+        }
+      });
+
+    };
+
+  })
 
   //我的圈子的卡的展示页面
   .controller('myCircleCardCtrl', function($scope,$state, $rootScope,$cordovaBarcodeScanner, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
@@ -85,15 +142,11 @@ angular.module('starter.controllers', [])
           }
         }
       });
-    $scope.chongZhi=function(){
+    $scope.chongZhi=function(storeId,cardId){
       //跳转到充值的页面
-      $state.go("tab.recharge",{
-        cardId:1001,
-        cardBalance:200,
-        cardName:"南塘包子店",
-        cardCode:123456,
-        isAuthToOthers:"N",
-        isAuthToMe:"N"
+      $state.go("tab.cirCleCardRecharge",{
+        storeId:storeId,
+        cardId:cardId
       });
     }
 
@@ -147,9 +200,10 @@ angular.module('starter.controllers', [])
       });
     }
    //支付宝和微信支付
-    //单选按钮初始化
+    //这里是向圈子卡里面充钱
     $scope.ret = {choice: '100'};
-    $scope.alipay=function (choice) {
+    $scope.alipay=function (choice,storeId) {
+      alert(storeId);
       $.ajax({
         url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
         // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
@@ -173,7 +227,8 @@ angular.module('starter.controllers', [])
       });
     };
 
-    $scope.weiXin=function (choice) {
+    $scope.weiXin=function (choice,storeId) {
+      alert(storeId);
       $.ajax({
         url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
         // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
