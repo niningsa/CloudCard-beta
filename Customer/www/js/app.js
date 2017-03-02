@@ -2,9 +2,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 .run(function($ionicPlatform,$rootScope,$state) {
   //当设备运行的时候就执行
-  //$rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
+  $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="http://192.168.3.13:8080/cloudcard/control/"; //接口前一截一样的
-   $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
+  // $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="https://kayunka.c1337y.com/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/"; //接口前一截一样的
 
@@ -234,6 +234,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         'tab-circleMap': {
           templateUrl: 'templates/tab-myCircleCard.html',
           controller: 'myCircleCardCtrl'
+
+        }
+      }
+    })
+    //向商家买卡
+    .state('tab.addCard', {
+      url: '/addCard/:storeId/:qrCode/:chooseCardStatus',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-addCard.html',
+          controller: 'addCardCtrl'
+        }
+      }
+    })
+    //用户选择卡来消费
+    .state('tab.chooseCard', {
+      url: '/chooseCard/:storeId/:storeName/:cloudCardList/:qrCode',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-chooseCard.html',
+          controller: 'chooseCardCtrl'
         }
       }
     })
@@ -259,9 +280,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
+    .state('tab.goShop', {
+      url: '/goShop/:longitude/:latitude/:storeId',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-shopMap.html',
+          controller: 'shopMapCtrl'
+        }
+      }
+    })
     //付款码的展示页面
     .state('tab.paymentCode', {
-      url: '/paymentCode/:telNumber',
+      url: '/paymentCode/:qrCode',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-paymentCode.html',
@@ -434,7 +464,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     //扫一扫支付的页面
     .state('tab.payment', {
       //url: '/payment/:qrCode/:storeName/:storeId/:storeImgUrl/:cardId',
-      url: '/payment/:qrCode/:storeName/:storeId/:cardId',//这是写死的暂时先拿掉，存在转义字符
+      url: '/payment/:qrCode/:storeName/:storeId/:cardId/:chooseCardStatus',//这是写死的暂时先拿掉，存在转义字符
       cache: false,
       views: {
         'tab-circleMap': {

@@ -25,14 +25,6 @@ angular.module('starter.controllers', [])
           $scope.groupName=result.groupName;
           //圈友
           $scope.storeList=result.storeList
-          //for (var o in result.storeList) {
-          //  $scope.storeName = result.storeList[o].storeName;
-          //  $scope.storeId	 = result.storeList[o].storeId;
-          //  $scope.storeImg  = result.storeList[o].storeImg ;
-          //  $scope.storeAddress= result.storeList[o].storeAddress ;
-          //  $scope.storeTeleNumber	  = result.storeList[o].storeTeleNumber	 ;
-          //  $scope.isGroupOwner  = result.storeList[o].isGroupOwner ;
-          //}
 
         }else{
           $scope.$apply(function () {
@@ -42,10 +34,33 @@ angular.module('starter.controllers', [])
       }
     });
   })
+  //如何去这家店
+  .controller('shopMapCtrl', function($scope,$state, $rootScope, $stateParams) {
+    $scope.longitude = $stateParams.longitude;
+    $scope.latitude = $stateParams.latitude;
+    $scope.storeId = $stateParams.storeId;
+    navigator.geolocation.getCurrentPosition(function (data) {
+      console.log(data);
+      var longitude= data.coords.longitude;
+      var latitude=data.coords.latitude;
+      var map = new BMap.Map("allmap");
+      //当前的位置
+      var Point = new BMap.Point($scope.longitude,$scope.latitude);
+      //店铺的位置
+      var gpsPoint = new BMap.Point(longitude,latitude);  // 创建点坐标
+      map.centerAndZoom(gpsPoint, 16);
+      var marker = new BMap.Marker(gpsPoint);
+      map.addOverlay(marker);
+      //根据经纬度来规划路线
+      var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map,panel: "r-result", autoViewport: true}});
+      walking.search(Point, gpsPoint);
+    })
+
+  })
 
 
   //我的圈子的卡的展示页面
-  .controller('myCircleCardCtrl', function($scope,$state, $rootScope, $stateParams) {
+  .controller('myCircleCardCtrl', function($scope,$state, $rootScope,$cordovaBarcodeScanner, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
     $scope.storeId = $stateParams.storeId;
     var token=$.cookie("token");
       $.ajax({
@@ -62,6 +77,7 @@ angular.module('starter.controllers', [])
               $scope.msg="";
             });
             $scope.cloudList=result.cloudCardList;
+
           }else{
             $scope.$apply(function () {
               $scope.msg=result.msg;
@@ -69,8 +85,6 @@ angular.module('starter.controllers', [])
           }
         }
       });
-      //$state.go("tab.myCircleCard");
-
     $scope.chongZhi=function(){
       //跳转到充值的页面
       $state.go("tab.recharge",{
@@ -82,6 +96,108 @@ angular.module('starter.controllers', [])
         isAuthToMe:"N"
       });
     }
+
+    //买卡，开卡
+    $scope.addCard=function(){
+      $state.go("tab.addCard",{
+        "storeId":$scope.storeId,
+        "qrCode":$scope.qrCode,
+        "chooseCardStatus":'N'
+      });
+    }
+  })
+
+  //向商家买卡的业务处理
+  .controller('addCardCtrl', function($scope,$state, $rootScope,$cordovaBarcodeScanner, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
+    $scope.storeId = $stateParams.storeId;
+    $scope.qrCode = $stateParams.qrCode;
+    $scope.chooseCardStatus = $stateParams.chooseCardStatus;
+    var token=$.cookie("token");
+    //这里是判断从扫一扫页面进入的还是从圈主圈友的页面进入的
+    $scope.chooseCard=function() {
+      $.ajax({
+        url: $rootScope.interfaceUrl + "userScanCodeGetCardAndStoreInfo",
+        type: "POST",
+        data: {
+          "token": token,
+          "qrCode": $scope.qrCode
+        },
+        success: function (result) {
+          console.log(result);
+          if (result.code == '200') {
+            $scope.$apply(function () {
+              $scope.msg = "";
+            });
+            //$scope.groupName=result.groupName;
+            //圈友
+            //$scope.cloudList=result.cloudCardList
+            $state.go("tab.chooseCard",
+              {
+                "storeId": result.storeId,
+                "storeName": result.storeName,
+                "qrCode": $scope.qrCode,
+                "cloudCardList": JSON.stringify(result.cloudCardList)
+              });
+          } else {
+            $scope.$apply(function () {
+              $scope.msg = result.msg;
+            });
+          }
+        }
+      });
+    }
+   //支付宝和微信支付
+    //单选按钮初始化
+    $scope.ret = {choice: '100'};
+    $scope.alipay=function (choice) {
+      $.ajax({
+        url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
+        // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+        type:"POST",
+        data: {
+          "paymentType": "aliPay",
+          "cardId": "213213123",
+          "subject": "库胖-充值",
+          "totalFee": "0.01",
+          "body": "充值"
+        },
+        success: function(result){
+          console.log(result.payInfo);
+          //第二步：调用支付插件
+          cordova.plugins.AliPay.pay(result.payInfo, function success(e){
+            // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+          }, function error(e){
+            // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+          });
+        }
+      });
+    };
+
+    $scope.weiXin=function (choice) {
+      $.ajax({
+        url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
+        // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+        type:"POST",
+        data: {
+          "paymentType": "wxPay",
+          "cardId": "213213123",
+          "totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
+          "body": "库胖-充值",           // 标题不能使用中文
+          "tradeType":"APP"
+        },
+        success: function(result){
+          console.log(result);
+          //第二步：调用支付插件
+          wxpay.payment(result, function success (e) {
+            // alert("成功了："+e);
+          }, function error (e) {
+            // alert("失败了："+e);
+          });
+        }
+      });
+
+    };
+
   })
 
   //店铺的展示页面
@@ -105,6 +221,8 @@ angular.module('starter.controllers', [])
           $scope.storeName=result.storeName;
           $scope.storeAddress=result.storeAddress;
           $scope.storeImg =result.storeImg ;
+          $scope.latitude =result.latitude ;
+          $scope.longitude =result.longitude ;
         }else{
           $scope.$apply(function () {
             $scope.msg=result.msg;
@@ -115,8 +233,9 @@ angular.module('starter.controllers', [])
   })
   //付款码的展示页面
   .controller('paymentCodeCtrl', function($scope,$state, $rootScope,$stateParams) {
-    $scope.telNumber=$stateParams.telNumber;
-    jQuery('#pcode').qrcode($stateParams.telNumber);
+    $scope.qrCode=$stateParams.qrCode;
+
+    jQuery('#pcode').qrcode($stateParams.qrCode);
   })
   //根据Id查询卡
   .controller('mycardCtrl', function($scope,mycards,$state, $rootScope,$stateParams) {
@@ -132,6 +251,7 @@ angular.module('starter.controllers', [])
   //我的圈子的定位显示
   .controller('circleMapCtrl', function($scope,$state, $rootScope, $cordovaBarcodeScanner, $rootScope, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
     //用于显示圈子或者店铺的详细的信息
+    var token=$.cookie("token");
     $scope.storeInfo = false;
     $scope.telNumber = 18772115070;
     //隐藏footer
@@ -143,8 +263,39 @@ angular.module('starter.controllers', [])
       //});
     }
 
-    //扫一扫的功能
+
+    //付款码
+    $scope.paymentCode=function(){
+      $.ajax({
+        url: $rootScope.interfaceUrl+"getPaymentQRCode",
+        type:"POST",
+        data: {
+          "token":token
+        },
+        success: function(result){
+          console.log(result);
+          if(result.code=='200'){
+            $scope.$apply(function () {
+              $scope.msg="";
+            });
+
+            $state.go("tab.paymentCode",
+                      {qrCode:result.qrCode});
+          }else{
+
+
+            $scope.$apply(function () {
+              $scope.msg=result.msg;
+            });
+          }
+        }
+      });
+
+    }
+    //扫一扫
     $scope.scanBarcode=function(){
+      //var qrCode="ccs-ec9cd1cf-200f-4d4c-8946-f3eaaf2885d4";
+      //真正的代码
       $ionicLoading.show({
         template: "正在调摄像头,请稍后...."
       });
@@ -152,24 +303,44 @@ angular.module('starter.controllers', [])
         $cordovaBarcodeScanner.scan().then(function (imageData) {
           $ionicLoading.hide();
           $scope.msg = "";
-          var storeId = imageData.text;
+          var qrCode = imageData.text;
           // 扫到的数据
-          if (storeId != '') {
+          if (qrCode != '') {
             //通过storeid来查询该圈子的卡，如果有卡就选卡来消费，如果没有卡就添加卡
-            $state.go("tab.myCircleCard",{"storeId":storeId});
+            $.ajax({
+              url: $rootScope.interfaceUrl+"userScanCodeGetCardAndStoreInfo",
+              type:"POST",
+              data: {
+                "token":token,
+                "qrCode":qrCode
+              },
+              success: function(result){
+                console.log(result);
+                if(result.code=='200'){
+                  $scope.$apply(function () {
+                    $scope.msg="";
+                  });
+                  //跳到选卡的页面
+                  $state.go("tab.chooseCard",
+                    {
+                      "storeId": result.storeId,
+                      "storeName":result.storeName,
+                      "qrCode":qrCode,
+                      "cloudCardList":JSON.stringify(result.cloudCardList)
+                    });
+                }else{
+                  $scope.$apply(function () {
+                    $scope.msg=result.msg;
+                  });
+                }
+              }
+            });
           }
         }, function (error) {
-          console.log("An error happened -> " + error);
         });
 
       },1000);
     }
-    //付款码
-    $scope.paymentCode=function(){
-      $state.go("tab.paymentCode",
-                {telNumber:$scope.telNumber});
-    }
-
     //百度定位
     navigator.geolocation.getCurrentPosition(function (data) {
       //var point = (121.419634, 31.207267);
@@ -177,8 +348,6 @@ angular.module('starter.controllers', [])
       var map = new BMap.Map("allmap");
       var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
       var token=$.cookie("token");
-      //var walking = new BMap.WalkingRoute(map, {renderOptions: {map: map, panel: "r-result", autoViewport: true}});
-      //walking.search("虹桥银城大厦", "龙峰大厦");
       $.ajax({
         url: $rootScope.interfaceUrl + "userStoreListLBS",
         type: "POST",
@@ -227,16 +396,6 @@ angular.module('starter.controllers', [])
               (function(p, m,storeName,isGroupOwner,distance,storeId,address,telNum){
 
                     m.addEventListener("click", function () {
-                      //geoc.getLocation(p, function(rs){
-                      //  console.log(rs);
-                      //  var pois = rs.surroundingPois;
-                      //  for(var i = 0; i < pois.length; i++) {
-                      //    //var addComp = poi.addressComponents;
-                      //    var titles = pois[i].title;
-                      //    //alert(titles);
-                      //  }
-                      //  //alert(addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
-                      //});
                       $scope.$apply(function () {
                         $scope.storeInfo = true;
                         $scope.storeName = storeName;
@@ -260,100 +419,43 @@ angular.module('starter.controllers', [])
         }
       });
 
-      //如何放置自定义的marker
-      //var myIcon = new BMap.Icon("http://developer.baidu.com/map/jsdemo/img/fox.gif", new BMap.Size(300,157));
-      //var marker = new BMap.Marker(point,{icon:myIcon});                        // 创建标注
-      // 将标注添加到地图中
-      //var points = [
-      //  {longitude: 121.419634, latitude: 31.207267,storeName:"南塘包子铺",circleLeader:'Y',telphone:"18772115070",address:"上海市长宁区"},
-      //  {longitude: 121.4196591, latitude: 31.207529,storeName:"庆丰包子铺",circleLeader:'N',telphone:"18772114254",address:"上海市长宁区"},
-      //  {longitude: 121.4196796, latitude: 31.207736,storeName:"大众包子铺",circleLeader:'N',telphone:"1877211123",address:"上海市长宁区"},
-      //  {longitude: 121.4196796, latitude: 31.207634,storeName:"香飘飘",circleLeader:'Y',telphone:"18772118884",address:"上海市长宁区"}
-      //];
-
-      //循环Json数组
-      //for (var o in points) {
-      //  var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
-      //
-      //  var longitude = points[o].longitude;
-      //  var latitude = points[o].latitude;
-      //  var storeName = points[o].storeName;
-      //  var circleLeader = points[o].circleLeader;
-      //  var telphone = points[o].telphone;
-      //  var address = points[o].address;
-      //  var point = new BMap.Point(longitude, latitude);  // 创建点坐标
-      //  map.centerAndZoom(point, 19);
-      //  var marker = new BMap.Marker(point);
-      //  map.addOverlay(marker);   // 将标注添加到地图中
-      //  map.addControl(ctrl_nav);//给地图添加缩放的按钮
-      //  map.enableScrollWheelZoom(true);
-      //  var geoc = new BMap.Geocoder();
-      //
-      //  if(circleLeader=='Y'){
-      //    var myLabel = new BMap.Label(storeName, //为lable填写内容
-      //      {position: point}); //label的位置
-      //    myLabel.setStyle({ //给label设置样式，任意的CSS都是可以的
-      //      "color": "red", //颜色
-      //      "fontSize": "12px", //字号
-      //      "border": "0", //边
-      //      "height": "10px", //高度
-      //      "width": "20px" //宽
-      //    });
-      //    map.addOverlay(myLabel); //把label添加到地图上
-      //
-      //    //将圆形扩状物加载到地图上
-      //    var circle = new BMap.Circle(point, 30, {
-      //      fillColor: "#22B2E7",
-      //      strokeWeight: 1,
-      //      fillOpacity: 0.3,
-      //      strokeOpacity: 0.3,
-      //      enableEditing: true
-      //    });
-      //    map.addOverlay(circle); //增加圆
-      //
-      //  }
-      //
-      //  //点击Marker将marker的值放进去
-      //  (function(p, m,storeName,circleLeader,telphone,address){
-      //
-      //    m.addEventListener("click", function () {
-      //
-      //      //geoc.getLocation(p, function(rs){
-      //      //  console.log(rs);
-      //      //  var pois = rs.surroundingPois;
-      //      //  for(var i = 0; i < pois.length; i++) {
-      //      //    //var addComp = poi.addressComponents;
-      //      //    var titles = pois[i].title;
-      //      //    //alert(titles);
-      //      //  }
-      //      //  //alert(addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
-      //      //});
-      //      $scope.$apply(function () {
-      //        $scope.storeInfo = true;
-      //        $scope.storeName = storeName;
-      //        $scope.circleLeader = circleLeader;
-      //        $scope.telphone = telphone;
-      //        $scope.address = address;
-      //      });
-      //
-      //    })
-      //  })(point, marker,storeName
-      //    ,circleLeader,telphone,address);
-      //}
-
-
-
     }, function (error) {
       alert("网络不可用，请打开网络!!");
       console.log(error);
 
     },{timeout: 30000, enableHighAccuracy:true, maximumAge: 75000,coorType: 'bd09ll'});
 
-
+  })
+  //通过二维码查询店铺中自己可以用的卡
+.controller('chooseCardCtrl', function($scope,$stateParams,$state,$rootScope) {
+    $scope.storeId = $stateParams.storeId;
+    $scope.storeName = $stateParams.storeName;
+    $scope.qrCode = $stateParams.qrCode;
+    $scope.cloudCardList = JSON.parse($state.params.cloudCardList);
+  console.log(JSON.parse($state.params.cloudCardList));
+  var token=$.cookie("token");
+  //选卡支付的操作
+  $scope.paymentToCode=function(cardId){
+    $state.go("tab.payment",{
+      "qrCode":$scope.qrCode,
+      "storeName":$scope.storeName,
+      "storeId":$scope.storeId,
+      "cardId":cardId,
+      "chooseCardStatus":'Y'
+    });
+  }
+  //JSON.parse($state.params.cloudCardList) 将对象转换为数组
+  //这是买卡的操作
+  $scope.addCard=function(qrCode){
+    $state.go("tab.addCard",{
+      "storeId":$scope.storeId,
+      "qrCode":$scope.qrCode,
+      "chooseCardStatus":'Y'
+    });
+  }
   })
   //其他授权的方式
 .controller('DashCtrl', function($scope,$stateParams) {
-
     $scope.teleNumber = $stateParams.teleNumber;
     $scope.amount = $stateParams.amount;
     $scope.fromDate = $stateParams.fromDate;
@@ -363,7 +465,6 @@ angular.module('starter.controllers', [])
 
   //C端跳转成功页面的传值
 .controller('paymentSuccessCtrl', function($scope,$stateParams) {
-
     $scope.type = $stateParams.type;
     $scope.cardId = $stateParams.cardId;
     $scope.amount = $stateParams.amount;
@@ -378,8 +479,6 @@ angular.module('starter.controllers', [])
   })
   //c端扫码消费成功之后的页面跳转
 .controller('userPaymentSuccessCtrl', function($scope,$stateParams) {
-
-
     $scope.storeName = $stateParams.storeName;
     $scope.amount = $stateParams.amount;
     $scope.cardBalance = $stateParams.cardBalance;
@@ -387,7 +486,6 @@ angular.module('starter.controllers', [])
   })
   //默认授权的方式
 .controller('DashAccreditCtrl', function($scope,$stateParams) {
-
     $scope.teleNumber = $stateParams.teleNumber;
     $scope.amount = $stateParams.amount;
     $scope.day = $stateParams.day;
@@ -1192,11 +1290,12 @@ angular.module('starter.controllers', [])
                  //alert(result.msg+" "+result.storeName+" "+result.storeId+" "+result.storeImgUrl);
                 if (result.code == '200') {
                   $state.go("tab.payment", {
-                          qrCode: cardCode,
-                          storeName: result.storeName,
-                          storeId: result.storeId,
-                          storeImgUrl: result.storeImgUrl,
-                          cardId: $scope.cardId
+                    qrCode: cardCode,
+                    storeName: result.storeName,
+                    storeId: result.storeId,
+                    storeImgUrl: result.storeImgUrl,
+                    cardId: $scope.cardId,
+                    chooseCardStatus: 'N'
                         });
                 } else {
                   $ionicPopup.alert({
@@ -1229,7 +1328,41 @@ angular.module('starter.controllers', [])
     $scope.storeId = $stateParams.storeId;
     //$scope.storeImgUrl = $stateParams.storeImgUrl;//可能会存在转义字符
     $scope.cardId = $stateParams.cardId;
-
+    $scope.chooseCardStatus = $stateParams.chooseCardStatus;
+     //返回到选卡的页面
+    $scope.chooseCard=function(){
+      $.ajax({
+        url: $rootScope.interfaceUrl+"userScanCodeGetCardAndStoreInfo",
+        type:"POST",
+        data: {
+          "token":token,
+          "qrCode":$scope.qrCode
+        },
+        success: function(result){
+          console.log(result);
+          if(result.code=='200'){
+            $scope.$apply(function () {
+              $scope.msg="";
+            });
+            //$scope.groupName=result.groupName;
+            //圈友
+            //$scope.cloudList=result.cloudCardList
+            $state.go("tab.chooseCard",
+              {
+                "storeId": result.storeId,
+                "storeName":result.storeName,
+                "qrCode":$scope.qrCode,
+                "cloudCardList":JSON.stringify(result.cloudCardList)
+              });
+          }else{
+            $scope.$apply(function () {
+              $scope.msg=result.msg;
+            });
+          }
+        }
+      });
+    }
+    //付款的调用接口
     $scope.paymentMethod=function(amount) {
       $scope.msg = '';
       var reg = /^(([1-9]\d{0,9})|0)(\.\d{1,3})?$/;

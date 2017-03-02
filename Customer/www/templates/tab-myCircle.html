@@ -18,7 +18,7 @@
         圈主
       </div>
       <div ng-repeat="chat in storeList">
-        <a class="item item-avatar"  ng-if="chat.isGroupOwner=='Y'">
+        <a class="item item-avatar"  ng-if="chat.isGroupOwner=='Y'" href="#tab/shop/{{chat.storeId}}">
           <img src="{{chat.storeImg}}">
           <h2>名称: {{chat.storeName}}</h2>
           <p> 地址: {{chat.storeAddress}}</p>
