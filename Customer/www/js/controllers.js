@@ -205,7 +205,7 @@ angular.module('starter.controllers', [])
     $scope.alipay=function (choice,storeId) {
       alert(storeId);
       $.ajax({
-        url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
+        url: $rootScope.interfaceUrl+"purchaseCard", // wxPrepayOrder
         // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
         type:"POST",
         data: {
@@ -230,7 +230,7 @@ angular.module('starter.controllers', [])
     $scope.weiXin=function (choice,storeId) {
       alert(storeId);
       $.ajax({
-        url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
+        url: $rootScope.interfaceUrl+"purchaseCard", // wxPrepayOrder
         // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
         type:"POST",
         data: {
