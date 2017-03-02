@@ -1,6 +1,7 @@
 <ion-view view-title="向商家付款">
   <ion-nav-buttons side="left">
-    <a class="button icon ion-ios-undo" ui-sref="tab.chats"></a>
+    <a class="button icon ion-ios-undo" ng-if="chooseCardStatus=='N'" ui-sref="tab.chats"></a>
+    <a class="button icon ion-ios-undo" ng-if="chooseCardStatus=='Y'" ng-click="chooseCard()"></a>
   </ion-nav-buttons>
   <ion-content class="padding">
     <div class="charInfoPayment">

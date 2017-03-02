@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova','ionic-datepicker'])
 
 .run(function($ionicPlatform,$rootScope,$state) {
   //当设备运行的时候就执行
@@ -156,7 +156,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 })
 
-.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider,ionicDatePickerProvider) {
         $ionicConfigProvider.platform.ios.tabs.style('standard');
         $ionicConfigProvider.platform.ios.tabs.position('bottom');
         $ionicConfigProvider.platform.android.tabs.style('standard');
@@ -171,6 +171,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         $ionicConfigProvider.platform.ios.views.transition('ios');
         $ionicConfigProvider.platform.android.views.transition('android');
         $ionicConfigProvider.views.swipeBackEnabled(false); // 防止ios左滑出现白屏
+  var datePickerObj = {
+    inputDate: new Date(),
+    titleLabel: 'Select a Date',
+    setLabel: '确定',
+    todayLabel: '今天',
+    closeLabel: '关闭',
+    mondayFirst: false,
+    weeksList: ["日", "一", "二", "三", "四", "五", "六"],
+    monthsList: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+    from: new Date(2017, 01, 01),
+    to: new Date(2030, 08, 01),
+    showTodayButton: true,
+    dateFormat: 'yyyy-MM-dd',
+    closeOnSelect: false,
+    disableWeekdays: []
+  };
+  ionicDatePickerProvider.configDatePicker(datePickerObj);
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -212,18 +229,39 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     //我的圈子的卡展示页面
     .state('tab.myCircleCard', {
-      url: '/myCircleCard',
+      url: '/myCircleCard/:storeId',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-myCircleCard.html',
           controller: 'myCircleCardCtrl'
+
+        }
+      }
+    })
+    //向商家买卡
+    .state('tab.addCard', {
+      url: '/addCard/:storeId/:qrCode/:chooseCardStatus',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-addCard.html',
+          controller: 'addCardCtrl'
+        }
+      }
+    })
+    //用户选择卡来消费
+    .state('tab.chooseCard', {
+      url: '/chooseCard/:storeId/:storeName/:cloudCardList/:qrCode',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-chooseCard.html',
+          controller: 'chooseCardCtrl'
         }
       }
     })
 
       //我的圈子的页面展示
     .state('tab.myCircle', {
-      url: '/myCircle',
+      url: '/myCircle/:storeId',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-myCircle.html',
@@ -234,7 +272,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
       //店铺的展示页面
     .state('tab.shop', {
-      url: '/shop',
+      url: '/shop/:storeId',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-shop.html',
@@ -242,9 +280,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
+    .state('tab.goShop', {
+      url: '/goShop/:longitude/:latitude/:storeId',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-shopMap.html',
+          controller: 'shopMapCtrl'
+        }
+      }
+    })
     //付款码的展示页面
     .state('tab.paymentCode', {
-      url: '/paymentCode/:telNumber',
+      url: '/paymentCode/:qrCode',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-paymentCode.html',
@@ -417,7 +464,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     //扫一扫支付的页面
     .state('tab.payment', {
       //url: '/payment/:qrCode/:storeName/:storeId/:storeImgUrl/:cardId',
-      url: '/payment/:qrCode/:storeName/:storeId/:cardId',//这是写死的暂时先拿掉，存在转义字符
+      url: '/payment/:qrCode/:storeName/:storeId/:cardId/:chooseCardStatus',//这是写死的暂时先拿掉，存在转义字符
       cache: false,
       views: {
         'tab-circleMap': {

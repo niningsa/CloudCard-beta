@@ -21,11 +21,11 @@
 		  <!--</label><br/>-->
 		  <label class="">
 		    <span class="input-label">开始时间：</span>
-		    <input id="other_startDate"   type="date" required min="" class="form-control"/>
+		    <input id="other_startDate" placeholder="年/月/日" min="" class="form-control" ng-click="openDatePicker()" required />
 		  </label><br/>
 		  <label class="">
 		    <span class="input-label">结束时间：</span>
-		    <input id="other_endDate" type="date" class="form-control"/>
+		    <input id="other_endDate" placeholder="年/月/日" ng-click="openDatePicker2()" class="form-control"/>
 		  </label>
        <time-picker  time-picker-result="toolModel.timePickerResult"  title="请选择时间"></time-picker>
      </div>
