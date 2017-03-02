@@ -210,7 +210,7 @@ angular.module('starter.controllers', [])
         type:"POST",
         data: {
           "paymentType": "aliPay",
-          "cardId": "213213123",
+          "storeId": storeId,
           "subject": "库胖-充值",
           "totalFee": "0.01",
           "body": "充值"
@@ -235,7 +235,7 @@ angular.module('starter.controllers', [])
         type:"POST",
         data: {
           "paymentType": "wxPay",
-          "cardId": "213213123",
+          "storeId": storeId,
           "totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType":"APP"
@@ -1470,7 +1470,7 @@ angular.module('starter.controllers', [])
    * Author LN
    * Date 2016-12-12
    * */
-  .controller('rechargeCtrl', function ($scope, $stateParams, $rootScope, $ionicLoading) {
+  .controller('rechargeCtrl', function ($scope, $stateParams, $rootScope,$state, $ionicLoading) {
     //页面信息初始化
     $scope.cardId = $stateParams.cardId;
     $scope.cardBalance = $stateParams.cardBalance;
@@ -1488,13 +1488,15 @@ angular.module('starter.controllers', [])
           type:"POST",
           data: {
             "paymentType": "aliPay",
-            "cardId": "213213123",
+            //"cardId": "213213123",
+            "cardId": $scope.cardId,
             "subject": "库胖-充值",
             "totalFee": "0.01",
             "body": "充值"
           },
           success: function(result){
             console.log(result.payInfo);
+            $state.go("tab.chats");
             //第二步：调用支付插件
             cordova.plugins.AliPay.pay(result.payInfo, function success(e){
               // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
@@ -1512,13 +1514,15 @@ angular.module('starter.controllers', [])
           type:"POST",
           data: {
             "paymentType": "wxPay",
-            "cardId": "213213123",
+            //"cardId": "213213123",
+            "cardId": $scope.cardId,
             "totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
             "body": "库胖-充值",           // 标题不能使用中文
             "tradeType":"APP"
           },
           success: function(result){
             console.log(result);
+            $state.go("tab.chats");
             //第二步：调用支付插件
             wxpay.payment(result, function success (e) {
                 // alert("成功了："+e);
