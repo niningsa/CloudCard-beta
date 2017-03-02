@@ -211,6 +211,7 @@ angular.module('starter.controllers', [])
         data: {
           "paymentType": "aliPay",
           "storeId": storeId,
+          "paymentService": "buyCard",
           "subject": "库胖-充值",
           "totalFee": "0.01",
           "body": "充值"
@@ -236,6 +237,7 @@ angular.module('starter.controllers', [])
         data: {
           "paymentType": "wxPay",
           "storeId": storeId,
+          "paymentService": "buyCard",
           "totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType":"APP"
@@ -244,9 +246,9 @@ angular.module('starter.controllers', [])
           console.log(result);
           //第二步：调用支付插件
           wxpay.payment(result, function success (e) {
-            // alert("成功了："+e);
+            alert("成功了："+e);
           }, function error (e) {
-            // alert("失败了："+e);
+            alert("失败了："+e);
           });
         }
       });
