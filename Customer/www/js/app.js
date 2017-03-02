@@ -234,8 +234,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         'tab-circleMap': {
           templateUrl: 'templates/tab-myCircleCard.html',
           controller: 'myCircleCardCtrl'
-
         }
+      },
+      cache:false,
+      params:{
+        isCache:true
       }
     })
     //圈子卡的充值

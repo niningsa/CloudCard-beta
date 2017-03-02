@@ -72,7 +72,8 @@ angular.module('starter.controllers', [])
         type:"POST",
         data: {
           "paymentType": "aliPay",
-          "cardId": "213213123",
+          //"cardId": "213213123",
+          "cardId":  $scope.cardId,
           "subject": "库胖-充值",
           "totalFee": "0.01",
           "body": "充值"
@@ -82,6 +83,8 @@ angular.module('starter.controllers', [])
           //第二步：调用支付插件
           cordova.plugins.AliPay.pay(result.payInfo, function success(e){
             // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            //充值成功后回到圈子卡的页面
+            $state.go("tab.myCircleCard",{"storeId": $scope.storeId})
           }, function error(e){
             // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
           });
@@ -96,7 +99,8 @@ angular.module('starter.controllers', [])
         type:"POST",
         data: {
           "paymentType": "wxPay",
-          "cardId": "213213123",
+          //"cardId": "213213123",
+          "cardId":  $scope.cardId,
           "totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType":"APP"
@@ -106,6 +110,8 @@ angular.module('starter.controllers', [])
           //第二步：调用支付插件
           wxpay.payment(result, function success (e) {
             // alert("成功了："+e);
+            //充值成功后回到圈子卡的页面
+            $state.go("tab.myCircleCard",{"storeId": $scope.storeId})
           }, function error (e) {
             // alert("失败了："+e);
           });
