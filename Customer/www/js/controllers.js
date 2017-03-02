@@ -209,7 +209,7 @@ angular.module('starter.controllers', [])
     //这里是向圈子卡里面充钱
     $scope.ret = {choice: '100'};
     $scope.alipay=function (choice,storeId) {
-      alert(storeId);
+      //alert(storeId);
       $.ajax({
         url: $rootScope.interfaceUrl+"purchaseCard", // wxPrepayOrder
         // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
@@ -236,7 +236,7 @@ angular.module('starter.controllers', [])
     };
 
     $scope.weiXin=function (choice,storeId) {
-      alert(storeId);
+      //alert(storeId);
       $.ajax({
         url: $rootScope.interfaceUrl+"purchaseCard", // wxPrepayOrder
         // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
