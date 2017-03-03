@@ -96,11 +96,11 @@ angular.module('starter.controllers', [])
           console.log(result.payInfo);
           //第二步：调用支付插件
           cordova.plugins.AliPay.pay(result.payInfo, function success(e){
-             alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+             //alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
             //充值成功后回到圈子卡的页面
             $state.go("tab.myCircleCard",{"storeId": $scope.storeId})
           }, function error(e){
-             alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+             //alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
           });
         }
       });
@@ -125,11 +125,11 @@ angular.module('starter.controllers', [])
           console.log(result);
           //第二步：调用支付插件
           wxpay.payment(result, function success (e) {
-             alert("成功了："+e);
+             //alert("成功了："+e);
             //充值成功后回到圈子卡的页面
             $state.go("tab.myCircleCard",{"storeId": $scope.storeId})
           }, function error (e) {
-             alert("失败了："+e);
+             //alert("失败了："+e);
           });
         }
       });
@@ -306,10 +306,10 @@ angular.module('starter.controllers', [])
           console.log(result);
           //第二步：调用支付插件
           wxpay.payment(result, function success(e) {
-            alert("成功了：" + e);
+            //alert("成功了：" + e);
             $state.go("myCircleCard", {"storeId": storeId});
           }, function error(e) {
-            alert("失败了：" + e);
+            //alert("失败了：" + e);
           });
         }
       });
@@ -716,11 +716,11 @@ angular.module('starter.controllers', [])
           console.log(result);
           //第二步：调用支付插件
           wxpay.payment(result, function success(e) {
-            alert("成功了：" + e);
+            //alert("成功了：" + e);
             $scope.chooseCard();
             //$state.go("myCircleCard",{"storeId":storeId});
           }, function error(e) {
-            alert("失败了：" + e);
+            //alert("失败了：" + e);
           });
         }
       });
