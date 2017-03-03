@@ -318,7 +318,6 @@ angular.module('starter.controllers', [])
     //用于显示圈子或者店铺的详细的信息
     var token=$.cookie("token");
     $scope.storeInfo = false;
-    $scope.telNumber = 18772115070;
     //隐藏footer
     $scope.diglogHide=function(){
       $scope.storeInfo = false;
@@ -410,81 +409,85 @@ angular.module('starter.controllers', [])
     navigator.geolocation.getCurrentPosition(function (data) {
       //var point = (121.419634, 31.207267);
       //$scope.ret = {longitude:121.419633, latitude:31.207256};
-      alert(data.coords.longitude);
-      alert(data.coords.latitude);
       var map = new BMap.Map("allmap");
       var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
       var token=$.cookie("token");
-      $.ajax({
-        url: $rootScope.interfaceUrl + "userStoreListLBS",
-        type: "POST",
-        data: {
-          "token": token,
-          "longitude": data.coords.longitude,
-          "latitude": data.coords.latitude
-        },
-        success: function (result) {
+      if(data.coords.longitude=="5e324" | data.coords.latitude=="5e324"){
+        alert("进入地图页面失败");
+         $state.go("tab.circleMap");
+      }else{
+        $.ajax({
+          url: $rootScope.interfaceUrl + "userStoreListLBS",
+          type: "POST",
+          data: {
+            "token": token,
+            "longitude": data.coords.longitude,
+            "latitude": data.coords.latitude
+          },
+          success: function (result) {
 
-          console.log(result);
-          if (result.code == '200') {
-            for (var o in result.storeList) {
-              var storeName = result.storeList[o].storeName;
-              var storeId	 = result.storeList[o].storeId;
-              var distance = result.storeList[o].distance;
-              var location = eval(result.storeList[o].location);
-              var longitude = location[0];
-              var latitude = location[1];
-              var isGroupOwner = result.storeList[o].isGroupOwner;
-              var address	 = result.storeList[o].address;
-              var telNum	 = result.storeList[o].telNum;
-              var gpsPoint = new BMap.Point(longitude,latitude);  // 创建点坐标
-              map.centerAndZoom(gpsPoint, 16);
-              var marker = new BMap.Marker(gpsPoint);
+            console.log(result);
+            if (result.code == '200') {
+              for (var o in result.storeList) {
+                var storeName = result.storeList[o].storeName;
+                var storeId	 = result.storeList[o].storeId;
+                var distance = result.storeList[o].distance;
+                var location = eval(result.storeList[o].location);
+                var longitude = location[0];
+                var latitude = location[1];
+                var isGroupOwner = result.storeList[o].isGroupOwner;
+                var address	 = result.storeList[o].address;
+                var telNum	 = result.storeList[o].telNum;
+                var gpsPoint = new BMap.Point(longitude,latitude);  // 创建点坐标
+                map.centerAndZoom(gpsPoint, 16);
+                var marker = new BMap.Marker(gpsPoint);
 
-              if(isGroupOwner=='Y'){//如果是圈主的话就将默认的marker变成蓝色
-                var icon=new BMap.Icon("img/blueMarket.png", new BMap.Size(20,32)); //icon_url为自己的图片路径
-                var marker = new BMap.Marker(gpsPoint,{icon:icon});
+                if(isGroupOwner=='Y'){//如果是圈主的话就将默认的marker变成蓝色
+                  var icon=new BMap.Icon("img/blueMarket.png", new BMap.Size(20,32)); //icon_url为自己的图片路径
+                  var marker = new BMap.Marker(gpsPoint,{icon:icon});
+                }
+                map.addOverlay(marker);
+                map.addControl(ctrl_nav);//给地图添加缩放的按钮
+                map.enableScrollWheelZoom(true);
+                var myLabel = new BMap.Label(storeName, //为lable填写内容
+                  {position: gpsPoint}); //label的位置
+                myLabel.setStyle({ //给label设置样式，任意的CSS都是可以的
+                  "color": "red", //颜色
+                  "fontSize": "12px", //字号
+                  "border": "0", //边
+                  "height": "10px", //高度
+                  "width": "20px" //宽
+                });
+                map.addOverlay(myLabel);
+
+
+                (function(p, m,storeName,isGroupOwner,distance,storeId,address,telNum){
+
+                  m.addEventListener("click", function () {
+                    $scope.$apply(function () {
+                      $scope.storeInfo = true;
+                      $scope.storeName = storeName;
+                      $scope.storeId = storeId;
+                      $scope.isGroupOwner = isGroupOwner;
+                      $scope.distance = distance;
+                      $scope.telNum = telNum;
+                      $scope.address = address;
+                    });
+
+                  })
+                })(gpsPoint, marker,storeName
+                  ,isGroupOwner,distance,storeId,address,telNum);
               }
-              map.addOverlay(marker);
-              map.addControl(ctrl_nav);//给地图添加缩放的按钮
-              map.enableScrollWheelZoom(true);
-              var myLabel = new BMap.Label(storeName, //为lable填写内容
-                    {position: gpsPoint}); //label的位置
-                  myLabel.setStyle({ //给label设置样式，任意的CSS都是可以的
-                    "color": "red", //颜色
-                    "fontSize": "12px", //字号
-                    "border": "0", //边
-                    "height": "10px", //高度
-                    "width": "20px" //宽
-                  });
-                  map.addOverlay(myLabel);
-
-
-              (function(p, m,storeName,isGroupOwner,distance,storeId,address,telNum){
-
-                    m.addEventListener("click", function () {
-                      $scope.$apply(function () {
-                        $scope.storeInfo = true;
-                        $scope.storeName = storeName;
-                        $scope.storeId = storeId;
-                        $scope.isGroupOwner = isGroupOwner;
-                        $scope.distance = distance;
-                        $scope.telNum = telNum;
-                        $scope.address = address;
-                      });
-
-                    })
-                  })(gpsPoint, marker,storeName
-                    ,isGroupOwner,distance,storeId,address,telNum);
+            } else {
+              $ionicPopup.alert({
+                title: '温馨提示',
+                template: result.msg
+              });
             }
-          } else {
-            $ionicPopup.alert({
-              title: '温馨提示',
-              template: result.msg
-            });
           }
-        }
-      });
+        });
+      }
+
 
     }, function (error) {
       alert("网络不可用，请打开网络!!");
