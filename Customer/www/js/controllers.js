@@ -409,15 +409,11 @@ angular.module('starter.controllers', [])
     navigator.geolocation.getCurrentPosition(function (data) {
       //var point = (121.419634, 31.207267);
       //$scope.ret = {longitude:121.419633, latitude:31.207256};
-      alert(data.coords.longitude);
+      //alert(data.coords.longitude);
       var map = new BMap.Map("allmap");
       var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
       var token=$.cookie("token");
-      if(data.coords.longitude=="5e-324" | data.coords.latitude=="5e-324"){
-        alert("进入地图页面失败");
-          location.reload();
-         $state.go("tab.circleMap");
-      }else{
+
         $.ajax({
           url: $rootScope.interfaceUrl + "userStoreListLBS",
           type: "POST",
@@ -427,7 +423,6 @@ angular.module('starter.controllers', [])
             "latitude": data.coords.latitude
           },
           success: function (result) {
-
             console.log(result);
             if (result.code == '200') {
               for (var o in result.storeList) {
@@ -488,7 +483,7 @@ angular.module('starter.controllers', [])
             }
           }
         });
-      }
+
 
 
     }, function (error) {
