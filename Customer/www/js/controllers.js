@@ -1,6 +1,10 @@
 angular.module('starter.controllers', [])
 
-//我的圈子的页面展示
+  /*
+   * Desc 我的圈子的页面展示
+   * Author WK
+   * Date 2017-3-3
+   * */
   .controller('myCircleCtrl', function($scope,$state, $rootScope, $stateParams) {
     $scope.storeId = $stateParams.storeId;
     var token=$.cookie("token");
@@ -34,7 +38,12 @@ angular.module('starter.controllers', [])
       }
     });
   })
-  //如何去这家店
+
+  /*
+   * Desc 如何去这家店
+   * Author WK
+   * Date 2017-3-1
+   * */
   .controller('shopMapCtrl', function($scope,$state, $rootScope, $stateParams) {
     $scope.longitude = $stateParams.longitude;
     $scope.latitude = $stateParams.latitude;
@@ -58,7 +67,11 @@ angular.module('starter.controllers', [])
 
   })
 
-  //圈子卡的充值
+  /*
+   * Desc 圈子卡的充值
+   * Author WK
+   * Date 2017-3-1
+   * */
   .controller('cirCleCardRechargeCtrl', function($scope,$state, $rootScope,$stateParams) {
     $scope.storeId=$stateParams.storeId;
     $scope.cardId=$stateParams.cardId;
@@ -125,53 +138,57 @@ angular.module('starter.controllers', [])
 
   })
 
-  //我的圈子的卡的展示页面
-  .controller('myCircleCardCtrl', function($scope,$state, $rootScope,$cordovaBarcodeScanner, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
+  /*
+   * Desc 我的圈子的卡的展示页面
+   * Author WK
+   * Date 2017-3-1
+   * */
+  .controller('myCircleCardCtrl', function ($scope, $state, $rootScope, $cordovaBarcodeScanner, $ionicPopup, $ionicLoading, $timeout, $stateParams) {
     $scope.storeId = $stateParams.storeId;
-    var token=$.cookie("token");
-      $.ajax({
-        url: $rootScope.interfaceUrl+"myCloudCards",
-        type:"POST",
-        data: {
-          "token":token,
-          "storeId":$scope.storeId
-        },
-        success: function(result){
-          console.log(result);
-          if(result.code=='200'){
-            $scope.$apply(function () {
-              $scope.msg="";
-            });
-            $scope.cloudList=result.cloudCardList;
+    var token = $.cookie("token");
+    $.ajax({
+      url: $rootScope.interfaceUrl + "myCloudCards",
+      type: "POST",
+      data: {
+        "token": token,
+        "storeId": $scope.storeId
+      },
+      success: function (result) {
+        console.log(result);
+        if (result.code == '200') {
+          $scope.$apply(function () {
+            $scope.msg = "";
+          });
+          $scope.cloudList = result.cloudCardList;
 
-          }else{
-            $scope.$apply(function () {
-              $scope.msg=result.msg;
-            });
-          }
+        } else {
+          $scope.$apply(function () {
+            $scope.msg = result.msg;
+          });
         }
-      });
+      }
+    });
     //下拉刷新的操作
-    $scope.doRefresh = function() {
+    $scope.doRefresh = function () {
       //下拉刷新的时候选中全部
       $.ajax({
-        url: $rootScope.interfaceUrl+"myCloudCards",
-        type:"POST",
+        url: $rootScope.interfaceUrl + "myCloudCards",
+        type: "POST",
         data: {
-          "token":token,
-          "storeId":$scope.storeId
+          "token": token,
+          "storeId": $scope.storeId
         },
-        success: function(result){
+        success: function (result) {
           console.log(result);
-          if(result.code=='200'){
+          if (result.code == '200') {
             $scope.$apply(function () {
-              $scope.msg="";
+              $scope.msg = "";
             });
-            $scope.cloudList=result.cloudCardList;
+            $scope.cloudList = result.cloudCardList;
 
-          }else{
+          } else {
             $scope.$apply(function () {
-              $scope.msg=result.msg;
+              $scope.msg = result.msg;
             });
           }
         }
@@ -181,30 +198,34 @@ angular.module('starter.controllers', [])
 
     };
 
-    $scope.chongZhi=function(storeId,cardId){
+    $scope.chongZhi = function (storeId, cardId) {
       //跳转到充值的页面
-      $state.go("tab.cirCleCardRecharge",{
-        storeId:storeId,
-        cardId:cardId
+      $state.go("tab.cirCleCardRecharge", {
+        storeId: storeId,
+        cardId: cardId
       });
     }
 
     //买卡，开卡(圈子的卡)
-    $scope.addCircleCard=function(){
-      $state.go("tab.addCircleCard",{
-        "storeId":$scope.storeId,
-        "qrCode":$scope.qrCode,
+    $scope.addCircleCard = function () {
+      $state.go("tab.addCircleCard", {
+        "storeId": $scope.storeId,
+        "qrCode": $scope.qrCode,
       });
     }
   })
 
-  //向商家买卡的业务处理
-  .controller('addCircleCardCtrl', function($scope,$state, $rootScope,$cordovaBarcodeScanner, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
+  /*
+   * Desc 向商家买卡的业务处理
+   * Author WK
+   * Date 2017-3-1
+   * */
+  .controller('addCircleCardCtrl', function ($scope, $state, $rootScope, $cordovaBarcodeScanner, $ionicPopup, $ionicLoading, $timeout, $stateParams) {
     $scope.storeId = $stateParams.storeId;
     $scope.qrCode = $stateParams.qrCode;
-    var token=$.cookie("token");
+    var token = $.cookie("token");
     //这里是判断从扫一扫页面进入的还是从圈主圈友的页面进入的
-    $scope.chooseCard=function() {
+    $scope.chooseCard = function () {
       $.ajax({
         url: $rootScope.interfaceUrl + "userScanCodeGetCardAndStoreInfo",
         type: "POST",
@@ -236,15 +257,15 @@ angular.module('starter.controllers', [])
         }
       });
     }
-   //支付宝和微信支付
+    //支付宝和微信支付
     //这里是向圈子卡里面充钱
     $scope.ret = {choice: '100'};
-    $scope.alipay=function (choice,storeId) {
+    $scope.alipay = function (choice, storeId) {
       //alert(storeId);
       $.ajax({
-        url: $rootScope.interfaceUrl+"purchaseCard", // wxPrepayOrder
+        url: $rootScope.interfaceUrl + "purchaseCard", // wxPrepayOrder
         // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
-        type:"POST",
+        type: "POST",
         data: {
           "paymentType": "aliPay",
           "storeId": storeId,
@@ -253,25 +274,25 @@ angular.module('starter.controllers', [])
           "totalFee": "0.01",
           "body": "充值"
         },
-        success: function(result){
+        success: function (result) {
           console.log(result.payInfo);
           //第二步：调用支付插件
-          cordova.plugins.AliPay.pay(result.payInfo, function success(e){
+          cordova.plugins.AliPay.pay(result.payInfo, function success(e) {
             // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
-            $state.go("myCircleCard",{"storeId":storeId});
-          }, function error(e){
+            $state.go("myCircleCard", {"storeId": storeId});
+          }, function error(e) {
             // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
           });
         }
       });
     };
-
-    $scope.weiXin=function (choice,storeId) {
+    //调用微信支付
+    $scope.weiXin = function (choice, storeId) {
       //alert(storeId);
       $.ajax({
-        url: $rootScope.interfaceUrl+"purchaseCard", // wxPrepayOrder
+        url: $rootScope.interfaceUrl + "purchaseCard", // wxPrepayOrder
         // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
-        type:"POST",
+        type: "POST",
         data: {
           "paymentType": "wxPay",
           "storeId": storeId,
@@ -279,16 +300,16 @@ angular.module('starter.controllers', [])
           //"totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
           "totalFee": "0.01",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
-          "tradeType":"APP"
+          "tradeType": "APP"
         },
-        success: function(result){
+        success: function (result) {
           console.log(result);
           //第二步：调用支付插件
-          wxpay.payment(result, function success (e) {
-            alert("成功了："+e);
-            $state.go("myCircleCard",{"storeId":storeId});
-          }, function error (e) {
-            alert("失败了："+e);
+          wxpay.payment(result, function success(e) {
+            alert("成功了：" + e);
+            $state.go("myCircleCard", {"storeId": storeId});
+          }, function error(e) {
+            alert("失败了：" + e);
           });
         }
       });
@@ -297,91 +318,90 @@ angular.module('starter.controllers', [])
 
   })
 
-  //店铺的展示页面
-  .controller('shopCtrl', function($scope,$state, $rootScope, $ionicScrollDelegate,$stateParams) {
-    $scope.storeId=$stateParams.storeId;
-    var token=$.cookie("token");
+  /*
+   * Desc 店铺的展示页面
+   * Author WK
+   * Date 2017-3-1
+   * */
+  .controller('shopCtrl', function ($scope, $state, $rootScope, $ionicScrollDelegate, $stateParams) {
+    $scope.storeId = $stateParams.storeId;
+    var token = $.cookie("token");
     $.ajax({
-      url: $rootScope.interfaceUrl+"userGetStoreInfo",
-      type:"POST",
+      url: $rootScope.interfaceUrl + "userGetStoreInfo",
+      type: "POST",
       data: {
-        "token":token,
-        "storeId":$scope.storeId
+        "token": token,
+        "storeId": $scope.storeId
       },
-      success: function(result){
+      success: function (result) {
         console.log(result);
-        if(result.code=='200'){
+        if (result.code == '200') {
           $scope.$apply(function () {
-            $scope.msg="";
+            $scope.msg = "";
           });
-          $scope.storeTeleNumber=result.storeTeleNumber;
-          $scope.storeName=result.storeName;
-          $scope.storeAddress=result.storeAddress;
-          $scope.storeImg =result.storeImg ;
-          $scope.latitude =result.latitude ;
-          $scope.longitude =result.longitude ;
-        }else{
+          $scope.storeTeleNumber = result.storeTeleNumber;
+          $scope.storeName = result.storeName;
+          $scope.storeAddress = result.storeAddress;
+          $scope.storeImg = result.storeImg;
+          $scope.latitude = result.latitude;
+          $scope.longitude = result.longitude;
+        } else {
           $scope.$apply(function () {
-            $scope.msg=result.msg;
+            $scope.msg = result.msg;
           });
         }
       }
     });
   })
-  //付款码的展示页面
-  .controller('paymentCodeCtrl', function($scope,$state, $rootScope,$stateParams) {
-    $scope.qrCode=$stateParams.qrCode;
+
+  /*
+   * Desc 付款码的展示页面
+   * Author WK
+   * Date 2017-3-1
+   * */
+  .controller('paymentCodeCtrl', function ($scope, $state, $rootScope, $stateParams) {
+    $scope.qrCode = $stateParams.qrCode;
 
     jQuery('#pcode').qrcode($stateParams.qrCode);
   })
-  //根据Id查询卡
-  .controller('mycardCtrl', function($scope,mycards,$state, $rootScope,$stateParams) {
-    $scope.cards = mycards.all();
-    //cardId:cards.cardId,
-    //  storeId:cards.storeId,
-    //  storeName:cards.storeName,
-    //  cardName:cards.cardName,
-    //  cardBalance:cards.cardBalance,
-    //  qrCode:cards.qrCode,
-    //  storeImgUrl:cards.storeImgUrl
-  })
-  //我的圈子的定位显示
-  .controller('circleMapCtrl', function($scope,$state, $rootScope, $cordovaBarcodeScanner, $rootScope, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
+
+  /*
+   * Desc 我的圈子的定位显示
+   * Author WK
+   * Date 2017-3-1
+   * */
+  .controller('circleMapCtrl', function ($scope, $state, $rootScope, $cordovaBarcodeScanner, $rootScope, $ionicPopup, $ionicLoading, $timeout, $stateParams) {
     //用于显示圈子或者店铺的详细的信息
-    var token=$.cookie("token");
+    var token = $.cookie("token");
     $scope.storeInfo = false;
     //隐藏footer
-    $scope.diglogHide=function(){
+    $scope.diglogHide = function () {
       $scope.storeInfo = false;
-      //$("#foot").css({
-      //  "display": "none",
-      //  "height":"0px"
-      //});
     }
 
 
     //付款码
-    $scope.paymentCode=function(){
+    $scope.paymentCode = function () {
       $.ajax({
-        url: $rootScope.interfaceUrl+"getPaymentQRCode",
-        type:"POST",
+        url: $rootScope.interfaceUrl + "getPaymentQRCode",
+        type: "POST",
         data: {
-          "token":token
+          "token": token
         },
-        success: function(result){
+        success: function (result) {
           console.log(result);
-          if(result.code=='200'){
+          if (result.code == '200') {
             $scope.$apply(function () {
-              $scope.msg="";
+              $scope.msg = "";
             });
 
             $state.go("tab.paymentCode",
-                      {qrCode:result.qrCode});
-          }else{
+              {qrCode: result.qrCode});
+          } else {
 
 
             $scope.$apply(function () {
-              $scope.msg=result.msg;
+              $scope.msg = result.msg;
             });
           }
         }
@@ -389,7 +409,7 @@ angular.module('starter.controllers', [])
 
     }
     //扫一扫
-    $scope.scanBarcode=function(){
+    $scope.scanBarcode = function () {
       //var qrCode="ccs-ec9cd1cf-200f-4d4c-8946-f3eaaf2885d4";
       //真正的代码
       $ionicLoading.show({
@@ -404,29 +424,29 @@ angular.module('starter.controllers', [])
           if (qrCode != '') {
             //通过storeid来查询该圈子的卡，如果有卡就选卡来消费，如果没有卡就添加卡
             $.ajax({
-              url: $rootScope.interfaceUrl+"userScanCodeGetCardAndStoreInfo",
-              type:"POST",
+              url: $rootScope.interfaceUrl + "userScanCodeGetCardAndStoreInfo",
+              type: "POST",
               data: {
-                "token":token,
-                "qrCode":qrCode
+                "token": token,
+                "qrCode": qrCode
               },
-              success: function(result){
+              success: function (result) {
                 console.log(result);
-                if(result.code=='200'){
+                if (result.code == '200') {
                   $scope.$apply(function () {
-                    $scope.msg="";
+                    $scope.msg = "";
                   });
                   //跳到选卡的页面
                   $state.go("tab.chooseCard",
                     {
                       "storeId": result.storeId,
-                      "storeName":result.storeName,
-                      "qrCode":qrCode,
-                      "cloudCardList":JSON.stringify(result.cloudCardList)
+                      "storeName": result.storeName,
+                      "qrCode": qrCode,
+                      "cloudCardList": JSON.stringify(result.cloudCardList)
                     });
-                }else{
+                } else {
                   $scope.$apply(function () {
-                    $scope.msg=result.msg;
+                    $scope.msg = result.msg;
                   });
                 }
               }
@@ -435,7 +455,7 @@ angular.module('starter.controllers', [])
         }, function (error) {
         });
 
-      },1000);
+      }, 1000);
     }
     //百度定位
     navigator.geolocation.getCurrentPosition(function (data) {
@@ -443,15 +463,15 @@ angular.module('starter.controllers', [])
       //$scope.ret = {longitude:121.419633, latitude:31.207256};
       //alert(data.coords.longitude);
       var map = new BMap.Map("allmap");
-      var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
-      var token=$.cookie("token");
+      var ctrl_nav = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE});
+      var token = $.cookie("token");
       //显示当前我的位置
-      var Point = new BMap.Point(data.coords.longitude,data.coords.latitude);  // 创建点坐标
+      var Point = new BMap.Point(data.coords.longitude, data.coords.latitude);  // 创建点坐标
       map.centerAndZoom(Point, 16);
       var marker = new BMap.Marker(Point);
       map.addOverlay(marker);
       var myLabels = new BMap.Label("我的位置", //为lable填写内容
-        {position:Point}); //label的位置
+        {position: Point,offset:new BMap.Size(10,-20)}); //label的位置
       myLabels.setStyle({ //给label设置样式，任意的CSS都是可以的
         "color": "blue", //颜色
         "fontSize": "12px", //字号
@@ -461,206 +481,253 @@ angular.module('starter.controllers', [])
       });
       map.addOverlay(myLabels);
       //请求后台查询店铺
-        $.ajax({
-          url: $rootScope.interfaceUrl + "userStoreListLBS",
-          type: "POST",
-          data: {
-            "token": token,
-            "longitude": data.coords.longitude,
-            "latitude": data.coords.latitude
-          },
-          success: function (result) {
-            console.log(result);
-            if (result.code == '200') {
-              for (var o in result.storeList) {
-                var storeName = result.storeList[o].storeName;
-                var storeId	 = result.storeList[o].storeId;
-                var distance = result.storeList[o].distance;
-                var location = eval(result.storeList[o].location);
-                var longitude = location[0];
-                var latitude = location[1];
-                var isGroupOwner = result.storeList[o].isGroupOwner;
-                var address	 = result.storeList[o].address;
-                var telNum	 = result.storeList[o].telNum;
-                var gpsPoint = new BMap.Point(longitude,latitude);  // 创建点坐标
-                map.centerAndZoom(gpsPoint, 16);
-                var marker = new BMap.Marker(gpsPoint);
+      $.ajax({
+        url: $rootScope.interfaceUrl + "userStoreListLBS",
+        type: "POST",
+        data: {
+          "token": token,
+          "longitude": data.coords.longitude,
+          "latitude": data.coords.latitude
+        },
+        success: function (result) {
+          console.log(result);
+          if (result.code == '200') {
+            for (var o in result.storeList) {
+              var storeName = result.storeList[o].storeName;
+              var storeId = result.storeList[o].storeId;
+              var distance = result.storeList[o].distance;
+              var location = eval(result.storeList[o].location);
+              var longitude = location[0];
+              var latitude = location[1];
+              var isGroupOwner = result.storeList[o].isGroupOwner;
+              var address = result.storeList[o].address;
+              var telNum = result.storeList[o].telNum;
+              var gpsPoint = new BMap.Point(longitude, latitude);  // 创建点坐标
+              map.centerAndZoom(gpsPoint, 16);
+              var marker = new BMap.Marker(gpsPoint);
 
-                if(isGroupOwner=='Y'){//如果是圈主的话就将默认的marker变成蓝色
-                  var icon=new BMap.Icon("img/blueMarket.png", new BMap.Size(20,32)); //icon_url为自己的图片路径
-                  var marker = new BMap.Marker(gpsPoint,{icon:icon});
-                }
-                map.addOverlay(marker);
-                map.addControl(ctrl_nav);//给地图添加缩放的按钮
-                map.enableScrollWheelZoom(true);
-                var myLabel = new BMap.Label(storeName, //为lable填写内容
-                  {position: gpsPoint}); //label的位置
-                myLabel.setStyle({ //给label设置样式，任意的CSS都是可以的
-                  "color": "red", //颜色
-                  "fontSize": "12px", //字号
-                  "border": "0", //边
-                  "height": "10px", //高度
-                  "width": "20px" //宽
-                });
-                map.addOverlay(myLabel);
-
-
-                (function(p, m,storeName,isGroupOwner,distance,storeId,address,telNum){
-
-                  m.addEventListener("click", function () {
-                    $scope.$apply(function () {
-                      $scope.storeInfo = true;
-                      $scope.storeName = storeName;
-                      $scope.storeId = storeId;
-                      $scope.isGroupOwner = isGroupOwner;
-                      $scope.distance = distance;
-                      $scope.telNum = telNum;
-                      $scope.address = address;
-                    });
-
-                  })
-                })(gpsPoint, marker,storeName
-                  ,isGroupOwner,distance,storeId,address,telNum);
+              if (isGroupOwner == 'Y') {//如果是圈主的话就将默认的marker变成蓝色
+                var icon = new BMap.Icon("img/blueMarket.png", new BMap.Size(20, 32)); //icon_url为自己的图片路径
+                var marker = new BMap.Marker(gpsPoint, {icon: icon});
               }
-            } else {
-              $ionicPopup.alert({
-                title: '温馨提示',
-                template: result.msg
+              map.addOverlay(marker);
+              map.addControl(ctrl_nav);//给地图添加缩放的按钮
+              map.enableScrollWheelZoom(true);
+              var myLabel = new BMap.Label(storeName, //为lable填写内容
+                {position: gpsPoint}); //label的位置
+              myLabel.setStyle({ //给label设置样式，任意的CSS都是可以的
+                "color": "red", //颜色
+                "fontSize": "12px", //字号
+                "border": "0", //边
+                "height": "10px", //高度
+                "width": "20px" //宽
               });
-            }
-          }
-        });
+              map.addOverlay(myLabel);
 
+
+              (function (p, m, storeName, isGroupOwner, distance, storeId, address, telNum) {
+
+                m.addEventListener("click", function () {
+                  $scope.$apply(function () {
+                    $scope.storeInfo = true;
+                    $scope.storeName = storeName;
+                    $scope.storeId = storeId;
+                    $scope.isGroupOwner = isGroupOwner;
+                    $scope.distance = distance;
+                    $scope.telNum = telNum;
+                    $scope.address = address;
+                  });
+
+                })
+              })(gpsPoint, marker, storeName
+                , isGroupOwner, distance, storeId, address, telNum);
+            }
+          } else {
+            $ionicPopup.alert({
+              title: '温馨提示',
+              template: result.msg
+            });
+          }
+        }
+      });
 
 
     }, function (error) {
       alert("网络不可用，请打开网络!!");
       console.log(error);
 
-    },{timeout: 30000, enableHighAccuracy:true, maximumAge: 75000,coorType: 'bd09ll'});
+    }, {timeout: 30000, enableHighAccuracy: true, maximumAge: 75000, coorType: 'bd09ll'});
 
   })
-  //通过二维码查询店铺中自己可以用的卡
-.controller('chooseCardCtrl', function($scope,$stateParams,$state,$rootScope) {
+  /*
+   * Desc 通过二维码查询店铺中自己可以用的卡
+   * Author WK
+   * Date 2017-3-1
+   * */
+  .controller('chooseCardCtrl', function ($scope, $stateParams, $state, $rootScope) {
     $scope.storeId = $stateParams.storeId;
     $scope.storeName = $stateParams.storeName;
     $scope.qrCode = $stateParams.qrCode;
     $scope.cloudCardList = JSON.parse($state.params.cloudCardList);
-  console.log(JSON.parse($state.params.cloudCardList));
-  var token=$.cookie("token");
-  //选卡支付的操作
-  $scope.paymentToCode=function(cardId){
-    $state.go("tab.payment",{
-      "qrCode":$scope.qrCode,
-      "storeName":$scope.storeName,
-      "storeId":$scope.storeId,
-      "cardId":cardId,
-      "chooseCardStatus":'Y'
-    });
-  }
-  //JSON.parse($state.params.cloudCardList) 将对象转换为数组
-  //这是扫一扫买卡的操作
-  $scope.scanAddCard=function(qrCode){
-    $state.go("tab.scanAddCard",{
-      "storeId":$scope.storeId,
-      "qrCode":$scope.qrCode,
-    });
-  }
-  })
-  //扫一扫向商家购买圈子的卡的逻辑判断
-.controller('scanAddCardCtrl', function($scope,$stateParams,$state,$rootScope) {
-  $scope.storeId = $stateParams.storeId;
-  $scope.qrCode = $stateParams.qrCode;
-  var token = $.cookie("token");
-  $scope.chooseCard=function(){
-    $.ajax({
-      url: $rootScope.interfaceUrl+"userScanCodeGetCardAndStoreInfo",
-      type:"POST",
-      data: {
-        "token":token,
-        "qrCode":$scope.qrCode
-      },
-      success: function(result){
-        console.log(result);
-        if(result.code=='200'){
-          $scope.$apply(function () {
-            $scope.msg="";
-          });
-          //$scope.groupName=result.groupName;
-          //圈友
-          //$scope.cloudList=result.cloudCardList
-          $state.go("tab.chooseCard",
-            {
-              "storeId": result.storeId,
-              "storeName":result.storeName,
-              "qrCode":$scope.qrCode,
-              "cloudCardList":JSON.stringify(result.cloudCardList)
+    console.log(JSON.parse($state.params.cloudCardList));
+    var token = $.cookie("token");
+    //选卡支付的操作
+    $scope.paymentToCode = function (cardId) {
+      $state.go("tab.payment", {
+        "qrCode": $scope.qrCode,
+        "storeName": $scope.storeName,
+        "storeId": $scope.storeId,
+        "cardId": cardId,
+        "chooseCardStatus": 'Y'
+      });
+    }
+    //JSON.parse($state.params.cloudCardList) 将对象转换为数组
+    //这是扫一扫买卡的操作
+    $scope.scanAddCard = function (qrCode) {
+      $state.go("tab.scanAddCard", {
+        "storeId": $scope.storeId,
+        "qrCode": $scope.qrCode,
+      });
+    }
+
+    //下拉刷新的操作，，****如果是充卡支付成功之后卡的金额没有发生变化的操作
+    $scope.doRefresh = function () {
+      $.ajax({
+        url: $rootScope.interfaceUrl + "userScanCodeGetCardAndStoreInfo",
+        type: "POST",
+        data: {
+          "token": token,
+          "qrCode": $scope.qrCode
+        },
+        success: function (result) {
+          console.log(result);
+          if (result.code == '200') {
+            $scope.$apply(function () {
+              $scope.msg = "";
             });
-        }else{
-          $scope.$apply(function () {
-            $scope.msg=result.msg;
+            //$scope.groupName=result.groupName;
+            //圈友
+            //$scope.cloudList=result.cloudCardList
+            $state.go("tab.chooseCard",
+              {
+                "storeId": result.storeId,
+                "storeName": result.storeName,
+                "qrCode": $scope.qrCode,
+                "cloudCardList": JSON.stringify(result.cloudCardList)
+              });
+          } else {
+            $scope.$apply(function () {
+              $scope.msg = result.msg;
+            });
+          }
+        }
+      });
+      $scope.$broadcast("scroll.refreshComplete");
+    }
+  })
+  /*
+   * Desc 扫一扫向商家购买圈子的卡的逻辑判断
+   * Author WK
+   * Date 2017-3-1
+   * */
+  .controller('scanAddCardCtrl', function ($scope, $stateParams, $state, $rootScope) {
+    $scope.storeId = $stateParams.storeId;
+    $scope.qrCode = $stateParams.qrCode;
+    var token = $.cookie("token");
+
+    //这里是返回的操作到所以扫后的圈子卡的列表
+    $scope.chooseCard = function () {
+      $.ajax({
+        url: $rootScope.interfaceUrl + "userScanCodeGetCardAndStoreInfo",
+        type: "POST",
+        data: {
+          "token": token,
+          "qrCode": $scope.qrCode
+        },
+        success: function (result) {
+          console.log(result);
+          if (result.code == '200') {
+            $scope.$apply(function () {
+              $scope.msg = "";
+            });
+            //$scope.groupName=result.groupName;
+            //圈友
+            //$scope.cloudList=result.cloudCardList
+            $state.go("tab.chooseCard",
+              {
+                "storeId": result.storeId,
+                "storeName": result.storeName,
+                "qrCode": $scope.qrCode,
+                "cloudCardList": JSON.stringify(result.cloudCardList)
+              });
+          } else {
+            $scope.$apply(function () {
+              $scope.msg = result.msg;
+            });
+          }
+        }
+      });
+    }
+    //这里是通过扫一扫来买圈子的卡
+    $scope.ret = {choice: '100'};
+    $scope.alipay = function (choice, storeId) {
+      //alert(storeId);
+      $.ajax({
+        url: $rootScope.interfaceUrl + "purchaseCard", // wxPrepayOrder
+        // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+        type: "POST",
+        data: {
+          "paymentType": "aliPay",
+          "storeId": storeId,
+          "paymentService": "buyCard",
+          "subject": "库胖-充值",
+          "totalFee": "0.01",
+          "body": "充值"
+        },
+        success: function (result) {
+          console.log(result.payInfo);
+          //第二步：调用支付插件
+          cordova.plugins.AliPay.pay(result.payInfo, function success(e) {
+            // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            //支付成功到扫一扫的卡页面列表
+            $scope.chooseCard();
+          }, function error(e) {
+            // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
           });
         }
-      }
-    });
-  }
-  //这里是通过扫一扫来买圈子的卡
-  $scope.ret = {choice: '100'};
-  $scope.alipay=function (choice,storeId) {
-    //alert(storeId);
-    $.ajax({
-      url: $rootScope.interfaceUrl+"purchaseCard", // wxPrepayOrder
-      // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
-      type:"POST",
-      data: {
-        "paymentType": "aliPay",
-        "storeId": storeId,
-        "paymentService": "buyCard",
-        "subject": "库胖-充值",
-        "totalFee": "0.01",
-        "body": "充值"
-      },
-      success: function(result){
-        console.log(result.payInfo);
-        //第二步：调用支付插件
-        cordova.plugins.AliPay.pay(result.payInfo, function success(e){
-          // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
-        }, function error(e){
-          // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
-        });
-      }
-    });
-  };
+      });
+    };
 
-  $scope.weiXin=function (choice,storeId) {
-    //alert(storeId);
-    $.ajax({
-      url: $rootScope.interfaceUrl+"purchaseCard", // wxPrepayOrder
-      // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
-      type:"POST",
-      data: {
-        "paymentType": "wxPay",
-        "storeId": storeId,
-        "paymentService": "buyCard",
-        "totalFee": "0.01",              // 微信金额不支持小数，这里1表示0.01
-        "body": "库胖-充值",           // 标题不能使用中文
-        "tradeType":"APP"
-      },
-      success: function(result){
-        console.log(result);
-        //第二步：调用支付插件
-        wxpay.payment(result, function success (e) {
-          alert("成功了："+e);
-          //$state.go("myCircleCard",{"storeId":storeId});
-        }, function error (e) {
-          alert("失败了："+e);
-        });
-      }
-    });
+    $scope.weiXin = function (choice, storeId) {
+      //alert(storeId);
+      $.ajax({
+        url: $rootScope.interfaceUrl + "purchaseCard", // wxPrepayOrder
+        // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+        type: "POST",
+        data: {
+          "paymentType": "wxPay",
+          "storeId": storeId,
+          "paymentService": "buyCard",
+          "totalFee": "0.01",              // 微信金额不支持小数，这里1表示0.01
+          "body": "库胖-充值",           // 标题不能使用中文
+          "tradeType": "APP"
+        },
+        success: function (result) {
+          console.log(result);
+          //第二步：调用支付插件
+          wxpay.payment(result, function success(e) {
+            alert("成功了：" + e);
+            $scope.chooseCard();
+            //$state.go("myCircleCard",{"storeId":storeId});
+          }, function error(e) {
+            alert("失败了：" + e);
+          });
+        }
+      });
 
-  };
+    };
 
-})
+  })
   //其他授权的方式
 .controller('DashCtrl', function($scope,$stateParams) {
     $scope.teleNumber = $stateParams.teleNumber;
@@ -679,7 +746,6 @@ angular.module('starter.controllers', [])
   })
   //转卡成功后的跳转页面
 .controller('sellCardSuccessCtrl', function($scope,$stateParams) {
-
     $scope.cardBalance = $stateParams.cardBalance;
     $scope.cardName = $stateParams.cardName;
     $scope.tel = $stateParams.tel;
@@ -700,7 +766,6 @@ angular.module('starter.controllers', [])
   })
 
 .controller('ChatsCtrl', function($scope, Chats,$state, $rootScope, $ionicScrollDelegate) {
-
   $scope.chats = Chats.all();
     $scope.doRefresh = function() {
       $scope.chats = Chats.all();
@@ -710,8 +775,11 @@ angular.module('starter.controllers', [])
 })
 
 
-  //分账单的页面查询
-
+/*
+ * Desc 分账单的页面查询
+ * Author WK
+ * Date 2016-11-18
+ * */
   .controller('subBillCtrl', function($scope, CardDetail,$state,$rootScope,$stateParams) {
     $scope.cardId = $stateParams.cardId;
     $scope.cardDetail= CardDetail.get($scope.cardId);
@@ -752,7 +820,6 @@ angular.module('starter.controllers', [])
     }
   })
 
-
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats, $state, $ionicPopup, $rootScope, $ionicModal) {
     $scope.cardId = $stateParams.cardId;
     $scope.cardBalance = $stateParams.cardBalance;
@@ -760,10 +827,6 @@ angular.module('starter.controllers', [])
     $scope.cardCode  =$stateParams.cardCode;
     $scope.isAuthToOthers  =$stateParams.isAuthToOthers;
     $scope.isAuthToMe  =$stateParams.isAuthToMe;
-    //alert($scope.lastText);
-  //$scope.chat = Chats.get($stateParams.chatId);
-  //  console.table($scope.chat );
-  // alert(jQuery('#output'));
   //  将客户的cardCode放入生成的二维码中
    jQuery('#output').qrcode($stateParams.cardCode);
     //根据是否授权来控制授权按钮的显示与否
@@ -857,182 +920,187 @@ angular.module('starter.controllers', [])
 
 
 //授权的controller
-.controller('inputCtrl', function($scope, $stateParams,$rootScope,$http,Chats,$state,$ionicPopup,ionicDatePicker) {
-   $scope.cardId  =$stateParams.cardId;
-   $scope.cardBalance  =$stateParams.cardBalance;
-   $scope.cardName  =$stateParams.cardName;
-   $scope.cardCode  =$stateParams.cardCode;
-   $scope.isAuthToOthers  =$stateParams.isAuthToOthers;
-   $scope.isAuthToMe  =$stateParams.isAuthToMe;
-    var token=$.cookie("token");
+  .controller('inputCtrl', function ($scope, $stateParams, $rootScope, $http, Chats, $state, $ionicPopup, ionicDatePicker) {
+    $scope.cardId = $stateParams.cardId;
+    $scope.cardBalance = $stateParams.cardBalance;
+    $scope.cardName = $stateParams.cardName;
+    $scope.cardCode = $stateParams.cardCode;
+    $scope.isAuthToOthers = $stateParams.isAuthToOthers;
+    $scope.isAuthToMe = $stateParams.isAuthToMe;
+    var token = $.cookie("token");
 
-  var ipObj1 = {
-    callback: function (val) {  //Mandatory
-      console.log('Return value from the datepicker popup is : ' + val, new Date(val));
-      var selectDate = new Date(val);
-      console.log(selectDate.getFullYear()+"-"+parseFloat(selectDate.getMonth()+1)+"-"+selectDate.getDate());
-      $("#other_startDate").val(selectDate.getFullYear()+"-"+parseFloat(selectDate.getMonth()+1)+"-"+selectDate.getDate());
-    },
-    disabledDates: [            //Optional
-      new Date(),
-      new Date(1439676000000)
-    ],
-    //from: new Date(1990, 1, 1), //Optional
-    //to: new Date(2020, 10, 30), //Optional
-    inputDate: new Date(),      //Optional
-    mondayFirst: false,          //Optional
-    closeOnSelect: false,
-    templateType: 'popup'       //Optional
-  };
-  var ipObj2 = {
-    callback: function (val) {  //Mandatory
-      console.log('Return value from the datepicker popup is : ' + val, new Date(val));
-      var selectDate = new Date(val);
-      console.log(selectDate.getFullYear()+"-"+parseFloat(selectDate.getMonth()+1)+"-"+selectDate.getDate());
-      $("#other_endDate").val(selectDate.getFullYear()+"-"+parseFloat(selectDate.getMonth()+1)+"-"+selectDate.getDate());
-    },
-    from: new Date(1990, 1, 1), //Optional
-    to: new Date(2020, 10, 30), //Optional
-    inputDate: new Date(),      //Optional
-    mondayFirst: false,          //Optional
-    closeOnSelect: false,       //Optional
-    templateType: 'popup'       //Optional
-  };
-
-  $scope.openDatePicker = function(){
-    ionicDatePicker.openDatePicker(ipObj1);
-  };
-  $scope.openDatePicker2 = function(){
-    ionicDatePicker.openDatePicker(ipObj2);
-  };
-
-
-  $("body").off("click", "#powerfrom").on("click","#powerfrom", function() {
-    $other_tel=$("#other_tel").val();
-    $other_cardId=$("#other_cardId").val();
-    //$other_money=$("#other_money").val();
-    $other_startDate=$("#other_startDate").val();
-    $other_endDate=$("#other_endDate").val();
-
-    var flag =true;
-
-    //验证手机号是否合法
-    var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-
-    if (!phoneReg.test($other_tel)) {
-      $ionicPopup.alert({
-        title:"温馨提示",
-        template:"请输入正确的手机号码",
-        okText:"确定",
-      })
-          flag = false;
-     }
-    //正则验证输入金额是否合法
-    // var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
-    // if (moneyReg.test($other_money)) {
-    //    if(parseFloat($other_money) > parseFloat($scope.cardBalance)){
-    //
-    //      $ionicPopup.alert({
-    //        title:"温馨提示",
-    //        template:"授权金额大于可用金额",
-    //        okText:"确定",
-    //      })
-    //      flag = false;
-    //    }
-    // }else{
-    //   $ionicPopup.alert({
-    //     title:"温馨提示",
-    //     template:"金额输入有误,请重新输入",
-    //     okText:"确定",
-    //
-    //   })
-    //      flag = false;
-    // }
-
-    if ($other_endDate == null | $other_endDate ==''){
-      $ionicPopup.alert({
-        title:"温馨提示",
-        template:"请将时间填写完整",
-        okText:"确定",
-      })
-      //var nowtime = new Date();
-      //$other_endDate = nowtime.toLocaleDateString().replace('/','-').replace('/','-');
-      flag = false;
-    }
-    if ($other_startDate == null | $other_startDate ==''){
-      //var nowtime2 = new Date();
-      //$other_endDate = nowtime2.toLocaleDateString().replace('/','-').replace('/','-');
-      $ionicPopup.alert({
-        title:"温馨提示",
-        template:"请将时间填写完整",
-        okText:"确定",
-      })
-      flag = false;
-    }
-    if($other_startDate > $other_endDate ){
-      $ionicPopup.alert({
-        title:"温馨提示",
-        template:"截止时间应大于授权时间",
-        okText:"确定",
-      })
-      flag = false;
-    }
-    if(flag){
-      $.ajax({
-        type: "POST",
-        url: $rootScope.interfaceUrl+"createCardAuth",
-        async: false,
-        data: {
-         "token":token,
-          "cardId":$other_cardId,
-          "teleNumber":$other_tel,
-          //"amount":$other_money,
-          "fromDate":$other_startDate,
-          "thruDate":$other_endDate
-        },
-        dataFilter: function(data){
-          console.log("raw data: "+data);
-          var idx =  data.indexOf("//");
-          if(data && /^\s*\/\/.*/.test(data) && idx>-1){
-            data = data.substring(idx+2);
-          }
-          return data;
-        },
-        success: function(data){
-          console.log(data);
-          if(data.code==500){
-            $ionicPopup.alert({
-              title:"温馨提示",
-              template:data.msg,
-              okText:"确定",
-
-            })
-          }
-          //跳转到登录的页面
-          if(data.code==400){
-            $state.go("login");
-          }
-          if(data.code==200){
-            //授权成功，传入必要的参数，跳转到授权成功的查看页面
-            window.location.href="#/tab/cardreturn/"+$other_tel+"/"+$scope.cardBalance+"/"+$other_startDate+"/"+$other_endDate+"/"+$scope.cardName;
-          }
-
-
-        },
-        error:function (e) {
-          console.log(e);
-
-          window.location.href="#/tab/cardinput";
-        }
-      });
-
-
+    var ipObj1 = {
+      callback: function (val) {  //Mandatory
+        console.log('Return value from the datepicker popup is : ' + val, new Date(val));
+        var selectDate = new Date(val);
+        console.log(selectDate.getFullYear() + "-" + parseFloat(selectDate.getMonth() + 1) + "-" + selectDate.getDate());
+        $("#other_startDate").val(selectDate.getFullYear() + "-" + parseFloat(selectDate.getMonth() + 1) + "-" + selectDate.getDate());
+      },
+      disabledDates: [            //Optional
+        new Date(),
+        new Date(1439676000000)
+      ],
+      //from: new Date(1990, 1, 1), //Optional
+      //to: new Date(2020, 10, 30), //Optional
+      inputDate: new Date(),      //Optional
+      mondayFirst: false,          //Optional
+      closeOnSelect: false,
+      templateType: 'popup'       //Optional
     };
-  });
-})
+    var ipObj2 = {
+      callback: function (val) {  //Mandatory
+        console.log('Return value from the datepicker popup is : ' + val, new Date(val));
+        var selectDate = new Date(val);
+        console.log(selectDate.getFullYear() + "-" + parseFloat(selectDate.getMonth() + 1) + "-" + selectDate.getDate());
+        $("#other_endDate").val(selectDate.getFullYear() + "-" + parseFloat(selectDate.getMonth() + 1) + "-" + selectDate.getDate());
+      },
+      from: new Date(1990, 1, 1), //Optional
+      to: new Date(2020, 10, 30), //Optional
+      inputDate: new Date(),      //Optional
+      mondayFirst: false,          //Optional
+      closeOnSelect: false,       //Optional
+      templateType: 'popup'       //Optional
+    };
+
+    $scope.openDatePicker = function () {
+      ionicDatePicker.openDatePicker(ipObj1);
+    };
+    $scope.openDatePicker2 = function () {
+      ionicDatePicker.openDatePicker(ipObj2);
+    };
 
 
-  //转卡页面的传值
+    $("body").off("click", "#powerfrom").on("click", "#powerfrom", function () {
+      $other_tel = $("#other_tel").val();
+      $other_cardId = $("#other_cardId").val();
+      //$other_money=$("#other_money").val();
+      $other_startDate = $("#other_startDate").val();
+      $other_endDate = $("#other_endDate").val();
+
+      var flag = true;
+
+      //验证手机号是否合法
+      var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+
+      if (!phoneReg.test($other_tel)) {
+        $ionicPopup.alert({
+          title: "温馨提示",
+          template: "请输入正确的手机号码",
+          okText: "确定",
+        })
+        flag = false;
+      }
+      //正则验证输入金额是否合法
+      // var moneyReg = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/;
+      // if (moneyReg.test($other_money)) {
+      //    if(parseFloat($other_money) > parseFloat($scope.cardBalance)){
+      //
+      //      $ionicPopup.alert({
+      //        title:"温馨提示",
+      //        template:"授权金额大于可用金额",
+      //        okText:"确定",
+      //      })
+      //      flag = false;
+      //    }
+      // }else{
+      //   $ionicPopup.alert({
+      //     title:"温馨提示",
+      //     template:"金额输入有误,请重新输入",
+      //     okText:"确定",
+      //
+      //   })
+      //      flag = false;
+      // }
+
+      if ($other_endDate == null | $other_endDate == '') {
+        $ionicPopup.alert({
+          title: "温馨提示",
+          template: "请将时间填写完整",
+          okText: "确定",
+        })
+        //var nowtime = new Date();
+        //$other_endDate = nowtime.toLocaleDateString().replace('/','-').replace('/','-');
+        flag = false;
+      }
+      if ($other_startDate == null | $other_startDate == '') {
+        //var nowtime2 = new Date();
+        //$other_endDate = nowtime2.toLocaleDateString().replace('/','-').replace('/','-');
+        $ionicPopup.alert({
+          title: "温馨提示",
+          template: "请将时间填写完整",
+          okText: "确定",
+        })
+        flag = false;
+      }
+      if ($other_startDate > $other_endDate) {
+        $ionicPopup.alert({
+          title: "温馨提示",
+          template: "截止时间应大于授权时间",
+          okText: "确定",
+        })
+        flag = false;
+      }
+      if (flag) {
+        $.ajax({
+          type: "POST",
+          url: $rootScope.interfaceUrl + "createCardAuth",
+          async: false,
+          data: {
+            "token": token,
+            "cardId": $other_cardId,
+            "teleNumber": $other_tel,
+            //"amount":$other_money,
+            "fromDate": $other_startDate,
+            "thruDate": $other_endDate
+          },
+          dataFilter: function (data) {
+            console.log("raw data: " + data);
+            var idx = data.indexOf("//");
+            if (data && /^\s*\/\/.*/.test(data) && idx > -1) {
+              data = data.substring(idx + 2);
+            }
+            return data;
+          },
+          success: function (data) {
+            console.log(data);
+            if (data.code == 500) {
+              $ionicPopup.alert({
+                title: "温馨提示",
+                template: data.msg,
+                okText: "确定",
+
+              })
+            }
+            //跳转到登录的页面
+            if (data.code == 400) {
+              $state.go("login");
+            }
+            if (data.code == 200) {
+              //授权成功，传入必要的参数，跳转到授权成功的查看页面
+              window.location.href = "#/tab/cardreturn/" + $other_tel + "/" + $scope.cardBalance + "/" + $other_startDate + "/" + $other_endDate + "/" + $scope.cardName;
+            }
+
+
+          },
+          error: function (e) {
+            console.log(e);
+
+            window.location.href = "#/tab/cardinput";
+          }
+        });
+
+
+      }
+      ;
+    });
+  })
+
+
+  /*
+   * Desc 转卡页面的传值
+   * Author WK
+   * Date 2016-11-18
+   * */
   .controller('inputsellCardCtrl', function($scope, $stateParams,$rootScope,$http,Chats,$state,$ionicPopup) {
     $scope.cardId = $stateParams.cardId;
     $scope.cardBalance = $stateParams.cardBalance;
@@ -1102,8 +1170,13 @@ angular.module('starter.controllers', [])
 
     }
   })
-  //授权的默认界面
 
+
+  /*
+   * Desc 授权的默认界面
+   * Author WK
+   * Date 2016-11-18
+   * */
   .controller('inputAccreditCtrl', function($scope, $stateParams,$rootScope,$http,Chats,$state,$ionicPopup) {
     $scope.cardId  =$stateParams.cardId;
     $scope.cardBalance  =$stateParams.cardBalance;
@@ -1214,11 +1287,12 @@ angular.module('starter.controllers', [])
     });
   })
 
-  //账单信息
+  /*
+   * Desc 账单信息
+   * Author WK
+   * Date 2016-11-18
+   * */
 .controller('CardDetailCtrl', function($scope,CardDetail,$rootScope,$ionicLoading,$timeout) {
-
-  // $(".item-content.disable-pointer-events").css("padding-right","40px");
-
   $scope.items=[
     {text:"0",value:"全部"},
     {text:"1",value:"充值"},
@@ -1226,10 +1300,6 @@ angular.module('starter.controllers', [])
   ];
   //默认选择全部
   $scope.ret={choice:'0'};
-
-
-  //$("#amountType").val(0);
-
   var viewSize=20;//账单一开始默认加载20条数据
   $scope.cardDetails = CardDetail.all(0,viewSize);
   $scope.cardDetail = $scope.cardDetails;
@@ -1310,7 +1380,11 @@ angular.module('starter.controllers', [])
 
 
 
-//退出登录
+/*
+ * Desc 退出登录
+ * Author LN
+ * Date 2016-11-24
+ * */
   .controller('settingCtrl', function($scope,$state,$ionicPopup,$rootScope) {
     var token=$.cookie("token");
     var registrationID=$.cookie("registrationID");
@@ -1350,12 +1424,11 @@ angular.module('starter.controllers', [])
 
 
 
-
-
-
-
-
-//获取验证码
+  /*
+   * Desc 获取验证码
+   * Author LN
+   * Date 2016-11-24
+   * */
 .controller('LoginCtrl', function($scope,$interval,$rootScope,$http,$state) {
   // $scope.tel='15910989807';
   //$scope.user={
@@ -1416,7 +1489,11 @@ angular.module('starter.controllers', [])
   };
 })
 
- //登录
+/*
+ * Desc 登陆
+ * Author LN
+ * Date 2016-11-24
+ * */
 .controller('login', function($scope,$rootScope,$state) {
 
     $scope.cloudCardLogin=function () {
@@ -1467,10 +1544,12 @@ angular.module('starter.controllers', [])
     }
 })
 
-
-
-//扫码消费
-  .controller("scanPaymentController", function ($scope, $state, $cordovaBarcodeScanner, $rootScope, $ionicPopup, $ionicLoading, $timeout,$stateParams) {
+/*
+ * Desc 扫码消费
+ * Author wk
+ * Date 2016-11-24
+ * */
+  .controller("scanPaymentController", function ($scope, $state, $cordovaBarcodeScanner, $rootScope, $ionicPopup, $ionicLoading, $timeout, $stateParams) {
     var token = $.cookie("token");
     $scope.cardId = $stateParams.cardId;
     if (token == null) {
@@ -1494,7 +1573,7 @@ angular.module('starter.controllers', [])
                 "qrCode": cardCode
               },
               success: function (result) {
-                 //alert(result.msg+" "+result.storeName+" "+result.storeId+" "+result.storeImgUrl);
+                //alert(result.msg+" "+result.storeName+" "+result.storeId+" "+result.storeImgUrl);
                 if (result.code == '200') {
                   $state.go("tab.payment", {
                     qrCode: cardCode,
@@ -1503,7 +1582,7 @@ angular.module('starter.controllers', [])
                     storeImgUrl: result.storeImgUrl,
                     cardId: $scope.cardId,
                     chooseCardStatus: 'N'
-                        });
+                  });
                 } else {
                   $ionicPopup.alert({
                     title: '温馨提示',
@@ -1517,18 +1596,21 @@ angular.module('starter.controllers', [])
           console.log("An error happened -> " + error);
         });
 
-      },1000);
+      }, 1000);
     };
   })
 
-
+  /*
+   * Desc 选卡支付页面
+   * Author wk
+   * Date 2017-3-3
+   * */
 //调到向商家付款的页面
   .controller('paymentController', function ($scope, $state, $stateParams, $rootScope, $ionicLoading, $ionicPopup) {
     var token = $.cookie("token");
     if (token == null) {
       $state.go("login");
     }
-
     //页面信息初始化
     $scope.qrCode = $stateParams.qrCode;
     $scope.storeName = $stateParams.storeName;
@@ -1661,7 +1743,7 @@ angular.module('starter.controllers', [])
           }
         });
     };
-
+    //从我的卡页面进去的充值
     $scope.weiXin=function (choice) {
       $.ajax({
           url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
