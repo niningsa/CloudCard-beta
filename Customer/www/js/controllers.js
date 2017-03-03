@@ -412,7 +412,7 @@ angular.module('starter.controllers', [])
       var map = new BMap.Map("allmap");
       var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
       var token=$.cookie("token");
-      if(data.coords.longitude=="5e324" | data.coords.latitude=="5e324"){
+      if(data.coords.longitude=="5e-324" | data.coords.latitude=="5e-324"){
         alert("进入地图页面失败");
          $state.go("tab.circleMap");
       }else{
