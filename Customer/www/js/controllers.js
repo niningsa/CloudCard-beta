@@ -74,6 +74,7 @@ angular.module('starter.controllers', [])
           "paymentType": "aliPay",
           //"cardId": "213213123",
           "cardId":  $scope.cardId,
+          "paymentService": "recharge",
           "subject": "库胖-充值",
           "totalFee": "0.01",
           "body": "充值"
@@ -101,6 +102,7 @@ angular.module('starter.controllers', [])
           "paymentType": "wxPay",
           //"cardId": "213213123",
           "cardId":  $scope.cardId,
+          "paymentService": "recharge",
           "totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType":"APP"
