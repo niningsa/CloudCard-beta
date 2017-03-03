@@ -150,6 +150,36 @@ angular.module('starter.controllers', [])
           }
         }
       });
+    //下拉刷新的操作
+    $scope.doRefresh = function() {
+      //下拉刷新的时候选中全部
+      $.ajax({
+        url: $rootScope.interfaceUrl+"myCloudCards",
+        type:"POST",
+        data: {
+          "token":token,
+          "storeId":$scope.storeId
+        },
+        success: function(result){
+          console.log(result);
+          if(result.code=='200'){
+            $scope.$apply(function () {
+              $scope.msg="";
+            });
+            $scope.cloudList=result.cloudCardList;
+
+          }else{
+            $scope.$apply(function () {
+              $scope.msg=result.msg;
+            });
+          }
+        }
+      });
+      //下拉刷新完成后提示转圈消失
+      $scope.$broadcast("scroll.refreshComplete");
+
+    };
+
     $scope.chongZhi=function(storeId,cardId){
       //跳转到充值的页面
       $state.go("tab.cirCleCardRecharge",{
@@ -413,7 +443,22 @@ angular.module('starter.controllers', [])
       var map = new BMap.Map("allmap");
       var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
       var token=$.cookie("token");
-
+      //显示当前我的位置
+      var Point = new BMap.Point(data.coords.longitude,data.coords.latitude);  // 创建点坐标
+      map.centerAndZoom(Point, 16);
+      var marker = new BMap.Marker(Point);
+      map.addOverlay(marker);
+      var myLabels = new BMap.Label("我的位置", //为lable填写内容
+        {position:Point}); //label的位置
+      myLabels.setStyle({ //给label设置样式，任意的CSS都是可以的
+        "color": "blue", //颜色
+        "fontSize": "12px", //字号
+        "border": "0", //边
+        "height": "10px", //高度
+        "width": "20px" //宽
+      });
+      map.addOverlay(myLabels);
+      //请求后台查询店铺
         $.ajax({
           url: $rootScope.interfaceUrl + "userStoreListLBS",
           type: "POST",
@@ -1586,6 +1631,7 @@ angular.module('starter.controllers', [])
 
     //单选按钮初始化
     $scope.ret = {choice: '100'};
+    //这里的充值说的是给我的卡充值，不是圈子卡充值
     $scope.alipay=function (choice) {
       $.ajax({
           url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
