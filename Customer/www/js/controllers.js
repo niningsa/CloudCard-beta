@@ -410,6 +410,8 @@ angular.module('starter.controllers', [])
     navigator.geolocation.getCurrentPosition(function (data) {
       //var point = (121.419634, 31.207267);
       //$scope.ret = {longitude:121.419633, latitude:31.207256};
+      alert(data.coords.longitude);
+      alert(data.coords.latitude);
       var map = new BMap.Map("allmap");
       var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
       var token=$.cookie("token");
@@ -1593,6 +1595,7 @@ angular.module('starter.controllers', [])
             "paymentType": "aliPay",
             //"cardId": "213213123",
             "cardId": $scope.cardId,
+            "paymentService": "recharge",
             "subject": "库胖-充值",
             "totalFee": "0.01",
             "body": "充值"
@@ -1620,6 +1623,7 @@ angular.module('starter.controllers', [])
             "paymentType": "wxPay",
             //"cardId": "213213123",
             "cardId": $scope.cardId,
+            "paymentService": "recharge",
             "totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
             "body": "库胖-充值",           // 标题不能使用中文
             "tradeType":"APP"
