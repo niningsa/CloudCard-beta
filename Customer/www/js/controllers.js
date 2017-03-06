@@ -7,6 +7,7 @@ angular.module('starter.controllers', [])
    * */
   .controller('myCircleCtrl', function($scope,$state, $rootScope, $stateParams) {
     $scope.storeId = $stateParams.storeId;
+    $scope.isGroupOwner = $stateParams.isGroupOwner;
     var token=$.cookie("token");
     $scope.mycards=function(storeId){
       $state.go("tab.myCircleCard",{"storeId":storeId});
@@ -247,6 +248,9 @@ angular.module('starter.controllers', [])
                 "storeId": result.storeId,
                 "storeName": result.storeName,
                 "qrCode": $scope.qrCode,
+                "canBuyGroupCard":result.canBuyGroupCard,//是否有圈子卡
+                "canBuyStoreCard":result.canBuyStoreCard,//是否有店的卡
+                "groupOwnerId":result.groupOwnerId,//圈子的id
                 "cloudCardList": JSON.stringify(result.cloudCardList)
               });
           } else {
@@ -325,6 +329,7 @@ angular.module('starter.controllers', [])
    * */
   .controller('shopCtrl', function ($scope, $state, $rootScope, $ionicScrollDelegate, $stateParams) {
     $scope.storeId = $stateParams.storeId;
+    $scope.isGroupOwner = $stateParams.isGroupOwner;
     var token = $.cookie("token");
     $.ajax({
       url: $rootScope.interfaceUrl + "userGetStoreInfo",
@@ -352,6 +357,11 @@ angular.module('starter.controllers', [])
         }
       }
     });
+
+    //通过圈主来购买圈子卡
+    $scope.buyCircleCard=function(storeId){
+      $state.go("tab.myCircleCard",{"storeId":storeId});
+    }
   })
 
   /*
@@ -410,16 +420,17 @@ angular.module('starter.controllers', [])
     }
     //扫一扫
     $scope.scanBarcode = function () {
-      //var qrCode="ccs-ec9cd1cf-200f-4d4c-8946-f3eaaf2885d4";
+    //  var qrCode="ccs-ec9cd1cf-200f-4d4c-8946-f3eaaf2885d4";
+      var qrCode="ccs-3faf754a-c9e0-4cfe-8bd7-48d55739cc43";
       //真正的代码
-      $ionicLoading.show({
-        template: "正在调摄像头,请稍后...."
-      });
-      $timeout(function () {
-        $cordovaBarcodeScanner.scan().then(function (imageData) {
-          $ionicLoading.hide();
-          $scope.msg = "";
-          var qrCode = imageData.text;
+      //$ionicLoading.show({
+      //  template: "正在调摄像头,请稍后...."
+      //});
+      //$timeout(function () {
+      //  $cordovaBarcodeScanner.scan().then(function (imageData) {
+      //    $ionicLoading.hide();
+      //    $scope.msg = "";
+      //    var qrCode = imageData.text;
           // 扫到的数据
           if (qrCode != '') {
             //通过storeid来查询该圈子的卡，如果有卡就选卡来消费，如果没有卡就添加卡
@@ -442,6 +453,9 @@ angular.module('starter.controllers', [])
                       "storeId": result.storeId,
                       "storeName": result.storeName,
                       "qrCode": qrCode,
+                      "canBuyGroupCard":result.canBuyGroupCard,//是否有圈子卡
+                      "canBuyStoreCard":result.canBuyStoreCard,//是否有店的卡
+                      "groupOwnerId":result.groupOwnerId,//圈子的id
                       "cloudCardList": JSON.stringify(result.cloudCardList)
                     });
                 } else {
@@ -452,10 +466,10 @@ angular.module('starter.controllers', [])
               }
             });
           }
-        }, function (error) {
-        });
-
-      }, 1000);
+      //  }, function (error) {
+      //  });
+      //
+      //}, 1000);
     }
     //百度定位
     navigator.geolocation.getCurrentPosition(function (data) {
@@ -568,6 +582,9 @@ angular.module('starter.controllers', [])
     $scope.storeId = $stateParams.storeId;
     $scope.storeName = $stateParams.storeName;
     $scope.qrCode = $stateParams.qrCode;
+    $scope.canBuyGroupCard = $stateParams.canBuyGroupCard;
+    $scope.canBuyStoreCard = $stateParams.canBuyStoreCard;
+    $scope.groupOwnerId = $stateParams.groupOwnerId;
     $scope.cloudCardList = JSON.parse($state.params.cloudCardList);
     console.log(JSON.parse($state.params.cloudCardList));
     var token = $.cookie("token");
@@ -583,10 +600,19 @@ angular.module('starter.controllers', [])
     }
     //JSON.parse($state.params.cloudCardList) 将对象转换为数组
     //这是扫一扫买卡的操作
+    //这里是买店里的卡
+    $scope.scanAddGroupCard = function (qrCode,groupOwnerId) {
+      $state.go("tab.scanAddGroupCard", {
+        "storeId": $scope.storeId,
+        "qrCode": $scope.qrCode,
+        "groupOwnerId": groupOwnerId
+      });
+    }
+    //这是买圈子的卡
     $scope.scanAddCard = function (qrCode) {
       $state.go("tab.scanAddCard", {
         "storeId": $scope.storeId,
-        "qrCode": $scope.qrCode,
+        "qrCode": $scope.qrCode
       });
     }
 
@@ -613,6 +639,9 @@ angular.module('starter.controllers', [])
                 "storeId": result.storeId,
                 "storeName": result.storeName,
                 "qrCode": $scope.qrCode,
+                "canBuyGroupCard":result.canBuyGroupCard,//是否有圈子卡
+                "canBuyStoreCard":result.canBuyStoreCard,//是否有店的卡
+                "groupOwnerId":result.groupOwnerId,//圈子的id
                 "cloudCardList": JSON.stringify(result.cloudCardList)
               });
           } else {
@@ -658,6 +687,112 @@ angular.module('starter.controllers', [])
                 "storeId": result.storeId,
                 "storeName": result.storeName,
                 "qrCode": $scope.qrCode,
+                "canBuyGroupCard":result.canBuyGroupCard,//是否有圈子卡
+                "canBuyStoreCard":result.canBuyStoreCard,//是否有店的卡
+                "groupOwnerId":result.groupOwnerId,//圈子的id
+                "cloudCardList": JSON.stringify(result.cloudCardList)
+              });
+          } else {
+            $scope.$apply(function () {
+              $scope.msg = result.msg;
+            });
+          }
+        }
+      });
+    }
+    //这里是通过扫一扫来买圈子的卡
+    $scope.ret = {choice: '100'};
+    $scope.alipay = function (choice, storeId) {
+      //alert(storeId);
+      $.ajax({
+        url: $rootScope.interfaceUrl + "purchaseCard", // wxPrepayOrder
+        // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+        type: "POST",
+        data: {
+          "paymentType": "aliPay",
+          "storeId": storeId,
+          "paymentService": "buyCard",
+          "subject": "库胖-充值",
+          "totalFee": "0.01",
+          "body": "充值"
+        },
+        success: function (result) {
+          console.log(result.payInfo);
+          //第二步：调用支付插件
+          cordova.plugins.AliPay.pay(result.payInfo, function success(e) {
+            // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            //支付成功到扫一扫的卡页面列表
+            $scope.chooseCard();
+          }, function error(e) {
+            // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+          });
+        }
+      });
+    };
+
+    $scope.weiXin = function (choice, storeId) {
+      //alert(storeId);
+      $.ajax({
+        url: $rootScope.interfaceUrl + "purchaseCard", // wxPrepayOrder
+        // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
+        type: "POST",
+        data: {
+          "paymentType": "wxPay",
+          "storeId": storeId,
+          "paymentService": "buyCard",
+          "totalFee": "0.01",              // 微信金额不支持小数，这里1表示0.01
+          "body": "库胖-充值",           // 标题不能使用中文
+          "tradeType": "APP"
+        },
+        success: function (result) {
+          console.log(result);
+          //第二步：调用支付插件
+          wxpay.payment(result, function success(e) {
+            //alert("成功了：" + e);
+            $scope.chooseCard();
+            //$state.go("myCircleCard",{"storeId":storeId});
+          }, function error(e) {
+            //alert("失败了：" + e);
+          });
+        }
+      });
+
+    };
+
+  })
+  //这是购买圈子里的卡
+  .controller('scanAddGroupCardCtrl', function ($scope, $stateParams, $state, $rootScope) {
+    $scope.storeId = $stateParams.storeId;
+    $scope.qrCode = $stateParams.qrCode;
+    $scope.groupOwnerId = $stateParams.groupOwnerId;
+    var token = $.cookie("token");
+
+    //这里是返回的操作到所以扫后的圈子卡的列表
+    $scope.chooseCard = function () {
+      $.ajax({
+        url: $rootScope.interfaceUrl + "userScanCodeGetCardAndStoreInfo",
+        type: "POST",
+        data: {
+          "token": token,
+          "qrCode": $scope.qrCode
+        },
+        success: function (result) {
+          console.log(result);
+          if (result.code == '200') {
+            $scope.$apply(function () {
+              $scope.msg = "";
+            });
+            //$scope.groupName=result.groupName;
+            //圈友
+            //$scope.cloudList=result.cloudCardList
+            $state.go("tab.chooseCard",
+              {
+                "storeId": result.storeId,
+                "storeName": result.storeName,
+                "qrCode": $scope.qrCode,
+                "canBuyGroupCard":result.canBuyGroupCard,//是否有圈子卡
+                "canBuyStoreCard":result.canBuyStoreCard,//是否有店的卡
+                "groupOwnerId":result.groupOwnerId,//圈子的id
                 "cloudCardList": JSON.stringify(result.cloudCardList)
               });
           } else {
@@ -1641,6 +1776,9 @@ angular.module('starter.controllers', [])
                 "storeId": result.storeId,
                 "storeName":result.storeName,
                 "qrCode":$scope.qrCode,
+                "hasGroupCard":result.hasGroupCard,//是否有圈子卡
+                "hasStoreCard":result.hasStoreCard,//是否有店的卡
+                "groupOwnerId":result.groupOwnerId,//圈子的id
                 "cloudCardList":JSON.stringify(result.cloudCardList)
               });
           }else{

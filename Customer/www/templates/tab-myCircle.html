@@ -18,7 +18,7 @@
         圈主
       </div>
       <div ng-repeat="chat in storeList">
-        <a class="item item-avatar"  ng-if="chat.isGroupOwner=='Y'" href="#tab/shop/{{chat.storeId}}">
+        <a class="item item-avatar"  ng-if="chat.isGroupOwner=='Y'" href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">
           <img src="{{chat.storeImg}}">
           <h2>名称: {{chat.storeName}}</h2>
           <p> 地址: {{chat.storeAddress}}</p>
@@ -31,7 +31,7 @@
         圈友
       </div>
       <div ng-repeat="chat in storeList">
-        <a class="item item-avatar" ng-if="chat.isGroupOwner=='N'" href="#tab/shop/{{chat.storeId}}">
+        <a class="item item-avatar" ng-if="chat.isGroupOwner=='N'" href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">
           <img src="{{chat.storeImg}}">
           <h2>名称: {{chat.storeName}}</h2>
           <p> 地址：{{chat.storeAddress}}</p>

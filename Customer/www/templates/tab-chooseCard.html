@@ -16,8 +16,16 @@
           </a>
         </div>
         <!--为了避免出错，将页面不共享，分离出来-->
-        <div class="item text-center">
-          <a style="font-size: 50px;" ng-click="scanAddCard('{{qrCode}}');" >+</a>
+
+        <!--这里要区分时候有圈子卡和店里卡-->
+        <!--hasGroupCard表示有圈子卡,如果有圈子卡就不能买圈子的卡了，圈子的卡只能买一次-->
+
+        <div class="item text-center" ng-if="canBuyGroupCard=='Y'">
+          <a style="font-size: 50px;color:red" ng-click="scanAddGroupCard('{{qrCode}}','{{groupOwnerId}}');"  >+<span style="font-size:20px;">(购买圈子卡)</span></a>
+        </div>
+        <!--hasStoreCard表示是后有店里的卡，店里的卡只能买一张-->
+        <div class="item text-center" ng-if="canBuyStoreCard=='Y'">
+          <a style="font-size: 50px;" ng-click="scanAddCard('{{qrCode}}');" >+<span style="font-size:20px;">(购买店里卡)</span></a>
         </div>
       </div>
     </ion-item>

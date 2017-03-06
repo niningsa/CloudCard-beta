@@ -262,7 +262,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
-    //扫一扫后向商家买卡
+    //扫一扫后向商家买卡（这是买店里的卡）
     .state('tab.scanAddCard', {
       url: '/scanAddCard/:storeId/:qrCode',
       views: {
@@ -272,9 +272,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
+    //扫一扫后向商家买卡（这是买圈子里的卡）
+    .state('tab.scanAddGroupCard', {
+      url: '/scanAddGroupCard/:storeId/:qrCode/:groupOwnerId',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-scanAddGroupCard.html',
+          controller: 'scanAddGroupCardCtrl'
+        }
+      }
+    })
     //用户选择卡来消费
     .state('tab.chooseCard', {
-      url: '/chooseCard/:storeId/:storeName/:cloudCardList/:qrCode',
+      url: '/chooseCard/:storeId/:storeName/:cloudCardList/:qrCode/:canBuyGroupCard/:canBuyStoreCard/:groupOwnerId',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-chooseCard.html',
@@ -285,7 +295,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
       //我的圈子的页面展示
     .state('tab.myCircle', {
-      url: '/myCircle/:storeId',
+      url: '/myCircle/:storeId/:isGroupOwner',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-myCircle.html',
@@ -296,7 +306,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
       //店铺的展示页面
     .state('tab.shop', {
-      url: '/shop/:storeId',
+      url: '/shop/:storeId/:isGroupOwner',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-shop.html',
