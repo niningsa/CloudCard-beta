@@ -1,5 +1,24 @@
 angular.module('starter.controllers', [])
-
+  //调用手机通讯录
+  .controller('TodoCtrl', function ($scope, $ionicModal, $cordovaContacts) {
+    $scope.pickContactss = function () {
+      $cordovaContacts.pickContact().then(
+        function (contact) {
+          //alert('Contact pick! '+ JSON.stringify(contact));
+          console.log('The following contact has been selected:' + JSON.stringify(contact));
+          //获取联系人的电话号码
+          //alert(contact.phoneNumbers[0].value);
+          //将联系人中的空格和特殊字符去掉
+          //contact.phoneNumbers[0].value.replace(/[\s\-]/g,'')
+          document.getElementById("telphone").value = contact.phoneNumbers[0].value.replace(/[\s\-]/g, '');
+        },
+        function (err) {
+          //alert('Contact pick err!', err);
+          //console.log(err);node_modules
+        }
+      );
+    }
+  })
   /*
    * Desc 我的圈子的页面展示
    * Author WK
@@ -1106,7 +1125,7 @@ angular.module('starter.controllers', [])
 
 
     $("body").off("click", "#powerfrom").on("click", "#powerfrom", function () {
-      $other_tel = $("#other_tel").val();
+      $other_tel = $("#telphone").val();
       $other_cardId = $("#other_cardId").val();
       //$other_money=$("#other_money").val();
       $other_startDate = $("#other_startDate").val();
@@ -1330,7 +1349,7 @@ angular.module('starter.controllers', [])
     $scope.ret={choice:'1'};
 
     $("body").off("click", "#powerfrom").on("click","#powerfrom", function() {
-      $other_tel=$("#other_tel").val();
+      $other_tel=$("#telphone").val();
       $other_cardId=$("#other_cardId").val();
       $other_money=$("#other_money").val();
       $day=$("#day").val();

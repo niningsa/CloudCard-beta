@@ -15,10 +15,12 @@
             <span class="input-label">卡id：</span>
             <input id="other_cardId" class="form-control" type="text" value="{{cardId}}"/>
           </label>
-          <label class="">
-            <span class="stime">被授权手机：</span>
-            <input id="other_tel" type="number" ng-model="other_tel"  name="other_tel" class="form-control" required/>
-          </label>
+          <div ng-controller="TodoCtrl">
+            <input id="telphone" style="width:150px;display: inline-block;padding: 0px 10px 0px 0px" type="number" ng-model="telphone" placeholder="被授权手机号" name="telphone"  required/>
+            <button style="padding: 0px 10px 0px 20px" class="button button-small "  ng-click="pickContactss();"  >
+              选择联系人
+            </button>
+          </div>
           <label class="">
             <span class="input-label" style="display: none">授权金额：</span>
             <input id="other_money" style="display: none" type="text" value="{{cardBalance}}" class="form-control"/>
@@ -53,8 +55,7 @@
           </label>
         </div>
         <div class="powerbutton">
-          <button id="powerfrom" class="button button-positive" style="width: 100%"
-                  ng-disabled="accreForm.other_tel.$error.required">确认授权
+          <button id="powerfrom" class="button button-positive" style="width: 100%">确认授权
           </button>
         </div>
       </form>

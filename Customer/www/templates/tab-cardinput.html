@@ -2,37 +2,39 @@
   <ion-nav-buttons side="left">
     <a class="button icon ion-ios-undo" href="#/tab/accredit/{{cardId}}/{{cardBalance}}/{{cardName}}/{{cardCode}}/{{isAuthToOthers}}/{{isAuthToMe}}"></a>
   </ion-nav-buttons>
-  <ion-content class="padding">
-   <div class="charInfos">
-	   <div class="chartext"><strong>{{cardName}}：{{cardBalance}} </strong>元</div>
-	   <div class="list">
-		  <label class=" item-input" style="display: none">
-		    <span class="input-label">卡id：</span>
-		    <input id="other_cardId" class="form-control" type="text" value="{{cardId}}"/>
-		  </label>
-		  <label class="">
-		    <span class="input-label ">手机号码：</span>
-        <input id="other_tel" type="number" class="form-control"/>
-		  </label><br/>
+  <ion-content >
        <!--其他方式授权暂时是授权全部的金额-->
 		  <!--<label class="">-->
 		    <!--<span class="input-label">授权金额：</span>-->
 		    <!--<input id="other_money" type="text" class="form-control"/>-->
 		  <!--</label><br/>-->
-		  <label class="">
-		    <span class="input-label">开始时间：</span>
-		    <input id="other_startDate" placeholder="年/月/日" min="" class="form-control" ng-click="openDatePicker()" required />
-		  </label><br/>
-		  <label class="">
-		    <span class="input-label">结束时间：</span>
-		    <input id="other_endDate" placeholder="年/月/日" ng-click="openDatePicker2()" class="form-control"/>
-		  </label>
-       <time-picker  time-picker-result="toolModel.timePickerResult"  title="请选择时间"></time-picker>
-     </div>
-	  	<div class="powerbutton">
-		  <button id="powerfrom" class="button button-positive" style="width: 100%">确认授权</button>
-	  	</div>
+    <div class="list list-inset" >
+      <div class="charInfos"><strong>{{cardName}}：{{cardBalance}} </strong>元</div>
+      <form name="cardinputForm">
+      <div>
+        <label class=" item-input" style="display: none">
+          <span class="input-label">卡id：</span>
+          <input id="other_cardId" class="form-control" type="text" value="{{cardId}}"/>
+        </label>
+      </div>
+      <div class="item item-input" ng-controller="TodoCtrl">
+        <input id="telphone" type="number" ng-model="telphone" placeholder="被授权手机号" name="telphone"  required/>
+        <button class="button button-small "  ng-click="pickContactss();"  >
+        选择联系人
+        </button>
+      </div>
+      <div class="item item-input">
+        <input id="other_startDate" name="other_startDate"  placeholder="开始时间" class="form-control" min="" ng-click="openDatePicker()" required />
+      </div>
+      <div class="item item-input">
+        <input id="other_endDate" name="other_endDate" ng-model="other_endDate" class="form-control" placeholder="结束时间" ng-click="openDatePicker2()"  required/>
+      </div>
+      <div class="powerbutton">
+      <button id="powerfrom" class="button button-positive" style="width: 100%">确认授权</button>
+      </div>
+      </form>
+    </div>
 
-   </div>
+
   </ion-content>
 </ion-view>
