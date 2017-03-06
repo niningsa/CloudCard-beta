@@ -420,18 +420,18 @@ angular.module('starter.controllers', [])
     }
     //扫一扫
     $scope.scanBarcode = function () {
-    //  var qrCode="ccs-ec9cd1cf-200f-4d4c-8946-f3eaaf2885d4";
-      var qrCode="ccs-3faf754a-c9e0-4cfe-8bd7-48d55739cc43";
+      //var qrCode="ccs-ec9cd1cf-200f-4d4c-8946-f3eaaf2885d4";
+    //  var qrCode="ccs-3faf754a-c9e0-4cfe-8bd7-48d55739cc43";
       //真正的代码
-      //$ionicLoading.show({
-      //  template: "正在调摄像头,请稍后...."
-      //});
-      //$timeout(function () {
-      //  $cordovaBarcodeScanner.scan().then(function (imageData) {
-      //    $ionicLoading.hide();
-      //    $scope.msg = "";
-      //    var qrCode = imageData.text;
-          // 扫到的数据
+      $ionicLoading.show({
+        template: "正在调摄像头,请稍后...."
+      });
+      $timeout(function () {
+        $cordovaBarcodeScanner.scan().then(function (imageData) {
+          $ionicLoading.hide();
+          $scope.msg = "";
+          var qrCode = imageData.text;
+           //扫到的数据
           if (qrCode != '') {
             //通过storeid来查询该圈子的卡，如果有卡就选卡来消费，如果没有卡就添加卡
             $.ajax({
@@ -466,10 +466,10 @@ angular.module('starter.controllers', [])
               }
             });
           }
-      //  }, function (error) {
-      //  });
-      //
-      //}, 1000);
+        }, function (error) {
+        });
+
+      }, 1000);
     }
     //百度定位
     navigator.geolocation.getCurrentPosition(function (data) {
