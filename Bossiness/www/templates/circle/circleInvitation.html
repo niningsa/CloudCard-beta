@@ -8,10 +8,10 @@
     <div class="list">
       <div class="item item-input-inset">
         <label class="item-input-wrapper">
-          <input ng-model="tel" type="text" placeholder="手机号码">
+          <input ng-model="tel" type="text" id="phoneNums" placeholder="手机号码">
         </label>
 
-        <button class="button button-small button-calm">
+        <button class="button button-small button-calm" ng-click="pickContactUsingNativeUI()">
           通讯录
         </button>
       </div>

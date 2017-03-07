@@ -71,10 +71,10 @@ angular.module('circle.controllers', [])
       $scope.modal.hide();
     };
 
-    // 结算
-    $scope.bizDoSettlement = function (actualSettlementAmount) {
-      // alert($scope.storeId+" "+$scope.settlementAmount+" "+actualSettlementAmount);
-      amountService.bizDoSettlement($scope.storeId, $scope.settlementAmount, actualSettlementAmount).success(function (data) {
+    // 圈主发起结算
+    $scope.bizDoSettlement = function (actualSettlementAmount, settlementAmount) {
+      // alert($scope.storeId+" "+settlementAmount+" "+actualSettlementAmount);
+      amountService.bizDoSettlement($scope.storeId, settlementAmount, actualSettlementAmount).success(function (data) {
         $scope.modal.hide();
       });
     };
@@ -191,17 +191,16 @@ angular.module('circle.controllers', [])
    * Author LN
    * Date 2017-2-26
    * */
-  .controller('myCircleCtrl', function ($scope, $state, $stateParams, $ionicPopup, myCircleServece) {
-    $scope.circleName  =$stateParams.circleName;
+  .controller('myCircleCtrl', function ($scope, $state, $ionicPopup, myCircleServece) {
+    var token = $.cookie("token");
     var organizationPartyId = $.cookie("organizationPartyId");
 
-    var token = $.cookie("token");
     if (token == null) {
       $state.go("login");
     }
 
     // 我的圈子info
-    myCircleServece.bizMyGroup().success(function (data) {
+    myCircleServece.bizMyGroup(token, organizationPartyId).success(function (data) {
       $scope.isJoinGroup	= data.isJoinGroup;		         	              // 是否已加入圈子
       $scope.isGroupOwner = data.isGroupOwner;	         	              // 是否为圈主
 
@@ -212,7 +211,6 @@ angular.module('circle.controllers', [])
       $scope.income = data.income;						                          // 收益总额，因为跨店消费的圈主给圈友的打折而产生的收益总额，
       $scope.partners = data.partners;		                              // 圈友列表
       $scope.invitations = data.invitations;		                        // 邀请加入圈子的列表，
-
     });
 
     // 页面数据展示
@@ -271,11 +269,23 @@ angular.module('circle.controllers', [])
    * Author LN
    * Date 2017-2-26
    * */
-  .controller('circleInvitationCtrl', function ($scope, $state, $ionicPopup, myCircleServece) {
+  .controller('circleInvitationCtrl', function ($scope, $state, $ionicPopup, $cordovaContacts, myCircleServece) {
     var token = $.cookie("token");
     if (token == null) {
       $state.go("login");
     }
+
+    // 打开通讯录
+    $scope.pickContactUsingNativeUI = function () {
+      $cordovaContacts.pickContact().then(function (contactPicked) {
+        $scope.contact = contact.phoneNumbers[0].value;
+        alert(JSON.stringify(contactPicked));
+        alert($scope.contact);
+        $scope.tel($scope.contact);
+
+      });
+    };
+
 
     $scope.invitationGroup = function(telphone){
       //验证手机号是否合法
