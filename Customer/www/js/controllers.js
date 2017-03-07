@@ -390,8 +390,36 @@ angular.module('starter.controllers', [])
    * */
   .controller('paymentCodeCtrl', function ($scope, $state, $rootScope, $stateParams) {
     $scope.qrCode = $stateParams.qrCode;
+    var token=$.cookie("token");
+    jQuery('.item').qrcode($stateParams.qrCode);
+   //刷新重新生成二维码
+    $scope.refresh=function(){
+      $.ajax({
+        url: $rootScope.interfaceUrl + "getPaymentQRCode",
+        type: "POST",
+        data: {
+          "token": token
+        },
+        success: function (result) {
+          console.log(result);
+          if (result.code == '200') {
+            $scope.$apply(function () {
+              $scope.msg = "";
+            });
 
-    jQuery('#pcode').qrcode($stateParams.qrCode);
+            $state.go("tab.paymentCode",
+              {qrCode: result.qrCode});
+          } else {
+
+
+            $scope.$apply(function () {
+              $scope.msg = result.msg;
+            });
+          }
+        }
+      });
+
+    }
   })
 
   /*
@@ -1590,7 +1618,6 @@ angular.module('starter.controllers', [])
   //};
   //为了让安卓手机按返回时不跳到登陆页面，判断tooken
   $scope.$on('$ionicView.beforeEnter', function () {                           // 这个玩意儿不错，刚加载执行的广播通知方法
-    $scope.user = {"identifyCode": ""};                                          // 退出登录后，清空验证码
     if ($.cookie("token") != null) { // 登录成功了，按物理返回键，就别想重新登录
       //$state.go("tab.chats");
       $state.go("tab.circleMap");
