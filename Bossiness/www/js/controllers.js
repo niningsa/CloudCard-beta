@@ -31,7 +31,7 @@ angular.module('starter.controllers', [])
     var charts = Chats.all(0);                                              // 商家账单
     $scope.Chats = charts;
     $scope.Chatss = charts;
-    console.table($scope.Chatss);
+    // console.table($scope.Chatss);
 
     if (token == '') {
       $state.go("login");
@@ -667,9 +667,9 @@ angular.module('starter.controllers', [])
             tags.push($scope.formData.tags1);
 
             window.plugins.jPushPlugin.setTagsWithAlias(tags, $scope.formData.alias);
-            alert("设置别名OK！");
+            // alert("设置别名OK！");
           } catch (exception) {
-            alert("设置别名错误！");
+            // alert("设置别名错误！");
             console.log(exception);
           }
           $state.go("login");

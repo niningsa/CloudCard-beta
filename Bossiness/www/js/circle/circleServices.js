@@ -3,9 +3,10 @@ angular.module('circle.services', [])
   .service("myCircleServece", function ($q, $rootScope) {
     var token = $.cookie("token");
     var organizationPartyId = $.cookie("organizationPartyId");
+
     return {
       // 我的圈子
-      bizMyGroup: function () {
+      bizMyGroup: function (tk, storeId) {
         var deferred = $q.defer();
         var promise = deferred.promise;
 
@@ -14,8 +15,8 @@ angular.module('circle.services', [])
             url: $rootScope.interfaceUrl + "bizMyGroup",
             type: "POST",
             data: {
-              "token": token,
-              "organizationPartyId": organizationPartyId
+              "token": tk,
+              "organizationPartyId": storeId
             },
             success: function (result) {
               console.log(result);
