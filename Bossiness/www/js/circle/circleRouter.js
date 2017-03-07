@@ -27,16 +27,6 @@ angular.module('starter')
       }
     })
 
-    .state('tab.circleFriend', {
-      url: '/circleFriend',
-      cache: false,
-      views: {
-        'tab-myCircle': {
-          templateUrl: 'templates/tab-circleFriend.html',
-          controller: 'circleFriendCtrl'
-        }
-      }
-    })
 
     .state('tab.circleInfo', {
       url: '/circleInfo',

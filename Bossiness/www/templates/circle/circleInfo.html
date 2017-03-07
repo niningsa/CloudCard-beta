@@ -33,8 +33,11 @@
       2、圈友没有冻结权限，退只能退自己的。
       -->
       <div class="item" ng-show="!(isGroupOwner == 'Y' && organizationPartyId == storeId)">
-        <button class="button button-positive" ng-show="isGroupOwner == 'Y'" style="width: 49%" ng-show="isGroupOwner=='Y'" ng-click="bizFreezeGroupPartner(storeId)">
-          冻结/解冻
+        <button class="button button-positive" ng-hide="isFrozen == 'Y'" ng-show="isGroupOwner == 'Y'" style="width: 49%" ng-click="bizFreezeGroupPartner(storeId)">
+          冻结
+        </button>
+        <button class="button button-positive" ng-hide="isFrozen == 'N'" ng-show="isGroupOwner == 'Y'" style="width: 49%" ng-click="bizFreezeGroupPartner(storeId)">
+          解冻
         </button>
         <button ng-show="isGroupOwner == 'Y' || organizationPartyId == storeId" ng-class="isGroupOwner=='Y'?'button button-positive':'button button-positive button-block'" ng-style="myObj"  ng-click="bizExitGroup()">
           退出圈子

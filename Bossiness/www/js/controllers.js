@@ -148,7 +148,6 @@ angular.module('starter.controllers', [])
 
               // alert(cardCode+" "+token+" "+organizationPartyId);
               if (cardCode != '') {
-                $scope.save = true;
                 // alert(cardCode+" "+token+" "+organizationPartyId);
                 $.ajax({
                   url: $rootScope.interfaceUrl + "cloudCardWithdraw",
@@ -170,7 +169,6 @@ angular.module('starter.controllers', [])
                     } else {
                       $scope.$apply(function () {
                         $scope.msg = result.msg;
-                        $scope.save = false;
                       });
                     }
                   }
