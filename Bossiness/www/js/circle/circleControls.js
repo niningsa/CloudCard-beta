@@ -100,6 +100,7 @@ angular.module('circle.controllers', [])
     // 查看店铺简要信息
     myCircleServece.bizGetStoreInfo($scope.storeId).success(function (data) {
       $scope.storeName = data.storeName;			            // 店名
+      $scope.isFrozen = data.isFrozen;			              // 是否被冻结
       $scope.storeId = data.storeId;					            // 店铺id
       $scope.storeImg = data.storeImg; 				            // 店铺图片地址
       $scope.storeAddress = data.storeAddress;            // 店铺地址
@@ -122,14 +123,14 @@ angular.module('circle.controllers', [])
       // 圈主踢出圈友时， 必须先对该圈友进行冻结, 然后结清未结算金额
       // 圈友主动发起退出操作的场景， 若有未结算金额时，也会给出错误提示。
       if($scope.isGroupOwner == 'Y'){
-        $scope.bizFreezeGroupPartner($scope.storeId);               // 冻结
+        // $scope.bizFreezeGroupPartner($scope.storeId);               // 冻结
         myCircleServece.bizGetStoreInfo($scope.storeId);            // 结算
       }
 
       myCircleServece.bizExitGroup($scope.storeId).success(function (data) {
         var alertPopup = $ionicPopup.alert({
           title: '成功',
-          template: "退出成功！"
+          template: data.msg
         });
         alertPopup.then(function(res) {
           $state.go("tab.myCircle");
@@ -148,7 +149,7 @@ angular.module('circle.controllers', [])
       myCircleServece.bizFreezeGroupPartner(storeId).success(function (data) {
         var alertPopup = $ionicPopup.alert({
           title: '成功',
-          template: "操作成功！"
+          template: data.msg
         });
         alertPopup.then(function(res) {
           $state.go("tab.myCircle");
@@ -286,36 +287,24 @@ angular.module('circle.controllers', [])
 
 
     $scope.invitationGroup = function(telphone){
-      //验证手机号是否合法
-      var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-
-      if (!phoneReg.test(telphone)) {
-        $ionicPopup.alert({
-          title:"温馨提示",
-          template:"请输入正确的手机号码",
-          okText:"确定"
+      // 邀请
+      myCircleServece.bizSentGroupInvitation(telphone).success(function (data) {
+        var alertPopup = $ionicPopup.alert({
+          title: '成功',
+          template: "邀请请求发送成功，等待好友确认！"
         });
-      }else{
-        // 邀请
-        myCircleServece.bizSentGroupInvitation(telphone).success(function (data) {
-          var alertPopup = $ionicPopup.alert({
-            title: '成功',
-            template: "邀请请求发送成功，等待好友确认！"
-          });
-          alertPopup.then(function(res) {
-            $state.go("tab.myCircle");
-          });
-        }).error(function (data) {
-          var alertPopup = $ionicPopup.alert({
-            title: '失败',
-            template: data.msg
-          });
-          alertPopup.then(function(res) {
-            $state.go("tab.circleInvitation");
-          });
+        alertPopup.then(function(res) {
+          $state.go("tab.myCircle");
         });
-      }
-
+      }).error(function (data) {
+        var alertPopup = $ionicPopup.alert({
+          title: '失败',
+          template: data.msg
+        });
+        alertPopup.then(function(res) {
+          $state.go("tab.circleInvitation");
+        });
+      });
     };
   })
 

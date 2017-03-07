@@ -1,12 +1,11 @@
 angular.module('circle.services', [])
 
   .service("myCircleServece", function ($q, $rootScope) {
-    var token = $.cookie("token");
-    var organizationPartyId = $.cookie("organizationPartyId");
-
     return {
       // 我的圈子
       bizMyGroup: function (tk, storeId) {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
 
@@ -41,6 +40,8 @@ angular.module('circle.services', [])
 
       // 商家创建圈子
       bizCreateGroup: function (groupName) {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
 
@@ -76,6 +77,8 @@ angular.module('circle.services', [])
 
       // 邀请商家加入圈子
       bizSentGroupInvitation: function (teleNumber) {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
 
@@ -111,6 +114,8 @@ angular.module('circle.services', [])
 
       // 查看店铺简要信息（如 点击圈友列表中的圈友）
       bizGetStoreInfo: function (storeId) {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
         $.ajax(
@@ -145,6 +150,8 @@ angular.module('circle.services', [])
 
       // 圈主解散圈子
       bizDissolveGroup: function () {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
         $.ajax(
@@ -178,6 +185,8 @@ angular.module('circle.services', [])
 
       // 接收/拒绝 加入圈子的邀请
       bizAcceptGroupInvitation: function (invitation, partyInvitationId) {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
         $.ajax(
@@ -213,6 +222,8 @@ angular.module('circle.services', [])
 
       // 圈友退出圈子
       bizExitGroup: function (storeId) {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
         $.ajax(
@@ -247,6 +258,8 @@ angular.module('circle.services', [])
 
       // 圈主冻结/解冻 圈友(冻结后 不允许再接收圈主的卡消费 )
       bizFreezeGroupPartner: function (storeId) {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
         $.ajax(
@@ -283,11 +296,11 @@ angular.module('circle.services', [])
 
 
   .service("amountService", function ($q, $rootScope) {
-    var token = $.cookie("token");
-    var organizationPartyId = $.cookie("organizationPartyId");
     return {
       // 圈主发起结算，需要等待圈友确认结算后，才会生效
       bizDoSettlement: function (storeId, settlementAmount, actualSettlementAmount) {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
         $.ajax(
@@ -323,6 +336,8 @@ angular.module('circle.services', [])
 
       // 获取待确认结算信息
       bizGetUnconfirmedSettlementInfo: function (storeId) {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
         $.ajax(
@@ -357,6 +372,8 @@ angular.module('circle.services', [])
 
       // 圈友确认结算
       bizSettlementConfirm: function (settlementId, isConfirm) {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
         $.ajax(
@@ -392,6 +409,8 @@ angular.module('circle.services', [])
 
       // 催款，提醒圈主进行结算
       bizSettlementRequest: function () {
+        var token = $.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
         $.ajax(
