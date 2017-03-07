@@ -278,11 +278,9 @@ angular.module('circle.controllers', [])
     // 打开通讯录
     $scope.pickContactUsingNativeUI = function () {
       $cordovaContacts.pickContact().then(function (contactPicked) {
-        $scope.contact = contact.phoneNumbers[0].value;
-        alert(JSON.stringify(contactPicked));
-        alert($scope.contact);
-        $scope.tel($scope.contact);
-
+        $scope.contact = contactPicked.phoneNumbers[0].value.replace(/[\s\-]/g,'');
+        // alert(JSON.stringify(contactPicked));
+        document.getElementById('phoneNums').value = $scope.contact;
       });
     };
 
