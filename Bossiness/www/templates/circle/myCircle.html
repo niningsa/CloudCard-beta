@@ -51,7 +51,7 @@
         <ion-list>
           <ion-item ng-repeat="invitation in invitations" can-swipe="true" class="item-icon-right">
             <h2>{{$index+1}}、 {{invitation.fromName}} 邀请您加入圈子</h2>
-            <i class="icon ion-arrow-move" style="color:darkgrey"></i>
+            <i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>
             <ion-option-button class="button-balanced" ng-click="bizAcceptGroupInvitation('Y',invitation.partyInvitationId)">接受</ion-option-button>
             <ion-option-button class="button-assertive" ng-click="bizAcceptGroupInvitation('N',invitation.partyInvitationId)">拒绝</ion-option-button>
           </ion-item>

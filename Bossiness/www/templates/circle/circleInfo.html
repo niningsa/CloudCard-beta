@@ -40,7 +40,7 @@
         </span>
         <span ng-show="isGroupOwner == 'Y'">
           <button class="button button-positive" ng-hide="isFrozen == 'N'"  style="width: 49%" ng-click="bizFreezeGroupPartner(storeId)">
-            冻结
+            解冻
           </button>
         </span>
         <button ng-show="isGroupOwner == 'Y' || organizationPartyId == storeId" ng-class="isGroupOwner=='Y'?'button button-positive':'button button-positive button-block'" ng-style="myObj"  ng-click="bizExitGroup()">
@@ -48,7 +48,6 @@
         </button>
       </div>
     </div>
-
 
   </ion-content>
   <ion-footer-bar class="has-subfooter stable-bg" ng-show="isGroupOwner != isGroupOwners && isGroupOwner=='Y'">

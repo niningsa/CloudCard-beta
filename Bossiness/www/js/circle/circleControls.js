@@ -101,7 +101,6 @@ angular.module('circle.controllers', [])
     myCircleServece.bizGetStoreInfo($scope.storeId).success(function (data) {
       $scope.storeName = data.storeName;			            // 店名
       $scope.isFrozen = data.isFrozen;			              // 是否被冻结
-      $scope.storeId = data.storeId;					            // 店铺id
       $scope.storeImg = data.storeImg; 				            // 店铺图片地址
       $scope.storeAddress = data.storeAddress;            // 店铺地址
       $scope.storeTeleNumber = data.storeTeleNumber;			// 店铺联系电话（店主电话）
@@ -194,14 +193,13 @@ angular.module('circle.controllers', [])
    * */
   .controller('myCircleCtrl', function ($scope, $state, $ionicPopup, myCircleServece) {
     var token = $.cookie("token");
-    var organizationPartyId = $.cookie("organizationPartyId");
 
     if (token == null) {
       $state.go("login");
     }
 
     // 我的圈子info
-    myCircleServece.bizMyGroup(token, organizationPartyId).success(function (data) {
+    myCircleServece.bizMyGroup().success(function (data) {
       $scope.isJoinGroup	= data.isJoinGroup;		         	              // 是否已加入圈子
       $scope.isGroupOwner = data.isGroupOwner;	         	              // 是否为圈主
 
@@ -215,7 +213,7 @@ angular.module('circle.controllers', [])
     });
 
     // 页面数据展示
-    myCircleServece.bizGetStoreInfo(organizationPartyId).success(function (data) {
+    myCircleServece.bizGetStoreInfo($.cookie("organizationPartyId")).success(function (data) {
       $scope.settlementAmount = data.settlementAmount;
       $scope.storeImg = data.storeImg;
       $scope.groupName = data.storeName;

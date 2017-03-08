@@ -8,17 +8,17 @@
     <div class="padding">
       <div class="list" ng-init="actualSettlementAmount=0;settlementAmounts=0">
         <label class="item item-input">
-          <span class="input-label">实际结算金额</span>
-          <input ng-model="actualSettlementAmount" type="text">
-        </label>
-        <label class="item item-input">
           <span class="input-label">结算金额</span>
           <input ng-model="settlementAmounts" type="text">
         </label>
-        <label class="item">
+        <label class="item item-input">
           <span class="input-label">实际结算金额</span>
-          <strong style="color: red;font-size: 20px;padding: 10px;display: inline"> ￥<span ng-bind="actualSettlementAmount"></span></strong>
+          <input ng-model="actualSettlementAmount" type="text">
         </label>
+        <!--<label class="item">-->
+          <!--<span class="input-label">实际结算金额</span>-->
+          <!--<strong style="color: red;font-size: 20px;padding: 10px;display: inline"> ￥<span ng-bind="actualSettlementAmount"></span></strong>-->
+        <!--</label>-->
         <button class="button button-full button-positive" ng-click="bizDoSettlement(actualSettlementAmount, settlementAmounts)">确定</button>
       </div>
     </div>
