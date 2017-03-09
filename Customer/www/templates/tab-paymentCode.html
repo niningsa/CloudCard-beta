@@ -6,15 +6,16 @@
 -->
 <ion-view view-title="付款码">
   <ion-nav-buttons side="left">
-    <a class="button icon ion-ios-undo" ui-sref="tab.circleMap"></a>
+    <!--<a class="button icon ion-ios-undo" ui-sref="tab.circleMap"></a>-->
+    <a class="button icon ion-ios-undo" ng-click="exitInterval();"></a>
   </ion-nav-buttons>
 
   <ion-content class="padding">
 
     <div style="text-align: center;padding-top: 20px">
       <div class="chartext" style="display: block">付款二维码：</div>
-      <div id="pcode" class="item"></div>
-      <div class="padding-20"><div style="color: red;display:  inline-block;font-size: 18px">
+      <div id="pcode" class="items"></div>
+      <div class="padding-20"><div style="color: blue;display:  inline-block;font-size: 18px">
         <i class="ion-refresh" ng-click="refresh();"></i></div>
         刷新重新生成付款码</div>
 

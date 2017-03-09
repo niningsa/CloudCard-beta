@@ -1,0 +1,29 @@
+<ion-view title="店铺可用卡的列表">
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" href="#tab/shop/{{storeId}}/{{isGroupOwner}}"></a>
+  </ion-nav-buttons>
+  <ion-content class="padding">
+    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+    <ion-item>
+      <div style="width: 100%; height: 100%">
+        <div class="list card" ng-repeat="chat in cloudList" style="border: 0px" class="char_style" >
+          <div id="zd">   <h2>{{chat.cardName}}： <strong>{{chat.cardBalance}} 元{{storeName}}</strong> </h2> </div>
+          <!--<a class="item" href="#/tab/payment/{{chat.cardCode}}/{{chat.storeName}}/{{chat.storeId}}/{{chat.cardId}}" style="border: 0px">-->
+          <a class="item" ng-click="shopCardchongZhi('{{storeId}}','{{chat.cardId}}')" style="border: 0px">
+            <div class="item item-image">
+              <img src="{{chat.cardImg}}">
+            </div>
+
+          </a>
+        </div>
+        <div class="item text-center" ng-if="canBuyGroupCard=='Y'">
+          <a style="font-size: 50px;color:red" ng-click="buyGroupCard('{{storeId}}','{{groupOwnerId}}');"  >+<span style="font-size:20px;">(购买圈子卡)</span></a>
+        </div>
+        <!--hasStoreCard表示是后有店里的卡，店里的卡只能买一张-->
+        <div class="item text-center" ng-if="canBuyStoreCard=='Y'">
+          <a style="font-size: 50px;" ng-click="buyShopCard('{{storeId}}');" >+<span style="font-size:20px;">(购买店里卡)</span></a>
+        </div>
+      </div>
+    </ion-item>
+  </ion-content>
+</ion-view>
