@@ -1,7 +1,8 @@
 <ion-view view-title="店铺">
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
   <ion-nav-buttons side="left">
-    <a class="button icon ion-ios-undo" ui-sref="tab.circleMap"></a>
+    <a class="button icon ion-ios-undo"  ng-if="isGroupOwner=='Y'" href="#tab/myCircle/{{storeId}}/{{isGroupOwner}}"></a>
+    <a class="button icon ion-ios-undo"  ng-if="isGroupOwner=='N'" ui-sref="tab.circleMap"></a>
   </ion-nav-buttons>
   <ion-content>
     <div class="list">
@@ -13,16 +14,22 @@
       </a>
 
       <div class="item item-divider" style="min-height:11px"></div>
-      <a class="item item-icon-left item-icon-right" href="#tab/goShop/{{longitude}}/{{latitude}}/{{storeId}}">
+      <a class="item item-icon-left item-icon-right" href="#tab/goShop/{{longitude}}/{{latitude}}/{{storeId}}/{{isGroupOwner}}">
       <!--<a class="item item-icon-left item-icon-right" href="#tab/goShop">-->
         <i class="icon ion-ios-location positive"></i>
         {{storeAddress}}
         <i class="icon ion-ios-arrow-right" style="color:darkgrey;"></i>
       </a>
       <!--如果属于圈子才能购卡-->
-      <a class="item item-icon-left item-icon-right" ng-if="isGroupOwner=='Y'" ng-click="buyCircleCard('{{storeId}}')">
+      <a class="item item-icon-left item-icon-right" ng-if="isGroupOwner=='Y'" ng-click="buyCircleCard('{{storeId}}','{{isGroupOwner}}')">
       <i class="icon ion-ios-cart positive"></i>
-      购卡
+      购卡/充值
+      <i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>
+    </a>
+      <!--没有加入圈子购卡方式-->
+      <a class="item item-icon-left item-icon-right" ng-if="isGroupOwner=='N'" ng-click="selectCircleCardAndShopCard('{{storeId}}','{{isGroupOwner}}')">
+      <i class="icon ion-ios-cart positive"></i>
+      购卡/充值
       <i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>
     </a>
       <div class="item item-divider" style="min-height:11px"></div>

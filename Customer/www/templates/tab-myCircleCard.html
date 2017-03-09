@@ -1,6 +1,6 @@
 <ion-view title="圈主可用卡的列表">
   <ion-nav-buttons side="left">
-    <a class="button icon ion-ios-undo" href="#tab/myCircle/{{storeId}}"></a>
+    <a class="button icon ion-ios-undo" href="#tab/myCircle/{{storeId}}/{{isGroupOwner}}"></a>
   </ion-nav-buttons>
   <ion-content class="padding">
     <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>

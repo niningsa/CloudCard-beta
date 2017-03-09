@@ -229,7 +229,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     //我的圈子的卡展示页面
     .state('tab.myCircleCard', {
-      url: '/myCircleCard/:storeId',
+      url: '/myCircleCard/:storeId/:isGroupOwner',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-myCircleCard.html',
@@ -243,7 +243,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     })
     //圈子卡的充值
     .state('tab.cirCleCardRecharge', {
-      url: '/cirCleCardRecharge/:storeId/:cardId',
+      url: '/cirCleCardRecharge/:storeId/:cardId/:isGroupOwner',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-cirCleCardRecharge.html',
@@ -254,7 +254,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     })
     //向商家买卡
     .state('tab.addCircleCard', {
-      url: '/addCircleCard/:storeId/:qrCode/',
+      url: '/addCircleCard/:storeId/:qrCode/:isGroupOwner',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-addCard.html',
@@ -269,6 +269,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         'tab-circleMap': {
           templateUrl: 'templates/tab-scanAddCard.html',
           controller: 'scanAddCardCtrl'
+        }
+      }
+    })
+
+    //从店铺进去购买圈子的卡
+    .state('tab.buyCardPay', {
+      url: '/buyCardPay/:storeId/:groupOwnerId/:isGroupOwner',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-buyCardPay.html',
+          controller: 'buyCardPayCtrl'
         }
       }
     })
@@ -303,6 +314,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
+    //根据storeid来查店铺时候有圈子卡和店里的卡
+    .state('tab.selectCircleCardAndShopCard', {
+      url: '/selectCircleCardAndShopCard/:storeId/:isGroupOwner',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-shopCard.html',
+          controller: 'selectCircleCardAndShopCardCtrl'
+        }
+      }
+    })
+    //购买店里的卡
+    .state('tab.buyShopCard', {
+      url: '/buyShopCard/:storeId/:isGroupOwner',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-buyShopCardPay.html',
+          controller: 'buyShopCardCtrl'
+        }
+      }
+    })
 
       //店铺的展示页面
     .state('tab.shop', {
@@ -314,8 +345,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
+    //店铺店的充值
+    .state('tab.shopRecharge', {
+      url: '/shopRecharge/:storeId/:cardId/:isGroupOwner',
+      views: {
+        'tab-circleMap': {
+          templateUrl: 'templates/tab-shopRecharge.html',
+          controller: 'shopRechargeCtrl'
+        }
+      }
+    })
+
+    //导航去这家店铺
     .state('tab.goShop', {
-      url: '/goShop/:longitude/:latitude/:storeId',
+      url: '/goShop/:longitude/:latitude/:storeId/:isGroupOwner',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-shopMap.html',
@@ -325,7 +368,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     })
     //付款码的展示页面
     .state('tab.paymentCode', {
-      url: '/paymentCode/:qrCode',
+      url: '/paymentCode/:qrCode/:refreshTime',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-paymentCode.html',
@@ -539,12 +582,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     });
-
-
-
-
-
-
 
 
   // if none of the above states are matched, use this as the fallback
