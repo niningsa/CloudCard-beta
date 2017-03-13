@@ -66,7 +66,7 @@ angular.module('circle.controllers', [])
    * Author LN
    * Date 2017-2-28
    * */
-  .controller('settleModalCtrl', function ($scope, $rootScope, myCircleServece, amountService) {
+  .controller('settleModalCtrl', function ($scope, $ionicPopup, myCircleServece, amountService) {
     $scope.closeModal = function () {
       $scope.modal.hide();
     };
@@ -75,7 +75,15 @@ angular.module('circle.controllers', [])
     $scope.bizDoSettlement = function (actualSettlementAmount, settlementAmount) {
       // alert($scope.storeId+" "+settlementAmount+" "+actualSettlementAmount);
       amountService.bizDoSettlement($scope.storeId, settlementAmount, actualSettlementAmount).success(function (data) {
-        $scope.modal.hide();
+        $ionicPopup.alert({
+          title: '成功',
+          template: data.msg
+        });
+      }).error(function (data) {
+        $ionicPopup.alert({
+          title: '失败',
+          template: data.msg
+        });
       });
     };
 
