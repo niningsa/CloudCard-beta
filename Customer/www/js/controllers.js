@@ -81,11 +81,56 @@ angular.module('starter.controllers', [])
       map.centerAndZoom(gpsPoint, 16);
       var marker = new BMap.Marker(gpsPoint);
       map.addOverlay(marker);
+      var ctrl_nav = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE});
+      map.addControl(ctrl_nav);//给地图添加缩放的按钮
+      map.enableScrollWheelZoom(true);
       //根据经纬度来规划路线
       var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map,panel: "r-result", autoViewport: true}});
       walking.search(Point, gpsPoint);
     })
 
+    //步行规划路线
+$scope.byWalk=function(longitude,latitude){
+  navigator.geolocation.getCurrentPosition(function (data) {
+    console.log(data);
+    var longitude= data.coords.longitude;
+    var latitude=data.coords.latitude;
+    var map = new BMap.Map("allmap");
+    //当前的位置
+    var Point = new BMap.Point($scope.longitude,$scope.latitude);
+    //店铺的位置
+    var gpsPoint = new BMap.Point(longitude,latitude);  // 创建点坐标
+    map.centerAndZoom(gpsPoint, 16);
+    var marker = new BMap.Marker(gpsPoint);
+    map.addOverlay(marker);
+    //根据经纬度来规划路线
+    var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map,panel: "r-result", autoViewport: true}});
+    walking.search(Point, gpsPoint);
+  })
+}
+
+    //开车来规划路线
+    $scope.byCar=function(longitude,latitude) {
+      navigator.geolocation.getCurrentPosition(function (data) {
+        console.log(data);
+        var longitude = data.coords.longitude;
+        var latitude = data.coords.latitude;
+        var map = new BMap.Map("allmap");
+        //当前的位置
+        var Point = new BMap.Point($scope.longitude, $scope.latitude);
+        //店铺的位置
+        var gpsPoint = new BMap.Point(longitude, latitude);  // 创建点坐标
+        map.centerAndZoom(gpsPoint, 16);
+        var marker = new BMap.Marker(gpsPoint);
+        map.addOverlay(marker);
+        var ctrl_nav = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE});
+        map.addControl(ctrl_nav);//给地图添加缩放的按钮
+        map.enableScrollWheelZoom(true);
+        //根据经纬度来规划路线
+        var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, panel: "r-result", autoViewport: true}});
+        driving.search(Point, gpsPoint);
+      })
+    }
   })
 
   /*
@@ -248,28 +293,33 @@ angular.module('starter.controllers', [])
     $scope.storeId = $stateParams.storeId;
     $scope.isGroupOwner = $stateParams.isGroupOwner;
     var token = $.cookie("token");
-    $.ajax({
-      url: $rootScope.interfaceUrl + "myCloudCards",
-      type: "POST",
-      data: {
-        "token": token,
-        "storeId": $scope.storeId
-      },
-      success: function (result) {
-        console.log(result);
-        if (result.code == '200') {
-          $scope.$apply(function () {
-            $scope.msg = "";
-          });
-          $scope.cloudList = result.cloudCardList;
+    if(token){
+      $.ajax({
+        url: $rootScope.interfaceUrl + "myCloudCards",
+        type: "POST",
+        data: {
+          "token": token,
+          "storeId": $scope.storeId
+        },
+        success: function (result) {
+          console.log(result);
+          if (result.code == '200') {
+            $scope.$apply(function () {
+              $scope.msg = "";
+            });
+            $scope.cloudList = result.cloudCardList;
 
-        } else {
-          $scope.$apply(function () {
-            $scope.msg = result.msg;
-          });
+          } else {
+            $scope.$apply(function () {
+              $scope.msg = result.msg;
+            });
+          }
         }
-      }
-    });
+      });
+    }else{
+      $state.go("login");
+    }
+
     //下拉刷新的操作
     $scope.doRefresh = function () {
       //下拉刷新的时候选中全部
@@ -487,30 +537,35 @@ angular.module('starter.controllers', [])
     $scope.storeId = $stateParams.storeId;
     $scope.isGroupOwner = $stateParams.isGroupOwner;
     var token = $.cookie("token");
-    $.ajax({
-      url: $rootScope.interfaceUrl + "getCardAndStoreInfoByStoreId",
-      type: "POST",
-      data: {
-        "token": token,
-        "storeId": $scope.storeId
-      },
-      success: function (result) {
-        console.log(result);
-        if (result.code == '200') {
-          $scope.$apply(function () {
-            $scope.msg = "";
-          });
-          $scope.cloudList= result.cloudCardList;
-          $scope.canBuyGroupCard= result.canBuyGroupCard;
-          $scope.canBuyStoreCard= result.canBuyStoreCard;
-          $scope.groupOwnerId= result.groupOwnerId;
-        } else {
-          $scope.$apply(function () {
-            $scope.msg = result.msg;
-          });
+    if(token){
+      $.ajax({
+        url: $rootScope.interfaceUrl + "getCardAndStoreInfoByStoreId",
+        type: "POST",
+        data: {
+          "token": token,
+          "storeId": $scope.storeId
+        },
+        success: function (result) {
+          console.log(result);
+          if (result.code == '200') {
+            $scope.$apply(function () {
+              $scope.msg = "";
+            });
+            $scope.cloudList= result.cloudCardList;
+            $scope.canBuyGroupCard= result.canBuyGroupCard;
+            $scope.canBuyStoreCard= result.canBuyStoreCard;
+            $scope.groupOwnerId= result.groupOwnerId;
+          } else {
+            $scope.$apply(function () {
+              $scope.msg = result.msg;
+            });
+          }
         }
-      }
-    });
+      });
+    }else{
+      $state.go("login");
+    }
+
 
     $scope.doRefresh=function(){
       $.ajax({
@@ -806,7 +861,7 @@ angular.module('starter.controllers', [])
    * Author WK
    * Date 2017-3-1
    * */
-  .controller('circleMapCtrl', function ($scope, $state, $rootScope, $cordovaBarcodeScanner, $rootScope, $ionicPopup, $ionicLoading, $timeout, $stateParams) {
+  .controller('circleMapCtrl', function ($scope, $state,$ionicPopover, $rootScope, $cordovaBarcodeScanner, $ionicPopup, $ionicLoading, $timeout, $stateParams) {
     //用于显示圈子或者店铺的详细的信息
     var token = $.cookie("token");
     $scope.storeInfo = false;
@@ -816,36 +871,42 @@ angular.module('starter.controllers', [])
     }
 
 
+
     //付款码
     $scope.paymentCode = function () {
-      $.ajax({
-        url: $rootScope.interfaceUrl + "getPaymentQRCode",
-        type: "POST",
-        data: {
-          "token": token
-        },
-        success: function (result) {
-          console.log(result);
+      if(token){
+        $.ajax({
+          url: $rootScope.interfaceUrl + "getPaymentQRCode",
+          type: "POST",
+          data: {
+            "token": token
+          },
+          success: function (result) {
+            console.log(result);
 
-          if (result.code == '200') {
-            $scope.$apply(function () {
-              $scope.msg = "";
-            });
-
-            $state.go("tab.paymentCode",
-              {
-                "qrCode": result.qrCode,
-                "refreshTime": result.refreshTime
+            if (result.code == '200') {
+              $scope.$apply(function () {
+                $scope.msg = "";
               });
-          } else {
+
+              $state.go("tab.paymentCode",
+                {
+                  "qrCode": result.qrCode,
+                  "refreshTime": result.refreshTime
+                });
+            } else {
 
 
-            $scope.$apply(function () {
-              $scope.msg = result.msg;
-            });
+              $scope.$apply(function () {
+                $scope.msg = result.msg;
+              });
+            }
           }
-        }
-      });
+        });
+      }else{
+        $state.go("login");
+      }
+
 
     }
     //扫一扫
@@ -864,6 +925,7 @@ angular.module('starter.controllers', [])
            //扫到的数据
           if (qrCode != '') {
             //通过storeid来查询该圈子的卡，如果有卡就选卡来消费，如果没有卡就添加卡
+          if(token){
             $.ajax({
               url: $rootScope.interfaceUrl + "userScanCodeGetCardAndStoreInfo",
               type: "POST",
@@ -895,6 +957,9 @@ angular.module('starter.controllers', [])
                 }
               }
             });
+          }else{
+            $state.go("login");
+          }
           }
         }, function (error) {
         });

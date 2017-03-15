@@ -1,0 +1,53 @@
+<ion-view view-title="我的">
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+
+  <ion-content>
+    <div class="list">
+      <div class="item item-divider" style="min-height:11px"></div>
+      <a class="item item-avatar">
+        <img src="img/adam.jpg">
+        <h2>库胖</h2>
+        <p>一个属于消费者的平台...</p>
+      </a>
+
+      <div class="item item-divider" style="min-height:11px"></div>
+      <a class="item item-icon-left item-icon-right" >
+        <!--<a class="item item-icon-left item-icon-right" href="#tab/goShop">-->
+        <i class="icon ion-briefcase positive"></i>
+        我的钱包
+        <i class="icon ion-ios-arrow-right" style="color:darkgrey;"></i>
+      </a>
+      <!--如果属于圈子才能购卡-->
+      <a class="item item-icon-left item-icon-right" href="#/tab/account">
+        <i class="icon ion-document-text" ></i>
+          消费账单
+        <i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>
+      </a>
+      <!--没有加入圈子购卡方式-->
+      <a class="item item-icon-left item-icon-right" >
+        <i class="icon ion-ios-cart positive"></i>
+       我的积分
+        <i class="icon" style="color:red;font-size: 20px">{{score}}积分 </i>
+        <!--<i class="icon" style="color:red">  </i>-->
+      </a>
+      <a class="item item-icon-left item-icon-right" >
+        <i class="icon ion-happy-outline positive"></i>
+       会员等级
+        <i class="icon" style="color:blue;font-size: 20px">{{userLevel}}</i>
+        <!--<i class="icon" style="color:red"> {{userLevel}} </i>-->
+      </a>
+      <div class="item item-divider" style="min-height:11px"></div>
+      <div class="item item-icon-left" href="#">
+        <i class="icon ion-ios-telephone positive"></i>
+        客服中心
+        <span class="item-note">10086</span>
+      </div>
+      <div class="item item-icon-left" ui-sref="setting">
+        <i class="icon ion-gear-b positive" ></i>
+        设置
+        <span class="item-note"></span>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

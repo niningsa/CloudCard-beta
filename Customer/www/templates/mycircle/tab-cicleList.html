@@ -1,0 +1,28 @@
+<ion-view view-title="附近店铺列表">
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.circleMap"></a>
+  </ion-nav-buttons>
+
+
+  <ion-content>
+    <div class="list">
+
+      <!--<div class="item item-divider">-->
+        <!--圈主-->
+      <!--</div>-->
+      <div ng-repeat="chat in storeList">
+        <!--<a class="item item-avatar"   href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">-->
+        <a class="item item-avatar" >
+          <img src="img/ben.png">
+          <h2>名称: {{chat.storeName}}</h2>
+          <p> 地址: {{chat.address}}</p>
+          <!--<p>{{chat.storeTeleNumber}}</p>-->
+        </a>
+      </div>
+
+
+    </div>
+  </ion-content>
+
+</ion-view>
