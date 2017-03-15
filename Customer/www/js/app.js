@@ -1,4 +1,5 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova','ionic-datepicker'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova','ionic-datepicker','aboutMe.controllers','aboutMe.services',
+                           'mycircle.controllers','mycircle.services'])
 
 .run(function($ionicPlatform,$rootScope,$state) {
   //当设备运行的时候就执行
@@ -500,7 +501,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.account', {
     url: '/account',
     views: {
-      'tab-account': {
+      'tab-circleMap': {
         templateUrl: 'templates/tab-account.html',
         controller: 'CardDetailCtrl'
       }
@@ -581,10 +582,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
           controller: 'rechargeCtrl'
         }
       }
-    });
+    })
+
 
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('tab/circleMap');
 
 });

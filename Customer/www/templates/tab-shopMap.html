@@ -8,7 +8,11 @@
       <ion-item>
        <div style="height: 800px">
          <div id="allmap" style="height: 350px;"></div>
-         <div id="r-result" style="height:280px;width:100%;"></div>
+         <div>
+           <button class="button button-positive " ng-click="byWalk('{{longitude}}','{{latitude}}')">步行到达</button>
+           <button class="button button-positive " ng-click="byCar('{{longitude}}','{{latitude}}');">开车到达</button>
+         </div>
+         <div id="r-result" style="height:500px;width:100%;"></div>
        </div>
       </ion-item>
     </ion-list>
