@@ -198,7 +198,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
-    abstract: true,
+    abstract: false,
     templateUrl: 'templates/tabs.html'
   })
 
@@ -216,6 +216,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   //百度地图显示我的圈子定位
     .state('tab.circleMap', {
       url: '/circleMap',
+      abstract:false,
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-circleMap.html',
@@ -587,6 +588,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('tab/circleMap');
+  $urlRouterProvider.otherwise('/tab/circleMap');
 
 });
