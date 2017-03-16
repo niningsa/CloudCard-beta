@@ -1070,7 +1070,7 @@ $scope.byWalk=function(longitude,latitude){
         console.log(error);
 
       }, {timeout: 10000, enableHighAccuracy: true, maximumAge: 75000, coorType: 'bd09ll'});
-    },500);
+    },800);
 
 
   })
