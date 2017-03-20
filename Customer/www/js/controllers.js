@@ -782,6 +782,7 @@ $scope.byWalk=function(longitude,latitude){
     $scope.qrCode = $stateParams.qrCode;
     $scope.refreshTime = $stateParams.refreshTime;
     var token=$.cookie("token");
+    jQuery('.items').html("");
     jQuery('.items').qrcode($stateParams.qrCode);
    //刷新重新生成二维码
     $scope.n=$scope.refreshTime;
@@ -2383,6 +2384,7 @@ $scope.byWalk=function(longitude,latitude){
     };
     //从我的卡页面进去的充值
     $scope.weiXin=function (choice) {
+      alert(choice);
       $.ajax({
           url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
           // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
@@ -2403,7 +2405,7 @@ $scope.byWalk=function(longitude,latitude){
             wxpay.payment(result, function success (e) {
               $state.go("tab.chats");
             }, function error (e) {
-                // alert("失败了："+e);
+                 alert("失败了："+e);
             });
           }
         });
