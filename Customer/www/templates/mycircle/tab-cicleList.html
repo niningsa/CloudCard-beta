@@ -1,15 +1,40 @@
 <ion-view view-title="附近店铺列表">
-  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <!--<ion-nav-bar class="bar-positive"></ion-nav-bar>-->
   <ion-nav-buttons side="left">
     <a class="button icon ion-ios-undo" ui-sref="tab.circleMap"></a>
   </ion-nav-buttons>
+  <ion-header-bar class="bar-subheader has-header">
+      <div class="row">
+        <div class="col ">
+          <div class="col-demo">全部分类</div>
+        </div>
+        <div class="col">
+          <div class="col-demo">全城</div>
+        </div>
+        <div class="col">
+          <div class="col-demo">智能排序</div>
+        </div>
+      </div>
+
+  </ion-header-bar>
+
   <ion-content>
 
     <div class="list">
-      <label class="item-input-wrapper">
-        <i class="icon ion-ios-search placeholder-icon"></i>
-        <input type="search" ng-model="searchContent" placeholder="请输入要搜索的商家">
-      </label>
+       <div id="find">
+         <select>
+           <option value="北京">北京</option>
+           <option value="上海">上海</option>
+           <option value="上海">大连</option>
+           <option value="上海">吉林</option>
+           <option value="上海">黑龙江</option>
+         </select>
+         <label >
+           <!--<i class="icon ion-ios-search placeholder-icon"></i>-->
+           <input type="search" ng-model="searchContent" placeholder="请输入要搜索的商家">
+         </label>
+         <span style="color: blue;font-size: 19px;padding-left:2px"><button>查找</button></span>
+       </div>
 
       <!--<div class="item item-divider">-->
         <!--圈主-->

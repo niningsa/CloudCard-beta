@@ -22,3 +22,12 @@ angular.module('aboutMe.controllers', [])
 
 
   })
+
+//账户与安全设置
+  .controller('accountSecurityCtrl', function($scope,$state, $rootScope,aboutMeService) {
+    /*
+     * Desc 这里是设置账户与安全的页面
+     * Author WK
+     * Date 2017-3-21
+     * */
+  })

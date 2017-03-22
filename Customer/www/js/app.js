@@ -382,7 +382,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.chats', {
       url: '/chats',
       views: {
-        'tab-circleMap': {
+        'tab-chats': {
           templateUrl: 'templates/tab-chats.html',
           controller: 'ChatsCtrl'
         }
@@ -422,7 +422,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/chats/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
-        'tab-circleMap': {
+        'tab-chats': {
           templateUrl: 'templates/chat-detail.html',
           controller: 'ChatDetailCtrl'
         }
