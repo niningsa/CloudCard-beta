@@ -15,20 +15,41 @@
       </div>
     </div>
     <div class="list">
-
-      <div class="card">
-        <div class="item item-text-wrap">
-          关于我们
-        </div>
-        <div class="item item-text-wrap">
-          用户反馈
-        </div>
-
-        <div class="item item-text-wrap">
-          <span>关于云卡</span>
-          <!--<i class="badge assertive-bg light">NEW</i>-->
-        </div>
+      <a class="item item-icon-left item-icon-right"  href="#tab/accountSecurity">
+        <!--<a class="item item-icon-left item-icon-right" href="#tab/goShop">-->
+        <i class="icon ion-briefcase positive"></i>
+        账户与安全
+        <i class="icon ion-ios-arrow-right" style="color:darkgrey;"></i>
+      </a>
+      <a class="item item-icon-left item-icon-right" >
+        <!--<a class="item item-icon-left item-icon-right" href="#tab/goShop">-->
+        <i class="icon ion-link positive"></i>
+        通用
+        <i class="icon ion-ios-arrow-right" style="color:darkgrey;"></i>
+      </a>
+      <a class="item item-icon-left item-icon-right" >
+        <!--<a class="item item-icon-left item-icon-right" href="#tab/goShop">-->
+        <i class="icon ion-wand positive"></i>
+        隐私
+        <i class="icon ion-ios-arrow-right" style="color:darkgrey;"></i>
+      </a>
+      <a class="item item-icon-left item-icon-right" >
+        <!--<a class="item item-icon-left item-icon-right" href="#tab/goShop">-->
+        <i class="icon ion-speakerphone positive"></i>
+        新消息通知
+        <i class="icon ion-ios-arrow-right" style="color:darkgrey;"></i>
+      </a>
+      <div class="item item-icon-left" ui-sref="setting">
+        <i class="icon ion-speakerphone positive" ></i>
+        通知栏
+        <span class="item-note"></span>
       </div>
+      <div class="item item-icon-left" ui-sref="setting">
+        <i class="icon ion-laptop positive" ></i>
+        关于库胖
+        <span class="item-note"></span>
+      </div>
+
       <div class="padding">
         <button class="button button-block button-assertive" ng-click="outLogin()">退出</button>
       </div>

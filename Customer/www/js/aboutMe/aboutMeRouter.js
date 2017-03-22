@@ -12,5 +12,16 @@ angular.module('starter')
             controller: 'aboutMeCtrl'
           }
         }
+      })
+      //账户与安全设置
+      .state('tab.accountSecurity', {
+        url: '/accountSecurity',
+        cache: false,
+        views: {
+          'tab-aboutMe': {
+            templateUrl: 'templates/aboutMe/tab-accountSecurity.html',
+            controller: 'accountSecurityCtrl'
+          }
+        }
       });
   })

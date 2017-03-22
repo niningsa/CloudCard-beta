@@ -1,4 +1,4 @@
-<ion-view view-title="首页" cache-view="false">
+<ion-view view-title="库胖" cache-view="false">
   <ion-header-bar class="bar-subheader has-header">
      <span style="padding: 0px 40px 0px 90px">
       <button class="button button-calm" ng-click="paymentCode()">付款码</button>
@@ -7,10 +7,12 @@
       <button class="button button-calm" ng-click="scanBarcode()" >扫一扫</button>
     </span>
   </ion-header-bar>
-  <ion-nav-buttons side="right">
-    <a class="button icon ion-clipboard"  href="#/tab/chats" title="我的卡" >我的卡</a>
+  <!--<ion-nav-buttons side="right">-->
+    <!--<a class="button icon ion-clipboard"  href="#/tab/chats" title="我的卡" >我的卡</a>-->
+  <!--</ion-nav-buttons>-->
+  <ion-nav-buttons side="right" >
+    <a class="button icon ion-ios-gear"  ui-sref="setting">设置</a>
   </ion-nav-buttons>
-
   </ion-nav-buttons>
   <ion-content>
     <ion-list>
