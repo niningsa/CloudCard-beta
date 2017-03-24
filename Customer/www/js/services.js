@@ -72,14 +72,14 @@ angular.module('starter.services', [])
             "viewSize": viewSize
           },
           // dataType: "json",
-          dataFilter: function (data) {
-            console.log("raw data: " + data);
-            var idx = data.indexOf("//");
-            if (data && /^\s*\/\/.*/.test(data) && idx > -1) {
-              data = data.substring(idx + 2);
-            }
-            return data;
-          },
+          //dataFilter: function (data) {
+          //  console.log("raw data: " + data);
+          //  var idx = data.indexOf("//");
+          //  if (data && /^\s*\/\/.*/.test(data) && idx > -1) {
+          //    data = data.substring(idx + 2);
+          //  }
+          //  return data;
+          //},
           success: function (data) {
             var paymentList = data.paymentList || [];
             cardDetail = $.map(paymentList, function (o) {

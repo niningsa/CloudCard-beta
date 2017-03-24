@@ -1,0 +1,25 @@
+<ion-view view-title="账单">
+  <ion-nav-bar class="bar-dark"></ion-nav-bar>
+  <ion-header-bar class="bar-subheader has-header">
+  <span id="dianlei">
+      <button class="button button-large button-positive" ui-sref="tab.shopConsume">店内消费</button>
+     </span>
+    <span id="kalei">
+      <button class="button button-large button-positive"  ui-sref="tab.cardConsume">卡内消费</button>
+    </span>
+    <span id="taren">
+      <button class="button button-large button-positive "  ui-sref="tab.otherConsume" >他卡消费</button>
+    </span>
+  </ion-header-bar>
+
+  <ion-content>
+    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+    <div class="list">
+      <ion-list>
+          <ion-item class="item-icon-right" >
+          <div>消费流水:咖啡店消费200元</div>
+          </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-view>

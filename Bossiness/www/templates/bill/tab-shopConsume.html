@@ -1,0 +1,52 @@
+<ion-view view-title="店内消费">
+  <ion-nav-bar class="bar-dark"></ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.billHome"></a>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+    <div class="list">
+      <ion-list>
+        <ion-item>
+          <table id="tb">
+            <Tr>
+              <td>时间</td>
+              <td>店名</td>
+              <td>消费</td>
+              <td>操作</td>
+              <td>去评分</td>
+            </Tr>
+            <tr>
+              <Td>3月22日</Td>
+              <Td>咖啡店</Td>
+              <Td>-200元</Td>
+              <Td>已收款</Td>
+              <Td><button>评分</button></Td>
+            </tr>
+            <Tr>
+              <Td>16:58</Td>
+              <td></td>
+              <td></td>
+              <td><button>催款</button></td>
+            </Tr>
+
+            <tr>
+              <Td>3月22日</Td>
+              <Td>奶茶店</Td>
+              <Td>-200元</Td>
+              <Td>已收款</Td>
+              <Td><button>评分</button></Td>
+            </tr>
+            <Tr>
+              <Td>16:58</Td>
+              <td></td>
+              <td></td>
+              <td><button>催款</button></td>
+            </Tr>
+          </table>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-view>

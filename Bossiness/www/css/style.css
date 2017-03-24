@@ -137,3 +137,37 @@ label{
   height: 180px;
   display: inline-block;
 }
+
+#shoukuan{
+  padding-left:15%;
+}
+#kaika{
+  padding-left: 15%;
+}
+#chongzhi{
+  padding-left: 15%;
+
+}
+.se{
+  padding-left: 20%;
+  font-size: 15px;
+}
+.shop{
+  color: blue;
+}
+
+#dianlei{
+  padding-left:10%;
+}
+#kalei{
+  padding-left: 10%;
+}
+#taren{
+  padding-left: 10%;
+}
+#seeMonth{
+  float: right;
+}
+td{
+  padding:6px;
+}

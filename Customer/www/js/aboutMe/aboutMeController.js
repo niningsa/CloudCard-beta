@@ -31,3 +31,21 @@ angular.module('aboutMe.controllers', [])
      * Date 2017-3-21
      * */
   })
+
+
+  /*
+   * Desc 我的钱包的页面查询
+   * Author WK
+   * Date 2017-3-21
+   * */
+  .controller('myWalletCtrl', function($scope,$state, $rootScope,aboutMeService) {
+
+  })
+  /*
+   * Desc 账单页面
+   * Author WK
+   * Date 2017-3-21
+   * */
+  .controller('billCtrl', function($scope,$state, $rootScope,aboutMeService) {
+
+  })

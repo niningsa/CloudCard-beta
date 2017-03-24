@@ -1,4 +1,5 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers', 'starter.services', 'circle.services', 'ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers', 'starter.services',
+               'circle.services','aboutMe.controllers','aboutMe.services','bill.controllers','bill.services','ngCordova'])
 
 .run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
@@ -72,7 +73,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
     url: '/account',
     cache: false,
     views: {
-      'tab-account': {
+      'tab-aboutMe': {
         templateUrl: 'templates/tab-account.html',
         controller: 'AccountCtrl'
       }

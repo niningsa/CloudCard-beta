@@ -224,3 +224,33 @@ height: 20px;
 #find{
  width: 100%;
 }
+
+#fukuan{
+  padding-left:22%;
+}
+#scan{
+  padding-left:22%;
+}
+td{
+  padding-left: 40px;
+}
+
+#zongxiaofei{
+  padding-left: 3%;
+}
+#zongchongzhi{
+  padding-left: 3%;
+}
+#kaxiaofei{
+  padding-left: 3%;
+}
+#kachongzhi{
+  padding-left: 3%;
+}
+#mybill{
+  padding-left: 10px;
+  width: 100%;
+}
+#monthBill{
+  padding-left: 70%;
+}
