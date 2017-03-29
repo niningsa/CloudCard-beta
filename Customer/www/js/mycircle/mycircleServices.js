@@ -2,7 +2,7 @@ angular.module('mycircle.services', [])
   .service("mycircleServices", function ($q, $rootScope,$state) {
     return {
       // 我的圈子
-      myGroupList: function () {
+      myGroupList: function (storeName) {
         var token = $.cookie("token");
         var deferred = $q.defer();
         var promise = deferred.promise;
@@ -14,6 +14,7 @@ angular.module('mycircle.services', [])
                 type: "POST",
                 data: {
                   "token": token,
+                  "storeName": storeName,
                   "longitude": data.coords.longitude,
                   "latitude": data.coords.latitude
                 },
