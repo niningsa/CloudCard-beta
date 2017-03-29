@@ -64,11 +64,23 @@ angular.module('starter.controllers', [])
    * Author WK
    * Date 2017-3-1
    * */
-  .controller('shopMapCtrl', function($scope,$state, $rootScope, $stateParams) {
+  .controller('shopMapCtrl', function($scope,$state, $rootScope, $stateParams,$cordovaLaunchNavigator) {
     $scope.longitude = $stateParams.longitude;
     $scope.latitude = $stateParams.latitude;
     $scope.storeId = $stateParams.storeId;
     $scope.isGroupOwner = $stateParams.isGroupOwner;
+    //导航
+    $scope.launchNavigator = function() {
+      navigator.geolocation.getCurrentPosition(function (data) {
+        $scope.start = [data.coords.latitude, data.coords.longitude];
+      });
+      var destination = [$scope.latitude, $scope.longitude];
+      $cordovaLaunchNavigator.navigate(destination, $scope.start).then(function() {
+        console.log("Navigator launched");
+      }, function (err) {
+        console.error(err);
+      });
+    };
     navigator.geolocation.getCurrentPosition(function (data) {
       console.log(data);
       var longitude= data.coords.longitude;
@@ -86,51 +98,11 @@ angular.module('starter.controllers', [])
       map.enableScrollWheelZoom(true);
       //根据经纬度来规划路线
       var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map,panel: "r-result", autoViewport: true}});
-      walking.search(Point, gpsPoint);
-    })
+      walking.search(Point,gpsPoint);
+    }, function (error) {
+      console.log(error);
+    }, {timeout: 30000, enableHighAccuracy: true, maximumAge: 75000, coorType: 'bd09ll'})
 
-    //步行规划路线
-$scope.byWalk=function(longitude,latitude){
-  navigator.geolocation.getCurrentPosition(function (data) {
-    console.log(data);
-    var longitude= data.coords.longitude;
-    var latitude=data.coords.latitude;
-    var map = new BMap.Map("allmap");
-    //当前的位置
-    var Point = new BMap.Point($scope.longitude,$scope.latitude);
-    //店铺的位置
-    var gpsPoint = new BMap.Point(longitude,latitude);  // 创建点坐标
-    map.centerAndZoom(gpsPoint, 16);
-    var marker = new BMap.Marker(gpsPoint);
-    map.addOverlay(marker);
-    //根据经纬度来规划路线
-    var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map,panel: "r-result", autoViewport: true}});
-    walking.search(Point, gpsPoint);
-  })
-}
-
-    //开车来规划路线
-    $scope.byCar=function(longitude,latitude) {
-      navigator.geolocation.getCurrentPosition(function (data) {
-        console.log(data);
-        var longitude = data.coords.longitude;
-        var latitude = data.coords.latitude;
-        var map = new BMap.Map("allmap");
-        //当前的位置
-        var Point = new BMap.Point($scope.longitude, $scope.latitude);
-        //店铺的位置
-        var gpsPoint = new BMap.Point(longitude, latitude);  // 创建点坐标
-        map.centerAndZoom(gpsPoint, 16);
-        var marker = new BMap.Marker(gpsPoint);
-        map.addOverlay(marker);
-        var ctrl_nav = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE});
-        map.addControl(ctrl_nav);//给地图添加缩放的按钮
-        map.enableScrollWheelZoom(true);
-        //根据经纬度来规划路线
-        var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, panel: "r-result", autoViewport: true}});
-        driving.search(Point, gpsPoint);
-      })
-    }
   })
 
   /*

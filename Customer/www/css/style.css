@@ -254,3 +254,56 @@ td{
 #monthBill{
   padding-left: 70%;
 }
+.all{
+  padding-left: 10%;
+}
+#shopAll{
+  padding-left: 12%;
+}
+#buycard{
+  padding: 8%;
+}
+.slist{
+  height: 12%;
+}
+.shoplist {
+  position: relative;
+  padding-top: 8%;
+  padding-bottom: 1px;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.search{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  width: 100%;
+}
+
+#inputSearch{
+ height: 35px;
+  margin: 0;
+  font: inherit;
+  color: darkgrey;
+  padding-bottom: 0px;
+}
+.sbutton{
+  margin: 0;
+  font: inherit;
+  color: darkgrey;
+}
+#zsearch{
+ display: inline-flex;
+  height: 35px;
+}

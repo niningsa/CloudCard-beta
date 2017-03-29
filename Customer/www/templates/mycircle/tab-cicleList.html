@@ -1,47 +1,88 @@
 <ion-view view-title="附近店铺列表">
   <!--<ion-nav-bar class="bar-positive"></ion-nav-bar>-->
-  <ion-nav-buttons side="left">
-    <a class="button icon ion-ios-undo" ui-sref="tab.circleMap"></a>
-  </ion-nav-buttons>
-  <ion-header-bar class="bar-subheader has-header">
-      <div class="row">
-        <div class="col ">
-          <div class="col-demo">全部分类</div>
+  <ion-nav-title>
+    <ion-header-bar class="item-input-inset search">
+     <div id="zsearch">
+       <select ng-model="area">
+         <option value="上海">上海</option>
+         <option value="宁波">宁波</option>
+         <option value="北京">北京</option>
+         <option value="杭州">杭州</option>
+         <option value="大连">大连</option>
+         <option value="吉林">吉林</option>
+         <option value="黑龙江">黑龙江</option>
+         <option value="湖北">湖北</option>
+       </select>
+       <label >
+         <input id="inputSearch" ng-model="storeName" placeholder="Search" >
+       </label>
+       <button class="sbutton" ng-click="searchStoreName(storeName,area)">
+         查 找
+       </button>
+     </div>
+    </ion-header-bar>
+  </ion-nav-title>
+  <ion-header-bar class="bar-subheader has-header slist">
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false" does-continue="true">
+      <ion-slide >
+        <div class="row all">
+          <div class="col ">
+            <div class="col-demo">美食</div>
+          </div>
+          <div class="col">
+            <div class="col-demo">酒店住宿</div>
+          </div>
+          <div class="col">
+            <div class="col-demo">休闲娱乐</div>
+          </div>
+          <div class="col">
+            <div class="col-demo">外卖</div>
+          </div>
         </div>
-        <div class="col">
-          <div class="col-demo">全城</div>
+
+        <div class="row all">
+          <div class="col ">
+            <div class="col-demo">KTV</div>
+          </div>
+          <div class="col">
+            <div class="col-demo">周边游</div>
+          </div>
+          <div class="col">
+            <div class="col-demo">高端酒店</div>
+          </div>
+          <div class="col">
+            <div class="col-demo">结婚</div>
+          </div>
         </div>
-        <div class="col">
-          <div class="col-demo">智能排序</div>
+      </ion-slide>
+
+      <ion-slide>
+        <div class="row all">
+          <div class="col ">
+            <div class="col-demo">景点</div>
+          </div>
+          <div class="col">
+            <div class="col-demo">动物园</div>
+          </div>
+          <div class="col">
+            <div class="col-demo">家装</div>
+          </div>
+          <div class="col">
+            <div class="col-demo">母婴亲子</div>
+          </div>
         </div>
-      </div>
+      </ion-slide>
+    </ion-slide-box>
+
 
   </ion-header-bar>
 
   <ion-content>
 
-    <div class="list">
-       <div id="find">
-         <select>
-           <option value="北京">北京</option>
-           <option value="上海">上海</option>
-           <option value="上海">大连</option>
-           <option value="上海">吉林</option>
-           <option value="上海">黑龙江</option>
-         </select>
-         <label >
-           <!--<i class="icon ion-ios-search placeholder-icon"></i>-->
-           <input type="search" ng-model="searchContent" placeholder="请输入要搜索的商家">
-         </label>
-         <span style="color: blue;font-size: 19px;padding-left:2px"><button>查找</button></span>
-       </div>
-
-      <!--<div class="item item-divider">-->
-        <!--圈主-->
-      <!--</div>-->
+    <div class="shoplist">
       <div ng-repeat="chat in storeList | filter:searchContent">
         <!--<a class="item item-avatar"   href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">-->
-        <a class="item item-avatar" >
+        <a class="item item-avatar" href="#tab/shopDetails">
           <img src="img/ben.png">
           <h2> {{chat.storeName}}</h2>
           <p>  {{chat.address}}</p>

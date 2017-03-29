@@ -47,5 +47,10 @@ angular.module('aboutMe.controllers', [])
    * Date 2017-3-21
    * */
   .controller('billCtrl', function($scope,$state, $rootScope,aboutMeService) {
+    var viewSize=20;//账单一开始默认加载20条数据
 
+    aboutMeService.billList().success(function (result) {
+     console.log(result);
+      $scope.billList=result.paymentList
+    })
   })
