@@ -156,6 +156,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
        controller: 'applySellerCtrl'
   })
 
+  //无卡消费
+    .state('tab.phoneNumberConsume', {
+      url: '/phoneNumberConsume',
+      cache: false,
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-phoneNumberConsume.html',
+          controller: 'phoneNumberConsumeCtrl'
+        }
+      }
+    })
+  //到验证码的确认页面
+    .state('tab.identifyingCode', {
+      url: '/identifyingCode',
+      cache: false,
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-identifyingCode.html',
+          controller: 'identifyingCodeCtrl'
+        }
+      }
+    })
 
   ;
 

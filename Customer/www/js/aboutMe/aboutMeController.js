@@ -54,3 +54,23 @@ angular.module('aboutMe.controllers', [])
       $scope.billList=result.paymentList
     })
   })
+  /*
+   * Desc 我的客服
+   * Author WK
+   * Date 2017-3-30
+   * */
+  .controller('customerServiceCtrl', function($scope,$state, $rootScope,aboutMeService) {
+
+
+  })
+  /*
+   * Desc 我的信息
+   * Author WK
+   * Date 2017-3-30
+   * */
+  .controller('myInformationCtrl', function($scope,$state, $rootScope,aboutMeService) {
+      $scope.customerName='王坤';
+      $scope.phone='18772115070';
+      $scope.address='虹桥银城大厦';
+
+  })
