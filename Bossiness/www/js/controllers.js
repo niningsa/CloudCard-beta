@@ -678,7 +678,28 @@ angular.module('starter.controllers', [])
   })
 
 
-  .controller('applySellerCtrl', function ($scope, $ionicLoading, $ionicPopup, $state, Banks, applySellerService, $rootScope) {
+  .controller('applySellerCtrl', function ($scope,$cordovaCamera,$cordovaImagePicker) {
+    //从相册里面选择图片上传
+    $scope.selectPhoto = function () {
+      var options = {
+        maximumImagesCount: 9,
+        width: 300,
+        height: 300,
+        quality: 100
+      };
+      $cordovaImagePicker.getPictures(options)
+        .then(function (results) {
+          $scope.imageSrcList = results;
+          var image = document.getElementById('myImage');
+          for (var i = 0; i < results.length; i++) {
+            console.log('Image URI: ' + results[i]);//返回参数是图片地址 results 是一个数组
+            image.src = results[i];
+            image.style.height = '200px';
+            image.style.width = '200px';
+          }
+        }, function (error) {
+        });
+    };
   })
 
   /*
@@ -692,49 +713,79 @@ angular.module('starter.controllers', [])
           // var latitude = localStorage.getItem('latitude');                      // 纬度
           // var longitude = localStorage.getItem('longitude');                    // 经度
           // alert(latitude+" "+longitude);
-
-          console.log($scope.boss);
           //验证手机号码
           var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-          // if (!phoneReg.test($scope.boss.phone)) {
-          if (false) {
-            $ionicLoading.show({
-              duration : 1500,
-              template : "电话号码校验不正确！"
-            });
-          }else{
+           if (!phoneReg.test($scope.boss.phone)) {
+             if (false) {
+               $ionicLoading.show({
+                 duration: 1500,
+                 template: "电话号码校验不正确！"
+               });
+             } else {
 
-            $ionicLoading.show({
-              template: '申请中...'
-            });
+               $ionicLoading.show({
+                 template: '申请中...'
+               });
 
-            applySellerService.applySellerRegister(
-              $scope.boss.businessName,
-              $scope.boss.phone,
-              $scope.boss.businessUserName,
-              $scope.boss.businessAddr
-            ).success(function(data) {
-              $ionicLoading.hide();
-              var alertPopup = $ionicPopup.alert({
-                title: '申请成功',
-                template: '恭喜您申请成功，快快登录使用吧！'
-              });
-              alertPopup.then(function(res) {
-                //用户点击确认登录后跳转
-                $state.go("login",{
-                  "tel":$scope.boss.phone
-                });
-              })
+               applySellerService.applySellerRegister(
+                 $scope.boss.businessName,
+                 $scope.boss.phone,
+                 $scope.boss.businessUserName,
+                 $scope.boss.businessAddr
+               ).success(function (data) {
+                 $ionicLoading.hide();
+                 var alertPopup = $ionicPopup.alert({
+                   title: '申请成功',
+                   template: '恭喜您申请成功，快快登录使用吧！'
+                 });
+                 alertPopup.then(function (res) {
+                   //用户点击确认登录后跳转
+                   $state.go("login", {
+                     "tel": $scope.boss.phone
+                   });
+                 })
 
-            }).error(function(data) {
-              $ionicLoading.hide();
-              var alertPopup = $ionicPopup.alert({
-                title: '申请失败',
-                template: data
-              });
-            });
-          }
+               }).error(function (data) {
+                 $ionicLoading.hide();
+                 var alertPopup = $ionicPopup.alert({
+                   title: '申请失败',
+                   template: data
+                 });
+               });
+             }
+           }
           };
-  });
+
+  })
+
+
+/*
+ * Desc 无卡收款（使用手机号来消费）
+ * Author LN
+ * Date 2017-2-26
+ * */
+.controller("phoneNumberConsumeCtrl", function ($scope, $rootScope) {
+
+})
+
+/*
+ * Desc 无卡收款（使用手机号来消费）
+ * Author LN
+ * Date 2017-2-26
+ * */
+.controller("noCardReceivablesCtrl", function ($scope,$state,$rootScope) {
+  $scope.noCardReceivables=function(){
+       $state.go("tab.identifyingCode");
+  }
+})
+/*
+ * Desc 传递验证码
+ * Author wk
+ * Date 2017-2-26
+ * */
+.controller("identifyingCodeCtrl", function ($scope,$state,$rootScope) {
+
+});
+
 
 

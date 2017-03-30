@@ -53,5 +53,35 @@ angular.module('starter')
             controller: 'billCtrl'
           }
         }
+      })
+      /*
+       * Desc 我的客服
+       * Author WK
+       * Date 2017-3-30
+       * */
+      .state('tab.customerService', {
+        url: '/customerService',
+        cache: true,
+        views: {
+          'tab-aboutMe': {
+            templateUrl: 'templates/aboutMe/tab-customerService.html',
+            controller: 'customerServiceCtrl'
+          }
+        }
+      })
+      /*
+       * Desc 我的信息
+       * Author WK
+       * Date 2017-3-30
+       * */
+      .state('tab.myInformation', {
+        url: '/myInformation',
+        cache: true,
+        views: {
+          'tab-aboutMe': {
+            templateUrl: 'templates/aboutMe/tab-myInformation.html',
+            controller: 'myInformationCtrl'
+          }
+        }
       });
   })

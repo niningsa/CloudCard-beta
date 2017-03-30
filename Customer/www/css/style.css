@@ -307,3 +307,8 @@ td{
  display: inline-flex;
   height: 35px;
 }
+
+.mycustomerservice{
+  font-size: 18px;
+  padding: 10%;
+}

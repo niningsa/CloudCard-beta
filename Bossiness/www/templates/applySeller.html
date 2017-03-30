@@ -23,6 +23,21 @@
         <input type="text" name="businessAddr" ng-model="boss.businessAddr" placeholder="请输入店铺地址">
       </label>
 
+       <div>
+         <span>店家图片：<span><button class="button button-balanced" ng-click="selectPhoto();">从图库里选择</button></span></span>
+
+         <div class="row padding row-wrap">
+           <div class="col col-33"
+                style="width: 100px;height: 100px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
+                ng-repeat="image in  imageSrcList">
+             <img class="img-responsive"  style="height: 100%;width: 100px; border:1px solid #ffffff;"
+                  ng-src="{{image}}" id="myImage">
+           </div>
+         </div>
+       </div>
+
+
+
         <div class="padding">
           <button class="button button-block button-positive" type="submit">确认申请</button>
         </div>
