@@ -502,7 +502,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.account', {
     url: '/account',
     views: {
-      'tab-circleMap': {
+      'tab-aboutMe': {
         templateUrl: 'templates/tab-account.html',
         controller: 'CardDetailCtrl'
       }

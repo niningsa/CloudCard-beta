@@ -13,13 +13,40 @@
   </ion-header-bar>
 
   <ion-content>
-    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-    <div class="list">
-      <ion-list>
-          <ion-item class="item-icon-right" >
-          <div>消费流水:咖啡店消费200元</div>
-          </ion-item>
-      </ion-list>
+    <div>
+      <div class="list">
+        <div class="item item-divider">
+          本月 <span style="padding-left: 55%"> 查看月账单>> </span>
+        </div>
+        <a class="item item-avatar" href="#">
+          <img src="img/zhiFuBao.png">
+          <div>
+            <span>3月17日</span> <span style="padding-left: 15%">-200</span>
+            <div>16:30 <span style="padding-left: 20%">奶茶店</span></div>
+          </div>
+
+        </a>
+        <a class="item item-avatar" href="#">
+          <img src="img/zhiFuBao.png">
+          <div>
+            <span>3月17日</span> <span style="padding-left: 15%">-200</span>
+            <div>16:30 <span style="padding-left: 20%">美甲店</span></div>
+          </div>
+
+        </a>
+        <div class="item item-divider">
+          二月 <span style="padding-left: 55%"> 查看月账单>> </span>
+        </div>
+
+        <a class="item item-avatar" href="#" >
+          <img src="img/zhiFuBao.png">
+          <div>
+            <span>3月19日</span> <span style="padding-left: 15%">-200</span>
+            <div>16:30 <span style="padding-left: 20%" >咖啡店</span></div>
+          </div>
+        </a>
+
+      </div>
     </div>
   </ion-content>
 </ion-view>
