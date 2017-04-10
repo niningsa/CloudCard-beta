@@ -258,10 +258,23 @@ td{
   padding-left: 10%;
 }
 #shopAll{
-  padding-left: 12%;
+  padding-left: 8%;
+ margin:40px 20px 40px 20px;
 }
 #buycard{
   padding: 8%;
+  border-radius: 50%;
+}
+.buycardButton{
+  border-radius: 40px;
+}
+.chongzhiButton{
+
+  border-radius: 40px;
+}
+.xiaofeijiluButton{
+
+  border-radius: 40px;
 }
 .slist{
   height: 12%;
@@ -311,4 +324,7 @@ td{
 .mycustomerservice{
   font-size: 18px;
   padding: 10%;
+}
+#searchCity{
+  width: 100%;
 }

@@ -48,6 +48,75 @@ angular.module('mycircle.services', [])
         return promise;
       },
 
-      //这里是下一个方法的开始
+      //根据店铺Id查询该店铺的详细的信息
+      shopDetailByStoreId: function (storeId) {
+        var token = $.cookie("token");
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+
+        $.ajax(
+          {
+            url: $rootScope.interfaceUrl + "userGetStoreInfo",
+            type: "POST",
+            data: {
+              "token": token,
+              "storeId":storeId
+            },
+            success: function (result) {
+              console.log(result);
+              deferred.resolve(result);
+              if (result.code == '200') {
+                deferred.resolve(result);
+              }else {
+                deferred.reject(result);
+              }
+            }
+          });
+
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
+      },
+      //根据店铺Id查询该客户是否拥有该店铺的卡
+      selectShopCard: function (storeId) {
+        var token = $.cookie("token");
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+
+        $.ajax(
+          {
+            url: $rootScope.interfaceUrl + "getCardAndStoreInfoByStoreId",
+            type: "POST",
+            data: {
+              "token": token,
+              "storeId":storeId
+            },
+            success: function (result) {
+              console.log(result);
+              deferred.resolve(result);
+              if (result.code == '200') {
+                deferred.resolve(result);
+              }else {
+                deferred.reject(result);
+              }
+            }
+          });
+
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
+      },
     }
   })

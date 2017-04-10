@@ -104,7 +104,7 @@ angular.module('starter.services', [])
     };
   })
 
-  .service('applySellerService', function ($q, $rootScope) {
+  .service('applySellerService', function ($q, $rootScope,$cordovaFileTransfer) {
     return {
       getCurrentPosition: function () {
         //开始获取定位数据
@@ -165,7 +165,124 @@ angular.module('starter.services', [])
           return promise;
         };
         return promise;
-      }
+      },
+      //从相册选择图片上传
+      uploadFile: function(fileUrl, server) {
+        function getBase64(img) {
+          function getBase64Image(img, width, height) {
+            var canvas = document.createElement("canvas");
+            canvas.width = width ? width : img.width;
+            canvas.height = height ? height : img.height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            var dataURL = canvas.toDataURL();
+            return dataURL;
+          }
+
+          var image = new Image();
+          image.crossOrigin = '';
+          image.src = img;
+          var deferred = $.Deferred();
+          if (img) {
+            image.onload = function () {
+              deferred.resolve(getBase64Image(image));
+            }
+            return deferred.promise();
+          }
+        }
+
+       //将dataurl转换成blob二进制数据
+        function dataURLtoBlob(dataurl) {
+          var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+          while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+          }
+          return new Blob([u8arr], {type: mime});
+        }
+        getBase64(fileUrl).then(function (base64) {
+          var bfile = dataURLtoBlob(base64);
+          var deferred = $.Deferred();
+          var promise = deferred.promise;
+          fileName = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
+          mimeType = bfile.type;
+          var formdata = new FormData();
+          formdata.set("uploadedFile", bfile);
+          formdata.set("_uploadedFile_fileName", fileName);
+          formdata.set("_uploadedFile_contentType", mimeType);
+          $.ajax(
+            {
+              url: $rootScope.interfaceUrl + "uploadedFile",
+              type: "POST",
+              data: formdata,
+              contentType: false,
+              cache: false,
+              processData: false,
+              success: function (result) {
+                console.log(result);
+                if (result.code == '200') {
+                  deferred.resolve(result.msg);
+                } else {
+                  deferred.reject(result.msg);
+                }
+              }
+            });
+          promise.success = function (fn) {
+            promise.then(fn);
+            return promise;
+          };
+          promise.error = function (fn) {
+            promise.then(null, fn);
+            return promise;
+          };
+          return promise;
+        }, function (err) {
+          console.log(err);
+        });
+
+
+      },
+      //无卡确认付款
+      noCardShouKuan:function(telphone,money,yanZhenCode) {
+
+      },
+      //支付时发送手机验证码
+      sendYanZhenNode: function (teleNumber, amount) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var token=$.cookie("token");
+        //ajax请求
+        $.ajax(
+          {
+            url: $rootScope.interfaceUrl + "getPayVerificationCodeOfCustomer",
+            type: "POST",
+            data: {
+              "token": token,
+              "teleNumber": teleNumber,
+              "amount": amount
+            },
+            success: function (result) {
+              console.log(result);
+              if (result.code == '200') {
+                deferred.resolve(result.msg);
+              } else {
+                deferred.reject(result.msg);
+              }
+            }
+          });
+
+
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
+      },
+
     }
   })
 

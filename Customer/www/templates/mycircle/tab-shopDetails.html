@@ -7,25 +7,35 @@
     <div class="list">
       <div class="item item-divider" style="min-height:11px"></div>
       <a class="item item-avatar">
-        <img src="img/adam.jpg">
-        <h2>商家一</h2>
-        <p>上海市长宁区中山西路933号...</p>
+        <img src="{{storeImg}}">
+        <h2>{{storeName}}</h2>
+        <p>{{storeAddress}}</p>
       </a>
      <div id="shopAll">
         <span id="chongzhi">
-       <button class="button button-calm" >充 值</button>
+       <button class="button button-calm chongzhiButton" ng-click="selectShopCard('{{storeId}}')">充 值</button>
       </span>
       <span id="buycard">
-       <button class="button button-calm" >买 卡</button>
+       <button class="button button-calm buycardButton" ng-click="selectShopCard('{{storeId}}')">买 卡</button>
       </span>
       <span id="xiaofeijilu">
-       <button class="button button-calm " >消费记录</button>
+       <button class="button button-calm xiaofeijiluButton" >消费记录</button>
       </span>
      </div>
       <div class="item item-divider" style="min-height:11px"></div>
       <div>
         <div>店家详情:</div>
         <div>这是一家口碑很好的店铺，享受一下终身值得拥有</div>
+        <div class="row padding row-wrap">
+          <div class="col col-33"
+               style="width: 100px;height: 100px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center">
+            <img class="img-responsive"  style="height: 100%; border:1px solid #ffffff;"
+                 ng-src="{{storeImg}}" id="myImage">
+          </div>
+
+          </div>
+        </div>
+
       </div>
 
 
