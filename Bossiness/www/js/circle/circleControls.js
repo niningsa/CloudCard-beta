@@ -162,13 +162,13 @@ angular.module('circle.controllers', [])
     };
 
     // 结算单模态框
-    $ionicModal.fromTemplateUrl('templates/circle/settleModal.html', function (modal) {
+    $ionicModal.fromTemplateUrl('templates/circle/settleModal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
       $scope.modal = modal;
-    }, {
-      animation: 'slide-in-up',
-      focusFirstInput: true,
-      scope: $scope
     });
+    
     $scope.openSettle = function () {
       $scope.modal.show();
     };

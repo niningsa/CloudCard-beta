@@ -2,24 +2,17 @@
   <!--<ion-nav-bar class="bar-positive"></ion-nav-bar>-->
   <ion-nav-title>
     <ion-header-bar class="item-input-inset search">
-     <div id="zsearch">
-       <select ng-model="area">
-         <option value="上海">上海</option>
-         <option value="宁波">宁波</option>
-         <option value="北京">北京</option>
-         <option value="杭州">杭州</option>
-         <option value="大连">大连</option>
-         <option value="吉林">吉林</option>
-         <option value="黑龙江">黑龙江</option>
-         <option value="湖北">湖北</option>
-       </select>
+
+     <span id="zsearch">
+       <!--<button  ng-click="openModal();"  class="button">上海</button>-->
+       <span id="adress" ng-click="openModal();">上海  </span> >
        <label >
-         <input id="inputSearch" ng-model="storeName" placeholder="Search" >
+         <input id="inputSearch" ng-model="storeName" placeholder="Search">
        </label>
        <button class="sbutton" ng-click="searchStoreName(storeName,area)">
          查 找
        </button>
-     </div>
+     </span>
     </ion-header-bar>
   </ion-nav-title>
   <ion-header-bar class="bar-subheader has-header slist">
@@ -82,14 +75,13 @@
     <div class="shoplist">
       <div ng-repeat="chat in storeList | filter:searchContent">
         <!--<a class="item item-avatar"   href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">-->
-        <a class="item item-avatar" href="#tab/shopDetails">
+        <a class="item item-avatar" href="#tab/shopDetails/{{chat.storeId}}">
           <img src="img/ben.png">
           <h2> {{chat.storeName}}</h2>
           <p>  {{chat.address}}</p>
           <!--<p>{{chat.storeTeleNumber}}</p>-->
         </a>
       </div>
-
 
     </div>
   </ion-content>

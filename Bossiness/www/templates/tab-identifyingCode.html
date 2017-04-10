@@ -9,12 +9,12 @@
     </ion-nav-buttons>
     <ion-content class="padding">
 
-      <form name="xiaoFeiSaoKaForm"  >
+      <form name="xiaoFeiSaoKaForm" ng-submit="shouKuan();" ng-controller="identifyingCodeCtrl">
 
         <div class="list">
           <label class="item item-input item-stacked-label">
             <span class="input-label">验证码</span>
-            <input type="number" type="text" placeholder="请输入验证码" >
+            <input type="number" type="text" ng-model="yanZhenCode" placeholder="请输入验证码" >
           </label>
         </div>
         <div class="padding">

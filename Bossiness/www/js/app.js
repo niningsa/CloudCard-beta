@@ -169,7 +169,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
     })
   //到验证码的确认页面
     .state('tab.identifyingCode', {
-      url: '/identifyingCode',
+      url: '/identifyingCode/:teleNumber/:amount',
       cache: false,
       views: {
         'tab-dash': {

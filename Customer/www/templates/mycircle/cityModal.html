@@ -1,0 +1,32 @@
+<ion-modal-view ng-controller="settleModalCtrl">
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">城市列表</h1>
+    <a class="button" ng-click="closeModal()">关闭</a>
+  </ion-header-bar>
+  <ion-content>
+    <div class="padding">
+      <ion-list >
+
+         <div>
+           <input type="text" id="searchCity" ng-model="userName" placeholder="请输入你要搜索的城市">
+         </div>
+        <div class="padding">
+          <button ng-click="choice('北京');" class="button button-balanced">北京</button>
+          <button ng-click="choice('深圳');"  class="button button-balanced">深圳</button>
+          <button ng-click="choice('西安');"  class="button button-balanced">西安</button>
+          <button ng-click="choice('重庆');"  class="button button-balanced">重庆</button>
+          <button ng-click="choice('宁波');"  class="button button-balanced">宁波</button>
+        </div>
+        <div class="padding">
+          <button ng-click="choice('襄阳');" class="button button-balanced">襄阳</button>
+          <button ng-click="choice('安徽');"  class="button button-balanced">安徽</button>
+          <button ng-click="choice('厦门');"  class="button button-balanced">厦门</button>
+          <button ng-click="choice('青岛');"  class="button button-balanced">青岛</button>
+          <button ng-click="choice('佘山');"  class="button button-balanced">佘山</button>
+        </div>
+
+        </ion-list>
+      </div>
+
+  </ion-content>
+</ion-modal-view>
