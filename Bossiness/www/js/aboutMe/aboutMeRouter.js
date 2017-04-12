@@ -13,4 +13,15 @@ angular.module('starter')
           }
         }
       })
+      //我的店铺的具体信息
+      .state('tab.myShopDetail', {
+        url: '/myShopDetail',
+        cache: false,
+        views: {
+          'tab-aboutMe': {
+            templateUrl: 'templates/aboutMe/tab-myShopDetail.html',
+            controller: 'myShopDetailCtrl'
+          }
+        }
+      })
   })

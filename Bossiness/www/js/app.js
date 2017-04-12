@@ -1,5 +1,6 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers', 'starter.services',
-               'circle.services','aboutMe.controllers','aboutMe.services','bill.controllers','bill.services','ngCordova'])
+               'circle.services','aboutMe.controllers','aboutMe.services','bill.controllers',
+               'bill.services','message.services','message.controllers','ngCordova'])
 
 .run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
@@ -167,9 +168,42 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
         }
       }
     })
+  //无卡充值
+    .state('tab.phoneNumberRecord', {
+      url: '/phoneNumberRecord',
+      cache: false,
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-phoneNumberRecord.html',
+          controller: 'phoneNumberRecordCtrl'
+        }
+      }
+    })
+  //无卡开卡
+    .state('tab.phoneNumberActivate', {
+      url: '/phoneNumberActivate',
+      cache: false,
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-phoneNumberActivate.html',
+          controller: 'phoneNumberActivateCtrl'
+        }
+      }
+    })
+    //无卡消费,通过电话号码和金额查询客户的卡
+    .state('tab.customerCard', {
+      url: '/customerCard/:teleNumber/:amount',
+      cache: false,
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-customerCard.html',
+          controller: 'customerCardCtrl'
+        }
+      }
+    })
   //到验证码的确认页面
     .state('tab.identifyingCode', {
-      url: '/identifyingCode/:teleNumber/:amount',
+      url: '/identifyingCode/:cardId/:cardCode/:teleNumber/:amount',
       cache: false,
       views: {
         'tab-dash': {

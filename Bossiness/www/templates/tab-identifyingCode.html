@@ -10,15 +10,13 @@
     <ion-content class="padding">
 
       <form name="xiaoFeiSaoKaForm" ng-submit="shouKuan();" ng-controller="identifyingCodeCtrl">
-
-        <div class="list">
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">验证码</span>
-            <input type="number" type="text" ng-model="yanZhenCode" placeholder="请输入验证码" >
-          </label>
+        <div style="font-size: 18px;color:red;padding: 10px 0px 20px 0px">您正在进行收款操作>>> </div>
+        <div class="loginbox-textbox">
+         付款验证码: <input class="form-control" style="width: 40%;display: inline-block;border:1px solid #B2B2B2" placeholder="验证码" name="identifyCode" ng-model="identifyCode" required/>
+          <input type="button" class="btn btn-primary"  ng-value="codeBtn" ng-click="getPayIdentifyCode('{{teleNumber}}')" ng-disabled="codeBtnDisable">
         </div>
         <div class="padding">
-          <button class="button button-block button-positive">确认收款</button>
+          <button class="button button-block button-positive" ng-disabled="xiaoFeiSaoKaForm.identifyCode.$error.required">确认收款</button>
         </div>
       </form>
     </ion-content>

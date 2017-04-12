@@ -167,7 +167,9 @@ angular.module('starter.services', [])
         return promise;
       },
       //从相册选择图片上传
-      uploadFile: function(fileUrl, server) {
+      uploadFile: function(fileUrl) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
         function getBase64(img) {
           function getBase64Image(img, width, height) {
             var canvas = document.createElement("canvas");
@@ -202,28 +204,33 @@ angular.module('starter.services', [])
         }
         getBase64(fileUrl).then(function (base64) {
           var bfile = dataURLtoBlob(base64);
-          var deferred = $.Deferred();
-          var promise = deferred.promise;
+          //var deferred = $.Deferred();
+          //var promise = deferred.promise;
           fileName = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
           mimeType = bfile.type;
+          var organizationPartyId = $.cookie("organizationPartyId");
           var formdata = new FormData();
           formdata.set("uploadedFile", bfile);
           formdata.set("_uploadedFile_fileName", fileName);
           formdata.set("_uploadedFile_contentType", mimeType);
+          //formdata.set("organizationPartyId", organizationPartyId);
+
           $.ajax(
             {
-              url: $rootScope.interfaceUrl + "uploadedFile",
+              url: $rootScope.interfaceUrl + "upload",
+              //url: $rootScope.interfaceUrl + "bizUploadStoreInfoImg",
               type: "POST",
               data: formdata,
               contentType: false,
               cache: false,
               processData: false,
               success: function (result) {
-                console.log(result);
+                alert(result.code);
+                deferred.resolve(result);
                 if (result.code == '200') {
-                  deferred.resolve(result.msg);
+                  deferred.resolve(result);
                 } else {
-                  deferred.reject(result.msg);
+                  deferred.reject(result);
                 }
               }
             });
@@ -239,34 +246,154 @@ angular.module('starter.services', [])
         }, function (err) {
           console.log(err);
         });
-
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
 
       },
       //无卡确认付款
-      noCardShouKuan:function(telphone,money,yanZhenCode) {
+      noCardShouKuan:function(teleNumber,cardId,cardCode,amount,identifyCode) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var token=$.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
+        //ajax请求
+        $.ajax({
+          url: $rootScope.interfaceUrl + "bizByTeleNumberWithdraw",
+          type: "POST",
+          data: {
+            "token": token,
+            "organizationPartyId": organizationPartyId,
+            "teleNumber": teleNumber,
+            "cardId": cardId,
+            "cardCode": cardCode,
+            "amount": amount,
+            "captcha": identifyCode
+          },
+          success: function (result) {
+            console.log(result);
+            if (result.code == '200') {
+              deferred.resolve(result);
+            } else {
+              deferred.reject(result);
+            }
+          }
+        });
 
+
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
       },
-      //支付时发送手机验证码
-      sendYanZhenNode: function (teleNumber, amount) {
+      //无卡充值
+      teleNumberRecharge:function(teleNumber,amount) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var token=$.cookie("token");
+        var organizationPartyId = $.cookie("organizationPartyId");
+        //ajax请求
+        $.ajax({
+          url: $rootScope.interfaceUrl + "bizByTeleNumberRecharge",
+          type: "POST",
+          data: {
+            "token": token,
+            "organizationPartyId": organizationPartyId,
+            "teleNumber": teleNumber,
+            "amount": amount
+          },
+          success: function (result) {
+            console.log(result);
+            if (result.code == '200') {
+              deferred.resolve(result);
+            } else {
+              deferred.reject(result);
+            }
+          }
+        });
+
+
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
+      },
+      //无卡充卡
+      teleNumberActivate:function(teleNumber,amount) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var token=$.cookie("token");
+        alert(teleNumber);
+        alert(amount);
+        var organizationPartyId = $.cookie("organizationPartyId");
+        $.ajax({
+          url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
+          type: "POST",
+          data: {
+            "token": token,
+            "organizationPartyId": organizationPartyId,
+            "teleNumber": teleNumber,
+            "amount": amount
+          },
+          success: function (result) {
+            console.log(result);
+            if (result.code == '200') {
+              deferred.resolve(result);
+            } else {
+              deferred.reject(result);
+            }
+          }
+        });
+
+
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
+      },
+
+      //通过手机号查询该客户是否有卡，有卡就显示卡
+      selectCustomerCard: function (teleNumber, amount) {
         var deferred = $q.defer();
         var promise = deferred.promise;
         var token=$.cookie("token");
         //ajax请求
         $.ajax(
           {
-            url: $rootScope.interfaceUrl + "getPayVerificationCodeOfCustomer",
+            url: $rootScope.interfaceUrl + "getCloudcardsOfUser",
             type: "POST",
             data: {
               "token": token,
               "teleNumber": teleNumber,
-              "amount": amount
+              "amount":amount
             },
             success: function (result) {
               console.log(result);
               if (result.code == '200') {
-                deferred.resolve(result.msg);
+                deferred.resolve(result);
               } else {
-                deferred.reject(result.msg);
+                deferred.reject(result);
               }
             }
           });
@@ -282,7 +409,6 @@ angular.module('starter.services', [])
         };
         return promise;
       },
-
     }
   })
 

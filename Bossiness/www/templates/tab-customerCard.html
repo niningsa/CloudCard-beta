@@ -1,0 +1,24 @@
+<ion-view view-title="客户选卡支付" hide-back-button="true">
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.phoneNumberConsume"></a>
+  </ion-nav-buttons>
+  <ion-content>
+
+    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+    <ion-item>
+      <div style="width: 100%; height: 100%">
+
+        <div class="list card" ng-repeat="chat in chatList" style="border: 0px" class="char_style" >
+          <div id="zd">   <h2>{{chat.cardName}}： <strong>{{chat.cardBalance}} 元</strong> </h2> </div>
+          <a class="item" ng-click="yanZhenNodeView('{{chat.cardId}}','{{chat.cardCode}}');" style="border: 0px">
+            <div class="item item-image">
+              <img src="{{chat.cardImg}}">
+            </div>
+
+          </a>
+
+        </div>
+      </div>
+    </ion-item>
+  </ion-content>
+</ion-view>

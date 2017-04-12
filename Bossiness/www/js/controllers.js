@@ -5,10 +5,42 @@ angular.module('starter.controllers', [])
  * Author LN
  * Date 2016-11-20
  * */
-  .controller('DashCtrl', function ($scope, $state) {
+  .controller('DashCtrl', function ($scope, $state,messageServece,$ionicPopup) {
     var token = $.cookie("token");
     if (token == null) {
       $state.go("login");
+    }
+
+    messageServece.messageList().success(function (data) {
+     console.log(data);
+      $scope.messageList=data.partyNotes;
+    });
+//消息已读
+    $scope.already=function(noteId){
+      messageServece.alreadymessageList(noteId).success(function (data) {
+        console.log(data);
+        //$scope.messageList=data.partyNotes;
+        //location.reload();
+        var alertPopup = $ionicPopup.alert({
+          title: '成功',
+          template: "已读成功"
+        });
+      });
+    }
+    //删除
+    $scope.deleteMessage=function(noteId){
+      messageServece.deleteMessageList(noteId).success(function (data) {
+        console.log(data);
+        var alertPopup = $ionicPopup.alert({
+          title: '成功',
+          template: "删除成功"
+        });
+        alertPopup.then(function(res) {
+          $scope.messageList=data.partyNotes;
+          //location.reload();//删除后刷新
+        });
+
+      });
     }
   })
 
@@ -679,32 +711,7 @@ angular.module('starter.controllers', [])
 
 
   .controller('applySellerCtrl', function ($scope,$cordovaCamera,$rootScope,$cordovaImagePicker,applySellerService,$cordovaFileTransfer) {
-    //从相册里面选择图片上传
-    $scope.selectPhoto = function () {
-      var options = {
-        maximumImagesCount: 9,
-        width: 400,
-        height: 400,
-        quality: 100
-      };
-      $cordovaImagePicker.getPictures(options)
-        .then(function (results) {
-          $scope.imageSrcList = results;
-          var image = document.getElementById('myImage');
-          for (var i = 0; i < results.length; i++) {
-            console.log('Image URI: ' + results[i]);//返回参数是图片地址 results 是一个数组
-            image.src = results[i];
-            applySellerService.uploadFile(results[i], "https://139.196.112.121:8443/cloudcard/control/uploadedFile").success(function (data) {
-              alert(data);
-                   }).error(function (data) {
-              alert(data);
-                     });//传递自己的服务器接口地址
-            image.style.height = '300px';
-            image.style.width = '300px';
-          }
-        }, function (error) {
-        });
-    };
+
   })
 
   /*
@@ -721,46 +728,46 @@ angular.module('starter.controllers', [])
           // var longitude = localStorage.getItem('longitude');                    // 经度
           // alert(latitude+" "+longitude);
           //验证手机号码
-          //var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-          // if (!phoneReg.test($scope.boss.phone)) {
-          //   if (false) {
-          //     $ionicLoading.show({
-          //       duration: 1500,
-          //       template: "电话号码校验不正确！"
-          //     });
-          //   } else {
-          //
-          //     $ionicLoading.show({
-          //       template: '申请中...'
-          //     });
-          //
-          //     applySellerService.applySellerRegister(
-          //       $scope.boss.businessName,
-          //       $scope.boss.phone,
-          //       $scope.boss.businessUserName,
-          //       $scope.boss.businessAddr
-          //     ).success(function (data) {
-          //       $ionicLoading.hide();
-          //       var alertPopup = $ionicPopup.alert({
-          //         title: '申请成功',
-          //         template: '恭喜您申请成功，快快登录使用吧！'
-          //       });
-          //       alertPopup.then(function (res) {
-          //         //用户点击确认登录后跳转
-          //         $state.go("login", {
-          //           "tel": $scope.boss.phone
-          //         });
-          //       })
-          //
-          //     }).error(function (data) {
-          //       $ionicLoading.hide();
-          //       var alertPopup = $ionicPopup.alert({
-          //         title: '申请失败',
-          //         template: data
-          //       });
-          //     });
-          //   }
-          // }
+          var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+           if (!phoneReg.test($scope.boss.phone)) {
+             if (false) {
+               $ionicLoading.show({
+                 duration: 1500,
+                 template: "电话号码校验不正确！"
+               });
+             } else {
+
+               $ionicLoading.show({
+                 template: '申请中...'
+               });
+
+               applySellerService.applySellerRegister(
+                 $scope.boss.businessName,
+                 $scope.boss.phone,
+                 $scope.boss.businessUserName,
+                 $scope.boss.businessAddr
+               ).success(function (data) {
+                 $ionicLoading.hide();
+                 var alertPopup = $ionicPopup.alert({
+                   title: '申请成功',
+                   template: '恭喜您申请成功，快快登录使用吧！'
+                 });
+                 alertPopup.then(function (res) {
+                   //用户点击确认登录后跳转
+                   $state.go("login", {
+                     "tel": $scope.boss.phone
+                   });
+                 })
+
+               }).error(function (data) {
+                 $ionicLoading.hide();
+                 var alertPopup = $ionicPopup.alert({
+                   title: '申请失败',
+                   template: data
+                 });
+               });
+             }
+           }
           };
 
   })
@@ -776,57 +783,232 @@ angular.module('starter.controllers', [])
 })
 
 /*
+ * Desc 无卡充值（使用手机号来充值）
+ * Author LN
+ * Date 2017-4-10
+ * */
+.controller("phoneNumberRecordCtrl", function ($scope,$ionicPopup,$state,$rootScope,$stateParams,applySellerService) {
+  $scope.noCardRecharge=function(){
+    //验证手机号是否合法
+    var flag = true;
+    var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+    if (!phoneReg.test( $scope.teleNumber)) {
+      $ionicPopup.alert({
+        title: "温馨提示",
+        template: "请输入正确的手机号码",
+        okText: "确定",
+      })
+      flag = false;
+    }
+    if(flag){
+      applySellerService.teleNumberRecharge(
+        $scope.teleNumber,
+        $scope.amount
+      ).success(function (data) {
+        console.log(data);
+        $state.go("tab.returnChongZhiMess",{
+          "cardCode":$scope.teleNumber,
+          "cardName":data.cardName,
+          "money":data.amount,
+          "amount":data.cardBalance
+        });
+      }).error(function (data) {
+
+      });
+    }
+  }
+
+})
+/*
+ * Desc 无卡开卡（使用手机号来开卡）
+ * Author LN
+ * Date 2017-4-10
+ * */
+.controller("phoneNumberActivateCtrl", function ($scope,$state,$rootScope,$stateParams,applySellerService,$ionicPopup) {
+  $scope.noCardActivate=function(){
+
+    var flag = true;
+
+    //验证手机号是否合法
+    var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+
+    if (!phoneReg.test( $scope.teleNumber)) {
+      $ionicPopup.alert({
+        title: "温馨提示",
+        template: "请输入正确的手机号码",
+        okText: "确定",
+      })
+      flag = false;
+    }
+    if (flag) {
+      applySellerService.teleNumberActivate(
+        $scope.teleNumber,
+        $scope.amount
+      ).success(function (data) {
+        console.log(data);
+      }).error(function (data) {
+        var alertPopup = $ionicPopup.alert({
+                   title: '开卡成功',
+                   template: '恭喜您开卡成功！'
+        });
+        alertPopup.then(function (res) {
+          //用户点击确认登录后跳转
+        })
+      });
+    }
+
+  }
+
+})
+/*
  * Desc 无卡收款（使用手机号来消费）
  * Author LN
  * Date 2017-2-26
  * */
-.controller("noCardReceivablesCtrl", function ($scope,$state,$rootScope,$stateParams,applySellerService) {
+.controller("noCardReceivablesCtrl", function ($scope,$ionicPopup,$state,$rootScope,$stateParams,applySellerService) {
 
   $scope.noCardReceivables=function(){
-    applySellerService.sendYanZhenNode(
-           $scope.teleNumber,
-           $scope.amount
-         ).success(function (data) {
-      $state.go("tab.identifyingCode",{
-        "teleNumber":$scope.teleNumber,
-        "amount":$scope.amount});
-         }).error(function (data) {
-
-         });
+    //验证手机号是否合法
+    var flag = true;
+    var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+    if (!phoneReg.test( $scope.teleNumber)) {
+      $ionicPopup.alert({
+        title: "温馨提示",
+        template: "请输入正确的手机号码",
+        okText: "确定",
+      })
+      flag = false;
+    }
+       if(flag){
+         $state.go("tab.customerCard",{
+           "teleNumber":$scope.teleNumber,
+           "amount":$scope.amount});
+       }
   }
+})
+/*
+ * Desc 无卡收款（查询该客户的卡）
+ * Author wk
+ * Date 2017-2-26
+ * */
+.controller("customerCardCtrl", function ($scope,$ionicPopup,$state,$rootScope,$stateParams,applySellerService) {
+  $scope.teleNumber = $stateParams.teleNumber;
+  $scope.amount = $stateParams.amount;
+  var flag = true;
+  var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+  if (!phoneReg.test( $scope.teleNumber)) {
+    $ionicPopup.alert({
+      title: "温馨提示",
+      template: "请输入正确的手机号码",
+      okText: "确定",
+    })
+    flag = false;
+  }
+   if(flag){
+     applySellerService.selectCustomerCard(
+       $scope.teleNumber,
+       $scope.amount
+     ).success(function (data) {
+       console.log(data);
+       $scope.chatList=data.cloudCardList;
+     }).error(function (data) {
+
+     });
+   }
+
+  //到验证码的页面
+$scope.yanZhenNodeView=function(cardId,cardCode){
+  $state.go("tab.identifyingCode",{
+      "cardId":cardId,
+      "cardCode":cardCode,
+      "teleNumber":$scope.teleNumber,
+      "amount":$scope.amount});
+}
 })
 /*
  * Desc 传递验证码
  * Author wk
  * Date 2017-2-26
  * */
-.controller("identifyingCodeCtrl", function ($scope,$state,$rootScope,$stateParams,$ionicLoading,$ionicPopup,applySellerService) {
+.controller("identifyingCodeCtrl", function ($http,$interval,$ionicLoading,$scope,$state,$rootScope,$stateParams,$ionicLoading,$ionicPopup,applySellerService) {
+  $scope.cardId = $stateParams.cardId;
   $scope.teleNumber = $stateParams.teleNumber;
   $scope.amount = $stateParams.amount;
+  $scope.cardCode = $stateParams.cardCode;
+  var token=$.cookie("token");
+  //无卡收款获取手机验证码
+  $scope.codeBtn = '获取验证码';
+  $scope.getPayIdentifyCode = function (teleNumber) {
+    $scope.msg = "";//先清空错误提示
+    if (teleNumber) {
+      $http({
+        method: "POST",
+        url: $rootScope.interfaceUrl + "getPayCaptchaOfUser",
+        data: {
+          "token": token,
+          "teleNumber": teleNumber,
+          "amount": $scope.amount
+        },
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},         // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+        transformRequest: function (obj) {                                      // 参数是对象的话，需要把参数转成序列化的形式
+          var str = [];
+          for (var p in obj) {
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          }
+          return str.join("&");
+        }
+      }).success(function (result) {
+        console.log(result);
+        console.log(result.code + " " + result.msg);
+        if (result.code == '500') {
+          $scope.msg = result.msg;
+        } else {
+          //倒计时
+          $scope.n = 60;
+          $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+          var time = $interval(function () {
+            $scope.n--;
+            $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+            if ($scope.n == 0) {
+              $interval.cancel(time); // 取消定时任务
+              $scope.codeBtn = '获取验证码';
+              $scope.codeBtnDisable = false;
+            }
+          }, 1000);
+          $scope.codeBtnDisable = true;
+        }
+      });
+    } else {
+      $scope.msg = "请输入您的手机号码！！"
+    }
+  };
+  //无卡收款
   $scope.shouKuan=function(){
-    alert($scope.yanZhenCode);
-    //applySellerService.noCardShouKuan(
-    //       $scope.telphone,
-    //       $scope.money,
-    //       $scope.yanZhenCode
-    //     ).success(function (data) {
-    //       $ionicLoading.hide();
-    //       var alertPopup = $ionicPopup.alert({
-    //         title: '支付成功',
-    //         template: '恭喜您支付成功！'
-    //       });
-    //       alertPopup.then(function (res) {
-    //         //用户点击确认登录后跳转
-    //         $state.go("tab.dash");
-    //       })
-    //
-    //     }).error(function (data) {
-    //       $ionicLoading.hide();
-    //       var alertPopup = $ionicPopup.alert({
-    //         title: '支付失败',
-    //         template: data
-    //       });
-    //     });
+    applySellerService.noCardShouKuan(
+           $scope.teleNumber,
+           $scope.cardId,
+           $scope.cardCode,
+           $scope.amount,
+           $scope.identifyCode
+         ).success(function (data) {
+      console.log(data);
+           $ionicLoading.hide();
+           var alertPopup = $ionicPopup.alert({
+             title: '支付成功',
+             template: '恭喜您支付成功！'
+           });
+           alertPopup.then(function (res) {
+             //用户点击确认登录后跳转
+             $state.go("tab.returnMess",{
+               "cardCode":data.cardCode,
+               "amount":data.amount,
+               "cardBalance":data.cardBalance
+             });
+           })
+
+         }).error(function (data) {
+
+         });
   }
 });
 

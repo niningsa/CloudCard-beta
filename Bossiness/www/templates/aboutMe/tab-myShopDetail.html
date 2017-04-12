@@ -1,0 +1,33 @@
+<ion-view view-title="店铺详情">
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.circleList"></a>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="list">
+      <div class="item item-divider" style="min-height:11px"></div>
+      <a class="item item-avatar">
+        <img src="{{storeImg}}">
+        <h2>{{storeName}}</h2>
+        <p>{{storeAddress}}</p>
+      </a>
+      <div class="item item-divider" style="min-height:11px"></div>
+        <div>
+          <span>上传图片：<span><button class="button button-balanced" ng-click="selectPhoto();">从图库里选择</button></span></span>
+
+          <div class="row padding row-wrap">
+            <div class="col col-33"
+                 style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
+                 ng-repeat="image in  imageSrcList">
+              <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+                   ng-src="{{image}}" id="myImage">
+            </div>
+          </div>
+        </div>
+
+
+    </div>
+
+    </div>
+  </ion-content>
+</ion-view>

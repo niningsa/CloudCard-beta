@@ -1,16 +1,16 @@
 <ion-view view-title="库胖">
   <ion-nav-bar class="bar-dark"></ion-nav-bar>
-  <ion-header-bar class="bar-subheader has-header">
-  <span id="shoukuan">
-      <button class="button button-large button-calm" >收 款</button>
-     </span>
-    <span id="kaika">
-      <button class="button button-large button-calm"  >开 卡</button>
-    </span>
-    <span id="chongzhi">
-      <button class="button button-large button-calm " >充 值</button>
-    </span>
-  </ion-header-bar>
+  <!--<ion-header-bar class="bar-subheader has-header">-->
+  <!--<span id="shoukuan">-->
+      <!--<button class="button button-large button-calm" >收 款</button>-->
+     <!--</span>-->
+    <!--<span id="kaika">-->
+      <!--<button class="button button-large button-calm"  >开 卡</button>-->
+    <!--</span>-->
+    <!--<span id="chongzhi">-->
+      <!--<button class="button button-large button-calm " >充 值</button>-->
+    <!--</span>-->
+  <!--</ion-header-bar>-->
   <ion-content class="padding content has-header ionic-pseudo" style="padding: 0px;margin: 0px">
 
   <div class="padding">
@@ -25,17 +25,32 @@
     <div>
       <a class="button button-block button-balanced" href="#/tab/phoneNumberConsume">无卡消费</a>
     </div>
+    <div>
+      <a class="button button-block button-balanced" href="#/tab/phoneNumberRecord">无卡充值</a>
+    </div>
+    <div>
+      <a class="button button-block button-balanced" href="#/tab/phoneNumberActivate">无卡开卡</a>
+    </div>
     <div ng-controller="RechargeExampleController">
       <a class="button button-block button-balanced" ng-click="scanBarcode()">充值/开卡</a>
     </div>
 
-    <div class="row se">
-      <div class="col">当前信息 :</div>
-      <div class="col shop">库胖商家</div>
-
-    </div>
-
   </div>
+    <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
 
+      <ion-item ng-repeat="item in messageList"
+                item="item"
+                href="#/item/{{item.id}}" class="item-remove-animate">
+      当前信息：<span style="color: red"> {{item.noteInfo}}</span>
+
+        <ion-option-button class="button-calm"
+                           ng-click="deleteMessage(item.noteId)" >
+          删除
+        </ion-option-button>
+        <ion-option-button class="button-assertive"
+                           ng-click="already(item.noteId)">
+          已读
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
