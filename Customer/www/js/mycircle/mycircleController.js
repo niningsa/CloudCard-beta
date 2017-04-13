@@ -66,6 +66,21 @@ angular.module('mycircle.controllers', [])
       });
 
     }
+    //图片的预览
+    $scope.shouBigImage=function(){
+      $state.go("showPicture",{"storeId":$scope.storeId});
+    }
+
+  })
+
+
+  //图片预览
+  .controller('showPictureCtrl', function ($scope,$ionicPopup,$state,$rootScope,mycircleServices,$stateParams) {
+    $scope.storeId = $stateParams.storeId;
+    mycircleServices.shopDetailByStoreId($scope.storeId).success(function (data) {
+      $scope.ossUrl=data.ossUrl;
+      $scope.storeInfoImgList=data.storeInfoImgList;
+    })
 
   })
 

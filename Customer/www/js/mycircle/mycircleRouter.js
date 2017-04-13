@@ -74,4 +74,11 @@ angular.module('starter')
         }
       })
 
+      //店家的图片预览
+      .state('showPicture', {
+        url: '/showPicture/:storeId',
+        templateUrl: 'templates/mycircle/showPicture.html',
+        controller: 'showPictureCtrl'
+      })
+
   })
