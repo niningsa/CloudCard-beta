@@ -1,7 +1,7 @@
 <ion-view view-title="店铺详情">
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
   <ion-nav-buttons side="left">
-    <a class="button icon ion-ios-undo" ui-sref="tab.circleList"></a>
+    <a class="button icon ion-ios-undo" ui-sref="tab.aboutMe"></a>
   </ion-nav-buttons>
   <ion-content>
     <div class="list">
@@ -18,9 +18,17 @@
           <div class="row padding row-wrap">
             <div class="col col-33"
                  style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
-                 ng-repeat="image in  imageSrcList">
+                 ng-repeat="image in  imageSrcList" ng-click="shouBigImage()">
               <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
                    ng-src="{{image}}" id="myImage">
+            </div>
+          </div>
+          <div class="row padding row-wrap">
+            <div class="col col-33" ng-click="shouBigImage()"
+                 style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
+                 ng-repeat="image in  storeInfoImgList">
+              <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+                   ng-src="{{ossUrl+image.objectInfo}}" id="myImages">
             </div>
           </div>
         </div>

@@ -806,12 +806,22 @@ angular.module('starter.controllers', [])
         $scope.amount
       ).success(function (data) {
         console.log(data);
-        $state.go("tab.returnChongZhiMess",{
-          "cardCode":$scope.teleNumber,
-          "cardName":data.cardName,
-          "money":data.amount,
-          "amount":data.cardBalance
-        });
+        if(data.code=='500'){
+          $ionicPopup.alert({
+            title: "温馨提示",
+            template: "用户不存在!!",
+            okText: "确定",
+          })
+        }
+        if(data.code=='200'){
+          $state.go("tab.returnChongZhiMess",{
+            "cardCode":$scope.teleNumber,
+            "cardName":data.cardName,
+            "money":data.amount,
+            "amount":data.cardBalance
+          });
+        }
+
       }).error(function (data) {
 
       });
@@ -909,8 +919,19 @@ angular.module('starter.controllers', [])
        $scope.teleNumber,
        $scope.amount
      ).success(function (data) {
-       console.log(data);
-       $scope.chatList=data.cloudCardList;
+       console.log(data.code);
+       if(data.code=='500'){
+         $ionicPopup.alert({
+           title: "温馨提示",
+           template: data.msg,
+           okText: "确定",
+         })
+       }
+       if(data.code=='200'){
+         $scope.chatList=data.cloudCardList;
+       }
+
+
      }).error(function (data) {
 
      });

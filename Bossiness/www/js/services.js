@@ -166,97 +166,124 @@ angular.module('starter.services', [])
         };
         return promise;
       },
-      //从相册选择图片上传
-      uploadFile: function(fileUrl) {
-        var deferred = $q.defer();
-        var promise = deferred.promise;
-        function getBase64(img) {
-          function getBase64Image(img, width, height) {
-            var canvas = document.createElement("canvas");
-            canvas.width = width ? width : img.width;
-            canvas.height = height ? height : img.height;
-            var ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            var dataURL = canvas.toDataURL();
-            return dataURL;
-          }
-
-          var image = new Image();
-          image.crossOrigin = '';
-          image.src = img;
-          var deferred = $.Deferred();
-          if (img) {
-            image.onload = function () {
-              deferred.resolve(getBase64Image(image));
-            }
-            return deferred.promise();
-          }
-        }
-
-       //将dataurl转换成blob二进制数据
-        function dataURLtoBlob(dataurl) {
-          var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-          while (n--) {
-            u8arr[n] = bstr.charCodeAt(n);
-          }
-          return new Blob([u8arr], {type: mime});
-        }
-        getBase64(fileUrl).then(function (base64) {
-          var bfile = dataURLtoBlob(base64);
-          //var deferred = $.Deferred();
-          //var promise = deferred.promise;
-          fileName = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
-          mimeType = bfile.type;
-          var organizationPartyId = $.cookie("organizationPartyId");
-          var formdata = new FormData();
-          formdata.set("uploadedFile", bfile);
-          formdata.set("_uploadedFile_fileName", fileName);
-          formdata.set("_uploadedFile_contentType", mimeType);
-          //formdata.set("organizationPartyId", organizationPartyId);
-
-          $.ajax(
-            {
-              url: $rootScope.interfaceUrl + "upload",
-              //url: $rootScope.interfaceUrl + "bizUploadStoreInfoImg",
-              type: "POST",
-              data: formdata,
-              contentType: false,
-              cache: false,
-              processData: false,
-              success: function (result) {
-                alert(result.code);
-                deferred.resolve(result);
-                if (result.code == '200') {
-                  deferred.resolve(result);
-                } else {
-                  deferred.reject(result);
-                }
-              }
-            });
-          promise.success = function (fn) {
-            promise.then(fn);
-            return promise;
-          };
-          promise.error = function (fn) {
-            promise.then(null, fn);
-            return promise;
-          };
-          return promise;
-        }, function (err) {
-          console.log(err);
-        });
-        promise.success = function (fn) {
-          promise.then(fn);
-          return promise;
-        };
-        promise.error = function (fn) {
-          promise.then(null, fn);
-          return promise;
-        };
-        return promise;
-
-      },
+      //通过流的方式从相册选择图片上传,会出现兼容性的问题
+      //uploadFile: function(fileUrl) {
+      //  var deferred = $q.defer();
+      //  var promise = deferred.promise;
+      //  function getBase64(img) {
+      //    function getBase64Image(img, width, height) {
+      //      var canvas = document.createElement("canvas");
+      //      canvas.width = width ? width : img.width;
+      //      canvas.height = height ? height : img.height;
+      //      var ctx = canvas.getContext("2d");
+      //      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      //      var dataURL = canvas.toDataURL();
+      //      return dataURL;
+      //    }
+      //
+      //    var image = new Image();
+      //    image.crossOrigin = '';
+      //    image.src = img;
+      //    var deferred = $.Deferred();
+      //    if (img) {
+      //      image.onload = function () {
+      //        deferred.resolve(getBase64Image(image));
+      //      }
+      //      return deferred.promise();
+      //    }
+      //  }
+      //
+      // //将dataurl转换成blob二进制数据
+      //  function dataURLtoBlob(dataurl) {
+      //    alert(dataurl);
+      //    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+      //      //bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+      //      bstr=atob(arr[1]),n=bstr.length,
+      //      aBuffer=new ArrayBuffer(n);
+      //    var uBuffer = new window.Uint8Array(aBuffer);
+      //    while (n--) {
+      //      uBuffer[n] = bstr.charCodeAt(n);
+      //    }
+      //    var blob=null;
+      //    try{
+      //      blob = new Blob([uBuffer], {type : mime});
+      //    }
+      //    catch(e){
+      //      window.BlobBuilder = window.BlobBuilder ||
+      //        window.WebKitBlobBuilder ||
+      //        window.MozBlobBuilder ||
+      //        window.MSBlobBuilder;
+      //      if(e.name == 'TypeError' && window.BlobBuilder){
+      //        var bb = new window.BlobBuilder();
+      //        bb.append(uBuffer.buffer);
+      //        blob = bb.getBlob(mime);
+      //      }
+      //      else if(e.name == "InvalidStateError"){
+      //        blob = new Blob([aBuffer], {type : mime});
+      //      }
+      //      else{
+      //
+      //      }
+      //    }
+      //    return blob;
+      //
+      //  }
+      //  getBase64(fileUrl).then(function (base64) {
+      //    var bfile = dataURLtoBlob(base64);
+      //    alert("我进来了"+bfile);
+      //    //var deferred = $.Deferred();
+      //    //var promise = deferred.promise;
+      //    fileName = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
+      //    mimeType = bfile.type;
+      //    var organizationPartyId = $.cookie("organizationPartyId");
+      //    var formdata = new FormData();
+      //    formdata.set("uploadedFile", bfile);
+      //    formdata.set("_uploadedFile_fileName", fileName);
+      //    formdata.set("_uploadedFile_contentType", mimeType);
+      //    //formdata.set("organizationPartyId", organizationPartyId);
+      //
+      //    $.ajax(
+      //      {
+      //        url: $rootScope.interfaceUrl + "upload",
+      //        //url: $rootScope.interfaceUrl + "bizUploadStoreInfoImg",
+      //        type: "POST",
+      //        data: formdata,
+      //        contentType: false,
+      //        cache: false,
+      //        processData: false,
+      //        success: function (result) {
+      //          alert(result.code);
+      //          deferred.resolve(result);
+      //          if (result.code == '200') {
+      //            deferred.resolve(result);
+      //          } else {
+      //            deferred.reject(result);
+      //          }
+      //        }
+      //      });
+      //    promise.success = function (fn) {
+      //      promise.then(fn);
+      //      return promise;
+      //    };
+      //    promise.error = function (fn) {
+      //      promise.then(null, fn);
+      //      return promise;
+      //    };
+      //    return promise;
+      //  }, function (err) {
+      //    console.log(err);
+      //  });
+      //  promise.success = function (fn) {
+      //    promise.then(fn);
+      //    return promise;
+      //  };
+      //  promise.error = function (fn) {
+      //    promise.then(null, fn);
+      //    return promise;
+      //  };
+      //  return promise;
+      //
+      //},
       //无卡确认付款
       noCardShouKuan:function(teleNumber,cardId,cardCode,amount,identifyCode) {
         var deferred = $q.defer();
@@ -315,6 +342,7 @@ angular.module('starter.services', [])
           },
           success: function (result) {
             console.log(result);
+            deferred.resolve(result);
             if (result.code == '200') {
               deferred.resolve(result);
             } else {
@@ -389,7 +417,8 @@ angular.module('starter.services', [])
               "amount":amount
             },
             success: function (result) {
-              console.log(result);
+              //console.log(result);
+              deferred.resolve(result);
               if (result.code == '200') {
                 deferred.resolve(result);
               } else {

@@ -1,0 +1,20 @@
+<ion-view title="图片预览">
+    <ion-nav-bar class="bar-positive"></ion-nav-bar>
+    <ion-nav-buttons side="left">
+      <a class="button icon ion-ios-undo" ui-sref="tab.myShopDetail" ></a>
+    </ion-nav-buttons>
+  </ion-nav-buttons>
+  <ion-content >
+  <div ng-repeat="image in storeInfoImgList">
+    <img src="img/fail.gif" style="float: right; position: absolute;right: 3%" ng-click="deletePicture(image.contentId)">
+    <img style="left:40px;width:100%;top:10px;height:100%"  ng-src="{{ossUrl+image.objectInfo}}" >
+  </div>
+    <!--<ion-slide-box  style="width: 100%;height: 600px;margin:0;" show-pager="false" >-->
+      <!--<ion-slide ng-repeat="image in storeInfoImgList" style="padding: 0;margin: 0;position:relative;top:12px;width: 100%;height: 100%">-->
+        <!--&lt;!&ndash;<span>{{storeInfoImgList}}</span>&ndash;&gt;-->
+         <!--<img src="img/fail.gif" style="float: right; position: absolute;right: 3%" ng-click="deletePicture(image.contentId)">-->
+        <!--<img   ng-src="{{ossUrl+image.objectInfo}}" >-->
+      <!--</ion-slide>-->
+    <!--</ion-slide-box>-->
+  </ion-content>
+</ion-view>
