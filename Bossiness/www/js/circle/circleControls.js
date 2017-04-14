@@ -3,7 +3,7 @@ angular.module('circle.controllers', [])
 /********************************************* Start 圈子 **************************************************/
   /*
    * Desc 圈子账单
-   * Author LN
+   * Author ln
    * Date 2017-1-12
    * */
   .controller('circeAccountCtrl', function ($scope) {
