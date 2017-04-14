@@ -16,6 +16,9 @@ angular.module('mycircle.controllers', [])
         $scope.storeList=result.storeList;
       })
     }
+    $scope.aa=function(){
+      alert(55);
+    }
 
     //点击下拉列表出现更多的城市列表
     $ionicModal.fromTemplateUrl('templates/mycircle/cityModal.html', {
@@ -65,6 +68,10 @@ angular.module('mycircle.controllers', [])
         "storeId": storeId
       });
 
+    }
+    //消费记录
+    $scope.record=function(storeId){
+      $state.go("tab.bill");
     }
     //图片的预览
     $scope.shouBigImage=function(){

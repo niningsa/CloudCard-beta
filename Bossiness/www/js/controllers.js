@@ -869,6 +869,95 @@ angular.module('starter.controllers', [])
 
   }
 
+  //已开卡的列表
+$scope.activateCardList=function(){
+  $state.go("tab.activateCardList");
+}
+})
+/*
+ * Desc 已开卡的列表（
+ * Author WK
+ * Date 2017-4-10
+ * */
+.controller("activateCardListCtrl", function ($scope,$state,$rootScope,$stateParams,applySellerService,$ionicPopup) {
+  applySellerService.activateCardListService().success(function (data) {
+    console.log(data);
+    $scope.chatList=data.finAccountList;
+  }).error(function (data) {
+  });
+
+  $scope.queryBill=function(cardNumber,ownerPartyId,cardId){
+
+    $state.go("tab.activateCardBill",{
+      "cardNumber":cardNumber,
+      "ownerPartyId":ownerPartyId,
+      "cardId":cardId
+    });
+  }
+
+})
+/*
+ * Desc 已开卡的列表（
+ * Author WK
+ * Date 2017-4-10
+ * */
+.controller("activateCardBillCtrl", function ($scope,$state,$rootScope,$stateParams,applySellerService,billService,$ionicPopup) {
+    $scope.cardNumber=$stateParams.cardNumber;
+    $scope.ownerPartyId=$stateParams.ownerPartyId;
+    $scope.cardId=$stateParams.cardId;
+  //已开卡列表的账单详情
+  applySellerService.activateCardBillService(
+    $scope.cardNumber,
+    $scope.ownerPartyId,
+    $scope.cardId
+  ).success(function (data) {
+    console.log(data);
+    //$scope.chatList=data.paymentList;
+    $scope.yearAndMonthPaymentList=data.yearAndMonthPaymentList;
+  }).error(function (data) {
+  });
+
+  //查询全部的账单
+  $scope.all=function(typeId){
+    applySellerService.activateCardBillService(
+      $scope.cardNumber,
+      $scope.ownerPartyId,
+      $scope.cardId,
+    typeId
+    ).success(function (data) {
+      console.log(data);
+      $scope.yearAndMonthPaymentList=data.yearAndMonthPaymentList;
+    }).error(function (data) {
+    });
+  }
+  //总消费账单
+  $scope.zongConsume=function(typeId){
+    applySellerService.activateCardBillService(
+      $scope.cardNumber,
+      $scope.ownerPartyId,
+      $scope.cardId,
+      typeId
+    ).success(function (data) {
+      console.log(data);
+      $scope.yearAndMonthPaymentList=data.yearAndMonthPaymentList;
+    }).error(function (data) {
+    });
+  }
+
+  //总充值账单
+  $scope.zongRecharge=function(typeId){
+    applySellerService.activateCardBillService(
+      $scope.cardNumber,
+      $scope.ownerPartyId,
+      $scope.cardId,
+      typeId
+    ).success(function (data) {
+      console.log(data);
+      $scope.yearAndMonthPaymentList=data.yearAndMonthPaymentList;
+    }).error(function (data) {
+    });
+  }
+
 })
 /*
  * Desc 无卡收款（使用手机号来消费）

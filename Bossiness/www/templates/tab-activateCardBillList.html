@@ -1,25 +1,19 @@
-<ion-view view-title="我的账单">
+<ion-view view-title="已开卡的账单">
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
   <ion-nav-buttons side="left">
-    <a class="button icon ion-ios-undo" ui-sref="tab.aboutMe"></a>
+    <a class="button icon ion-ios-undo" ui-sref="tab.activateCardList"></a>
   </ion-nav-buttons>
   <ion-header-bar class="bar-subheader has-header">
-  <div id="mybill">
-    <span id="zongxiaofei">
-      <button class="button button-large button-positive" ng-click="all(0)" >全部</button>
+  <span id="dianlei">
+      <button class="button button-large button-positive" ng-click="all(0)">全部</button>
      </span>
-    <span id="zongchongzhi">
+    <span id="kalei">
       <button class="button button-large button-positive"  ng-click="zongRecharge(1)">总充值</button>
     </span>
-    <span id="kaxiaofei">
-      <button class="button button-large button-positive "  ng-click="zongConsume(2)" >总消费</button>
+    <span id="taren">
+      <button class="button button-large button-positive " ng-click="zongConsume(2)" >总消费</button>
     </span>
-    <!--<span id="kachongzhi">-->
-      <!--<button class="button button-large button-positive "  ui-sref="tab.otherConsume" >卡内充值</button>-->
-    <!--</span>-->
-  </div>
   </ion-header-bar>
-
   <ion-content>
     <div>
       <div class="list">
@@ -38,6 +32,7 @@
             <div><span>{{bills.transDate |date:'h:mm:ss'}}</span> <span style="padding-left: 20%" ng-bind="bills.storeName"></span></div>
           </div>
         </a>
+
       </div>
     </div>
   </ion-content>

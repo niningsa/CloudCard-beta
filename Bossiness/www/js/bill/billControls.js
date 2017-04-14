@@ -1,5 +1,13 @@
 angular.module('bill.controllers', [])
-  .controller('billHomeCtrl', function ($scope) {
+
+  //B端账单
+  .controller('billHomeCtrl', function ($scope,billService) {
+    billService.getUserPaymentBybizService().success(function (data) {
+      $scope.billList=data.paymentList;
+    }).error(function (data) {
+
+
+    });
 
   })
 

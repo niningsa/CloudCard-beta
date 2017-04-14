@@ -46,13 +46,37 @@ angular.module('aboutMe.controllers', [])
    * Author WK
    * Date 2017-3-21
    * */
-  .controller('billCtrl', function($scope,$state, $rootScope,aboutMeService) {
-    var viewSize=20;//账单一开始默认加载20条数据
+  .controller('billCtrl', function($scope,$state, $rootScope,aboutMeService,$filter) {
 
-    aboutMeService.billList().success(function (result) {
+    //var today = new Date();
+    //$scope.formatDate = $filter('date')(today, 'M');
+    //alert($scope.formatDate);
+    aboutMeService.billList(0).success(function (result) {
      console.log(result);
-      $scope.billList=result.paymentList
+      $scope.yearAndMonthPaymentList=result.yearAndMonthPaymentList;
     })
+
+    //全部账单
+    $scope.all=function(typeId){
+      aboutMeService.billList(typeId).success(function (result) {
+        console.log(result);
+        $scope.yearAndMonthPaymentList=result.yearAndMonthPaymentList;
+      })
+    }
+//总消费账单
+    $scope.zongConsume=function(typeId){
+      aboutMeService.billList(typeId).success(function (result) {
+        console.log(result);
+        $scope.yearAndMonthPaymentList=result.yearAndMonthPaymentList;
+      })
+    }
+    //总充值账单
+    $scope.zongRecharge=function(typeId){
+      aboutMeService.billList(typeId).success(function (result) {
+        console.log(result);
+        $scope.yearAndMonthPaymentList=result.yearAndMonthPaymentList;
+      })
+    }
   })
   /*
    * Desc 我的客服
@@ -68,9 +92,35 @@ angular.module('aboutMe.controllers', [])
    * Author WK
    * Date 2017-3-30
    * */
-  .controller('myInformationCtrl', function($scope,$state, $rootScope,aboutMeService) {
-      $scope.customerName='王坤';
-      $scope.phone='18772115070';
+  .controller('myInformationCtrl', function($scope,$state, $rootScope,aboutMeService,$ionicPopup) {
+      //$scope.customerName='王坤';
+      //$scope.phone='18772115070';
       $scope.address='虹桥银城大厦';
+
+    aboutMeService.getUesrInfoService().success(function (result) {
+      console.log(result);
+      $scope.userName=result.userName
+      $scope.teleNumber=result.teleNumber
+      //$scope.billList=result.paymentList
+    })
+    //更改个人信息
+    $scope.updateInformation=function(){
+      aboutMeService.updateInformationService(
+        $scope.userName,
+        $scope.teleNumber
+      ).success(function (result) {
+        console.log(result);
+        if(result.code=='200'){
+          var alertPopup = $ionicPopup.alert({
+            title: '温馨提示',
+            template: '修改个人信息成功!!'
+          });
+          alertPopup.then(function (res) {
+            //用户点击确认登录后跳转
+            $state.go("tab.aboutMe");
+          })
+        }
+      })
+    }
 
   })

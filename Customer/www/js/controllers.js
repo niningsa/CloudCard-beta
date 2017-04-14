@@ -2356,7 +2356,7 @@ angular.module('starter.controllers', [])
     };
     //从我的卡页面进去的充值
     $scope.weiXin=function (choice) {
-      alert(choice);
+      //alert(choice);
       $.ajax({
           url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
           // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
