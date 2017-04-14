@@ -35,7 +35,7 @@ angular.module('aboutMe.services', [])
         };
         return promise;
       },
-      billList:function(){
+      billList:function(amountType){
         var token = $.cookie("token");
         var deferred = $q.defer();
         var promise = deferred.promise;
@@ -46,10 +46,9 @@ angular.module('aboutMe.services', [])
           async: false,
           data: {
             "token": token,
-            "organizationPartyId": organizationPartyId,
-            //"type":amountType,  //0-全部， 1-充值，2-支付
+            "type":amountType,  //0-全部， 1-充值，2-支付
             "viewIndex": 0,
-            "viewSize": 20
+            "viewSize": 2000
           },
             success: function (result) {
               console.log(result);
@@ -73,5 +72,71 @@ angular.module('aboutMe.services', [])
       },
 
       //这里是下一个方法的开始
+      getUesrInfoService:function(){
+        var token = $.cookie("token");
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var organizationPartyId=$.cookie("organizationPartyId");
+        $.ajax({
+          type: "POST",
+          url: $rootScope.interfaceUrl + "getUesrInfo",
+          async: false,
+          data: {
+            "token": token,
+          },
+          success: function (result) {
+            console.log(result);
+            deferred.resolve(result);
+            if (result.code == '200') {
+              deferred.resolve(result);
+            } else {
+              deferred.reject(result);
+            }
+          }
+        });
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
+      },
+     //更改个人信息
+      updateInformationService:function(userName,teleNumber){
+        var token = $.cookie("token");
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var organizationPartyId=$.cookie("organizationPartyId");
+        $.ajax({
+          type: "POST",
+          url: $rootScope.interfaceUrl + "updateUesrInfo",
+          async: false,
+          data: {
+            "token": token,
+            "userName": userName
+          },
+          success: function (result) {
+            console.log(result);
+            deferred.resolve(result);
+            if (result.code == '200') {
+              deferred.resolve(result);
+            } else {
+              deferred.reject(result);
+            }
+          }
+        });
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
+      },
     }
     })

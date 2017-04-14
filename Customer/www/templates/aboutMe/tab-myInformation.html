@@ -4,19 +4,19 @@
     <a class="button icon ion-ios-undo" ui-sref="tab.aboutMe"></a>
   </ion-nav-buttons>
   <ion-content>
-    <form name="regForm" ng-submit="applySeller()" >
+    <form name="regForm" ng-submit="updateInformation()"  ng-controller="myInformationCtrl">
       <div class="list card">
         <label class="item item-input item-stacked-label">
           <span class="input-label">姓名：</span>
-          <input type="text" name="businessName" ng-model="customerName"  required>
+          <input type="text"  style="border: 0px solid #d5d5d5;" name="userName" ng-model="userName"  required>
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">电话号码：</span>
-          <input type="text" name="phone" ng-model="phone">
+          <input type="text" style="border: 0px solid #d5d5d5;" disabled="disabled" name="teleNumber" ng-model="teleNumber">
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">地址：</span>
-          <input type="text" name="address" ng-model="address" >
+          <input type="text"  style="border: 0px solid #d5d5d5;" name="address" ng-model="address" >
         </label>
 
         <div class="padding">

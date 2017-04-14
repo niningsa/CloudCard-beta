@@ -190,6 +190,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
         }
       }
     })
+    //已开卡的列表
+    .state('tab.activateCardList', {
+      url: '/activateCardList',
+      cache: false,
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-activateCardList.html',
+          controller: 'activateCardListCtrl'
+        }
+      }
+    })
+    //已开卡的列表
+    .state('tab.activateCardBill', {
+      url: '/activateCardBill/:cardNumber/:ownerPartyId/:cardId',
+      cache: false,
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-activateCardBillList.html',
+          controller: 'activateCardBillCtrl'
+        }
+      }
+    })
     //无卡消费,通过电话号码和金额查询客户的卡
     .state('tab.customerCard', {
       url: '/customerCard/:teleNumber/:amount',

@@ -1,0 +1,23 @@
+<ion-view view-title="已开卡列表" hide-back-button="true">
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.phoneNumberActivate"></a>
+  </ion-nav-buttons>
+  <ion-content>
+
+    <!--<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>-->
+    <ion-list>
+      <ion-item collection-repeat="chat in chatList">
+       <div ng-click="queryBill(chat.cardNumber,chat.ownerPartyId,chat.paymentMethodId)">
+         卡号：{{chat.cardNumber}}
+         <div>
+           名称：<strong>{{chat.description}}</strong>
+         </div>
+         <div>
+           金额：<strong>{{chat.actualBalance==null?0:chat.actualBalance}} 元</strong>
+         </div>
+       </div>
+        </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

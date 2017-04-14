@@ -24,6 +24,9 @@
         <div class="padding">
           <button class="button button-block button-positive" ng-disabled="phoneNumberActivateForm.money.$error.required">确认开卡</button>
         </div>
+        <div class="padding">
+          <button class="button button-block button-positive" ng-click="activateCardList()" ng-controller="phoneNumberActivateCtrl">已开卡</button>
+        </div>
       </form>
     </ion-content>
 </ion-view>
