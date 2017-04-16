@@ -179,3 +179,14 @@ td{
   color: #222;
   font-weight: 500;
 }
+.char_style{
+  height: 120px;
+  padding: 0px;
+  margin: 0px;
+}
+.wujiaoxing{
+  vertical-align: middle;
+}
+#zd{
+  height: 20px;
+}

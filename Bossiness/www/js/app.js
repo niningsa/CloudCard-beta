@@ -68,6 +68,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
       }
     }
   })
+    //通过扫客户二维码
+  .state('tab.shopCustomerCardList', {
+    url: '/shopCustomerCardList/:qrcode',
+     cache: false,  //清除缓存
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-shopCustomerCardList.html',
+        controller: 'shopCustomerCardListCtrl'
+      }
+    }
+  })
+    //选客户的卡来收款
+  .state('tab.xiaoFei', {
+    url: '/xiaoFei/:cardCode',
+     cache: false,  //清除缓存
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-xiaofe.html',
+        controller: 'xiaoFeiCtrl'
+      }
+    }
+  })
 
 
   .state('tab.account', {

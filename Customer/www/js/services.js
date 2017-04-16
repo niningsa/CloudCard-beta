@@ -32,13 +32,14 @@ angular.module('starter.services', [])
           chats = data.cloudCardList||[];
         },
         error:function (e) {
+          console.log(e);
           $ionicPopup.alert({
             title:"温馨提示",
             template:"手机网络已中断，请尝试开启网络!!",
             okText:"确定",
 
           })
-          console.log(e);
+
         }
       });
       }else{

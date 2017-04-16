@@ -35,6 +35,7 @@ angular.module('aboutMe.services', [])
         };
         return promise;
       },
+      //总帐单
       billList:function(amountType){
         var token = $.cookie("token");
         var deferred = $q.defer();
@@ -47,6 +48,43 @@ angular.module('aboutMe.services', [])
           data: {
             "token": token,
             "type":amountType,  //0-全部， 1-充值，2-支付
+            "viewIndex": 0,
+            "viewSize": 2000
+          },
+            success: function (result) {
+              console.log(result);
+              deferred.resolve(result);
+              if (result.code == '200') {
+                deferred.resolve(result);
+              } else {
+                deferred.reject(result);
+              }
+            }
+          });
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
+      },
+      //分帐单
+      subBillService:function(amountType,cardId){
+        var token = $.cookie("token");
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var organizationPartyId=$.cookie("organizationPartyId");
+        $.ajax({
+          type: "POST",
+          url: $rootScope.interfaceUrl + "getUserPayment",
+          async: false,
+          data: {
+            "token": token,
+            "type":amountType,  //0-全部， 1-充值，2-支付
+            "cardId":cardId,
             "viewIndex": 0,
             "viewSize": 2000
           },

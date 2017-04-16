@@ -1,0 +1,65 @@
+<ion-view view-title="客户卡列表" hide-back-button="true">
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.dash"></a>
+  </ion-nav-buttons>
+  <ion-content>
+
+    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+    <ion-item>
+      <div style="width: 100%; height: 100%">
+
+        <div class="list card" ng-repeat="chat in cloudCardList" style="border: 0px" class="char_style" >
+          <div id="zd">   <h2>{{chat.cardName}}： <strong>{{chat.cardBalance}} 元</strong> </h2> </div>
+        <!--用星代表商家的信用-->
+          <div>商家信用:<span>
+            <span ng-if="chat.storeLevel=='STORE_LEVEL_1'">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinhui.png">
+              <img class="wujiaoxing" src="img/wujiaoxinhui.png">
+              <img class="wujiaoxing" src="img/wujiaoxinhui.png">
+              <img class="wujiaoxing" src="img/wujiaoxinhui.png">
+            </span>
+            <span ng-if="chat.storeLevel=='STORE_LEVEL_2'">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinhui.png">
+              <img class="wujiaoxing" src="img/wujiaoxinhui.png">
+              <img class="wujiaoxing" src="img/wujiaoxinhui.png">
+            </span>
+            <span ng-if="chat.storeLevel=='STORE_LEVEL_3'">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinhui.png">
+              <img class="wujiaoxing" src="img/wujiaoxinhui.png">
+            </span>
+            <span ng-if="chat.storeLevel=='STORE_LEVEL_4'">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinhui.png">
+            </span>
+            <span ng-if="chat.storeLevel=='STORE_LEVEL_5'">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+              <img class="wujiaoxing" src="img/wujiaoxinghuang.png">
+            </span>
+
+
+
+          </span></div>
+          <a class="item" href="#/tab/xiaoFei/{{chat.cardCode}}" style="border: 0px">
+            <div class="item item-image">
+              <img src="{{chat.cardImg}}">
+            </div>
+
+          </a>
+
+        </div>
+      </div>
+    </ion-item>
+  </ion-content>
+</ion-view>

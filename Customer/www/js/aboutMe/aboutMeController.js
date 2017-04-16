@@ -20,6 +20,14 @@ angular.module('aboutMe.controllers', [])
 
     })
 
+    $scope.address='虹桥银城大厦';
+
+    aboutMeService.getUesrInfoService().success(function (result) {
+      console.log(result);
+      $scope.userName=result.userName
+      $scope.teleNumber=result.teleNumber
+    })
+
 
   })
 
@@ -101,7 +109,6 @@ angular.module('aboutMe.controllers', [])
       console.log(result);
       $scope.userName=result.userName
       $scope.teleNumber=result.teleNumber
-      //$scope.billList=result.paymentList
     })
     //更改个人信息
     $scope.updateInformation=function(){

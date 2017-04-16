@@ -219,11 +219,107 @@ angular.module('starter.controllers', [])
 
   })
 
+  //b扫c消费收款
+  .controller("xiaoFeiCtrl", function ($scope, $state, $rootScope, $ionicLoading, $timeout,$stateParams) {
+   $scope.cardCode=$stateParams.cardCode;
+    var token = $.cookie("token");
+    var organizationPartyId = $.cookie("organizationPartyId");
+    if (token == null) {
+      $state.go("login");
+    }
+
+    $scope.pay = function (amount) {
+      $scope.msg = '';
+      var reg = /^(([1-9]\d{0,9})|0)(\.\d{1,3})?$/;
+
+      //金额必须大于0的数字..痛苦 0_o||
+      if (!reg.test(amount)) {
+        $scope.msg = '输入金额不合法，请重新输入！！';
+        $("input[name='amount']").val("");
+      } else {
+        if (parseFloat(amount) <= 0) {
+          $scope.msg = '输入金额不合法，请重新输入！！';
+          $("input[name='amount']").val("");
+        } else {
+              $scope.msg = "";                                                //清空错误提示
+              if ($scope.cardCode != '') {
+                $.ajax({
+                  url: $rootScope.interfaceUrl + "cloudCardWithdraw",
+                  type: "POST",
+                  data: {
+                    "cardCode": $scope.cardCode,
+                    "token": token,
+                    "organizationPartyId": organizationPartyId,
+                    "amount": amount
+                  },
+                  success: function (result) {
+                    console.log(result);
+                    // alert(result.code+" "+result.msg+"　"+result.amount+" "+result.cardBalance);
+                    if (result.code == '200') {
+                      $state.go("tab.returnMess", {
+                        cardCode:  $scope.cardCode,
+                        amount: amount,
+                        cardBalance: result.cardBalance
+                      });
+                    } else {
+                      $scope.$apply(function () {
+                        $scope.msg = result.msg;
+                      });
+                    }
+                  }
+                });
+
+              }
+        }
+      }
+    };
+
+  })
+
   //消费扫卡成功后，页面初始化
   .controller('returnMessCtrl', function ($scope, $stateParams) {
     $scope.cardCode = $stateParams.cardCode;
     $scope.amount = $stateParams.amount;
     $scope.cardBalance = $stateParams.cardBalance;
+  })
+
+  //店家扫客户二维码来查询客户的卡
+  .controller('scanShopReceivablesCtrl', function ($scope, $state, $cordovaBarcodeScanner, $rootScope, $ionicPopup, $ionicLoading, $timeout,applySellerService) {
+    $scope.scanCustomerBarcode = function () {
+      $ionicLoading.show({
+        template: "正在调摄像头,请稍后...."
+      });
+      $timeout(function () {
+        $cordovaBarcodeScanner.scan().then(function (imageData) {
+          $ionicLoading.hide();
+          var cardCode = imageData.text;                                  // 扫到的数据
+           //var cardCode="user_pay_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTIyMzc2MjYsImlzcyI6ImNsb3VkY2FyZCIsImRlbGVnYXRvck5hbWUiOiJkZWZhdWx0IiwidXNlciI6IjEwMDA4IiwiaWF0IjoxNDkyMjM3NjI2fQ.t4XXE3t2vZzfvpuixuwOnt_sI52aA8dMTsRDt3P-WYs"
+           //var cardCode="56067041145085307052"
+          //alert(cardCode+"客户二维码"+cardCode.substr(0,9));
+          if (cardCode != '') {
+              if((cardCode.substr(0,9))=="user_pay_"){
+                //到选客户的卡来支付的页面
+                $state.go("tab.shopCustomerCardList",{"qrcode":cardCode});
+              }else{
+               //直接到输入金额支付的页面
+                $state.go("tab.xiaoFei",{"cardCode":cardCode});
+              }
+
+          }
+        });
+      }, 1000);
+    };
+
+
+  })
+  //到客户卡的列表
+  .controller('shopCustomerCardListCtrl', function ($scope, $state, $rootScope, $ionicPopup,$stateParams, $ionicLoading, $timeout,applySellerService) {
+   $scope.qrcode=$stateParams.qrcode;
+    applySellerService.selectCustomerCardList($scope.qrcode).success(function (data) {
+     console.log(data);
+      $scope.cloudCardList=data.cloudCardList;
+    });
+
   })
 
 
@@ -856,14 +952,15 @@ angular.module('starter.controllers', [])
         $scope.amount
       ).success(function (data) {
         console.log(data);
-      }).error(function (data) {
         var alertPopup = $ionicPopup.alert({
-                   title: '开卡成功',
-                   template: '恭喜您开卡成功！'
+          title: '开卡成功',
+          template: '恭喜您开卡成功！'
         });
         alertPopup.then(function (res) {
           //用户点击确认登录后跳转
         })
+      }).error(function (data) {
+
       });
     }
 

@@ -367,8 +367,6 @@ angular.module('starter.services', [])
         var deferred = $q.defer();
         var promise = deferred.promise;
         var token=$.cookie("token");
-        alert(teleNumber);
-        alert(amount);
         var organizationPartyId = $.cookie("organizationPartyId");
         $.ajax({
           url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
@@ -497,6 +495,44 @@ angular.module('starter.services', [])
             },
             success: function (result) {
               //console.log(result);
+              deferred.resolve(result);
+              if (result.code == '200') {
+                deferred.resolve(result);
+              } else {
+                deferred.reject(result);
+              }
+            }
+          });
+
+
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
+      },
+      //查询客户的卡列表
+      selectCustomerCardList: function (qrcode) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var token=$.cookie("token");
+        var organizationPartyId=$.cookie("organizationPartyId");
+        //ajax请求
+        $.ajax(
+          {
+            url: $rootScope.interfaceUrl + "getCloudcardsOfUser",
+            type: "POST",
+            data: {
+              "token": token,
+              "organizationPartyId": organizationPartyId,
+              "qrCode":qrcode
+            },
+            success: function (result) {
+              console.log(result);
               deferred.resolve(result);
               if (result.code == '200') {
                 deferred.resolve(result);

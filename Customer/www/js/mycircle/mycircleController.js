@@ -42,7 +42,8 @@ angular.module('mycircle.controllers', [])
   //城市选择完成之后
   .controller('settleModalCtrl', function($scope,$state, $rootScope,mycircleServices,$stateParams) {
     $scope.choice=function(city){
-      $("#adress").html(city);
+      document.getElementById("adress").innerHTML=city
+      //$("#adress").html(city);
       $scope.modal.hide();
     }
   })
@@ -231,7 +232,7 @@ angular.module('mycircle.controllers', [])
     };
     //从我的卡页面进去的充值
     $scope.weiXin=function (choice) {
-      alert(choice);
+      //alert(choice);
       $.ajax({
         url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
         // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
