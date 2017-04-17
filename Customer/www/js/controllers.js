@@ -2382,7 +2382,7 @@ angular.module('starter.controllers', [])
             wxpay.payment(result, function success (e) {
               $state.go("tab.chats");
             }, function error (e) {
-                 alert("失败了："+e);
+                 //alert("失败了："+e);
             });
           }
         });

@@ -305,6 +305,7 @@ angular.module('starter.services', [])
           },
           success: function (result) {
             console.log(result);
+            deferred.resolve(result);
             if (result.code == '200') {
               deferred.resolve(result);
             } else {

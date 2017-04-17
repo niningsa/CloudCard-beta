@@ -304,7 +304,6 @@ angular.module('starter.controllers', [])
                //直接到输入金额支付的页面
                 $state.go("tab.xiaoFei",{"cardCode":cardCode});
               }
-
           }
         });
       }, 1000);
@@ -885,6 +884,7 @@ angular.module('starter.controllers', [])
  * */
 .controller("phoneNumberRecordCtrl", function ($scope,$ionicPopup,$state,$rootScope,$stateParams,applySellerService) {
   $scope.noCardRecharge=function(){
+    $("#cz").attr("disabled","disabled");//这是为了重复的提交，所以给它弄死
     //验证手机号是否合法
     var flag = true;
     var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
@@ -932,7 +932,7 @@ angular.module('starter.controllers', [])
  * */
 .controller("phoneNumberActivateCtrl", function ($scope,$state,$rootScope,$stateParams,applySellerService,$ionicPopup) {
   $scope.noCardActivate=function(){
-
+    $("#ka").attr("disabled","disabled");//这是为了重复的提交，所以给它弄死
     var flag = true;
 
     //验证手机号是否合法
@@ -1168,7 +1168,9 @@ $scope.yanZhenNodeView=function(cardId,cardCode){
         console.log(result);
         console.log(result.code + " " + result.msg);
         if (result.code == '500') {
-          $scope.msg = result.msg;
+          $scope.$apply(function () {
+            $scope.msg = result.msg;
+          });
         } else {
           //倒计时
           $scope.n = 60;
@@ -1191,6 +1193,8 @@ $scope.yanZhenNodeView=function(cardId,cardCode){
   };
   //无卡收款
   $scope.shouKuan=function(){
+    //$("#sk").attr("disabled","disabled")
+    $("#sk").attr("disabled","disabled");//这是为了重复的提交，所以给它弄死
     applySellerService.noCardShouKuan(
            $scope.teleNumber,
            $scope.cardId,
@@ -1199,20 +1203,26 @@ $scope.yanZhenNodeView=function(cardId,cardCode){
            $scope.identifyCode
          ).success(function (data) {
       console.log(data);
-           $ionicLoading.hide();
-           var alertPopup = $ionicPopup.alert({
-             title: '支付成功',
-             template: '恭喜您支付成功！'
-           });
-           alertPopup.then(function (res) {
-             //用户点击确认登录后跳转
-             $state.go("tab.returnMess",{
-               "cardCode":data.cardCode,
-               "amount":data.amount,
-               "cardBalance":data.cardBalance
-             });
-           })
-
+      if(data.code=="200"){
+        $ionicLoading.hide();
+        var alertPopup = $ionicPopup.alert({
+          title: '支付成功',
+          template: '恭喜您支付成功！'
+        });
+        alertPopup.then(function (res) {
+          //用户点击确认登录后跳转
+          $state.go("tab.returnMess",{
+            "cardCode":data.cardCode,
+            "amount":data.amount,
+            "cardBalance":data.cardBalance
+          });
+        })
+      }else{
+        var alertPopup = $ionicPopup.alert({
+          title: '验证码不正确',
+          template: '验证码不正确！'
+        });
+      }
          }).error(function (data) {
 
          });
