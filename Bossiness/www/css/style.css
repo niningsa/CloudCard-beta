@@ -142,7 +142,8 @@ label{
   padding-left:15%;
 }
 #kaika{
-  padding-left: 15%;
+  padding-left:25%;
+
 }
 #chongzhi{
   padding-left: 15%;
@@ -190,3 +191,16 @@ td{
 #zd{
   height: 20px;
 }
+
+#bshouye{
+  padding-left: 6%;
+  margin:40px 0px 80px 0px;
+}
+
+#kk{
+  padding: 10%;
+}
+.buttonstyle{
+  padding: 8px 19px 8px 19px;
+}
+

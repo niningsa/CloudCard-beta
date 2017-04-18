@@ -1,6 +1,9 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers', 'starter.services',
                'circle.services','aboutMe.controllers','aboutMe.services','bill.controllers',
-               'bill.services','message.services','message.controllers','ngCordova'])
+               'bill.services','message.services','message.controllers',
+               'kaika.controllers','kaika.services',
+               'shoukuan.controllers','shoukuan.services',
+               'chongzhi.controllers','chongzhi.services','ngCordova'])
 
 .run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
@@ -68,28 +71,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
       }
     }
   })
-    //通过扫客户二维码
-  .state('tab.shopCustomerCardList', {
-    url: '/shopCustomerCardList/:qrcode',
-     cache: false,  //清除缓存
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-shopCustomerCardList.html',
-        controller: 'shopCustomerCardListCtrl'
-      }
-    }
-  })
-    //选客户的卡来收款
-  .state('tab.xiaoFei', {
-    url: '/xiaoFei/:cardCode',
-     cache: false,  //清除缓存
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-xiaofe.html',
-        controller: 'xiaoFeiCtrl'
-      }
-    }
-  })
+
 
 
   .state('tab.account', {
@@ -179,83 +161,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
        controller: 'applySellerCtrl'
   })
 
-  //无卡消费
-    .state('tab.phoneNumberConsume', {
-      url: '/phoneNumberConsume',
-      cache: false,
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-phoneNumberConsume.html',
-          controller: 'phoneNumberConsumeCtrl'
-        }
-      }
-    })
-  //无卡充值
-    .state('tab.phoneNumberRecord', {
-      url: '/phoneNumberRecord',
-      cache: false,
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-phoneNumberRecord.html',
-          controller: 'phoneNumberRecordCtrl'
-        }
-      }
-    })
-  //无卡开卡
-    .state('tab.phoneNumberActivate', {
-      url: '/phoneNumberActivate',
-      cache: false,
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-phoneNumberActivate.html',
-          controller: 'phoneNumberActivateCtrl'
-        }
-      }
-    })
-    //已开卡的列表
-    .state('tab.activateCardList', {
-      url: '/activateCardList',
-      cache: false,
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-activateCardList.html',
-          controller: 'activateCardListCtrl'
-        }
-      }
-    })
-    //已开卡的列表
-    .state('tab.activateCardBill', {
-      url: '/activateCardBill/:cardNumber/:ownerPartyId/:cardId',
-      cache: false,
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-activateCardBillList.html',
-          controller: 'activateCardBillCtrl'
-        }
-      }
-    })
-    //无卡消费,通过电话号码和金额查询客户的卡
-    .state('tab.customerCard', {
-      url: '/customerCard/:teleNumber/:amount',
-      cache: false,
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-customerCard.html',
-          controller: 'customerCardCtrl'
-        }
-      }
-    })
-  //到验证码的确认页面
-    .state('tab.identifyingCode', {
-      url: '/identifyingCode/:cardId/:cardCode/:teleNumber/:amount',
-      cache: false,
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-identifyingCode.html',
-          controller: 'identifyingCodeCtrl'
-        }
-      }
-    })
+
+
 
   ;
 

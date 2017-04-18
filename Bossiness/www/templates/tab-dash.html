@@ -1,46 +1,38 @@
-<ion-view view-title="库胖">
-  <ion-nav-bar class="bar-dark"></ion-nav-bar>
-  <!--<ion-header-bar class="bar-subheader has-header">-->
-  <!--<span id="shoukuan">-->
-      <!--<button class="button button-large button-calm" >收 款</button>-->
-     <!--</span>-->
-    <!--<span id="kaika">-->
-      <!--<button class="button button-large button-calm"  >开 卡</button>-->
-    <!--</span>-->
-    <!--<span id="chongzhi">-->
-      <!--<button class="button button-large button-calm " >充 值</button>-->
-    <!--</span>-->
-  <!--</ion-header-bar>-->
+<ion-view view-title="库胖商家">
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
   <ion-content class="padding content has-header ionic-pseudo" style="padding: 0px;margin: 0px">
-
   <div class="padding">
-    <div class="list list-borderless">
-      <div class="item item-image">
-        <img src="img/paris.jpg">
-      </div>
-    </div>
-    <!--<div>-->
-      <!--<a class="button button-block button-balanced" href="#/tab/receivables">收款</a>-->
-    <!--</div>-->
-    <div>
-      <a class="button button-block button-balanced"  ng-click="scanCustomerBarcode()" ng-controller="scanShopReceivablesCtrl">收款</a>
-    </div>
-    <div>
-      <a class="button button-block button-balanced" href="#/tab/phoneNumberConsume">无卡消费</a>
-    </div>
-    <div>
-      <a class="button button-block button-balanced" href="#/tab/phoneNumberRecord">无卡充值</a>
-    </div>
-    <div>
-      <a class="button button-block button-balanced" href="#/tab/phoneNumberActivate">无卡开卡</a>
-    </div>
-    <div ng-controller="RechargeExampleController">
-      <a class="button button-block button-balanced" ng-click="scanBarcode()">充值/开卡</a>
-    </div>
+  <div id="bshouye">
+      <span id="sk">
+      <a class="button button-calm buttonstyle" href="#/tab/shoukuanHome">收款</a>
+    </span>
+    <span id="kk">
+      <a class="button button-calm buttonstyle"  href="#/tab/kaikaHome">开卡</a>
+    </span>
+    <span>
+      <a class="button button-calm buttonstyle"  href="#/tab/chongzhiHome">充值</a>
+    </span>
 
   </div>
-    <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+    <!--<div>-->
+      <!--<a class="button button-calm sk"  ng-click="scanCustomerBarcode()" ng-controller="scanShopReceivablesCtrl">收款</a>-->
+    <!--</div>-->
+    <!---->
+    <!--<div>-->
+      <!--<a class="button  button-calm" href="#/tab/phoneNumberConsume">无卡消费</a>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<a class="button button-block button-balanced" href="#/tab/phoneNumberRecord">无卡充值</a>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<a class="button button-block button-balanced" href="#/tab/phoneNumberActivate">无卡开卡</a>-->
+    <!--</div>-->
+    <!--<div ng-controller="RechargeExampleController">-->
+      <!--<a class="button button-block button-balanced" ng-click="scanBarcode()">充值/开卡</a>-->
+    <!--</div>-->
 
+  </div>
+    <ion-list>
       <ion-item ng-repeat="item in messageList"
                 item="item"
                 href="#/item/{{item.id}}" class="item-remove-animate">
@@ -54,6 +46,9 @@
                            ng-click="already(item.noteId)">
           已读
       </ion-item>
+      <div class="item text-center" ng-if="messageList==''">
+        <span style="color: red"> 当前信用良好，没有欠款信息</span>
+      </div>
     </ion-list>
   </ion-content>
 </ion-view>

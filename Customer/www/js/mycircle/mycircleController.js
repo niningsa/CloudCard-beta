@@ -9,6 +9,8 @@ angular.module('mycircle.controllers', [])
      * */
     mycircleServices.myGroupList().success(function (result) {
       $scope.storeList=result.storeList;
+      $scope.region =result.region;
+
       })
     //导航栏的查询
     $scope.searchStoreName=function(storeName,area){

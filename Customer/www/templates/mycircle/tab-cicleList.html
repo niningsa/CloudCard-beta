@@ -5,8 +5,9 @@
 
      <span id="zsearch">
        <!--<button  ng-click="openModal();"  class="button">上海</button>-->
-       <span id="adress" ng-click="openModal();">上海  </span> >
+       <span id="adress" ng-click="openModal();">{{region}} </span> >
        <label >
+         <!--{{region}}-->
          <input id="inputSearch" ng-model="storeName" placeholder="Search" >
        </label>
        <button class="sbutton" ng-click="searchStoreName(storeName,area)">
