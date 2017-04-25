@@ -13,14 +13,13 @@ angular.module('mycircle.controllers', [])
 
       })
     //导航栏的查询
-    $scope.searchStoreName=function(storeName,area){
-      mycircleServices.myGroupList(storeName).success(function (result) {
+    $scope.searchStoreName=function(storeName){
+      var area=$("#geo").html();
+      mycircleServices.myGroupList(storeName,area).success(function (result) {
         $scope.storeList=result.storeList;
       })
     }
-    $scope.aa=function(){
-      alert(55);
-    }
+
 
     //点击下拉列表出现更多的城市列表
     $ionicModal.fromTemplateUrl('templates/mycircle/cityModal.html', {
@@ -34,6 +33,11 @@ angular.module('mycircle.controllers', [])
     $scope.openModal = function() {
       $scope.modal.show();
       $("ion-modal-view").removeClass("modal slide-in-up ng-enter active ng-enter-active");
+      mycircleServices.myGroupList().success(function (result) {
+        $scope.countyList=result.countyList;
+        $scope.region =result.region;
+
+      })
     };
     $scope.closeModal = function () {
       $scope.modal.hide();
@@ -43,11 +47,22 @@ angular.module('mycircle.controllers', [])
   })
   //城市选择完成之后
   .controller('settleModalCtrl', function($scope,$state, $rootScope,mycircleServices,$stateParams) {
-    $scope.choice=function(city){
-      document.getElementById("adress").innerHTML=city
+
+    $scope.choice=function(geoId,city){
+      document.getElementById("adress").innerHTML=city;
+      document.getElementById("geo").innerHTML=geoId;
       //$("#adress").html(city);
       $scope.modal.hide();
     }
+
+    $scope.onOff = true;
+    $scope.changeOnOff = function (onOff) {
+      if (onOff == true) {
+        $scope.onOff = false;
+      } else {
+        $scope.onOff = true;
+      }
+    };
   })
   /*
    * Desc 这里是查询附近圈子和店铺的列表

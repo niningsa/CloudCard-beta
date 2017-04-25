@@ -3,7 +3,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
                'bill.services','message.services','message.controllers',
                'kaika.controllers','kaika.services',
                'shoukuan.controllers','shoukuan.services',
-               'chongzhi.controllers','chongzhi.services','ngCordova'])
+               'chongzhi.controllers','chongzhi.services',
+               'jiesuan.controllers','jiesuan.services','ngCordova'])
 
 .run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
@@ -58,19 +59,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
         templateUrl: 'templates/tab-dash.html',
         controller: 'DashCtrl'
       }
+    },
+    cache:false,
+    params:{
+      isCache:true
     }
   })
 
-  .state('tab.receivables', {
-    url: '/receivables',
-    // cache: false,  //清除缓存
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-xiaofe.html',
-        controller: 'DashCtrl'
-      }
-    }
-  })
+  //.state('tab.receivables', {
+  //  url: '/receivables',
+  //  // cache: false,  //清除缓存
+  //  views: {
+  //    'tab-dash': {
+  //      templateUrl: 'templates/tab-xiaofe.html',
+  //      controller: 'DashCtrl'
+  //    }
+  //  }
+  //})
 
 
 

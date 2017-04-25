@@ -4,7 +4,8 @@
     <ion-header-bar class="item-input-inset search">
 
      <span id="zsearch">
-       <!--<button  ng-click="openModal();"  class="button">上海</button>-->
+       <!--<span id="adress" ng-click="openModal();">上海</span> >-->
+       <span id="geo" style="display: none"></span>
        <span id="adress" ng-click="openModal();">{{region}} </span> >
        <label >
          <!--{{region}}-->
@@ -77,7 +78,7 @@
       <div ng-repeat="chat in storeList | filter:searchContent">
         <!--<a class="item item-avatar"   href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">-->
         <a class="item item-avatar" href="#tab/shopDetails/{{chat.storeId}}">
-          <img src="img/ben.png">
+          <img src="img/katong.jpe">
           <h2> {{chat.storeName}}</h2>
           <p>  {{chat.address}}</p>
           <!--<p>{{chat.storeTeleNumber}}</p>-->

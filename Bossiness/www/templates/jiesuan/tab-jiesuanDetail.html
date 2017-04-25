@@ -1,0 +1,38 @@
+<ion-view view-title="结算">
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.jiesuanMethod"></a>
+  </ion-nav-buttons>
+  <ion-header-bar class="bar-subheader has-header">
+
+  <span >
+  具体结算操作>>>
+  </span>
+
+  </ion-header-bar>
+  <ion-content class="padding content has-header ionic-pseudo" style="padding: 0px;margin: 0px">
+      <div class="padding" > E咖啡店
+      </div>
+       <div class="list">
+         <ion-item item="item">
+           <ion-checkbox ng-model="quanxuan" ng-click="selectAll(jiesuanList,quanxuan)" >全选/全不选</ion-checkbox>
+           <ion-checkbox name="selected"  ng-repeat="jlist in jiesuanList" ng-checked="jlist.checked" ng-model="jlist.checked">
+             {{jlist.name}}：<span style="color: red"> {{jlist.money}}</span>
+             <span style="float: right"> <button style="padding: 0px 20px 0px 20px" class="button button-small button-calm">确认清算</button></span>
+           </ion-checkbox>
+         </ion-item>
+       </div>
+    </ion-content>
+
+  <ion-footer-bar class="has-subfooter stable-bg" style="height:60px;display: inline">
+  <div >
+      <span class="buttons" >
+      <!--<button class="button button-block button-balanced"  ng-click="qingsuan(jiesuanList)" >清算</button>-->
+        <a class="button button-block button-balanced"   ng-click="qingsuan(jiesuanList)">清 算</a>
+    </span>
+    <!--<span style="padding: 0px 10px 0px 80px">-->
+     <!--<label style="width:150px;float: right"> <ion-checkbox ng-model="quanxuan" ng-click="selectAll(jiesuanList)">全部清算</ion-checkbox></label>-->
+    <!--</span>-->
+  </div>
+  </ion-footer-bar>
+</ion-view>
