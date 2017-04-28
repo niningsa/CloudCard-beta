@@ -66,6 +66,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
     }
   })
 
+  //显示点击二维码
+    .state('tab.shopQrcode', {
+      url: '/shopQrcode',
+      // cache: false,  //清除缓存
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-shopQrcode.html',
+          controller: 'shopQrcodeCtrl'
+        }
+      }
+    })
+
   //.state('tab.receivables', {
   //  url: '/receivables',
   //  // cache: false,  //清除缓存

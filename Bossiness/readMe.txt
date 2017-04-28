@@ -17,3 +17,7 @@ cordova plugin add https://github.com/wymsee/cordova-imagePicker.git
 
 商家图片上传需要安装两个插件：
 cordova plugin add cordova-plugin-file-transfer
+
+
+未完成的内容:
+结算模块

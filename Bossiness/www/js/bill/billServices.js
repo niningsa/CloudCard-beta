@@ -9,16 +9,18 @@ angular.module('bill.services', [])
 
         $.ajax(
           {
-            url: $rootScope.interfaceUrl + "getUserPaymentBybiz",
+            url: $rootScope.interfaceUrl + "getBizPayment",
             type: "POST",
             data: {
               "token": token,
               "organizationPartyId": organizationPartyId,
               "viewIndex": 0,
-              "viewSize": 20
+              "viewSize": 200
             },
             success: function (result) {
+
               console.log(result.code);
+              console.log(result);
               if (result.code == '200') {
                 deferred.resolve(result);
               } else {

@@ -42,6 +42,30 @@ angular.module('starter.controllers', [])
 
       });
     }
+
+
+  })
+/*
+ * Desc 店家二维码的生成
+ * Author WK
+ * Date 2017-4-26
+ * */
+  .controller('shopQrcodeCtrl', function ($scope, $state,applySellerService,$ionicPopup) {
+    var token = $.cookie("token");
+    if (token == null) {
+      $state.go("login");
+    }
+
+    //查询店家的二维码，然后生成二维码
+    applySellerService.shopQrcode().success(function (data) {
+     console.log(data);
+
+      jQuery('#pcode').qrcode(data.storeCode);
+
+    });
+
+
+
   })
 
   /*

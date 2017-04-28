@@ -4,7 +4,7 @@
 		输入：
 			手机号
 		输出：
-			
+
 
 	1、登录接口：
 		输入：
@@ -18,7 +18,7 @@
 		输入：
 			无，需要带上登录token
 
-		输出 
+		输出
 			列表：
 				卡名：
 				卡图片
@@ -77,7 +77,7 @@
 		输出：
 			成功失败状态
 			卡信息（卡名、消费金额 、卡余额）
-			
+
 
 	3、充值、开卡
 
@@ -138,8 +138,23 @@
 
 
 
-代码流程：html ==>app.js ==>controllers.js ==>services.js 
+代码流程：html ==>app.js ==>controllers.js ==>services.js
 
 
 
 apk的地址 项目\platforms\android\build\outputs\apk
+
+
+c端目前未完成的任务：
+库胖店根据地区来分类查询
+uk.co.workingedge.phonegap.plugin.launchnavigator   调用导航的插件
+cordova plugin add https://github.com/phonegap/phonegap-plugin-barcodescanner.git 手机扫描需要安装的插件
+ionic plugin add https://github.com/mrwutong/cordova-qdc-wxpay.git  微信支付需要安装的插件
+ionic 如何调用通讯录的插件：
+cordova plugin add cordova-plugin-contacts
+npm install ionic-native --save  执行之后会在node_modules中生成一个ionic-native文件夹，把里面的
+ionic.native.min.js考到lib-->>ionic-->>js中
+百度定位的插件
+cordova plugin add https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git --variable API_KEY=jNTpqTSSOlYQUNQfg8PLB25576NwYAkL
+极光推送需要安装的插件：
+cordova plugin add jpush-phonegap-plugin --variable API_KEY= registrationID(53f3141c48b5ba7127be174e)

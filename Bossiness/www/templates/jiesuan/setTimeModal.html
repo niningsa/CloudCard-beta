@@ -1,0 +1,21 @@
+<ion-modal-view ng-controller="settleModalCtrl">
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">付款结算模式</h1>
+    <a class="button" ng-click="closeModal()">关闭</a>
+  </ion-header-bar>
+  <ion-content>
+
+    <div class="padding">
+      <div class="list">
+        <ion-item item="item" >
+          <ion-checkbox ng-model="quanxuan" ng-click="selectAll(jiesuanList,quanxuan)" >全选/全不选</ion-checkbox>
+          <ion-checkbox name="selected"  ng-repeat="wlist in weekList" ng-checked="wlist.checked"   ng-model="wlist.checked">
+            {{wlist.name}}   {{wlist.time}}
+          </ion-checkbox>
+          <button class="button button-block button-positive">向店家发出申请</button>
+        </ion-item>
+
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

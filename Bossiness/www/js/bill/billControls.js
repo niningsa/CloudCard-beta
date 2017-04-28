@@ -3,7 +3,7 @@ angular.module('bill.controllers', [])
   //B端账单
   .controller('billHomeCtrl', function ($scope,billService) {
     billService.getUserPaymentBybizService().success(function (data) {
-      $scope.billList=data.paymentList;
+      $scope.yearAndMonthPaymentList=data.yearAndMonthPaymentList;
     }).error(function (data) {
 
 

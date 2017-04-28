@@ -1,29 +1,26 @@
-<ion-view view-title="结算模式">
+<ion-view view-title="收款结算">
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
   <ion-nav-buttons side="left">
-    <a class="button icon ion-ios-undo" ui-sref="tab.dash"></a>
+    <a class="button icon ion-ios-undo" ui-sref="tab.jiesuanMethod"></a>
   </ion-nav-buttons>
-  <ion-header-bar class="bar-subheader has-header skmehtod">
-    <div id="jsmothod">
-       <span id="shoukuan">
-      <button class="button button-large button-calm" ng-click="paymentCode()">收款结算</button>
-     </span>
-    <span id="fukuan">
-      <button class="button button-calm" ng-click="fukuanJieSuan()" >付款结算</button>
-    </span>
-    </div>
-
-  </ion-header-bar>
   <ion-content class="padding content has-header ionic-pseudo" style="padding: 0px;margin: 0px">
     <ion-list>
       <ion-item item="item"   class="item-remove-animate" >
-        结算模式：手工模式
+        结算模式：
+        <select id="amountType" ng-change="change(amountType)"  ng-model="amountType">-->
+          <option value="1" ng-selected="true">手工模式</option>
+          <option value="2">自动模式</option>
+        </select>
+        <button class="button button-small button-balanced" ng-show="show=='2'" ng-click="setTime();">设置时间</button>
+        <!--<label class="widget-buttons">-->
+        <!--<ion-radio class="calm" ng-repeat="item in items" ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">{{item.value}}</ion-radio>-->
+        <!--</label>     -->
       </ion-item>
       <div class="list">
         <ion-item item="item" >
           <ion-checkbox ng-model="quanxuan" ng-click="selectAll(jiesuanList,quanxuan)" >全选/全不选</ion-checkbox>
           <ion-checkbox name="selected"  ng-repeat="jlist in jiesuanList" ng-checked="jlist.checked"   ng-model="jlist.checked">
-           {{jlist.name}}：<span style="color: red"> {{jlist.money}}</span>
+            {{jlist.name}}：<span style="color: red"> {{jlist.money}}</span>
           </ion-checkbox>
         </ion-item>
       </div>
@@ -33,13 +30,10 @@
   <ion-footer-bar class="has-subfooter stable-bg">
 
     <div class="buttons" style="padding: 0px 10px 0px 10px">
-      <button class="button button-balanced" disabled="disabled" ng-click="openSettle(settlementAmount)"> 投 诉 </button>
-    </div>
-    <div class="buttons" style="padding: 0px 10px 0px 10px">
       <button class="button button-balanced" ng-click="gojiesuanDetail(jiesuanList);">进入详情 </button>
     </div>
     <div class="buttons" style="padding: 0px 10px 0px 40px" ng="in">
-      <button class="button button-assertive"   ng-click="qingsuan(jiesuanList)"> 发起结算请求 </button>
+      <button class="button button-assertive"  ng-show="show=='1'" ng-click="qingsuan(jiesuanList)"> 发起结算请求 </button>
     </div>
   </ion-footer-bar>
 </ion-view>

@@ -1,11 +1,18 @@
 <ion-view view-title="库胖商家">
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
   <ion-content class="padding content has-header ionic-pseudo" style="padding: 0px;margin: 0px">
-    <div class="list list-borderless">
-      <div class="item item-image">
-        <img src="img/paris.jpg" >
-      </div>
-    </div>
+    <!--<div class="list list-borderless">-->
+      <!--<div class="item item-image">-->
+        <!--<img src="img/paris.jpg" >-->
+      <!--</div>-->
+    <!--</div>-->
+      <a class="item item-avatar">
+         <img src="img/shop.jpg">
+        <h2>咖啡店</h2>
+        <p>上海市长宁区</p>
+      </a>
+
+
   <div class="padding">
 
   <div id="bshouye">
@@ -23,7 +30,29 @@
       <a class="button button-calm buttonstyle" href="#/tab/jiesuanMethod">结算</a>
     </span>
   </div>
+
   </div>
+    <div class="bsiness1" >
+      <div style="float: left;padding-left: 60px">
+        <a class="item shop" href="#/tab/myShopDetail" >
+          <img src="img/myshop.png">
+        </a>
+        <p>我的店</p>
+      </div>
+        <div style="float: left;padding: 0px 40px 0px 40px">
+           <a class="item shop" href="#/tab/shopQrcode">
+             <img src="img/qcore.jpg">
+           </a>
+        <p>二维码</p>
+        </div>
+
+        <div style="float: left;">
+           <a class="item shop" ng-click="activateCardList()" ng-controller="phoneNumberActivateCtrl">
+             <img src="img/mycard.png">
+           </a>
+        <p>我的卡</p>
+        </div>
+    </div>
     <ion-list>
       <ion-item ng-repeat="item in messageList" item="item" href="#/item/{{item.id}}" class="item-remove-animate">
         当前信息：<span style="color: red"> {{item.noteInfo}}</span>

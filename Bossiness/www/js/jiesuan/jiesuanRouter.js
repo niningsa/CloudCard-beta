@@ -35,4 +35,16 @@ angular.module('starter')
           }
         }
       })
+      //付款结算的页面
+      .state('tab.fukuanHome', {
+        url: '/fukuanHome',
+        // cache: false,  //清除缓存
+        views: {
+          'tab-dash': {
+            templateUrl: 'templates/jiesuan/tab-fukuanHome.html',
+            controller: 'fukuanHomeCtrl'
+          }
+        }
+      })
+
   })
