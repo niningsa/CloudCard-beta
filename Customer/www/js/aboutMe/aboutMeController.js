@@ -8,6 +8,10 @@ angular.module('aboutMe.controllers', [])
      * Author WK
      * Date 2017-3-13
      * */
+    var token=$.cookie("token");
+ if(token==null){
+   $state.go("login");
+ }
     aboutMeService.bizMyGroup().success(function (data) {
       var token = $.cookie("token");
       if(token){
@@ -56,9 +60,10 @@ angular.module('aboutMe.controllers', [])
    * */
   .controller('billCtrl', function($scope,$state, $rootScope,aboutMeService,$filter) {
 
-    //var today = new Date();
-    //$scope.formatDate = $filter('date')(today, 'M');
-    //alert($scope.formatDate);
+    var token=$.cookie("token");
+    if(token==null){
+      $state.go("login");
+    }
     aboutMeService.billList(0).success(function (data) {
      console.log(data);
       //$scope.yearAndMonthPaymentList=result.yearAndMonthPaymentList;

@@ -24,12 +24,12 @@
     <div>
       <div class="list">
 
-        <a class="padding"  ng-repeat="bill in yearAndMonthPaymentList"  >
+        <a class="padding"  ng-repeat="(key,value) in list"  >
           <div class="chakanzhangdan" >
-            {{bill.dateTime }}
+            {{key }}
           </div>
 
-          <div class="item item-avatar" ng-repeat="bills in bill.paymentsList">
+          <div class="item item-avatar" ng-repeat="bills in value">
             <img src="img/zhiFuBao.png">
             <span>{{bills.transDate |date:'M'}}</span>月
             <span>{{bills.transDate |date:'dd'}}</span>日

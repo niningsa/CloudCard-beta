@@ -410,6 +410,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     //分账单的页面查询
     .state('tab.subBill', {
       url: '/subBill/:cardId',
+      cache: false,
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-subBill.html',
