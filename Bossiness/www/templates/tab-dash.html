@@ -8,8 +8,8 @@
     <!--</div>-->
       <a class="item item-avatar">
          <img src="img/shop.jpg">
-        <h2>咖啡店</h2>
-        <p>上海市长宁区</p>
+        <h2>{{storeName}}</h2>
+        <p>{{storeAddress}}</p>
       </a>
 
 
@@ -54,8 +54,9 @@
         </div>
     </div>
     <ion-list>
+      当前信息：
       <ion-item ng-repeat="item in messageList" item="item" href="#/item/{{item.id}}" class="item-remove-animate">
-        当前信息：<span style="color: red"> {{item.noteInfo}}</span>
+       <span style="color: red"> {{item.noteInfo}}</span>
         <ion-option-button class="button-calm" ng-click="deleteMessage(item.noteId)">
           删除
         </ion-option-button>

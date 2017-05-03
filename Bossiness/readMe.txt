@@ -11,6 +11,7 @@ cordova plugin add https://github.com/wildabeast/BarcodeScanner.git
 集成极光推送需要安装的插件：
 首先注册一个极光账号把自己的应用放进去获取一个registrationID
 cordova plugin add jpush-phonegap-plugin --variable API_KEY= registrationID
+cordova plugin add jpush-phonegap-plugin --variable API_KEY=a601771e25dafc5e2abda486
 
 需要安装调用手机相册的插件:
 cordova plugin add https://github.com/wymsee/cordova-imagePicker.git

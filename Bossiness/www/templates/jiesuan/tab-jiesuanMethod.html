@@ -23,7 +23,7 @@
         <ion-item item="item" >
           <ion-checkbox ng-model="quanxuan" ng-click="selectAll(jiesuanList,quanxuan)" >全选/全不选</ion-checkbox>
           <ion-checkbox name="selected"  ng-repeat="jlist in jiesuanList" ng-checked="jlist.checked"   ng-model="jlist.checked">
-           {{jlist.name}}：<span style="color: red"> {{jlist.money}}</span>
+           {{jlist.tradePartyName}}：<span style="color: red"> {{jlist.amount}} 元</span>
           </ion-checkbox>
         </ion-item>
       </div>
@@ -33,13 +33,14 @@
   <ion-footer-bar class="has-subfooter stable-bg">
 
     <div class="buttons" style="padding: 0px 10px 0px 10px">
-      <button class="button button-balanced" disabled="disabled" ng-click="openSettle(settlementAmount)"> 投 诉 </button>
+      <button class="button button-balanced" disabled="disabled"  ng-click="tousu(jiesuanList)"> 投 诉 </button>
     </div>
-    <div class="buttons" style="padding: 0px 10px 0px 10px">
-      <button class="button button-balanced" ng-click="gojiesuanDetail(jiesuanList);">进入详情 </button>
+
+    <div class="buttons" style="padding: 0px 10px 0px 40px" ng="in">
+      <button class="button button-assertive" id="faqi"  ng-click="qingsuanRequest(jiesuanList)"> 发起结算请求 </button>
     </div>
     <div class="buttons" style="padding: 0px 10px 0px 40px" ng="in">
-      <button class="button button-assertive"   ng-click="qingsuan(jiesuanList)"> 发起结算请求 </button>
+      <button class="button button-calm" id="qr"  ng-click="qingsuanConfirm(jiesuanList)"> 确认清算 </button>
     </div>
   </ion-footer-bar>
 </ion-view>

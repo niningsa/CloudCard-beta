@@ -5,12 +5,19 @@ angular.module('starter.controllers', [])
  * Author LN
  * Date 2016-11-20
  * */
-  .controller('DashCtrl', function ($scope, $state,messageServece,$ionicPopup) {
+  .controller('DashCtrl', function ($scope, $state,messageServece,$ionicPopup,myShopDetailService) {
     var token = $.cookie("token");
     if (token == null) {
       $state.go("login");
     }
+    myShopDetailService.selectMyShopDetail().success(function (data) {
+      console.log(data);
+      $scope.storeName=data.storeName;
+      $scope.storeAddress=data.storeAddress;
+    }).error(function (data) {
 
+
+    });
     messageServece.messageList().success(function (data) {
      console.log(data);
       $scope.messageList=data.partyNotes;

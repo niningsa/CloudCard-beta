@@ -59,30 +59,56 @@ angular.module('aboutMe.controllers', [])
     //var today = new Date();
     //$scope.formatDate = $filter('date')(today, 'M');
     //alert($scope.formatDate);
-    aboutMeService.billList(0).success(function (result) {
-     console.log(result);
-      $scope.yearAndMonthPaymentList=result.yearAndMonthPaymentList;
+    aboutMeService.billList(0).success(function (data) {
+     console.log(data);
+      //$scope.yearAndMonthPaymentList=result.yearAndMonthPaymentList;
+      $scope.paymentsList=data.paymentsList;
+      function getTransDateYearMonth(obj){
+        var transDate = parseInt(obj.transDate);
+        var date = new Date(transDate);
+        return date.getFullYear() + '年' + (date.getMonth()+1) +'月';
+      }
+      $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
+      console.log( $scope.list);
     })
 
     //全部账单
     $scope.all=function(typeId){
-      aboutMeService.billList(typeId).success(function (result) {
-        console.log(result);
-        $scope.yearAndMonthPaymentList=result.yearAndMonthPaymentList;
+      aboutMeService.billList(typeId).success(function (data) {
+        $scope.paymentsList=data.paymentsList;
+        function getTransDateYearMonth(obj){
+          var transDate = parseInt(obj.transDate);
+          var date = new Date(transDate);
+          return date.getFullYear() + '年' + (date.getMonth()+1) +'月';
+        }
+        $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
+        console.log( $scope.list);
       })
     }
 //总消费账单
     $scope.zongConsume=function(typeId){
-      aboutMeService.billList(typeId).success(function (result) {
-        console.log(result);
-        $scope.yearAndMonthPaymentList=result.yearAndMonthPaymentList;
+      aboutMeService.billList(typeId).success(function (data) {
+        $scope.paymentsList=data.paymentsList;
+        function getTransDateYearMonth(obj){
+          var transDate = parseInt(obj.transDate);
+          var date = new Date(transDate);
+          return date.getFullYear() + '年' + (date.getMonth()+1) +'月';
+        }
+        $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
+        console.log( $scope.list);
       })
     }
     //总充值账单
     $scope.zongRecharge=function(typeId){
-      aboutMeService.billList(typeId).success(function (result) {
-        console.log(result);
-        $scope.yearAndMonthPaymentList=result.yearAndMonthPaymentList;
+      aboutMeService.billList(typeId).success(function (data) {
+        $scope.paymentsList=data.paymentsList;
+        function getTransDateYearMonth(obj){
+          var transDate = parseInt(obj.transDate);
+          var date = new Date(transDate);
+          return date.getFullYear() + '年' + (date.getMonth()+1) +'月';
+        }
+        $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
+        console.log( $scope.list);
       })
     }
   })

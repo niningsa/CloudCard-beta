@@ -1,4 +1,4 @@
-<ion-view view-title="收款结算">
+<ion-view view-title="付款结算">
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
   <ion-nav-buttons side="left">
     <a class="button icon ion-ios-undo" ui-sref="tab.jiesuanMethod"></a>
@@ -11,7 +11,7 @@
           <option value="1" ng-selected="true">手工模式</option>
           <option value="2">自动模式</option>
         </select>
-        <button class="button button-small button-balanced" ng-show="show=='2'" ng-click="setTime();">设置时间</button>
+        <button class="button button-small button-balanced" ng-show="show=='2'" ng-click="setTime(jiesuanList);">设置时间</button>
         <!--<label class="widget-buttons">-->
         <!--<ion-radio class="calm" ng-repeat="item in items" ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">{{item.value}}</ion-radio>-->
         <!--</label>     -->
@@ -20,20 +20,17 @@
         <ion-item item="item" >
           <ion-checkbox ng-model="quanxuan" ng-click="selectAll(jiesuanList,quanxuan)" >全选/全不选</ion-checkbox>
           <ion-checkbox name="selected"  ng-repeat="jlist in jiesuanList" ng-checked="jlist.checked"   ng-model="jlist.checked">
-            {{jlist.name}}：<span style="color: red"> {{jlist.money}}</span>
+            {{jlist.tradePartyName}}：<span style="color: red"> {{jlist.amount}} 元</span>
           </ion-checkbox>
         </ion-item>
       </div>
     </ion-list>
   </ion-content>
 
-  <ion-footer-bar class="has-subfooter stable-bg">
-
-    <div class="buttons" style="padding: 0px 10px 0px 10px">
-      <button class="button button-balanced" ng-click="gojiesuanDetail(jiesuanList);">进入详情 </button>
-    </div>
-    <div class="buttons" style="padding: 0px 10px 0px 40px" ng="in">
-      <button class="button button-assertive"  ng-show="show=='1'" ng-click="qingsuan(jiesuanList)"> 发起结算请求 </button>
-    </div>
+  <ion-footer-bar class="has-subfooter stable-bg" style="height:60px;display: inline">
+       <span class="buttons" >
+      <!--<button class="button button-block button-balanced"  ng-click="qingsuan(jiesuanList)" >清算</button>-->
+        <a class="button button-block button-balanced" id="qs" ng-show="show=='1'"  ng-click="qingsuan(jiesuanList)">清 算</a>
+    </span>
   </ion-footer-bar>
 </ion-view>

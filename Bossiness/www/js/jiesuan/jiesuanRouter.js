@@ -5,7 +5,7 @@ angular.module('starter')
       //结算的首页
       .state('tab.jiesuanHome', {
         url: '/jiesuanHome',
-        // cache: false,  //清除缓存
+         cache: false,  //清除缓存
         views: {
           'tab-dash': {
             templateUrl: 'templates/jiesuan/tab-jiesuanHome.html',
@@ -16,7 +16,7 @@ angular.module('starter')
       //具体结算的页面
       .state('tab.jiesuanDetail', {
         url: '/jiesuanDetail',
-        // cache: false,  //清除缓存
+         cache: false,  //清除缓存
         views: {
           'tab-dash': {
             templateUrl: 'templates/jiesuan/tab-jiesuanDetail.html',
@@ -27,7 +27,7 @@ angular.module('starter')
       //结算方式的页面
       .state('tab.jiesuanMethod', {
         url: '/jiesuanMethod',
-        // cache: false,  //清除缓存
+         cache: false,  //清除缓存
         views: {
           'tab-dash': {
             templateUrl: 'templates/jiesuan/tab-jiesuanMethod.html',
@@ -38,7 +38,7 @@ angular.module('starter')
       //付款结算的页面
       .state('tab.fukuanHome', {
         url: '/fukuanHome',
-        // cache: false,  //清除缓存
+         cache: false,  //清除缓存
         views: {
           'tab-dash': {
             templateUrl: 'templates/jiesuan/tab-fukuanHome.html',

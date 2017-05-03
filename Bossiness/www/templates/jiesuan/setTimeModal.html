@@ -8,11 +8,11 @@
     <div class="padding">
       <div class="list">
         <ion-item item="item" >
-          <ion-checkbox ng-model="quanxuan" ng-click="selectAll(jiesuanList,quanxuan)" >全选/全不选</ion-checkbox>
+          <ion-checkbox ng-model="quanxuan" ng-click="selectAll(weekList,quanxuan)" >全选/全不选</ion-checkbox>
           <ion-checkbox name="selected"  ng-repeat="wlist in weekList" ng-checked="wlist.checked"   ng-model="wlist.checked">
             {{wlist.name}}   {{wlist.time}}
           </ion-checkbox>
-          <button class="button button-block button-positive">向店家发出申请</button>
+          <button class="button button-block button-positive"  ng-click="autoRequest(weekList,tradePartyId,cardSellerId)">向店家发出申请</button>
         </ion-item>
 
       </div>
