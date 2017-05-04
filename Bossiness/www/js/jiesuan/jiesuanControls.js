@@ -11,11 +11,8 @@ angular.module('jiesuan.controllers', [])
       $scope.jiesuanList=data.list
     }).error(function (data) {
     });
-    //$scope.jiesuanList=[{"name":" 包子铺","money":"200元"},
-    //  {"name":" 奶茶店","money":"500元"},
-    //  {"name":" 咖啡店","money":"300元"}];
 
-    //发起清算的请求
+    //收款方发起清算的请求
     $scope.qingsuanRequest=function(jiesuanList){
 
       var flag = false;
@@ -37,20 +34,21 @@ angular.module('jiesuan.controllers', [])
               jiesuanList[j].reqCount
             ).success(function (data) {
               console.log(data);
-              $ionicPopup.alert({
-                title: "温馨提示",
-                template: "请求发送成功!!",
-                okText: "确定",
-              })
+
 
             }).error(function (data) {
             });
           }
         }
+        $ionicPopup.alert({
+          title: "温馨提示",
+          template: "操作成功!!",
+          okText: "确定",
+        })
       }else{
         $ionicPopup.alert({
           title: "温馨提示",
-          template: "请至少选择一个结算!!",
+          template: "请至少选择一个!!",
           okText: "确定",
         })
       }
@@ -77,26 +75,27 @@ angular.module('jiesuan.controllers', [])
               jiesuanList[j].amount
             ).success(function (data) {
               console.log(data);
-              $ionicPopup.alert({
-                title: "温馨提示",
-                template: "已确认!!",
-                okText: "确定",
-              }).then(function (res) {
+
                 jiesuanService.bizListNeedSettlement().success(function (data) {
                   console.log(data);
                   $scope.jiesuanList=data.list
                 }).error(function (data) {
                 });
-              })
+
 
             }).error(function (data) {
             });
           }
         }
+        $ionicPopup.alert({
+          title: "温馨提示",
+          template: "操作成功!!",
+          okText: "确定",
+        })
       }else{
         $ionicPopup.alert({
           title: "温馨提示",
-          template: "请至少选择一个结算!!",
+          template: "请至少选择一个!!",
           okText: "确定",
         })
       }
@@ -262,17 +261,35 @@ angular.module('jiesuan.controllers', [])
         }
       }
       if(flag){
+        var count=0;
         for (var j = 0; j < jiesuanList.length; j++) {
           if(jiesuanList[j].checked==true){
-            $scope.tradePartyId=jiesuanList[j].tradePartyId;
-            $scope.cardSellerId=jiesuanList[j].cardSellerId;
+            count++;
+
           }
         }
-        $scope.modal.show();
+        //只能让他选择一个店铺来设置时间
+        if(count==1){
+          for (var j = 0; j < jiesuanList.length; j++) {
+            if(jiesuanList[j].checked==true){
+              $scope.tradePartyId=jiesuanList[j].tradePartyId;
+              $scope.cardSellerId=jiesuanList[j].cardSellerId;
+            }
+          }
+          $scope.modal.show();
+        }else{
+          $ionicPopup.alert({
+            title: "温馨提示",
+            template: "只能选择一个!!",
+            okText: "确定",
+          })
+        }
+
+
       }else{
         $ionicPopup.alert({
           title: "温馨提示",
-          template: "请至少选择一个设置时间!!",
+          template: "请选择一个店铺!!",
           okText: "确定",
         })
       }
@@ -284,7 +301,6 @@ angular.module('jiesuan.controllers', [])
 
     //付款方的清算
     $scope.qingsuan=function(jiesuanList){
-      //alert(jiesuanList.length);
 
       var flag = false;
       for (var i = 0; i < jiesuanList.length; i++) {
@@ -304,26 +320,27 @@ angular.module('jiesuan.controllers', [])
               jiesuanList[j].amount
             ).success(function (data) {
               console.log(data);
-              $ionicPopup.alert({
-                title: "温馨提示",
-                template: "清算成功!!",
-                okText: "确定",
-              }).then(function (res) {
+
                 jiesuanService.fukuanbizListNeedSettlement().success(function (data) {
                   console.log(data);
                   $scope.jiesuanList=data.list
                 }).error(function (data) {
                 });
-              })
+
 
             }).error(function (data) {
             });
           }
         }
+        $ionicPopup.alert({
+          title: "温馨提示",
+          template: "操作成功!!",
+          okText: "确定",
+        })
       }else{
         $ionicPopup.alert({
           title: "温馨提示",
-          template: "请至少选择一个结算!!",
+          template: "请至少选择一个!!",
           okText: "确定",
         })
       }
@@ -360,6 +377,7 @@ angular.module('jiesuan.controllers', [])
 
     //自动模式的结算
 $scope.autoRequest=function(weekList,tradePartyId,cardSellerId){
+
   var flag = false;
   for (var i = 0; i < weekList.length; i++) {
     if(weekList[i].checked==true){
@@ -376,17 +394,19 @@ $scope.autoRequest=function(weekList,tradePartyId,cardSellerId){
           tradePartyId,
           cardSellerId
         ).success(function (data) {
-          $scope.modal.hide();
-          console.log(data);
+
         }).error(function (data) {
         });
       }
     }
-    $ionicPopup.alert({
-      title: "温馨提示",
-      template: "自动结算已发出!!",
-      okText: "确定",
-    })
+    var alertPopup = $ionicPopup.alert({
+      title: '成功',
+      template: "成功！"
+    });
+    alertPopup.then(function(res) {
+      $scope.modal.hide();
+      $state.go("tab.fukuanHome");
+    });
   }else{
     $ionicPopup.alert({
       title: "温馨提示",

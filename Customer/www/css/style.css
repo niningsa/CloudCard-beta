@@ -281,7 +281,7 @@ td{
 }
 .shoplist {
   position: relative;
-  padding-top: 8%;
+  /*padding-top: 8%;*/
   padding-bottom: 1px;
   padding-left: 0;
   margin-bottom: 20px;
