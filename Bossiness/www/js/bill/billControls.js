@@ -17,6 +17,11 @@ angular.module('bill.controllers', [])
 
     });
 
+    $scope.change=function(){
+      alert(555);
+
+    }
+
   })
 
   //店内消费的账单

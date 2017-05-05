@@ -1,8 +1,8 @@
 <ion-view view-title="附近店铺列表">
-  <!--<ion-nav-bar class="bar-positive"></ion-nav-bar>-->
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
   <ion-nav-title>
-    <ion-header-bar class="item-input-inset search">
-
+    <!--<ion-header-bar class="item-input-inset search">-->
+    <ion-header-bar align-title="left" class="bar-positive">
      <span id="zsearch">
        <!--<span id="adress" ng-click="openModal();">上海</span> >-->
        <span id="geo" style="display: none"></span>
@@ -72,7 +72,7 @@
 
   <!--</ion-header-bar>-->
 
-  <ion-content>
+  <ion-content has-header="true">
 
     <div class="shoplist">
       <div ng-repeat="chat in storeList | filter:searchContent">

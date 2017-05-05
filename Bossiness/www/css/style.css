@@ -158,13 +158,16 @@ label{
 }
 
 #dianlei{
-  padding-left:10%;
+  padding-left:5%;
 }
 #kalei{
-  padding-left: 10%;
+  padding-left: 5%;
 }
 #taren{
-  padding-left: 10%;
+  padding-left: 5%;
+}
+#tarens{
+  padding-left: 5%;
 }
 #seeMonth{
   float: right;
@@ -236,4 +239,15 @@ td{
   text-align: left;
   margin-bottom: 30px;
   margin-left: 10px;
+}
+
+.item-content{
+  text-overflow: inherit;
+  width: 120px;
+}
+
+.ftype{
+  height:45px;
+  margin-top: 10px;
+  padding-left: 6%;
 }

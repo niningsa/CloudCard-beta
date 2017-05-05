@@ -2,17 +2,65 @@
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
   <!--<ion-header-bar class="bar-subheader has-header">-->
   <!--<span id="dianlei">-->
-      <!--<button class="button button-large button-positive" ui-sref="tab.shopConsume">店内消费</button>-->
+      <!--<button class="button button-large button-positive" ui-sref="tab.shopConsume">店内他卡消费</button>-->
      <!--</span>-->
     <!--<span id="kalei">-->
-      <!--<button class="button button-large button-positive"  ui-sref="tab.cardConsume">卡内消费</button>-->
+      <!--<button class="button button-large button-positive"  ui-sref="tab.cardConsume">店内本卡消费</button>-->
     <!--</span>-->
     <!--<span id="taren">-->
-      <!--<button class="button button-large button-positive "  ui-sref="tab.otherConsume" >他卡消费</button>-->
+      <!--<button class="button button-large button-positive "  ui-sref="tab.otherConsume" >本卡他店消费</button>-->
     <!--</span>-->
   <!--</ion-header-bar>-->
 
   <ion-content>
+    <!--<div class="firstStyle">-->
+      <!--<div style="height: 50px" class="padding">-->
+      <!--<span id="dianlei" style="float: left">-->
+       <!--<button  style="padding: 0px 20px 0px 28px" class="button button-small button-positive">总消费</button>-->
+     <!--</span>-->
+      <!--<span id="kalei" style="float: left">-->
+        <!--<button  style="padding: 0px 10px 0px 10px" class="button button-small button-positive">本店卡消费</button>-->
+      <!--</span>-->
+
+      <!--</div>-->
+
+      <!--<div class="padding">-->
+        <!--<span id="taren" style="float: left">-->
+          <!--<button style="padding: 0px 10px 0px 10px" class="button button-small button-positive">他店卡消费</button>-->
+        <!--</span>-->
+        <!--<span id="tarens" style="float: left">-->
+          <!--<button  style="padding: 0px 20px 0px 20px" class="button button-small button-positive">跨店消费</button>-->
+        <!--</span>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <div class="ftype">
+      <span id="taren" style="float: left" >
+           <label class="widget-buttons">
+             <ion-radio class="calm"   ng-model="ret.choice" ng-change="change(ret.choice)">总消费</ion-radio>
+           </label>
+    </span>
+      <span id="tarens" style="float: left">
+          <label class="widget-buttons">
+            <ion-radio class="calm"   ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">本店卡消费
+            </ion-radio>
+          </label>
+    </span>
+    </div>
+    <div  class="ftype">
+      <span id="dianlei" style="float: left">
+       <label class="widget-buttons">
+         <ion-radio class="calm"  ng-model="ret.choice" ng-change="change()"  ng-value="item.text">他店卡消费
+         </ion-radio>
+       </label>
+      </span>
+      <span id="kalei" style="float: left">
+      <label class="widget-buttons">
+        <ion-radio class="calm"  ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">跨店消费
+        </ion-radio>
+      </label>
+      </span>
+    </div>
     <div>
       <div class="list">
         <a class="padding"  ng-repeat="(key,value)  in list"  >

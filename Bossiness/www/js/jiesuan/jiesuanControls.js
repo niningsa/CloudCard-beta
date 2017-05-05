@@ -161,8 +161,6 @@ angular.module('jiesuan.controllers', [])
 
         }
       }
-
-
     }
 
     $scope.fukuanJieSuan=function(){
@@ -285,7 +283,6 @@ angular.module('jiesuan.controllers', [])
           })
         }
 
-
       }else{
         $ionicPopup.alert({
           title: "温馨提示",
@@ -370,14 +367,11 @@ angular.module('jiesuan.controllers', [])
       }
 
     }
-
     $scope.fukuanJieSuan=function(){
       $state.go("tab.fukuanHome");
     }
-
     //自动模式的结算
 $scope.autoRequest=function(weekList,tradePartyId,cardSellerId){
-
   var flag = false;
   for (var i = 0; i < weekList.length; i++) {
     if(weekList[i].checked==true){
