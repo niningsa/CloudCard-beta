@@ -31,7 +31,7 @@ angular.module('starter')
         cache: false,  //清除缓存
         views: {
           'tab-dash': {
-            templateUrl: 'templates/tab-xiaofe.html',
+            templateUrl: 'templates/shoukuan/tab-xiaofe.html',
             controller: 'xiaoFeiCtrl'
           }
         }

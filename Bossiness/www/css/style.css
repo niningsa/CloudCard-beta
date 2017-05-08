@@ -158,16 +158,16 @@ label{
 }
 
 #dianlei{
-  padding-left:5%;
+  padding-left:3%;
 }
 #kalei{
-  padding-left: 5%;
+  padding-left: 3%;
 }
 #taren{
-  padding-left: 5%;
+  padding-left: 3%;
 }
 #tarens{
-  padding-left: 5%;
+  padding-left: 3%;
 }
 #seeMonth{
   float: right;
@@ -243,7 +243,7 @@ td{
 
 .radio-content{
   text-overflow: inherit;
-  width: 130px;
+  width: 135px;
 }
 
 .ftype{
