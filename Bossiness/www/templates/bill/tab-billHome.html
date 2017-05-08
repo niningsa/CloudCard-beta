@@ -37,12 +37,12 @@
     <div class="ftype">
       <span id="taren" style="float: left" >
            <label class="widget-buttons">
-             <ion-radio class="calm"   ng-model="ret.choice" ng-change="change(ret.choice)">总消费</ion-radio>
+             <ion-radio class="calm" ng-model="aa" ng-click="change(' ')" ng-checked="checked" required>总消费</ion-radio>
            </label>
     </span>
       <span id="tarens" style="float: left">
           <label class="widget-buttons">
-            <ion-radio class="calm"   ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">本店卡消费
+            <ion-radio class="calm"   ng-click="change('4')" >本店卡消费
             </ion-radio>
           </label>
     </span>
@@ -50,13 +50,13 @@
     <div  class="ftype">
       <span id="dianlei" style="float: left">
        <label class="widget-buttons">
-         <ion-radio class="calm"  ng-model="ret.choice" ng-change="change()"  ng-value="item.text">他店卡消费
+         <ion-radio class="calm"   ng-click="change('5')">他店卡消费
          </ion-radio>
        </label>
       </span>
       <span id="kalei" style="float: left">
       <label class="widget-buttons">
-        <ion-radio class="calm"  ng-model="ret.choice" ng-change="change(ret.choice)" ng-value="item.text">跨店消费
+        <ion-radio class="calm"   ng-click="change('3')">跨店消费
         </ion-radio>
       </label>
       </span>
@@ -73,8 +73,13 @@
             <span>{{bills.transDate |date:'M'}}</span>月
             <span>{{bills.transDate |date:'dd'}}</span>日
             <span style="padding-left: 18%">
-                  {{bills.type=='1'?'+ '+bills.amount:'- '+bills.amount}}</span>
-            <div><span>{{bills.transDate |date:'h:mm:ss'}}</span> <span style="padding-left: 20%" ng-bind="bills.customerName"></span></div>
+                  {{bills.type=='1'?'+ '+bills.amount:'- '+bills.amount}}
+            </span>
+            <div><span>{{bills.transDate |date:'h:mm:ss'}}</span>
+              <span style="padding-left: 20%" ng-bind="bills.tradePartyName"></span>
+              <!--发卡商家暂不显示-->
+              <!--<span style="padding-left: 20%" ng-bind="bills.cardSellerName"></span>-->
+            </div>
           </div>
         </a>
         <!--<div class="item item-divider">-->

@@ -17,9 +17,22 @@ angular.module('bill.controllers', [])
 
     });
 
-    $scope.change=function(){
-      alert(555);
+    //通过类型来分类账单
+    $scope.change=function(type){
+      billService.getUserPaymentBybizService(type).success(function (data) {
+        //$scope.yearAndMonthPaymentList=data.yearAndMonthPaymentList;
+        $scope.paymentsList=data.paymentsList;
+        function getTransDateYearMonth(obj){
+          var transDate = parseInt(obj.transDate);
+          var date = new Date(transDate);
+          return date.getFullYear() + '年' + (date.getMonth()+1) +'月';
+        }
+        $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
+        console.log( $scope.list);
+      }).error(function (data) {
 
+
+      });
     }
 
   })

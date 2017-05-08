@@ -241,13 +241,13 @@ td{
   margin-left: 10px;
 }
 
-.item-content{
+.radio-content{
   text-overflow: inherit;
-  width: 120px;
+  width: 130px;
 }
 
 .ftype{
   height:45px;
   margin-top: 10px;
-  padding-left: 6%;
+  padding-left:2%;
 }

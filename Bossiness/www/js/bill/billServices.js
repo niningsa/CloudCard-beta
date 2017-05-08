@@ -1,12 +1,11 @@
 angular.module('bill.services', [])
   .service("billService", function ($q, $rootScope) {
     return {
-      getUserPaymentBybizService: function () {
+      getUserPaymentBybizService: function (type) {
         var token = $.cookie("token");
         var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
         var promise = deferred.promise;
-
         $.ajax(
           {
             url: $rootScope.interfaceUrl + "getBizPayment",
@@ -14,6 +13,7 @@ angular.module('bill.services', [])
             data: {
               "token": token,
               "organizationPartyId": organizationPartyId,
+              "type": type,
               "viewIndex": 0,
               "viewSize": 200
             },

@@ -315,6 +315,11 @@ td{
   margin: 0;
   font: inherit;
   color: darkgrey;
+  /*padding: 0px 20px 0px 20px;*/
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 10px;
 }
 #zsearch{
  display: inline-flex;

@@ -1,22 +1,22 @@
 <ion-view view-title="附近店铺列表">
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
-  <ion-nav-title>
+  <!--<ion-nav-title>-->
     <!--<ion-header-bar class="item-input-inset search">-->
-    <ion-header-bar align-title="left" class="bar-positive">
-     <span id="zsearch">
-       <!--<span id="adress" ng-click="openModal();">上海</span> >-->
-       <span id="geo" style="display: none"></span>
-       <span id="adress" ng-click="openModal();">{{region}} </span> >
-       <label >
-         <!--{{region}}-->
-         <input id="inputSearch" ng-model="storeName" placeholder="Search" >
-       </label>
-       <button class="sbutton" ng-click="searchStoreName(storeName,area)">
-         查 找
-       </button>
-     </span>
-    </ion-header-bar>
-  </ion-nav-title>
+    <!--<ion-header-bar align-title="left" class="bar-positive">-->
+     <!--<span id="zsearch">-->
+       <!--&lt;!&ndash;<span id="adress" ng-click="openModal();">上海</span> >&ndash;&gt;-->
+       <!--<span id="geo" style="display: none"></span>-->
+       <!--<span id="adress" ng-click="openModal();">{{region}} </span> >-->
+       <!--<label >-->
+         <!--&lt;!&ndash;{{region}}&ndash;&gt;-->
+         <!--<input id="inputSearch" ng-model="storeName" placeholder="Search" >-->
+       <!--</label>-->
+       <!--<button class="sbutton" ng-click="searchStoreName(storeName,area)">-->
+         <!--查 找-->
+       <!--</button>-->
+     <!--</span>-->
+    <!--</ion-header-bar>-->
+  <!--</ion-nav-title>-->
   <!--<ion-header-bar class="bar-subheader has-header slist">-->
     <!--<ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false" does-continue="true">-->
       <!--<ion-slide >-->
@@ -73,7 +73,20 @@
   <!--</ion-header-bar>-->
 
   <ion-content has-header="true">
-
+     <div class="padding" style="padding-left: 10%" >
+       <span id="zsearch">
+       <span id="adress" ng-click="openModal();" style="padding: 4px 0px 0px 0px;font-size: 18px">上海</span> <span style="padding: 4px 0px 0px 0px;font-size: 18px"> >> </span>
+       <span id="geo" style="display: none"></span>
+       <!--<span id="adress" ng-click="openModal();">{{region}} </span>-->
+       <label >
+         <!--{{region}}-->
+         <input id="inputSearch" ng-model="storeName" placeholder="Search" >
+       </label>
+       <button class="sbutton" ng-click="searchStoreName(storeName,area)">
+         查 找
+       </button>
+     </span>
+     </div>
     <div class="shoplist">
       <div ng-repeat="chat in storeList | filter:searchContent">
         <!--<a class="item item-avatar"   href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">-->
