@@ -75,10 +75,14 @@
   <ion-content has-header="true">
      <div class="padding" style="padding-left: 10%" >
        <span id="zsearch">
-       <span id="adress" ng-click="openModal();" style="padding: 4px 0px 0px 0px;font-size: 18px">上海</span> <span style="padding: 4px 0px 0px 0px;font-size: 18px"> >> </span>
+       <!--<span id="adress" ng-click="openModal();" style="padding: 4px 0px 0px 0px;font-size: 18px">上海</span> <span style="padding: 4px 0px 0px 0px;font-size: 18px"> >> </span>-->
        <span id="geo" style="display: none"></span>
-       <!--<span id="adress" ng-click="openModal();">{{region}} </span>-->
-       <label >
+         <!--<span id="adress" ng-click="openModal();"> </span>-->
+         <span id="adress" ng-click="openModal();"
+               style="padding: 4px 0px 0px 0px;font-size: 18px">{{region}}</span>
+         <span style="padding: 4px 0px 0px 0px;font-size: 18px"> >> </span>
+
+       <label>
          <!--{{region}}-->
          <input id="inputSearch" ng-model="storeName" placeholder="Search" >
        </label>
