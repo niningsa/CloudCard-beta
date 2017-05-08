@@ -688,52 +688,49 @@ angular.module('starter.controllers', [])
   .controller("registerCtrl", function ($scope, $ionicLoading, $ionicPopup, $state, Banks, applySellerService, $rootScope) {
       $scope.applySeller = function () {
         //alert($scope.boss.phone);
-        alert($("#picture").html());
           // applySellerService.getCurrentPosition();
           // var latitude = localStorage.getItem('latitude');                      // 纬度
           // var longitude = localStorage.getItem('longitude');                    // 经度
           // alert(latitude+" "+longitude);
           //验证手机号码
-          var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-           if (!phoneReg.test($scope.boss.phone)) {
-             if (false) {
-               $ionicLoading.show({
-                 duration: 1500,
-                 template: "电话号码校验不正确！"
+        var flag = true;
+        //验证手机号是否合法
+        var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+        if (!phoneReg.test($scope.boss.phone)) {
+          $ionicPopup.alert({
+            title: "温馨提示",
+            template: "手机号码不正确!!",
+            okText: "确定",
+          })
+          flag = false;
+        }
+         if(flag){
+           applySellerService.applySellerRegister(
+             $scope.boss.businessName,
+             $scope.boss.phone,
+             $scope.boss.businessUserName,
+             $scope.boss.businessAddr
+           ).success(function (data) {
+             $ionicLoading.hide();
+             var alertPopup = $ionicPopup.alert({
+               title: '申请成功',
+               template: '恭喜您申请成功，快快登录使用吧！'
+             });
+             alertPopup.then(function (res) {
+               //用户点击确认登录后跳转
+               $state.go("login", {
+                 "tel": $scope.boss.phone
                });
-             } else {
+             })
 
-               $ionicLoading.show({
-                 template: '申请中...'
-               });
-
-               applySellerService.applySellerRegister(
-                 $scope.boss.businessName,
-                 $scope.boss.phone,
-                 $scope.boss.businessUserName,
-                 $scope.boss.businessAddr
-               ).success(function (data) {
-                 $ionicLoading.hide();
-                 var alertPopup = $ionicPopup.alert({
-                   title: '申请成功',
-                   template: '恭喜您申请成功，快快登录使用吧！'
-                 });
-                 alertPopup.then(function (res) {
-                   //用户点击确认登录后跳转
-                   $state.go("login", {
-                     "tel": $scope.boss.phone
-                   });
-                 })
-
-               }).error(function (data) {
-                 $ionicLoading.hide();
-                 var alertPopup = $ionicPopup.alert({
-                   title: '申请失败',
-                   template: data
-                 });
-               });
-             }
-           }
+           }).error(function (data) {
+             $ionicLoading.hide();
+             var alertPopup = $ionicPopup.alert({
+               title: '申请失败',
+               template: data
+             });
+           });
+         }
           };
 
   })

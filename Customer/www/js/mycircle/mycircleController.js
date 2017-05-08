@@ -49,8 +49,6 @@ angular.module('mycircle.controllers', [])
   .controller('settleModalCtrl', function($scope,$state, $rootScope,mycircleServices,$stateParams) {
 
     $scope.choice=function(geoId,city){
-      alert(geoId);
-      alert(city);
       document.getElementById("adress").innerHTML=city;
       document.getElementById("geo").innerHTML=geoId;
       //$("#adress").html(city);
