@@ -114,3 +114,48 @@ angular.module('aboutMe.controllers', [])
 
 
   })
+
+
+  //我的消息
+  .controller('jiesuanMessageCtrl', function ($scope,$ionicPopup,$state,$rootScope,myShopDetailService,messageServece) {
+    myShopDetailService.listMyHistoryNoteService().success(function (data) {
+      console.log(data);
+      $scope.partyNotes=data.partyNotes;
+    }).error(function (data) {
+
+    });
+
+    //消息已读
+    $scope.already=function(noteId){
+      messageServece.alreadymessageList(noteId).success(function (data) {
+        console.log(data);
+        //$scope.messageList=data.partyNotes;
+        //location.reload();
+        var alertPopup = $ionicPopup.alert({
+          title: '成功',
+          template: "已读成功"
+        });
+      });
+    }
+    //删除
+    $scope.deleteMessage=function(noteId){
+      messageServece.deleteMessageList(noteId).success(function (data) {
+        console.log(data);
+        var alertPopup = $ionicPopup.alert({
+          title: '成功',
+          template: "删除成功"
+        });
+        alertPopup.then(function(res) {
+          myShopDetailService.listMyHistoryNoteService().success(function (data) {
+            console.log(data);
+            $scope.partyNotes=data.partyNotes;
+          }).error(function (data) {
+
+          });
+          //location.reload();//删除后刷新
+        });
+
+      });
+    }
+
+  })

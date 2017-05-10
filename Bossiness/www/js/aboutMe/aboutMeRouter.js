@@ -34,4 +34,21 @@ angular.module('starter')
         templateUrl: 'templates/aboutMe/showPicture.html',
         controller: 'showPictureCtrl'
       })
+
+      //已经结算的历史消息
+      .state('tab.jiesuanMessage', {
+        url: '/jiesuanMessage',
+        views: {
+          'tab-aboutMe': {
+            templateUrl: 'templates/aboutMe/tab-jiesuanMessage.html',
+            controller: 'jiesuanMessageCtrl'
+          }
+        },
+        cache:false,
+        params:{
+          isCache:true
+        }
+      })
+
+
   })
