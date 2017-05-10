@@ -4,13 +4,27 @@
     <a class="button icon ion-ios-undo" ui-sref="tab.dash"></a>
   </ion-nav-buttons>
   <ion-header-bar class="bar-subheader has-header skmehtod">
-    <div id="jsmothod">
-       <span id="shoukuan">
-      <button class="button button-large button-calm" ng-click="paymentCode()">收款结算</button>
-     </span>
-    <span id="fukuan">
-      <button class="button button-calm" ng-click="fukuanJieSuan()" >付款结算</button>
-    </span>
+    <!--<div id="jsmothod">-->
+       <!--<span id="shoukuan">-->
+      <!--<button class="button button-large button-calm" ng-click="paymentCode()">收款结算</button>-->
+     <!--</span>-->
+    <!--<span id="fukuan">-->
+      <!--<button class="button button-calm" ng-click="fukuanJieSuan()" >付款结算</button>-->
+    <!--</span>-->
+    <!--</div>-->
+    <div style="padding-left: 20px">
+         <span style="float: left">
+       <label class="widget-buttons">
+         <ion-radio class="calm"  ng-model="payment"  ng-click="paymentCode()" ng-checked="checked" required>收款结算
+         </ion-radio>
+       </label>
+      </span>
+         <span style="float: left">
+       <label class="widget-buttons">
+         <ion-radio class="calm"   ng-click="fukuanJieSuan()">付款结算
+         </ion-radio>
+       </label>
+      </span>
     </div>
 
   </ion-header-bar>
@@ -23,7 +37,7 @@
         <ion-item item="item" >
           <ion-checkbox ng-model="quanxuan" ng-click="selectAll(jiesuanList,quanxuan)" >全选/全不选</ion-checkbox>
           <ion-checkbox name="selected"  ng-repeat="jlist in jiesuanList" ng-checked="jlist.checked"   ng-model="jlist.checked">
-           {{jlist.tradePartyName}}：<span style="color: red"> {{jlist.amount}} 元</span>
+           {{jlist.cardSellerName}}：<span style="color: red"> {{jlist.amount}} 元</span>
           </ion-checkbox>
         </ion-item>
       </div>

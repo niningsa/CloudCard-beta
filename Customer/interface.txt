@@ -1,0 +1,416 @@
+C端接口文档:
+1、接口调用方法及公共字段说明
+		调用方法：
+			HTTPS POST 请求
+
+		公共输入：
+			token	登录凭证
+						除 “ 获取登录短信验证码”  和 "登录" 这两个接口外的所有接口，都需要输入token才能访问
+
+		公共输出：
+			token	登陆凭证，非必需
+						如果系统发现token快过期了，会输出更新的token，客户端需要保存下来，代入其它接口调用
+
+			code	返回码
+						200		成功
+						300		保留，
+						401		需要登录，出现这个错误码表示需要跳转到登录页
+						402		保留，准备用于版本太低，需要更新版本
+						500		其它业务错误，可直接显示错误信息给用户
+
+			msg		错误信息
+							当code为500时候，可以直接显示此信息
+
+
+2、公共接口：
+
+	2.1 获取登录短信验证码
+
+		接口地址：https://ip地址:端口/cloudcard/control/getLoginCaptcha
+
+		输入：
+			teleNumber		手机号码，需要已经在系统注册的手机号
+							（激活卡、授权卡时，系统内若没有此手机的用户会自动注册）
+		输出：
+			公共输出		code、msg等
+
+		js请求示例:
+			$.ajax(
+			{
+				url: "https://127.0.0.1:8443/cloudcard/control/getLoginCaptcha",
+				type:"POST",
+				data: {
+					"teleNumber":"159xxxxxxxx"
+				},
+				success: function(result){
+					console.log(result);
+				}
+			});
+
+
+			2.2 获取app更新信息
+      		接口地址：https://ip地址:端口/cloudcard/control/checkAppVersion
+
+      		输入：
+      			curVersion		app当前版本号
+      			deviceType      设备类型（android或ios）
+      			appType			app类型（商家输入biz,用户输入user）
+      		输出：
+      			公共输出		code、msg等
+      			latestVersion   最新版本号
+      			updateType      是否强制更新 0：非强制更新  1：强制更新
+      			url             更新请求地址
+
+      		js请求示例:
+      			$.ajax(
+      			{
+      				url: "https://127.0.0.1:8443/cloudcard/control/checkAppVersion",
+      				type:"POST",
+      				data: {
+      					"curVersion":"0.9.1",
+      					"deviceType":"android",
+      					"appType":"biz"
+      				},
+      				success: function(result){
+      					console.log(result);
+      				}
+      			});
+
+
+2.3 极光推送设备注册
+		接口地址：https://ip地址:端口/cloudcard/control/regJpushRegId
+
+	输入：
+		公共输入	如token
+		regId		设备regId
+		deviceType  设备类型（android和ios）
+		appType     用户类型（biz（商家）和user（顾客））
+	输出：
+		公共输出		code、msg等
+
+
+	js请求示例:
+		$.ajax(
+		{
+			url: "https://127.0.0.1:8443/cloudcard/control/regJpushRegId",
+			type:"POST",
+			data: {
+				"token":"xxxxxxx",
+				"regId":"xxxx",
+				"deviceType":"xxxx",
+				"appType":"xxxx"
+
+
+			},
+			success: function(result){
+				console.log(result);
+			}
+		});
+
+	2.4 极光推送删除设备ID
+		接口地址：https://ip地址:端口/cloudcard/control/removeJpushRegId
+
+	输入：
+		公共输入	如token
+		regId		设备regId
+
+	输出：
+		公共输出		code、msg等
+
+
+	js请求示例:
+		$.ajax(
+		{
+			url: "https://127.0.0.1:8443/cloudcard/control/removeJpushRegId",
+			type:"POST",
+			data: {
+				"token":"xxxxxxx",
+				"regId":"xxxxxx"
+			},
+			success: function(result){
+				console.log(result);
+			}
+		});
+
+		2.5 C端账单接口：
+         <service name="getUserPayment" engine="java"
+       		location="com.banfftech.cloudcard.CloudCardQueryServices" invoke="getUserPayment" auth="true">
+       		<description>查询客户交易流水</description>
+       		<attribute name="viewIndex" type="Integer" mode="IN" optional="true" default-value="0"/>
+       		<attribute name="viewSize" type="Integer" mode="IN" optional="true" default-value="20"/>
+       		<attribute name="fromTime" type="String" mode="IN" optional="true"/>
+       		<attribute name="thruTime" type="String" mode="IN" optional="true"/>
+       		<attribute name="cardId" type="String" mode="IN" optional="true"/>
+       		<attribute name="type" type="String" mode="IN" optional="true"/>
+       		<attribute name="paymentList" type="List" mode="OUT" optional="false"/>
+       		<attribute name="totalPage" type="Integer" mode="OUT" optional="false"/>
+       	</service>
+
+     2.6 获取个人信息接口：
+          <service name="getUesrInfo" engine="java"
+         		location="com.banfftech.cloudcard.CloudCardCustServices" invoke="getUesrInfo" auth="true">
+         		<description>C端获取个人信息</description>
+         		<attribute name="userName" type="String" mode="OUT" optional="false"><description>名字</description></attribute>
+         		<attribute name="teleNumber" type="String" mode="OUT" optional="false"><description>电话号码</description></attribute>
+           </service>
+
+      2.7 修改个人信息的接口
+            <service name="updateUesrInfo" engine="java"
+          		location="com.banfftech.cloudcard.CloudCardCustServices" invoke="updateUesrInfo" auth="true">
+                          <description>C端修改个人信息</description>
+          		<attribute name="userName" type="String" mode="IN" optional="false"><description>用户姓名</description></attribute>
+          	</service>
+
+
+      2.8  通过扫二维码来查询客户的卡，选卡来支付
+          <service name="getCloudcardsOfUser" engine="java"
+         		location="com.banfftech.cloudcard.CloudCardBossServices" invoke="getCloudcardsOfUser" auth="true">
+         		<description>根据电话号码获取用户卡包</description>
+         		<attribute name="viewIndex" type="Integer" mode="IN" optional="true" default-value="0"/>
+         		<attribute name="viewSize" type="Integer" mode="IN" optional="true" default-value="20"/>
+         		<attribute name="teleNumber" type="String" mode="INOUT" optional="true"><description>顾客电话号码</description></attribute>
+         		<attribute name="qrCode" type="String" mode="INOUT" optional="true"><description>顾客付款码</description></attribute>
+         		<attribute name="amount" type="String" mode="INOUT" optional="false"><description>消费金额</description></attribute>
+         		<attribute name="listSize" type="Integer" mode="OUT" optional="false"/>
+         		<attribute name="cloudCardList" type="List" mode="OUT" optional="false"/>
+         	</service>
+
+      2.9登录接口：
+
+         		接口地址：https://ip地址:端口/cloudcard/control/userAppLogin
+
+         		输入：
+         			teleNumber		手机号码
+
+         			captcha			短信验证码
+
+         		输出：
+         			公共输出		code、msg等
+
+         			token			登录凭证,
+         								登录成功返回，用于其它接口调用
+
+
+         		js请求示例:
+         			$.ajax(
+         			{
+         				url: "https://127.0.0.1:8443/cloudcard/control/userAppLogin",
+         				type:"POST",
+         				data: {
+         					"teleNumber":"159xxxxxxxx",
+         					"captcha":"xxxxxx"
+         				},
+         				success: function(result){
+         					console.log(result);
+         				}
+         			});
+
+      3.0 查询用户卡列表：
+
+          		接口地址：https://ip地址:端口/cloudcard/control/myCloudCards
+
+          		输入：
+          			公共输入		如token
+
+          			viewIndex		起始页码，0开始，非必须
+
+          			viewSize		每页大小
+
+          		输出：
+          			公共输出			如token、code、msg等
+
+          			listSize			总条数，用户总的卡数量
+
+          			cloudCardList		用户卡列表，对象数组类型[{},{},{}]
+          				cardId				卡Id
+          				cardName			卡名称
+          				cardImg				卡图片
+          				cardCode			卡二维码数据
+          				cardBalance			卡余额
+          				distributorPartyId	发卡商家id
+          				ownerPartyId		原卡主id
+          				isAuthToMe			是否授权给我的卡 Y、N
+          				isAuthToOthers		是否授权给别人的卡 Y、N
+          				authFromDate		授权开始时间， isAuthToMe 或 isAuthToOthers 为Y时输出
+          				authThruDate		授权结束时间， isAuthToMe 或 isAuthToOthers 为Y时输出
+          				authFromPartyId		授权来至谁， isAuthToMe 为Y时输出
+          				authToPartyId		授权给了谁， isAuthToOthers 为Y时输出
+
+          		js请求示例:
+          			$.ajax(
+          			{
+          				url: "https://127.0.0.1:8443/cloudcard/control/myCloudCards",
+          				type:"POST",
+          				data: {
+          					"token":"xxxxx.xxxxx.xxxxx"
+          				},
+          				success: function(result){
+          					console.log(result);
+          				}
+          			});
+
+     3.1卡授权给他人使用
+
+        		接口地址：https://ip地址:端口/cloudcard/control/createCardAuth
+
+        		输入：
+        			公共输入		如token
+
+        			teleNumber		手机号码，要授权给谁
+
+        			cardId			卡id，要授权的卡id
+
+        			amount			授权金额，若未传入则默认为授权卡内全部余额
+
+        			fromDate		授权开始时间  yyyy-MM-dd HH:mm:ss，
+        								若不传入则从当前开始
+
+        			thruDate		授权结束时间  yyyy-MM-dd HH:mm:ss，
+        								若此字段未传入，则使用 fromDate + days 进行自动计算，
+        								若days字段也为未传入，或传入的不是大于0的整数，表示永久
+
+        			days			要授权几天，整数类型，
+        								如果已经传入thruDate，则系统忽略此字段
+        								如果没有传入thruDate，就使用fromDate加上days
+        								1- 1天  3- 3天  若 days <= 0，表示永久
+
+        		输出：
+        			公共输出			如token、code、msg等
+
+        			customerPartyId		被授权的用户id
+
+
+        		推送相关：
+
+        			推送对象:
+        				customerPartyId
+
+        				通知内容: 暂定为：
+
+        					你的好友授权了一张云卡给你
+
+        				透传消息内容: 暂无
+
+
+        		js请求示例:
+        			$.ajax(
+        			{
+        				url: "https://127.0.0.1:8443/cloudcard/control/createCardAuth",
+        				type:"POST",
+        				data: {
+        					"token":"xxxxx.xxxxx.xxxxx",
+        					"teleNumber":"170xxxxxxxx",
+        					"cardId":"1000xx",
+        					"amount":"200",
+        					"fromDate":"2016-11-15 00:00:00",
+        					"thruDate":"2016-11-16 00:00:00"
+        				},
+        				success: function(result){
+        					console.log(result);
+        				}
+        			});
+
+     3.2 解除卡授权
+
+         		接口地址：https://ip地址:端口/cloudcard/control/revokeCardAuth
+
+         		输入：
+         			公共输入		如token
+
+         			cardId			卡id，要解除授权的卡id
+
+         		输出：
+         			公共输出			如token、code、msg等
+
+
+         		js请求示例:
+         			$.ajax(
+         			{
+         				url: "https://127.0.0.1:8443/cloudcard/control/revokeCardAuth",
+         				type:"POST",
+         				data: {
+         					"token":"xxxxx.xxxxx.xxxxx",
+         					"cardId":"1000xx"
+         				},
+         				success: function(result){
+         					console.log(result);
+         				}
+         			});
+
+      3.3通过二维码查询商家信息
+
+         		接口地址：https://ip地址:端口/cloudcard/control/getStoreInfoByQRcode
+
+         		输入：
+         			公共输入		如token
+
+         			qrCode			商家二维码
+
+         		输出：
+         			公共输出			如token、code、msg等
+
+         			storeImgUrl			商家图片
+
+         			storeId				商家id
+
+         			storeName			商家名
+
+         		js请求示例:
+         			$.ajax(
+         			{
+         				url: "https://127.0.0.1:8443/cloudcard/control/getStoreInfoByQRcode",
+         				type:"POST",
+         				data: {
+         					"token":"xxxxx.xxxxx.xxxxx",
+         					"qrCode":"ccs-cb595305-ae07-4c86-8b26-235484389b49"
+         				},
+         				success: function(result){
+         					console.log(result);
+         				}
+         			});
+      3.4客户付款给商家
+
+         		接口地址：https://ip地址:端口/cloudcard/control/customerWithdraw
+
+         		输入：
+         			公共输入		如token
+
+         			qrCode			商家二维码，与商家id 二选一
+
+         			cardId			卡id
+
+         			amount			支付金额
+
+
+         		输出：
+         			公共输出			如token、code、msg等
+
+         			cardId					卡Id
+
+         			amount					支付金额
+
+         			cardBalance				卡余额
+
+         			storeId					商家id
+
+         			storeName				商家名
+
+
+         		js请求示例:
+         			$.ajax(
+         			{
+         				url: "https://127.0.0.1:8443/cloudcard/control/customerWithdraw",
+         				type:"POST",
+         				data: {
+         					"token": "xxxxx.xxxxx.xxxxx",
+         					"qrCode": "",
+         					"cardId": "1000xxx",
+         					"amount": "100.00"
+         				},
+         				success: function(result){
+         					console.log(result);
+         				}
+         			});
+
+
+

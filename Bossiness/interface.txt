@@ -1,0 +1,561 @@
+B端接口文档
+1、接口调用方法及公共字段说明
+		调用方法：
+			HTTPS POST 请求
+
+		公共输入：
+			token	登录凭证
+						除 “ 获取登录短信验证码”  和 "登录" 这两个接口外的所有接口，都需要输入token才能访问
+
+		公共输出：
+			token	登陆凭证，非必需
+						如果系统发现token快过期了，会输出更新的token，客户端需要保存下来，代入其它接口调用
+
+			code	返回码
+						200		成功
+						300		保留，
+						401		需要登录，出现这个错误码表示需要跳转到登录页
+						402		保留，准备用于版本太低，需要更新版本
+						500		其它业务错误，可直接显示错误信息给用户
+
+			msg		错误信息
+							当code为500时候，可以直接显示此信息
+
+
+2、公共接口：
+
+	2.1 获取登录短信验证码
+
+		接口地址：https://ip地址:端口/cloudcard/control/getLoginCaptcha
+
+		输入：
+			teleNumber		手机号码，需要已经在系统注册的手机号
+							（激活卡、授权卡时，系统内若没有此手机的用户会自动注册）
+		输出：
+			公共输出		code、msg等
+
+		js请求示例:
+			$.ajax(
+			{
+				url: "https://127.0.0.1:8443/cloudcard/control/getLoginCaptcha",
+				type:"POST",
+				data: {
+					"teleNumber":"159xxxxxxxx"
+				},
+				success: function(result){
+					console.log(result);
+				}
+			});
+
+
+2.2 获取app更新信息
+		接口地址：https://ip地址:端口/cloudcard/control/checkAppVersion
+
+		输入：
+			curVersion		app当前版本号
+			deviceType      设备类型（android或ios）
+			appType			app类型（商家输入biz,用户输入user）
+		输出：
+			公共输出		code、msg等
+			latestVersion   最新版本号
+			updateType      是否强制更新 0：非强制更新  1：强制更新
+			url             更新请求地址
+
+		js请求示例:
+			$.ajax(
+			{
+				url: "https://127.0.0.1:8443/cloudcard/control/checkAppVersion",
+				type:"POST",
+				data: {
+					"curVersion":"0.9.1",
+					"deviceType":"android",
+					"appType":"biz"
+				},
+				success: function(result){
+					console.log(result);
+				}
+			});
+
+
+2.3 极光推送设备注册
+		接口地址：https://ip地址:端口/cloudcard/control/regJpushRegId
+
+	输入：
+		公共输入	如token
+		regId		设备regId
+		deviceType  设备类型（android和ios）
+		appType     用户类型（biz（商家）和user（顾客））
+	输出：
+		公共输出		code、msg等
+
+
+	js请求示例:
+		$.ajax(
+		{
+			url: "https://127.0.0.1:8443/cloudcard/control/regJpushRegId",
+			type:"POST",
+			data: {
+				"token":"xxxxxxx",
+				"regId":"xxxx",
+				"deviceType":"xxxx",
+				"appType":"xxxx"
+
+
+			},
+			success: function(result){
+				console.log(result);
+			}
+		});
+
+	2.4 极光推送删除设备ID
+		接口地址：https://ip地址:端口/cloudcard/control/removeJpushRegId
+
+	输入：
+		公共输入	如token
+		regId		设备regId
+
+	输出：
+		公共输出		code、msg等
+
+
+	js请求示例:
+		$.ajax(
+		{
+			url: "https://127.0.0.1:8443/cloudcard/control/removeJpushRegId",
+			type:"POST",
+			data: {
+				"token":"xxxxxxx",
+				"regId":"xxxxxx"
+			},
+			success: function(result){
+				console.log(result);
+			}
+		});
+
+		2.5 批量上传图片（bizUploadStoreInfoImg）
+    <attribute mode="IN" name="uploadedFile" type="java.nio.ByteBuffer" optional="true" />
+    <attribute mode="IN" name="_uploadedFile_fileName" type="String" optional="true" />
+    <attribute mode="IN" name="_uploadedFile_contentType" type="String" optional="true"/>
+
+2.6 无卡消费收款接口
+   <service name="bizByTeleNumberWithdraw" engine="java"
+   		location="com.banfftech.cloudcard.CloudCardBossServices" invoke="receiptByCardId" auth="true">
+   		<description>无卡消费收款</description>
+   		<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+   		<attribute name="cardId" type="String" mode="IN" optional="false"/>
+   		<attribute name="captcha" type="String" mode="IN" optional="false"/>
+   		<attribute name="teleNumber" type="String" mode="IN" optional="false"/>
+
+   		<attribute name="cardId" type="String" mode="OUT" optional="true"><description>卡Id</description></attribute>
+   		<attribute name="cardBalance" type="BigDecimal" mode="OUT" optional="false"><description>可用余额</description></attribute>
+   		<attribute name="customerPartyId" type="String" mode="OUT" optional="false"><description>客户partyId</description></attribute>
+   	</service>
+2.7 oss图片的获取：
+   <attribute name="ossUrl" type="String" mode="OUT" optional="true"><description>oss外网访问地址</description></attribute>
+   <attribute name="storeInfoImgList" type="List" mode="OUT" optional="true"><description>店铺图片信息</description></attribute>
+
+2.8商家删除图片的操作
+   <service name="bizDeleteStoreInfoImg" engine="java"
+               location="com.banfftech.cloudcard.CloudCardBossServices" invoke="bizDeleteStoreInfoImg" auth="true">
+           <description>商家删除图片</description>
+           <attribute mode="IN" name="organizationPartyId" type="String" optional="false"><description>店家partyI</description></attribute>
+           <attribute mode="IN" name="contentId" type="String" optional="false"><description>dataResourceId</description></attribute>
+   </service>
+
+
+2.9 无卡充值接口
+<service name="bizByTeleNumberRecharge" engine="java"
+            location="com.banfftech.cloudcard.CloudCardBossServices" invoke="rechargeCloudCardByCardId" auth="true">
+        <description>无卡消费充值</description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"><description>店家partyId</description></attribute>
+        <attribute name="teleNumber" type="String" mode="INOUT" optional="false"><description>电话号码</description></attribute>
+        <attribute name="amount" type="BigDecimal" mode="INOUT" optional="false"><description>充值金额</description></attribute>
+
+        <attribute name="customerPartyId" type="String" mode="OUT" optional="false"><description>客户partyId</description></attribute>
+        <attribute name="actualBalance" type="BigDecimal" mode="OUT" optional="false"><description>可用余额</description></attribute>
+	</service>
+
+3.0 首页我的消息接口
+   <service name="listMyNote" engine="java"
+            location="com.banfftech.cloudcard.CloudCardBossServices" invoke="listMyNote" auth="true">
+        <description>我的消息</description>
+        <attribute name="organizationPartyId" type="String" mode="IN" optional="false"><description>店家partyId</description></attribute>
+        <attribute name="partyNotes" type="List" mode="OUT" optional="false"><description>消费列表</description></attribute>
+	 </service>
+
+3.1 已读消息接口
+	<service name="readMyNote" engine="java"
+            location="com.banfftech.cloudcard.CloudCardBossServices" invoke="readMyNote" auth="true">
+        <description>已读消息标记</description>
+        <attribute name="organizationPartyId" type="String" mode="INOUT" optional="false"><description>店家partyId</description></attribute>
+        <attribute name="noteId" type="String" mode="INOUT" optional="false"><description>消费列表</description></attribute>
+        <attribute name="isViewed" type="String" mode="INOUT" optional="false"><description>消费列表</description></attribute>
+	</service>
+
+	3.2	删除消息标记的接口
+	   <service name="deleteMyNote" engine="java"
+                 location="com.banfftech.cloudcard.CloudCardBossServices" invoke="deleteMyNote" auth="true">
+             <description>删除消息标记</description>
+             <attribute name="organizationPartyId" type="String" mode="INOUT" optional="false"><description>店家partyId</description></attribute>
+             <attribute name="noteId" type="String" mode="INOUT" optional="false"><description>消费列表</description></attribute>
+             <attribute name="removed" type="String" mode="INOUT" optional="false"><description>消费列表</description></attribute>
+     	</service>
+
+  3.3   B账单接口：
+     <service name="getBizPayment" engine="java"
+     		location="com.banfftech.cloudcard.CloudCardQueryServices" invoke="getBizPayment" auth="true">
+     		<description>查询商户交易流水</description>
+     		<attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+     		<attribute name="viewIndex" type="Integer" mode="IN" optional="true" default-value="0"/>
+     		<attribute name="viewSize" type="Integer" mode="IN" optional="true" default-value="20"/>
+     		<attribute name="fromTime" type="String" mode="IN" optional="true"/>
+     		<attribute name="thruTime" type="String" mode="IN" optional="true"/>
+     		<attribute name="type" type="String" mode="IN" optional="true"/>
+     		<attribute name="paymentList" type="List" mode="OUT" optional="false"/>
+     		<attribute name="totalPage" type="Integer" mode="OUT" optional="false"/>
+     	</service>
+
+3.4登录接口：
+
+   		接口地址：https://ip地址:端口/cloudcard/control/bizAppLogin
+
+   		输入：
+   			teleNumber		手机号码
+
+   			captcha			短信验证码
+
+   		输出：
+   			公共输出				code、msg等
+
+   			token					登录凭证,
+   										登录成功返回，用于其它接口调用
+
+   			organizationPartyId		商家partyId，
+   										B端app其余接口都需要输入此信息，所以登录成功后需要保存下来
+
+   		js请求示例:
+   			$.ajax(
+   			{
+   				url: "https://127.0.0.1:8443/cloudcard/control/bizAppLogin",
+   				type:"POST",
+   				data: {
+   					"teleNumber":"159xxxxxxxx",
+   					"captcha":"xxxxxx"
+   				},
+   				success: function(result){
+   					console.log(result);
+   				}
+   			});
+
+  3.5商家扫码收客户款
+
+     		接口地址：https://ip地址:端口/cloudcard/control/cloudCardWithdraw
+
+     		输入：
+     			公共输入				如token
+
+     			organizationPartyId		商家partyId
+
+     			cardCode				扫到的二维码信息
+
+     			amount					支付金额
+
+     		输出：
+     			公共输出				token、code、msg等
+
+     			cardId					卡Id
+
+     			amount					支付金额
+
+     			cardBalance				卡余额
+
+     			customerPartyId			客户partyId
+
+     		推送相关：
+
+     			推送对象:
+     				customerPartyId
+
+     				通知内容:
+     					付款成功
+
+     				透传消息内容:
+     					{"type":"payment","cardId":"${cardId}","amount":"${amount}","cardBalance":"${cardBalance}"}
+
+
+     		js请求示例:
+     			$.ajax(
+     			{ url: "https://127.0.0.1:8443/cloudcard/control/cloudCardWithdraw",
+     				type:"POST",
+     				data: {
+     					"token":"xxxx.xxxxx.xxxxxx",
+     					"organizationPartyId":"10xxxx",
+     					"cardCode":"619xxxxxxxxxxxxxxxxx",
+     					"amount":"100"
+     				},
+     				success: function(result){
+     					console.log(result);
+     				}
+     			});
+
+     	3.6充值、开卡(激活卡)
+
+         		4.3.1 根据二维码查询卡信息
+
+         			地址：https://127.0.0.1:8443/cloudcard/control/getCardInfoByCode
+
+         			输入：
+         				公共输入				如token
+         				organizationPartyId		商家partyId
+         				cardCode				扫到的二维码
+
+         			输出：
+         				公共输出				如token、code、msg等
+
+         				isActivated				是否已激活卡  Y 已激活 N 未激活
+
+         				cardId					卡id
+
+         				cardName				卡名
+
+         				cardImg					卡图片
+
+         				cardBalance				余额
+
+         				distributorPartyId		商家partyId
+
+         				customerPartyId			客户id
+
+         				ownerPartyId			原卡主partyId
+
+         			js请求示例:
+         				$.ajax(
+         				{ url: "https://127.0.0.1:8443/cloudcard/control/getCardInfoByCode",
+         					type:"POST",
+         					data: {
+         						"token":"xxxxxxxx.xxxxxxxxxxxxxx.xxxxx",
+         						"organizationPartyId":"10xxxx",
+         						"cardCode":"619xxxxxxxxxxxxxxxxx",
+         					},
+         					success: function(result){
+         						console.log(result);
+         					}
+         				});
+       3.7充值
+          			公用一个接口
+
+          			如果 cardCode已经激活，则直接充值，未激活则进行激活，此时 teleNumber必输
+
+          			地址：https://127.0.0.1:8443/cloudcard/control/activateCloudCardAndRecharge
+
+          			输入：
+          				公共输入				如token
+
+          				organizationPartyId		商家partyId
+
+          				cardCode				扫到的二维码
+
+          				amount					充值金额
+
+          				teleNumber				电话号码，激活卡时必输
+
+          			输出：
+          				公共输出				如token、code、msg等
+
+          				amount					充值金额
+
+          				cardId					卡id（开卡时为新建的卡id）
+
+          				cardBalance				卡余额
+
+          				customerPartyId			客户partyId
+
+          			推送相关：
+
+          				推送对象:
+          					customerPartyId
+
+          					通知内容:
+          						充值成功
+
+          					透传消息内容:
+          						{"type":"recharge","cardId":"${cardId}","amount":"${amount}","cardBalance":"${cardBalance}"}
+
+          			示例：
+          				$.ajax(
+          				{
+          					url: "https://127.0.0.1:8443/cloudcard/control/activateCloudCardAndRecharge",
+          					type:"POST",
+          					data: {
+          				      "token":"xxxxxxxx.xxxxxxxxxxxxxx.xxxxx",
+          				      "organizationPartyId":"10xxx",
+          				      "cardCode":"618xxxxxxxxxxxxxxxxx",
+          				      "amount":"200",
+          				      "teleNumber":"15915915911"
+          				    },
+          				  success: function(result){
+          				        console.log(result);
+          				      }
+          				});
+   3.8  B端已开卡的接口：
+        <service name="getCloudCardByBiz" engine="java"
+                  location="com.banfftech.cloudcard.CloudCardBossServices" invoke="getCloudCardByBiz" auth="true">
+              <description>商家获取已开的卡</description>
+              <attribute mode="IN" name="organizationPartyId" type="String" optional="false"><description>店家partyI</description></attribute>
+             	<attribute name="finAccountList" type="List" mode="OUT" optional="false"><description>卡信息列表</description></attribute>
+         </service>
+
+
+   3.9 B端账单的接口
+         <service name="getUserPaymentBybiz" engine="java"
+                  location="com.banfftech.cloudcard.CloudCardBossServices" invoke="getUserPaymentBybiz" auth="true">
+                  <description>商家获取用户消费列表</description>
+                  <attribute name="viewIndex" type="Integer" mode="IN" optional="true" default-value="0"/>
+      	    <attribute name="viewSize" type="Integer" mode="IN" optional="true" default-value="20"/>
+      	    <attribute name="fromTime" type="String" mode="IN" optional="true"/>
+      	    <attribute name="thruTime" type="String" mode="IN" optional="true"/>
+      	    <attribute name="cardNumber" type="String" mode="IN" optional="false"/>
+      	    <attribute name="organizationPartyId" type="String" mode="IN" optional="false"/>
+      	    <attribute name="ownerPartyId" type="String" mode="IN" optional="false"/>
+      	    <attribute name="cardId" type="String" mode="IN" optional="false"/>
+      	    <attribute name="type" type="String" mode="IN" optional="true"/>
+      	    <attribute name="paymentList" type="List" mode="OUT" optional="false"/>
+      	    <attribute name="totalPage" type="Integer" mode="OUT" optional="false"/>
+           </service>
+
+
+4.0商家授信额度查询
+
+   		地址：https://127.0.0.1:8443/cloudcard/control/getLimitAndPresellInfo
+
+   		输入：
+   			公共输入				如token
+
+   			organizationPartyId		商家partyId
+
+   		输出：
+   			公共输出				如token、code、msg等
+
+   			presellAmount			已卖出金额
+
+   			limitAmount				卖卡限额
+
+   			balance					卖卡余额
+
+   			liabilities				负债金额（卖出去还未消费的卡总额）
+
+   			settlementAmount		跨店消费待结算金额
+
+   		js请求示例:
+   			$.ajax(
+   			{
+   				url: "https://127.0.0.1:8443/cloudcard/control/getLimitAndPresellInfo",
+   				type:"POST",
+   				data: {
+   					"token":"xxxxx",
+   					"organizationPartyId":"10xxx"
+   				},
+   				success: function(result){
+   					console.log(result);
+   				}
+   			});
+
+
+4.1无卡消费获取验证码：（getPayVerificationCodeOfCustomer）
+   <attribute name="teleNumber" type="String" mode="INOUT" optional="false"><description>顾客电话号码</description></attribute>
+   <attribute name="amount" type="String" mode="INOUT" optional="false"><description>消费金额</description></attribute>
+
+
+4.2  bizListNeedSettlement
+   	收卡/款 方 查询待结算(待对方付款)列表
+   	卖卡/付款方 查询待付款列表
+
+   	输入：
+
+   		公共输入				如token
+
+   		organizationPartyId		商家partyId
+
+   		role					角色:
+   									payee ：收款方
+   									payer : 付款方
+
+   		viewIndex				起始页码，0开始，非必须，默认0
+
+   		viewSize				每页大小，非必须，默认20
+
+
+
+   	输出：
+
+
+   			list:
+   				[
+   				 	{
+   				 		paymentId=cytest,               // paymentId
+   				 		cardId=10192,                   // cardId
+   				 		reqCount=5, 					// 催款次数
+   				 		tradePartyId=10580, 		    // 交易发生店Id
+   				 		tradePartyName=宁波南塘汤团,    // 交易发生店名
+   				 		cardSellerId=cycyId,            // 卖卡商家id
+   				 		cardSellerName=cycyName, 		// 卖卡商家名
+   				 		transDate=1492513931000, 		// 交易发生时间戳 (毫秒)
+   				 		amount=7.00, 					// 金额
+   				 		statusId=1       				// 状态 1- 待发起结算  2- 待确认收款
+
+   					}
+   				]
+
+   			listSize 1
+
+4.3  收款方向付款方发起结算请求
+    <service name="initiateSettlement" engine="java"
+               location="com.banfftech.cloudcard.CloudCardBossServices" invoke="initiateSettlement" auth="true">
+                   <description>收款方向付款方发起结算请求</description>
+                   <attribute name="paymentId" type="String" mode="IN" optional="false"/>
+   		<attribute name="payerPartyId" type="String" mode="IN" optional="false"/>
+   		<attribute name="payeePartyId" type="String" mode="IN" optional="false"/>
+   		<attribute name="amount" type="String" mode="IN" optional="false"/>
+   		<attribute name="reqCount" type="Integer" mode="OUT" optional="false"/>
+    </service>
+
+4.4付款方向收款方发起结算确认请求
+   <service name="settlementRequest" engine="java"
+               location="com.banfftech.cloudcard.CloudCardBossServices" invoke="settlementRequest" auth="true">
+           <description>付款方向收款方发起结算确认请求</description>
+           <attribute name="paymentId" type="String" mode="IN" optional="false"/>
+   		<attribute name="payerPartyId" type="String" mode="IN" optional="false"/>
+   		<attribute name="payeePartyId" type="String" mode="IN" optional="false"/>
+   		<attribute name="amount" type="String" mode="IN" optional="false"/>
+   </service>
+
+4.5  收款方对付款方结算确认
+      <service name="settlementConfirmation" engine="java"
+               location="com.banfftech.cloudcard.CloudCardBossServices" invoke="settlementConfirmation" auth="true">
+           <description>收款方对付款方结算确认</description>
+           <attribute name="paymentId" type="String" mode="IN" optional="false"/>
+   		<attribute name="payerPartyId" type="String" mode="IN" optional="false"/>
+   		<attribute name="payeePartyId" type="String" mode="IN" optional="false"/>
+   		<attribute name="amount" type="String" mode="IN" optional="false"/>
+    	</service>
+
+4.6 商家设定结算时间
+     <service name="bizSetCloudcardSettlementPeriod" engine="java"
+               location="com.banfftech.cloudcard.CloudCardBossServices" invoke="bizSetCloudcardSettlementPeriod" auth="true">
+           <description>商家设定结算时间</description>
+   		<attribute name="partyIdFrom" type="String" mode="IN" optional="false"/>
+   		<attribute name="partyIdTo" type="String" mode="IN" optional="false"/>
+   		<attribute name="week" type="Long" mode="IN" optional="false"/>
+   		<attribute name="hour" type="Long" mode="IN" optional="false"/>
+    	</service>
+
+4.7 商家查询结算时间
+     <service name="bizGetCloudcardSettlementPeriod" engine="java"
+                location="com.banfftech.cloudcard.CloudCardBossServices" invoke="bizGetCloudcardSettlementPeriod" auth="true">
+            <description>商家查询结算时间</description>
+    		<attribute name="partyIdFrom" type="String" mode="IN" optional="false"/>
+    		<attribute name="partyIdTo" type="String" mode="IN" optional="false"/>
+    		<attribute name="week" type="Long" mode="OUT" optional="false"/>
+    		<attribute name="hour" type="Long" mode="OUT" optional="false"/>
+    		<attribute name="status" type="String" mode="OUT" optional="false"/>
+     	</service>

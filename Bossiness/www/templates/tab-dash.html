@@ -50,21 +50,35 @@
            <a class="item shop" ng-click="activateCardList()" ng-controller="phoneNumberActivateCtrl">
              <img src="img/mycard.png">
            </a>
-        <p>我的卡</p>
+        <p>已开的卡</p>
         </div>
     </div>
     <ion-list>
-      当前信息：
-      <ion-item ng-repeat="item in messageList" item="item" href="#/item/{{item.id}}" class="item-remove-animate">
-       <span style="color: red"> {{item.noteInfo}}</span>
-        <ion-option-button class="button-calm" ng-click="deleteMessage(item.noteId)">
-          删除
-        </ion-option-button>
-        <ion-option-button class="button-assertive" ng-click="already(item.noteId)">
-          已读
-      </ion-item>
-      <div class="item text-center" ng-if="messageList==''">
-        <span style="color: red"> 当前信用良好，没有欠款信息</span>
+      <!--当前信息：-->
+      <!--<ion-item ng-repeat="item in messageList" item="item" href="#/item/{{item.id}}" class="item-remove-animate">-->
+       <!--<span style="color: red"> {{item.noteInfo}}</span>-->
+        <!--<ion-option-button class="button-calm" ng-click="deleteMessage(item.noteId)">-->
+          <!--删除-->
+        <!--</ion-option-button>-->
+        <!--<ion-option-button class="button-assertive" ng-click="already(item.noteId)">-->
+          <!--已读-->
+      <!--</ion-item>-->
+      <!--<div class="item text-center" ng-if="messageList==''">-->
+        <!--<span style="color: red"> 当前信用良好，没有欠款信息</span>-->
+      <!--</div>-->
+      <div class="list">
+        <div class="item item-divider item-icon-right" ng-click="changeOnOff(onOff)">当前信息 <i class="icon {{onOff==true?'ion-android-arrow-dropdown':'ion-android-arrow-dropup'}}"></i></div>
+        <div ng-show="onOff">
+            <ion-item ng-repeat="item in messageList" item="item" href="#/item/{{item.id}}" class="item-remove-animate">
+            <span style="color: red"> {{item.noteInfo}}</span>
+            <ion-option-button class="button-calm" ng-click="deleteMessage(item.noteId)">
+            删除
+            </ion-option-button>
+            <ion-option-button class="button-assertive" ng-click="already(item.noteId)">
+            已读
+            </ion-item>
+
+        </div>
       </div>
     </ion-list>
   </ion-content>

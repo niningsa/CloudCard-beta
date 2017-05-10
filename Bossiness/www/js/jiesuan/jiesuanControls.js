@@ -67,7 +67,20 @@ angular.module('jiesuan.controllers', [])
       if(flag){
         for (var j = 0; j < jiesuanList.length; j++) {
           if(jiesuanList[j].checked==true){
-            $("#qr").attr("disabled","disabled");//这是为了重复的提交，所以给它弄死
+            if(jiesuanList[j].statusId==1){
+              $ionicPopup.alert({
+                title: "温馨提示",
+                template: "请先发起清算请求在确认清算!!",
+                okText: "确定",
+              })
+            }else{
+              $ionicPopup.alert({
+                title: "温馨提示",
+                template: "操作成功!!",
+                okText: "确定",
+              })
+            }
+            //$("#qr").attr("disabled","disabled");//这是为了重复的提交，所以给它弄死
             jiesuanService.settlementConfirmation(
               jiesuanList[j].paymentId,
               jiesuanList[j].cardSellerId,
@@ -87,11 +100,8 @@ angular.module('jiesuan.controllers', [])
             });
           }
         }
-        $ionicPopup.alert({
-          title: "温馨提示",
-          template: "操作成功!!",
-          okText: "确定",
-        })
+
+
       }else{
         $ionicPopup.alert({
           title: "温馨提示",

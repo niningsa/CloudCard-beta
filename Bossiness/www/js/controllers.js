@@ -49,7 +49,14 @@ angular.module('starter.controllers', [])
 
       });
     }
-
+    $scope.onOff = true;
+    $scope.changeOnOff = function (onOff) {
+      if (onOff == true) {
+        $scope.onOff = false;
+      } else {
+        $scope.onOff = true;
+      }
+    };
 
   })
 /*
@@ -481,6 +488,8 @@ angular.module('starter.controllers', [])
         $scope.msg = "请输入您的手机号码！！"
       }
     };
+
+
 
   })
 
