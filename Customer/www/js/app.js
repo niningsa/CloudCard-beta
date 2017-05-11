@@ -13,131 +13,131 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   //极光推送开始
 
   // 当设备就绪时
-  var onDeviceReady = function () {
-    //$scope.message += "JPushPlugin:Device ready!";
-    initiateUI();
-  };
-
-  // 打开通知的回调函数
-  var onOpenNotification = function (event) {
-    try {
-      var alertContent;
-      if (device.platform == "Android") {
-        alertContent = window.plugins.jPushPlugin.openNotification.alert;
-      } else {
-        alertContent = event.aps.alert;
-      }
-      //$scope.message = alertContent;
-      //alert(alertContent+"打开通知后的跳转页面");
-    } catch (exception) {
-      console.log("JPushPlugin:onOpenNotification" + exception);
-    }
-  };
-  // 接收到通知时的回调函数
-  var onReceiveNotification = function (event) {
-    try {
-      var alertContent;
-      if (device.platform == "Android") {
-        alertContent = window.plugins.jPushPlugin.receiveNotification.alert;
-      } else {
-        alertContent = event.aps.alert;
-      }
-      //$scope.message = alertContent;
-      //$scope.notificationResult = alertContent;
-      //alert($scope.message+"接受通知");
-    } catch (exception) {
-      console.log(exception)
-    }
-  };
-
-  // 接收到消息时的回调函数
-  var onReceiveMessage = function (event) {
-    try {
-      var message;
-      if (device.platform == "Android") {
-        message = window.plugins.jPushPlugin.receiveMessage.message;
-      } else {
-        message = event.content;
-      }
-      //$scope.message = message;
-      //$scope.messageResult = message;
-      //alert($scope.message+"接受消息");
-      try{
-        //var ret = JSON.parse($scope.message);
-        var ret = JSON.parse(message);
-      }catch (e){
-        alert("解析失败");
-      }
-      if(ret.type=="chowner"){//这个是转卡的类型，转卡就不用跳转页面
-      }else{
-        $state.go("tab.paymentSuccess",{
-          "type":ret.type,
-          "cardId":ret.cardId,
-          "amount":ret.amount,
-          "cardBalance":ret.cardBalance
-        });
-
-      }
-
-
-    } catch (exception) {
-      console.log("JPushPlugin:onReceiveMessage-->" + exception);
-    }
-  };
-
-
-  // 获取RegistrationID
-  var getRegistrationID = function () {
-    window.plugins.jPushPlugin.getRegistrationID(function (data) {
-      try {
-        console.log("JPushPlugin:registrationID is " + data);
-
-        if (data.length == 0) {
-          var t1 = window.setTimeout(getRegistrationID, 1000);
-        }else{
-          //调用极光推送的接口
-          //alert(data+"ssss"+device.platform);
-          //将极光的registrationID放入到cookie
-          $.cookie("registrationID",data,{
-            expires:7
-          });
-          $.cookie("platform",device.platform,{
-            expires:7
-          });
-
-        }
-        //$scope.message += "JPushPlugin:registrationID is " + data;
-        //$scope.registrationID = data;
-      } catch (exception) {
-        console.log(exception);
-      }
-    });
-
-  };
-  //初始化jpush
-  var initiateUI = function () {
-    try {
-      window.plugins.jPushPlugin.init();
-      getRegistrationID();
-      if (device.platform != "Android") {
-        window.plugins.jPushPlugin.setDebugModeFromIos();
-        window.plugins.jPushPlugin.setApplicationIconBadgeNumber(0);
-      } else {
-        window.plugins.jPushPlugin.setDebugMode(true);
-        window.plugins.jPushPlugin.setStatisticsOpen(true);
-      }
-      //$scope.message += '初始化成功! \r\n';
-
-    } catch (exception) {
-      console.log(exception);
-    }
-  };
+  //var onDeviceReady = function () {
+  //  //$scope.message += "JPushPlugin:Device ready!";
+  //  initiateUI();
+  //};
+  //
+  //// 打开通知的回调函数
+  //var onOpenNotification = function (event) {
+  //  try {
+  //    var alertContent;
+  //    if (device.platform == "Android") {
+  //      alertContent = window.plugins.jPushPlugin.openNotification.alert;
+  //    } else {
+  //      alertContent = event.aps.alert;
+  //    }
+  //    //$scope.message = alertContent;
+  //    //alert(alertContent+"打开通知后的跳转页面");
+  //  } catch (exception) {
+  //    console.log("JPushPlugin:onOpenNotification" + exception);
+  //  }
+  //};
+  //// 接收到通知时的回调函数
+  //var onReceiveNotification = function (event) {
+  //  try {
+  //    var alertContent;
+  //    if (device.platform == "Android") {
+  //      alertContent = window.plugins.jPushPlugin.receiveNotification.alert;
+  //    } else {
+  //      alertContent = event.aps.alert;
+  //    }
+  //    //$scope.message = alertContent;
+  //    //$scope.notificationResult = alertContent;
+  //    //alert($scope.message+"接受通知");
+  //  } catch (exception) {
+  //    console.log(exception)
+  //  }
+  //};
+  //
+  //// 接收到消息时的回调函数
+  //var onReceiveMessage = function (event) {
+  //  try {
+  //    var message;
+  //    if (device.platform == "Android") {
+  //      message = window.plugins.jPushPlugin.receiveMessage.message;
+  //    } else {
+  //      message = event.content;
+  //    }
+  //    //$scope.message = message;
+  //    //$scope.messageResult = message;
+  //    //alert($scope.message+"接受消息");
+  //    try{
+  //      //var ret = JSON.parse($scope.message);
+  //      var ret = JSON.parse(message);
+  //    }catch (e){
+  //      alert("解析失败");
+  //    }
+  //    if(ret.type=="chowner"){//这个是转卡的类型，转卡就不用跳转页面
+  //    }else{
+  //      $state.go("tab.paymentSuccess",{
+  //        "type":ret.type,
+  //        "cardId":ret.cardId,
+  //        "amount":ret.amount,
+  //        "cardBalance":ret.cardBalance
+  //      });
+  //
+  //    }
+  //
+  //
+  //  } catch (exception) {
+  //    console.log("JPushPlugin:onReceiveMessage-->" + exception);
+  //  }
+  //};
+  //
+  //
+  //// 获取RegistrationID
+  //var getRegistrationID = function () {
+  //  window.plugins.jPushPlugin.getRegistrationID(function (data) {
+  //    try {
+  //      console.log("JPushPlugin:registrationID is " + data);
+  //
+  //      if (data.length == 0) {
+  //        var t1 = window.setTimeout(getRegistrationID, 1000);
+  //      }else{
+  //        //调用极光推送的接口
+  //        //alert(data+"ssss"+device.platform);
+  //        //将极光的registrationID放入到cookie
+  //        $.cookie("registrationID",data,{
+  //          expires:7
+  //        });
+  //        $.cookie("platform",device.platform,{
+  //          expires:7
+  //        });
+  //
+  //      }
+  //      //$scope.message += "JPushPlugin:registrationID is " + data;
+  //      //$scope.registrationID = data;
+  //    } catch (exception) {
+  //      console.log(exception);
+  //    }
+  //  });
+  //
+  //};
+  ////初始化jpush
+  //var initiateUI = function () {
+  //  try {
+  //    window.plugins.jPushPlugin.init();
+  //    getRegistrationID();
+  //    if (device.platform != "Android") {
+  //      window.plugins.jPushPlugin.setDebugModeFromIos();
+  //      window.plugins.jPushPlugin.setApplicationIconBadgeNumber(0);
+  //    } else {
+  //      window.plugins.jPushPlugin.setDebugMode(true);
+  //      window.plugins.jPushPlugin.setStatisticsOpen(true);
+  //    }
+  //    //$scope.message += '初始化成功! \r\n';
+  //
+  //  } catch (exception) {
+  //    console.log(exception);
+  //  }
+  //};
 
   // 添加对回调函数的监听
-  document.addEventListener("deviceready", onDeviceReady, false);
-  document.addEventListener("jpush.openNotification", onOpenNotification, false);
-  document.addEventListener("jpush.receiveNotification", onReceiveNotification, false);
-  document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
+  //document.addEventListener("deviceready", onDeviceReady, false);
+  //document.addEventListener("jpush.openNotification", onOpenNotification, false);
+  //document.addEventListener("jpush.receiveNotification", onReceiveNotification, false);
+  //document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
   //极光推送结束
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
