@@ -73,26 +73,29 @@
   <!--</ion-header-bar>-->
 
   <ion-content has-header="true">
-     <div class="padding" style="padding-left: 10%" >
+     <div class="padding" style="padding-left: 8%" >
        <span id="zsearch">
        <!--<span id="adress" ng-click="openModal();" style="padding: 4px 0px 0px 0px;font-size: 18px">上海</span> <span style="padding: 4px 0px 0px 0px;font-size: 18px"> >> </span>-->
-       <span id="geo" style="display: none"></span>
+       <span id="geo" style="display: none">{{geoId}}</span>
+       <span id="geoTypeId" style="display: none">{{geoTypeId}}</span>
          <!--<span id="adress" ng-click="openModal();"> </span>-->
          <span id="adress" ng-click="openModal();"
-               style="padding: 4px 0px 0px 0px;font-size: 18px">{{region}}</span>
-         <span style="padding: 4px 0px 0px 0px;font-size: 18px"> >> </span>
+               style="padding: 4px 0px 0px 0px;font-size: 16px">{{region}}</span>
+         <!--<span id="adress" ng-click="openModal();"-->
+               <!--style="padding: 4px 0px 0px 0px;font-size: 16px">杭州市</span>-->
+         <span style="padding: 4px 0px 0px 0px;font-size: 16px"> >> </span>
 
        <label>
          <!--{{region}}-->
          <input id="inputSearch" ng-model="storeName" placeholder="Search" >
        </label>
-       <button class="sbutton" ng-click="searchStoreName(storeName,area)">
+       <button class="sbutton" ng-click="searchStoreName(storeName)">
          查 找
        </button>
      </span>
      </div>
     <div class="shoplist">
-      <div ng-repeat="chat in storeList | filter:searchContent">
+      <div ng-repeat="chat in storeList">
         <!--<a class="item item-avatar"   href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">-->
         <a class="item item-avatar" href="#tab/shopDetails/{{chat.storeId}}">
           <img src="img/katong.jpe">
@@ -101,6 +104,10 @@
           <!--<p>{{chat.storeTeleNumber}}</p>-->
         </a>
       </div>
+      <div class="item text-center" ng-if="storeList==''">
+        附件暂无库胖店!!
+      </div>
+
 
     </div>
   </ion-content>

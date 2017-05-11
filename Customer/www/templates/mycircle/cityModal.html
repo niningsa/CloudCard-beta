@@ -8,27 +8,57 @@
       <ion-list >
 
          <div>
-           <input type="text" id="searchCity" ng-model="countyName" placeholder="请输入你要搜索的城市">
+          <span id="zssearch" >
+               <label>
+                 <!--{{region}}-->
+                 <input id="inputSearch" ng-model="area" placeholder="Search">
+               </label>
+          <button class="sbutton" ng-click="findArea(area)">
+            查 找
+          </button>
+          </span>
          </div>
-        <div class="padding">当前热门城市: {{region}}</div>
-        <div class="padding">
-          <button ng-click="choice('1001','北京');" class="button button-balanced">北京</button>
-          <button ng-click="choice('1002','深圳');"  class="button button-balanced">深圳</button>
-          <button ng-click="choice('1003','重庆');"  class="button button-balanced">重庆</button>
-          <button ng-click="choice('1004','宁波');"  class="button button-balanced">宁波</button>
-        </div>
-        <div class="padding">
-          <button ng-click="choice('1005','襄阳');" class="button button-balanced">襄阳</button>
-          <button ng-click="choice('1006','安徽');"  class="button button-balanced">安徽</button>
-          <button ng-click="choice('1007','青岛');"  class="button button-balanced">青岛</button>
-          <button ng-click="choice('1008','佘山');"  class="button button-balanced">佘山</button>
-        </div>
-         <div class="padding">地区分类:</div>
+        <div class="padding">城市分类:</div>
         <div class="list">
-          <div class="item item-divider item-icon-right" ng-click="changeOnOff(onOff)">{{region}} <i class="icon {{onOff==true?'ion-android-arrow-dropdown':'ion-android-arrow-dropup'}}"></i></div>
+          <div class="item item-divider item-icon-right" ng-click="changeOnOff(onOff)">城市分类 <i class="icon {{onOff==true?'ion-android-arrow-dropdown':'ion-android-arrow-dropup'}}"></i></div>
           <div ng-show="onOff">
             <div class="item item-text-wrap" >
-              <a class="item item-icon-left item-icon-right" ng-repeat="citys in countyList  | filter:countyName"  ng-click="choice(citys.countyGeoId,citys.countyName);" >
+              <a class="item item-icon-left item-icon-right" ng-repeat="citys in cityList"  ng-click="choice(citys.geoId,citys.geoName,citys.geoTypeId);" >
+                {{citys.geoName}}
+              </a>
+
+            </div>
+          </div>
+          <div class="item text-center" ng-if="cityList==''">
+           查询无结果
+          </div>
+
+        </div>
+
+        <div class="padding">当前热门城市: {{region}}</div>
+        <div class="padding">
+          <button ng-click="choice('110100','北京','CITY');" class="button button-balanced">北京</button>
+          <button ng-click="choice('440300','深圳','CITY');"  class="button button-balanced">深圳</button>
+          <button ng-click="choice('500100','重庆','CITY');"  class="button button-balanced">重庆</button>
+          <button ng-click="choice('330200','宁波','CITY');"  class="button button-balanced">宁波</button>
+        </div>
+        <div class="padding">
+          <button ng-click="choice('430100','长沙','CITY');" class="button button-balanced">长沙</button>
+          <button ng-click="choice('340100','合肥','CITY');"  class="button button-balanced">合肥</button>
+          <button ng-click="choice('330100','杭州','CITY');"  class="button button-balanced">杭州</button>
+          <button ng-click="choice('310100','上海','CITY');"  class="button button-balanced">上海</button>
+        </div>
+        <div class="padding">
+          <button ng-click="choice('440100','广州','CITY');" class="button button-balanced">广州</button>
+          <button ng-click="choice('510100','成都','CITY');"  class="button button-balanced">成都</button>
+          <button ng-click="choice('320100','南京','CITY');"  class="button button-balanced">南京</button>
+          <button ng-click="choice('120100','天津','CITY');"  class="button button-balanced">天津</button>
+        </div>
+        <div class="list">
+          <div class="item item-divider item-icon-right" ng-click="changeOnOff(onOff)">区县分类 <i class="icon {{onOff==true?'ion-android-arrow-dropdown':'ion-android-arrow-dropup'}}"></i></div>
+          <div ng-show="onOff">
+            <div class="item item-text-wrap" >
+              <a class="item item-icon-left item-icon-right" ng-repeat="citys in countyList"  ng-click="choice(citys.countyGeoId,citys.countyName,citys.geoType);" >
                {{citys.countyName}}
               </a>
 

@@ -411,6 +411,31 @@ C端接口文档:
          					console.log(result);
          				}
          			});
+3.5 根据城市名获取城市列表
+<service name="getCityOrAreaByCityName" engine="java"
+		location="com.banfftech.cloudcard.CloudCardCustServices" invoke="getCityOrAreaByCityName" auth="false">
+		<description>根据城市名获取城市列表</description>
+		<attribute name="cityName" type="String" mode="IN" optional="false"><description>城市名</description></attribute>
+		<attribute name="cityList" type="List" mode="OUT" optional="false"><description>城市列表</description></attribute>
+	geoId geoName geoTypeId  countyGeoId countyName geoType
+	</service>
+	3.6 根据城市geoId名获取下级城市列表
+	<service name="getCityOrAreaByGeoId" engine="java"
+  		location="com.banfftech.cloudcard.CloudCardCustServices" invoke="getCityOrAreaByGeoId" auth="false">
+  		<description>根据城市geoId名获取下级城市列表</description>
+  		<attribute name="geoId" type="String" mode="IN" optional="false"><description>城市geoId</description></attribute>
+  		<attribute name="cityList" type="List" mode="OUT" optional="false"><description>城市列表</description></attribute>
+  	</service>
+
+  	3.7 根据geoId名获取库胖店家列表
+  	<service name="getCloudcardStoreByGeoId" engine="java"
+       		location="com.banfftech.cloudcard.CloudCardCustServices" invoke="getCloudcardStoreByGeoId" auth="false">
+       		<description>根据geoId名获取库胖店家列表</description>
+       		<attribute name="geoId" type="String" mode="IN" optional="false"><description>城市geoId</description></attribute>
+       		<attribute name="geoTypeId" type="String" mode="IN" optional="false"><description>城市geoTypeId</description></attribute>
+       		<attribute name="storeList" type="List" mode="OUT" optional="false"><description>店铺列表</description></attribute>
+       	</service>
+
 
 
 

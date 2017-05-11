@@ -10,12 +10,14 @@ angular.module('mycircle.controllers', [])
     mycircleServices.myGroupList().success(function (result) {
       $scope.storeList=result.storeList;
       $scope.region =result.region;
-
+      $scope.geoId =result.geoId;
+      $scope.geoTypeId =result.geoTypeId;
       })
     //导航栏的查询
     $scope.searchStoreName=function(storeName){
-      var area=$("#geo").html();
-      mycircleServices.myGroupList(storeName,area).success(function (result) {
+      var geoId=$("#geo").html();
+      var geoTypeId=$("#geoTypeId").html();
+      mycircleServices.findStoreName(storeName,geoId,geoTypeId).success(function (result) {
         $scope.storeList=result.storeList;
       })
     }
@@ -31,12 +33,18 @@ angular.module('mycircle.controllers', [])
     });
 
     $scope.openModal = function() {
+      var cityName=document.getElementById("adress").innerHTML;
+      var geo=document.getElementById("geo").innerHTML;
+      var geoTypeId=document.getElementById("geoTypeId").innerHTML;
       $scope.modal.show();
       $("ion-modal-view").removeClass("modal slide-in-up ng-enter active ng-enter-active");
-      mycircleServices.myGroupList().success(function (result) {
-        $scope.countyList=result.countyList;
-        $scope.region =result.region;
-
+      //mycircleServices.myGroupList().success(function (result) {
+      //  $scope.countyList=result.countyList;
+      //  $scope.region =result.region;
+      //
+      //})
+      mycircleServices.getCityOrAreaByGeoId(geo,geoTypeId).success(function (result) {
+        $scope.countyList=result.cityList;
       })
     };
     $scope.closeModal = function () {
@@ -48,9 +56,10 @@ angular.module('mycircle.controllers', [])
   //城市选择完成之后
   .controller('settleModalCtrl', function($scope,$state, $rootScope,mycircleServices,$stateParams) {
 
-    $scope.choice=function(geoId,city){
-      document.getElementById("adress").innerHTML=city;
+    $scope.choice=function(geoId,cityName,geoTypeId){
+      document.getElementById("adress").innerHTML=cityName;
       document.getElementById("geo").innerHTML=geoId;
+      document.getElementById("geoTypeId").innerHTML=geoTypeId;
       //$("#adress").html(city);
       $scope.modal.hide();
     }
@@ -63,6 +72,12 @@ angular.module('mycircle.controllers', [])
         $scope.onOff = true;
       }
     };
+
+    $scope.findArea=function(area){
+      mycircleServices.cityList(area).success(function (result) {
+        $scope.cityList=result.cityList;
+      })
+    }
   })
   /*
    * Desc 这里是查询附近圈子和店铺的列表

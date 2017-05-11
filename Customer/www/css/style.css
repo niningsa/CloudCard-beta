@@ -325,13 +325,20 @@ td{
  display: inline-flex;
   height: 35px;
 }
+#zssearch{
+ display: inline-flex;
+  height: 35px;
+  padding-left: 12%;
+}
 
 .mycustomerservice{
   font-size: 18px;
   padding: 10%;
 }
 #searchCity{
-  width: 100%;
+  width: 80%;
+  display: inline-flex;
+  height: 35px;
 }
 .chakanzhangdan{
   padding-top: 8px;
