@@ -159,3 +159,15 @@ angular.module('aboutMe.controllers', [])
     }
 
   })
+
+
+  //我的信用
+  .controller('myCreditCtrl', function ($scope,$ionicPopup,$state,$rootScope,myShopDetailService) {
+    myShopDetailService.myCreditService().success(function (data) {
+      console.log(data);
+      $scope.storeLevel=data.storeLevel;
+    }).error(function (data) {
+
+    });
+
+  })

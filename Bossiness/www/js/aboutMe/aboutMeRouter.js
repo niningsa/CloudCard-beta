@@ -49,6 +49,20 @@ angular.module('starter')
           isCache:true
         }
       })
+      //我的信用查询
+      .state('tab.myCredit', {
+        url: '/myCredit',
+        views: {
+          'tab-aboutMe': {
+            templateUrl: 'templates/aboutMe/tab-myCredit.html',
+            controller: 'myCreditCtrl'
+          }
+        },
+        cache:false,
+        params:{
+          isCache:true
+        }
+      })
 
 
   })

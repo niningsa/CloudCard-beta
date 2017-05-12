@@ -559,3 +559,11 @@ B端接口文档
     		<attribute name="hour" type="Long" mode="OUT" optional="false"/>
     		<attribute name="status" type="String" mode="OUT" optional="false"/>
      	</service>
+
+4.8我的信用
+     <service name="bizGetMyStorelevel" engine="java"
+               location="com.banfftech.cloudcard.CloudCardBossServices" invoke="bizGetMyStorelevel" auth="true">
+           <description>我的信用</description>
+   		<attribute name="storeId" type="String" mode="IN" optional="false"/>
+   		<attribute name="storeLevel" type="String" mode="OUT" optional="false"/>
+    	</service>

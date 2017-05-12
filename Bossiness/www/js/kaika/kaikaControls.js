@@ -90,8 +90,14 @@ angular.module('kaika.controllers', [])
       $scope.cardId
     ).success(function (data) {
       console.log(data);
-      //$scope.chatList=data.paymentList;
-      $scope.yearAndMonthPaymentList=data.yearAndMonthPaymentList;
+      $scope.paymentsList=data.paymentsList;
+      function getTransDateYearMonth(obj){
+        var transDate = parseInt(obj.transDate);
+        var date = new Date(transDate);
+        return date.getFullYear() + '年' + (date.getMonth()+1) +'月';
+      }
+      $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
+      console.log( $scope.list);
     }).error(function (data) {
     });
 
@@ -103,8 +109,13 @@ angular.module('kaika.controllers', [])
         $scope.cardId,
         typeId
       ).success(function (data) {
-        console.log(data);
-        $scope.yearAndMonthPaymentList=data.yearAndMonthPaymentList;
+        $scope.paymentsList=data.paymentsList;
+        function getTransDateYearMonth(obj){
+          var transDate = parseInt(obj.transDate);
+          var date = new Date(transDate);
+          return date.getFullYear() + '年' + (date.getMonth()+1) +'月';
+        }
+        $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
       }).error(function (data) {
       });
     }
@@ -117,7 +128,13 @@ angular.module('kaika.controllers', [])
         typeId
       ).success(function (data) {
         console.log(data);
-        $scope.yearAndMonthPaymentList=data.yearAndMonthPaymentList;
+        $scope.paymentsList=data.paymentsList;
+        function getTransDateYearMonth(obj){
+          var transDate = parseInt(obj.transDate);
+          var date = new Date(transDate);
+          return date.getFullYear() + '年' + (date.getMonth()+1) +'月';
+        }
+        $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
       }).error(function (data) {
       });
     }
@@ -131,7 +148,13 @@ angular.module('kaika.controllers', [])
         typeId
       ).success(function (data) {
         console.log(data);
-        $scope.yearAndMonthPaymentList=data.yearAndMonthPaymentList;
+        $scope.paymentsList=data.paymentsList;
+        function getTransDateYearMonth(obj){
+          var transDate = parseInt(obj.transDate);
+          var date = new Date(transDate);
+          return date.getFullYear() + '年' + (date.getMonth()+1) +'月';
+        }
+        $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
       }).error(function (data) {
       });
     }

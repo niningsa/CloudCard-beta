@@ -4,7 +4,7 @@
     <a class="button icon ion-ios-undo" ui-sref="tab.activateCardList"></a>
   </ion-nav-buttons>
   <ion-header-bar class="bar-subheader has-header">
-  <span id="dianlei">
+  <span id="all">
       <button class="button button-large button-positive" ng-click="all(0)">全部</button>
      </span>
     <span id="kalei">
@@ -18,13 +18,13 @@
     <div>
       <div class="list">
 
-        <a class="padding"  ng-repeat="bill in yearAndMonthPaymentList"  >
+        <a class="padding"   ng-repeat="(key,value)  in list"  >
           <div class="chakanzhangdan" >
-            {{bill.dateTime }}
+            {{key}}
           </div>
 
-          <div class="item item-avatar" ng-repeat="bills in bill.paymentsList">
-            <img src="img/zhiFuBao.png">
+          <div class="item item-avatar" ng-repeat="bills in value">
+            <img src="img/icon.png">
             <span>{{bills.transDate |date:'M'}}</span>月
             <span>{{bills.transDate |date:'dd'}}</span>日
             <span style="padding-left: 18%">
@@ -34,6 +34,8 @@
         </a>
 
       </div>
+
+
     </div>
   </ion-content>
 </ion-view>
