@@ -98,7 +98,7 @@
       <div ng-repeat="chat in storeList">
         <!--<a class="item item-avatar"   href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">-->
         <a class="item item-avatar" href="#tab/shopDetails/{{chat.storeId}}">
-          <img src="img/katong.jpe">
+          <img src="{{chat.storeImg}}">
           <h2> {{chat.storeName}}</h2>
           <p>  {{chat.address}}</p>
           <!--<p>{{chat.storeTeleNumber}}</p>-->
