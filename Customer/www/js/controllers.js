@@ -2452,7 +2452,7 @@ angular.module('starter.controllers', [])
             "cardId": $scope.cardId,
             "paymentService": "recharge",
             "subject": "库胖-充值",
-            "totalFee": "2.0",
+            "totalFee": "0.01",
             "body": "充值"
           },
           success: function(result){
