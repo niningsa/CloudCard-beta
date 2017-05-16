@@ -10,11 +10,11 @@
       <ion-item collection-repeat="chat in chatList">
        <div ng-click="queryBill(chat.cardNumber,chat.ownerPartyId,chat.paymentMethodId)">
          卡号：{{chat.cardNumber}}
+         <!--<div>-->
+           <!--名称：<strong>{{chat.description}}</strong>-->
+         <!--</div>-->
          <div>
-           名称：<strong>{{chat.description}}</strong>
-         </div>
-         <div>
-           号码：<strong>{{chat.teleNumber}}</strong>
+           号码：<strong>{{chat.teleNumber)}}</strong>
          </div>
          <div>
            金额：<strong>{{chat.actualBalance==null?0:chat.actualBalance}} 元</strong>
