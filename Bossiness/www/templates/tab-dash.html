@@ -7,7 +7,7 @@
       <!--</div>-->
     <!--</div>-->
       <a class="item item-avatar">
-         <img src="img/shop.jpg">
+         <img src="{{storeImg}}">
         <h2>{{storeName}}</h2>
         <p>{{storeAddress}}</p>
       </a>
@@ -15,8 +15,8 @@
 
   <div class="padding">
 
-  <div id="bshouye">
-      <span id="sk">
+  <div id="bshouye" style="text-align:center;">
+    <span id="sk">
       <a class="button button-calm buttonstyle" href="#/tab/shoukuanHome">收款</a>
     </span>
     <span id="kk">
@@ -32,21 +32,21 @@
   </div>
 
   </div>
-    <div class="bsiness1" >
-      <div style="float: left;padding-left: 60px">
-        <a class="item shop" href="#/tab/myShopDetail" >
-          <img src="img/myshop.png">
-        </a>
-        <p>我的店</p>
-      </div>
-        <div style="float: left;padding: 0px 40px 0px 40px">
+    <div class="bsiness1">
+      <!--<div style="float: left;padding-left: 60px">-->
+        <!--<a class="item shop" href="#/tab/myShopDetail" >-->
+          <!--<img src="img/myshop.png">-->
+        <!--</a>-->
+        <!--<p>我的店</p>-->
+      <!--</div>-->
+        <div style="float: left;padding-left: 130px">
            <a class="item shop" href="#/tab/shopQrcode">
              <img src="img/qcore.jpg">
            </a>
         <p>二维码</p>
         </div>
 
-        <div style="float: left;">
+        <div style="float: left;padding: 0px 40px 0px 40px">
            <a class="item shop" ng-click="activateCardList()" ng-controller="phoneNumberActivateCtrl">
              <img src="img/mycard.png">
            </a>

@@ -12,6 +12,7 @@ angular.module('starter.controllers', [])
     }
     myShopDetailService.selectMyShopDetail().success(function (data) {
       console.log(data);
+      $scope.storeImg=data.storeImg;
       $scope.storeName=data.storeName;
       $scope.storeAddress=data.storeAddress;
     }).error(function (data) {
