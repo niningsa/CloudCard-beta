@@ -76,7 +76,9 @@
                   {{bills.type=='1'?'+ '+bills.amount:'- '+bills.amount}}
             </span>
             <div><span>{{bills.transDate |date:'h:mm:ss'}}</span>
-              <span style="padding-left: 20%" ng-bind="bills.tradePartyName"></span>
+              <span style="padding-left: 20%" ng-bind="bills.cardCode"></span>
+              <span ng-bind="bills.tradePartyName"></span>
+
               <!--发卡商家暂不显示-->
               <!--<span style="padding-left: 20%" ng-bind="bills.cardSellerName"></span>-->
             </div>

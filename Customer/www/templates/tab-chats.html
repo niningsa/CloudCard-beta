@@ -9,7 +9,10 @@
     <div style="width: 100%; height: 100%">
 
       <div class="list card" ng-repeat="chat in chats" style="border: 0px" class="char_style" >
-         <div id="zd">   <h2>{{chat.cardName}}： <strong>{{chat.cardBalance}} 元</strong><span id="zandan"><a href="#/tab/subBill/{{chat.cardId}}"> 分账单</a></span> </h2> </div>
+        <div id="zd">   <h2>{{chat.cardName}}： <strong>{{chat.cardBalance}} 元</strong><span id="zandan"><a href="#/tab/subBill/{{chat.cardId}}"> 分账单</a></span> </h2> </div>
+        <div id="tel">   <h2>商家联系电话：<strong>{{chat.storeTeleNumber}}</strong><span id="zandan"></div>
+        <div id="address">   <h2>商家联系地址：<strong>{{chat.storeAddress}}</strong><span id="zandan"></div>
+
         <a class="item" href="#/tab/chats/{{chat.cardId}}/{{chat.cardBalance}}/{{chat.cardName}}/{{chat.cardCode}}/{{chat.isAuthToOthers}}/{{chat.isAuthToMe}}" style="border: 0px">
         <div class="item item-image">
           <img src="{{chat.cardImg}}">
