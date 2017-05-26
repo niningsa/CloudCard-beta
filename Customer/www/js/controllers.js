@@ -949,22 +949,57 @@ angular.module('starter.controllers', [])
         var map = new BMap.Map("allmap");
         var ctrl_nav = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE});
         var token = $.cookie("token");
-        //显示当前我的位置
-        var Point = new BMap.Point(data.coords.longitude, data.coords.latitude);  // 创建点坐标
-        map.centerAndZoom(Point, 16);
-        var marker = new BMap.Marker(Point);
-        map.addOverlay(marker);
-        var myLabels = new BMap.Label("我的位置", //为lable填写内容
-          {position: Point,offset:new BMap.Size(10,-20)}); //label的位置
-        myLabels.setStyle({ //给label设置样式，任意的CSS都是可以的
-          "color": "blue", //颜色
-          "fontSize": "12px", //字号
-          "border": "0", //边
-          "height": "10px", //高度
-          "width": "20px" //宽
-        });
-        map.addOverlay(myLabels);
-        map.addControl(ctrl_nav);//给地图添加缩放的按钮
+        var platform=$.cookie("platform");
+        //解决ios偏移的问题
+        if(platform === 'iOS'){
+          //ios gps偏移
+          var ggPoint = new BMap.Point(data.coords.longitude,data.coords.latitude);
+          //添加gps marker和label
+          var markergg = new BMap.Marker(ggPoint);
+          //坐标转换完之后的回调函数
+          translateCallback = function (data){
+            if(data.status === 0) {
+              var marker = new BMap.Marker(data.points[0]);
+              map.centerAndZoom(data.points[0], 16);
+              map.addOverlay(marker);
+              var myLabels = new BMap.Label("我的位置", //为lable填写内容
+                {offset:new BMap.Size(10,-20)}); //label的位置
+              myLabels.setStyle({ //给label设置样式，任意的CSS都是可以的
+                "color": "blue", //颜色
+                "fontSize": "12px", //字号
+                "border": "0", //边
+                "height": "10px", //高度
+                "width": "20px" //宽
+              });
+              marker.setLabel(myLabels); //添加百度label
+              map.addControl(ctrl_nav);//给地图添加缩放的按钮
+            }
+          }
+
+          setTimeout(function(){
+            var convertor = new BMap.Convertor();
+            var pointArr = [];
+            pointArr.push(ggPoint);
+            convertor.translate(pointArr, 1, 5, translateCallback)
+          }, 1000);
+        }else{
+          //显示当前我的位置
+          var Point = new BMap.Point(data.coords.longitude, data.coords.latitude);  // 创建点坐标
+          map.centerAndZoom(Point, 16);
+          var marker = new BMap.Marker(Point);
+          map.addOverlay(marker);
+          var myLabels = new BMap.Label("我的位置", //为lable填写内容
+            {position: Point,offset:new BMap.Size(10,-20)}); //label的位置
+          myLabels.setStyle({ //给label设置样式，任意的CSS都是可以的
+            "color": "blue", //颜色
+            "fontSize": "12px", //字号
+            "border": "0", //边
+            "height": "10px", //高度
+            "width": "20px" //宽
+          });
+          map.addOverlay(myLabels);
+          map.addControl(ctrl_nav);//给地图添加缩放的按钮
+        }
 
         // 添加定位控件
         var geolocationControl = new BMap.GeolocationControl({ offset:new BMap.Size(10,80)});
