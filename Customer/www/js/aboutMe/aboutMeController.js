@@ -30,6 +30,8 @@ angular.module('aboutMe.controllers', [])
       console.log(result);
       $scope.userName=result.userName
       $scope.teleNumber=result.teleNumber
+      $scope.avaterUrl=result.avaterUrl
+      $scope.contentId=result.contentId
     })
 
 
@@ -135,21 +137,13 @@ angular.module('aboutMe.controllers', [])
 
 
   })
-  /*
-   * Desc 关于库胖
-   * Author WK
-   * Date 2017-5-27
-   * */
-  .controller('aboutCloudCardServiceCtrl', function($scope,$state, $rootScope,aboutMeService) {
 
-
-  })
   /*
    * Desc 我的信息
    * Author WK
    * Date 2017-3-30
    * */
-  .controller('myInformationCtrl', function($scope,$state, $rootScope,aboutMeService,$ionicPopup) {
+  .controller('myInformationCtrl', function($scope,$state, $rootScope,aboutMeService,$ionicPopup,$cordovaImagePicker,$cordovaFileTransfer) {
       //$scope.customerName='王坤';
       //$scope.phone='18772115070';
       $scope.address='虹桥银城大厦';
@@ -158,6 +152,8 @@ angular.module('aboutMe.controllers', [])
       console.log(result);
       $scope.userName=result.userName
       $scope.teleNumber=result.teleNumber
+      $scope.avaterUrl=result.avaterUrl
+      $scope.contentId=result.contentId
     })
     //更改个人信息
     $scope.updateInformation=function(){
@@ -178,5 +174,40 @@ angular.module('aboutMe.controllers', [])
         }
       })
     }
+
+    $scope.selectPhoto = function () {
+      var options = {
+        maximumImagesCount: 1,
+        width: 800,
+        height: 800,
+        quality: 100
+      };
+      //通过插件的方式进行上传图片
+      $cordovaImagePicker.getPictures(options)
+        .then(function (results) {
+          $scope.imageSrcList = results;
+          for (var i = 0; i < results.length; i++) {
+            document.addEventListener('deviceready', function () {
+              var url = $rootScope.interfaceUrl+"userUploadAvatar";
+              var options = {
+                fileKey:"uploadedFile"};
+              $cordovaFileTransfer.upload(url, results[i], options)
+                .then(function (result) {
+                  //alert("success");
+                }, function (err) {
+                  //alert("fail");
+                }, function (progress) {
+                  // constant progress updates
+                });
+            }, false);
+          }
+          var alertPopup = $ionicPopup.alert({
+            title: '成功',
+            template: "图片上传成功"
+          });
+        }, function (error) {
+          // error getting photos
+        });
+    };
 
   })

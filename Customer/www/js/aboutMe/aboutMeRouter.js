@@ -99,6 +99,24 @@ angular.module('starter')
           }
         }
       })
+
+      /*
+       * Desc 我的头像
+       * Author sbk
+       * Date 2017-5-27
+       * */
+      .state('tab.myAvatar', {
+        url: '/myAvatar',
+        cache: true,
+        views: {
+          'tab-aboutMe': {
+            templateUrl: 'templates/aboutMe/tab-myAvatar.html',
+            controller: 'myInformationCtrl'
+          }
+        }
+      })
+
+
       /*
        * Desc 我的信息
        * Author WK
