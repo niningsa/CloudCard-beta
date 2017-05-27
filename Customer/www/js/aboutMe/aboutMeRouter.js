@@ -70,6 +70,36 @@ angular.module('starter')
         }
       })
       /*
+       * Desc 关于我们
+       * Author WK
+       * Date 2017-5-27
+       * */
+      .state('tab.aboutUs', {
+        url: '/aboutUs',
+        cache: true,
+        views: {
+          'tab-aboutMe': {
+            templateUrl: 'templates/aboutMe/tab-aboutUs.html',
+            controller: 'aboutUsServiceCtrl'
+          }
+        }
+      })
+      /*
+       * Desc 关于库胖
+       * Author WK
+       * Date 2017-5-27
+       * */
+      .state('tab.aboutCloudCard', {
+        url: '/aboutCloudCard',
+        cache: true,
+        views: {
+          'tab-aboutMe': {
+            templateUrl: 'templates/aboutMe/tab-aboutCloudCard.html',
+            controller: 'aboutCloudCardServiceCtrl'
+          }
+        }
+      })
+      /*
        * Desc 我的信息
        * Author WK
        * Date 2017-3-30

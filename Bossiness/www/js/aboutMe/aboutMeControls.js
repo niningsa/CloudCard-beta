@@ -17,7 +17,6 @@ angular.module('aboutMe.controllers', [])
   .controller('myShopDetailCtrl', function ($scope,$state,$rootScope,applySellerService,$ionicPopup,myShopDetailService,$cordovaImagePicker,$cordovaFileTransfer) {
     var organizationPartyId = $.cookie("organizationPartyId");
     myShopDetailService.selectMyShopDetail().success(function (data) {
-      console.log(data);
       $scope.storeName=data.storeName;
       $scope.storeAddress=data.storeAddress;
       $scope.storeImg=data.storeImg;
@@ -160,6 +159,14 @@ angular.module('aboutMe.controllers', [])
 
   })
 
+  //关于我们
+  .controller('aboutUsCtrl', function ($scope,$ionicPopup,$state,$rootScope,myShopDetailService) {
+
+  })
+  //关于库胖
+  .controller('aboutCloudCardCtrl', function ($scope,$ionicPopup,$state,$rootScope,myShopDetailService) {
+
+  })
 
   //我的信用
   .controller('myCreditCtrl', function ($scope,$ionicPopup,$state,$rootScope,myShopDetailService) {

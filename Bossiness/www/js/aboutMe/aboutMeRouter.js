@@ -63,6 +63,34 @@ angular.module('starter')
           isCache:true
         }
       })
+      //关于我们
+      .state('tab.aboutUs', {
+        url: '/aboutMe',
+        views: {
+          'tab-aboutMe': {
+            templateUrl: 'templates/aboutMe/tab-aboutUs.html',
+            controller: 'aboutUsCtrl'
+          }
+        },
+        cache:false,
+        params:{
+          isCache:true
+        }
+      })
+      //关于库胖
+      .state('tab.aboutCloudCard', {
+        url: '/aboutMe',
+        views: {
+          'tab-aboutMe': {
+            templateUrl: 'templates/aboutMe/tab-aboutCloudCard.html',
+            controller: 'aboutCloudCardCtrl'
+          }
+        },
+        cache:false,
+        params:{
+          isCache:true
+        }
+      });
 
 
   })

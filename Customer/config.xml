@@ -108,4 +108,9 @@
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="jpush-phonegap-plugin" spec="^2.2.8" />
     <plugin name="phonegap-plugin-barcodescanner" spec="^4.0.2" />
+    <plugin name="cordova-plugin-file-transfer" spec="~1.6.3" />
+    <plugin name="cordova-plugin-file" spec="~4.3.3" />
+    <plugin name="cordova-plugin-image-picker" spec="~1.1.1">
+        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value=" " />
+    </plugin>
 </widget>
