@@ -137,6 +137,15 @@ angular.module('aboutMe.controllers', [])
 
 
   })
+  /*
+   * Desc 关于库胖
+   * Author WK
+   * Date 2017-5-27
+   * */
+  .controller('aboutCloudCardServiceCtrl', function($scope,$state, $rootScope,aboutMeService) {
+
+
+  })
 
   /*
    * Desc 我的信息
