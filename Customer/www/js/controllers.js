@@ -1476,7 +1476,9 @@ angular.module('starter.controllers', [])
     $scope.cardId = $stateParams.cardId;
     $scope.amount = $stateParams.amount;
     $scope.cardBalance = $stateParams.cardBalance;
-  })
+    $scope.storeName = $stateParams.storeName;
+
+})
   //转卡成功后的跳转页面
 .controller('sellCardSuccessCtrl', function($scope,$stateParams) {
     $scope.cardBalance = $stateParams.cardBalance;

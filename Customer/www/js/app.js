@@ -74,8 +74,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
           "type":ret.type,
           "cardId":ret.cardId,
           "amount":ret.amount,
-          "cardBalance":ret.cardBalance
-        });
+          "cardBalance":ret.cardBalance,
+          "storeName":ret.storeName
+      });
 
       }
 
@@ -517,7 +518,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 //B端收费成功后C端跳转页面
   .state('tab.paymentSuccess', {
-    url: '/paymentSuccess/:type/:cardId/:amount/:cardBalance',
+    url: '/paymentSuccess/:type/:cardId/:amount/:cardBalance/:storeName',
     cache: false,
     views: {
       'tab-circleMap': {

@@ -37,6 +37,7 @@ angular.module('kaika.controllers', [])
           });
           alertPopup.then(function (res) {
             //用户点击确认登录后跳转
+            $state.go("tab.dash");
           })
         }).error(function (data) {
 
