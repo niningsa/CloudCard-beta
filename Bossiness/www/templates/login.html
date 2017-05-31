@@ -1,30 +1,22 @@
-﻿<ion-view title="登录">
-  <ion-content class="padding">
-    <div class="login-container animated fadeInDown">
-        <div class="loginbox bg-white">
-            <div class="loginbox-title"></div>
-            <div class="cardCloud"></div>
-            <form name="loginForm" ng-submit="cloudCardLogin()" ng-init="user.tel = telNum" ng-controller="login">
-              <div class="loginbox-textbox">
-                  <input class="form-control" type="number" style="border:1px solid #B2B2B2" placeholder="手机号" name="tel" ng-model="user.tel" required/>
-              </div>
-              <div class="loginbox-textbox">
-                  <input class="form-control" style="width: 40%;display: inline-block;border:1px solid #B2B2B2" type="number" placeholder="验证码" name="identifyCode" ng-model="user.identifyCode" required/>
-                  <input type="button" class="btn btn-primary" style="float: right;" ng-value="codeBtn" ng-click="getIdentifyCode(user.tel)" ng-disabled="codeBtnDisable">
-              </div>
-              <div class="loginbox-submit">
-                  <input type="submit" class="btn btn-primary btn-block" value="登 录" ng-disabled="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">
-              </div>
-              <div class="loginbox-submit">
-                  <a class="btn btn-primary btn-block" ui-sref="applySeller">申请商家</a>
-              </div>
-              <div ng-show="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">
-                <span style="width:300px;display: block;text-align: center;font-weight: bold;color: red;">请输入完整的信息！！</span>
-              </div>
-              <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
-            </form>
+﻿<ion-view title="登录" hide-back-button="true">
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <ion-content class="bg-white">
+    <form name="loginForm" ng-submit="cloudCardLogin()" ng-controller="login">
+      <div class="loginContent">
+        <img class="logoImg" src="img/logo.png">
+        <div class="loginForm">
+          <input type="number" class="loginInput" placeholder="手机号" name="tel" ng-model="user.tel" required/>
         </div>
-    </div>
-
+        <div class="loginForm codeInput">
+          <input type="number" id="identifyCode"  class="loginInput" placeholder="验证码" name="identifyCode" ng-model="user.identifyCode" required/>
+          <input type="button" class="codeTxt" ng-value="codeBtn" ng-click="getIdentifyCode(user.tel)" ng-disabled="codeBtnDisable" value="获取验证码"/>
+        </div>
+        <input type="submit" class="loginFormBtn" value="登陆"/>
+      </div>
+      <div ng-show="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">
+        <span class="loginVaildMsg">请输入完整的信息！！</span>
+      </div>
+      <span ng-bind="msg" class="loginErrMsg"></span>
+    </form>
   </ion-content>
 </ion-view>
