@@ -26,5 +26,5 @@ i,em{font-style: normal;}
 .loginForm.codeInput .loginInput{width: 60%;display: inline-block;}
 .loginForm.codeInput .codeTxt{width: 35%;display: inline-block;border:none;height:35px;line-height:30px;text-align:center;font-size:1.2rem;background: #1992f2;border-radius: 4px;color:#fff;}
 .loginFormBtn{width: 80%;height:50px;display:block;border:none;line-height: 50px;text-align: center;margin:60px auto;font-size:1.6rem;background: #1992f2;border-radius: 8px;color:#fff; }
-.loginErrMsg{display: block;text-align: center;font-weight: bold;color: red;}
-.loginVaildMsg{display: block;text-align: center;font-weight: bold;color: red;}
+.loginErrMsg{display: block;text-align: center;font-weight: bold;color: red; margin-top: 10px;}
+.loginVaildMsg{display: block;text-align: center;font-weight: bold;color: red;margin-top: 10px;}

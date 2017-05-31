@@ -9,17 +9,26 @@
         <img class="logoImg" src="img/logo.png">
         <div class="loginForm">
           <input type="number" class="loginInput" placeholder="手机号" name="tel" ng-model="user.tel" required/>
+
         </div>
         <div class="loginForm codeInput">
           <input type="number" id="identifyCode"  class="loginInput" placeholder="验证码" name="identifyCode" ng-model="user.identifyCode" required/>
           <input type="button" class="codeTxt" ng-value="codeBtn" ng-click="getIdentifyCode(user.tel)" ng-disabled="codeBtnDisable" value="获取验证码"/>
+
+        </div>
+        <div class="loginVaildMsg">
+          <span style="color:red" ng-show="loginForm.tel.$dirty && loginForm.tel.$invalid"/>
+          <span ng-show="loginForm.tel.$error.required">手机号码不能为空。</span>
+        </div>
+        <div class="loginVaildMsg">
+          <span style="color:red" ng-show="loginForm.identifyCode.$dirty && loginForm.identifyCode.$invalid"/>
+          <span ng-show="loginForm.identifyCode.$error.required">验证码不能为空。</span>
+        </div>
+        <div>
+          <span ng-bind="msg" class="loginErrMsg"></span>
         </div>
         <input type="submit" class="loginFormBtn" value="登陆"/>
       </div>
-      <div ng-show="loginForm.tel.$error.required || loginForm.identifyCode.$error.required">
-        <span class="loginVaildMsg">请输入完整的信息！！</span>
-      </div>
-      <span ng-bind="msg" class="loginErrMsg"></span>
     </form>
   </ion-content>
 </ion-view>
