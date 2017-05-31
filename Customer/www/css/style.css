@@ -181,10 +181,6 @@ text-decoration:none;
   overflow:hidden;
 }
 
-#identifyCode{
-  width: 46%;
-display: inline-block
-}
 #codebtn{
   float: right;
 }

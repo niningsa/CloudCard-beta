@@ -1,9 +1,5 @@
 ﻿<ion-view title="登录" hide-back-button="true">
-  <ion-nav-bar class="bar-positive"></ion-nav-bar>
-  <ion-nav-buttons side="left">
-    <a class="button icon ion-ios-undo" ui-sref="tab.circleMap"></a>
-  </ion-nav-buttons>
-  <ion-content class="bg-white">
+  <ion-content>
     <form name="loginForm" ng-submit="cloudCardLogin()" ng-controller="login">
       <div class="loginContent">
         <img class="logoImg" src="img/logo.png">
@@ -12,7 +8,7 @@
 
         </div>
         <div class="loginForm codeInput">
-          <input type="number" id="identifyCode"  class="loginInput" placeholder="验证码" name="identifyCode" ng-model="user.identifyCode" required/>
+          <input type="number" class="loginInput" placeholder="验证码" name="identifyCode" ng-model="user.identifyCode" required/>
           <input type="button" class="codeTxt" ng-value="codeBtn" ng-click="getIdentifyCode(user.tel)" ng-disabled="codeBtnDisable" value="获取验证码"/>
 
         </div>

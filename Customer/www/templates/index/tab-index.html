@@ -1,5 +1,18 @@
 <ion-view view-title="首页">
-  <ion-content>
-
-  </ion-content>
+    <div class="kpCardWrap">
+      <div class="scanPayBox cleafix">
+        <div class="scanPay fl"  ng-click="paymentCode()">
+          <img src="img/account.png">
+          <span class="text">付款</span>
+        </div>
+        <div class="scanPay fr" ng-click="scanBarcode()">
+          <img src="img/scan.png">
+          <span class="text" >扫一扫</span>
+        </div>
+      </div>
+      <div class="cardInforBox">
+        <img class="cardImg" src="img/card.png">
+        <p class="cardName">卡包</p>
+      </div>
+    </div>
 </ion-view>

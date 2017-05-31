@@ -1476,9 +1476,8 @@ angular.module('starter.controllers', [])
     $scope.cardId = $stateParams.cardId;
     $scope.amount = $stateParams.amount;
     $scope.cardBalance = $stateParams.cardBalance;
-    $scope.storeName = $stateParams.storeName;
 
-})
+  })
   //转卡成功后的跳转页面
 .controller('sellCardSuccessCtrl', function($scope,$stateParams) {
     $scope.cardBalance = $stateParams.cardBalance;
@@ -2198,7 +2197,8 @@ angular.module('starter.controllers', [])
   $scope.$on('$ionicView.beforeEnter', function () {                           // 这个玩意儿不错，刚加载执行的广播通知方法
     if ($.cookie("token") != null) { // 登录成功了，按物理返回键，就别想重新登录
       //$state.go("tab.chats");
-      $state.go("tab.circleMap");
+      //$state.go("tab.circleMap");
+      $state.go("tab.index");
     }
   });
   $scope.codeBtn='获取验证码';
@@ -2290,7 +2290,8 @@ angular.module('starter.controllers', [])
                 }
               });
             //$state.go("tab.chats");
-            $state.go("tab.circleMap");
+            //$state.go("tab.circleMap");
+            $state.go("tab.index");
             // location.href="http://"+location.host+"/#/tab/chats";
           }else{
             $scope.$apply(function () {
