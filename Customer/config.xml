@@ -88,10 +88,6 @@
     <plugin name="cordova-plugin-baidu-geolocation" spec="https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git">
         <variable name="API_KEY" value="z89D54HRzvzF8jobhBktAbqRIKue8gQN" />
     </plugin>
-    <plugin name="cordova-plugin-camera" spec="^2.3.1">
-        <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
-        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
-    </plugin>
     <plugin name="cordova-plugin-console" spec="^1.0.7" />
     <plugin name="cordova-plugin-device" spec="^1.1.6" />
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3">
@@ -112,5 +108,9 @@
     <plugin name="cordova-plugin-file" spec="~4.3.3" />
     <plugin name="cordova-plugin-image-picker" spec="~1.1.1">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value=" " />
+    </plugin>
+    <plugin name="cordova-plugin-camera" spec="~2.4.1">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="your usage message" />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="亲，打开相机哦！" />
     </plugin>
 </widget>

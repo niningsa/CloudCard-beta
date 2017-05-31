@@ -1,5 +1,5 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova','ionic-datepicker','aboutMe.controllers','aboutMe.services',
-                           'mycircle.controllers','mycircle.services'])
+                           'mycircle.controllers','mycircle.services','index.controllers','index.services'])
 
 .run(function($ionicPlatform,$rootScope,$state) {
   //当设备运行的时候就执行
