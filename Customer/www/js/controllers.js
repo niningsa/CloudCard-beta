@@ -793,7 +793,7 @@ angular.module('starter.controllers', [])
 
     $scope.exitInterval=function(){
       $interval.cancel(time); // 取消定时任务
-      $state.go("tab.circleMap");
+      $state.go("tab.index");
     }
 
 

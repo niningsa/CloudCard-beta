@@ -6,16 +6,13 @@
  * @version $Id$
  */
 
-*{font-family: "-apple-system","microsoft yahei"; box-sizing: border-box;padding: 0px;margin: 0px;}
-ul{list-style: none; padding: 0px; margin: 0px;}
 
-button, input, select, textarea{font-family: "-apple-system","microsoft yahei"; box-sizing: border-box;-webkit-appearance: none;}
 .clearfix:after,.clearfix:before{display:table;content:"";line-height:0}
 .clearfix:after{clear:both}
 .fl{ float: left}
 .fr{ float: right}
 
-html,body{font-size:65%;width: 100%;height: 100%;}
+html,body{width: 100%;height: 100%;}
 a{text-decoration: none;}
 i,em{font-style: normal;}
 
