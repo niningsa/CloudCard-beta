@@ -379,20 +379,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
-//我的卡页面查询列表
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      },
-    cache:false,
-    params:{
-      isCache:true
-    }
-    })
+
     //根据Id查询某张卡
   .state('tab.mycards', {
       url: '/mycards',

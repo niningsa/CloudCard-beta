@@ -12,15 +12,19 @@ angular.module('starter')
           }
         }
       })
-      //卡包
-      .state('tab.myCard', {
-        url: '/myCard/:chats',
-        cache: false,
+
+      //我的卡页面查询列表
+      .state('tab.chats', {
+        url: '/index',
         views: {
           'tab-index': {
-            templateUrl: 'templates/index/tab-myCard.html',
-            controller: 'indexCtrl'
+            templateUrl: 'templates/tab-chats.html',
+            controller: 'ChatsCtrl'
           }
+        },
+        cache:false,
+        params:{
+          isCache:true
         }
       });
   })

@@ -1499,14 +1499,7 @@ angular.module('starter.controllers', [])
     $scope.cardName = $stateParams.cardName;
   })
 
-.controller('ChatsCtrl', function($scope, Chats,$state, $rootScope, $ionicScrollDelegate) {
-  $scope.chats = Chats.all();
-    $scope.doRefresh = function() {
-      $scope.chats = Chats.all();
-      $scope.$broadcast("scroll.refreshComplete");
-    };
 
-})
 
 
 /*

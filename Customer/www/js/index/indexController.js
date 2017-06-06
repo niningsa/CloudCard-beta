@@ -34,93 +34,65 @@ angular.module('index.controllers', [])
     };
 
     $scope.scanBarcode = function () {
-      $ionicLoading.show({
-        template: "正在调摄像头,请稍后...."
-      });
-      $timeout(function () {
-        $cordovaBarcodeScanner.scan().then(function (imageData) {
-          $ionicLoading.hide();
-          $scope.msg = "";
-          var cardCode = imageData.text;                                  // 扫到的数据
-          if (cardCode != '') {
-            $.ajax({
-              url: $rootScope.interfaceUrl + "getStoreInfoByQRcode",
-              type: "POST",
-              data: {
-                "token": token,
-                "qrCode": cardCode
-              },
-              success: function (result) {
-                //alert(result.msg+" "+result.storeName+" "+result.storeId+" "+result.storeImgUrl);
-                if (result.code == '200') {
-                  $state.go("tab.payment", {
-                    qrCode: cardCode,
-                    storeName: result.storeName,
-                    storeId: result.storeId,
-                    storeImgUrl: result.storeImgUrl,
-                    cardId: $scope.cardId,
-                    chooseCardStatus: 'N'
-                  });
-                } else {
-                  $ionicPopup.alert({
-                    title: '温馨提示',
-                    template: result.msg
-                  });
-                }
-              }
-            });
-          }
-        }, function (error) {
-          console.log("An error happened -> " + error);
-        });
-      }, 1000);
-    }
-
-    $scope.myCard = function() {
-      var chats = [];
-      var token=$.cookie("token");
       if(token){
-        $.ajax({
-          type: "POST",
-          url:$rootScope.interfaceUrl+"myCloudCards",
-          async: false,
-          data: {
-            "token": token,
-            "viewIndex": 0,
-            "viewSize": 200
-          },
-          // dataType: "json",
-          dataFilter: function(data){
-            console.log("raw data: "+data);
-            var idx =  data.indexOf("//");
-            if(data && /^\s*\/\/.*/.test(data) && idx>-1){
-              data = data.substring(idx+2);
-            }
-            return data;
-          },
-          success: function(data){
-            if (data.code == '200') {
-              $scope.chats = data.cloudCardList;
-              $state.go("tab.myCard", {
-                chats: $scope.chats
-              });
-            } else {
-              $scope.$apply(function () {
-                $scope.msg = data.msg;
-              });
-            }
-          },
-          error:function (e) {
-            $ionicPopup.alert({
-              title:"温馨提示",
-              template:"手机网络已中断，请尝试开启网络!!",
-              okText:"确定",
-            })
-          }
+        $ionicLoading.show({
+          template: "正在调摄像头,请稍后...."
         });
+        $timeout(function () {
+          $cordovaBarcodeScanner.scan().then(function (imageData) {
+            $ionicLoading.hide();
+            $scope.msg = "";
+            var qrCode = imageData.text;
+            //扫到的数据
+            if (qrCode != '') {
+              //通过storeid来查询该圈子的卡，如果有卡就选卡来消费，如果没有卡就添加卡
+              if(token){
+                $.ajax({
+                  url: $rootScope.interfaceUrl + "userScanCodeGetCardAndStoreInfo",
+                  type: "POST",
+                  data: {
+                    "token": token,
+                    "qrCode": qrCode
+                  },
+                  success: function (result) {
+                    console.log(result);
+                    if (result.code == '200') {
+                      $scope.$apply(function () {
+                        $scope.msg = "";
+                      });
+                      //跳到选卡的页面
+                      $state.go("tab.chooseCard",
+                        {
+                          "storeId": result.storeId,
+                          "storeName": result.storeName,
+                          "qrCode": qrCode,
+                          "canBuyGroupCard":result.canBuyGroupCard,//是否有圈子卡
+                          "canBuyStoreCard":result.canBuyStoreCard,//是否有店的卡
+                          "groupOwnerId":result.groupOwnerId,//圈子的id
+                          "cloudCardList": JSON.stringify(result.cloudCardList)
+                        });
+                    } else {
+                      $scope.$apply(function () {
+                        $scope.msg = result.msg;
+                      });
+                    }
+                  }
+                });
+              }else{
+                $state.go("login");
+              }
+            }
+          }, function (error) {
+          });
+        }, 1000);
       }else{
         $state.go("login");
       }
+
+    }
+
+    $scope.myCard = function() {
+      $state.go("tab.chats");
     }
 
     //下拉刷新的操作
@@ -151,5 +123,14 @@ angular.module('index.controllers', [])
       //下拉刷新完成后提示转圈消失
       $scope.$broadcast("scroll.refreshComplete");
     };;
+
+  })
+
+  .controller('ChatsCtrl', function($scope, Chats,$state, $rootScope, $ionicScrollDelegate) {
+    $scope.chats = Chats.all();
+    $scope.doRefresh = function() {
+      $scope.chats = Chats.all();
+      $scope.$broadcast("scroll.refreshComplete");
+    };
 
   })
