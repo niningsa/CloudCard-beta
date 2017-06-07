@@ -133,7 +133,9 @@ angular.module('index.controllers', [])
       $scope.$broadcast("scroll.refreshComplete");
     };
 
-    $scope.cardInfo = function (cardId,cardBalance,cardName,cardCode,cardCode,isAuthToOthers,isAuthToMe) {
+    $scope.cardInfo = function (cardId,cardBalance,cardName,cardCode,isAuthToOthers,isAuthToMe) {
+      alert(isAuthToOthers);
+      alert(isAuthToMe);
       $state.go("tab.chat-detail",{
         "cardId":cardId,
         "cardBalance":cardBalance,
