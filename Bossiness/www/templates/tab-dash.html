@@ -67,7 +67,8 @@
         <!--<span style="color: red"> 当前信用良好，没有欠款信息</span>-->
       <!--</div>-->
       <div class="list">
-        <div class="item item-divider item-icon-right" ng-click="changeOnOff(onOff)">当前信息 <i class="icon {{onOff==true?'ion-android-arrow-dropdown':'ion-android-arrow-dropup'}}"></i></div>
+        <!--<div class="item item-divider item-icon-right" ng-click="changeOnOff(onOff)">当前信息 <i class="icon {{onOff==true?'ion-android-arrow-dropdown':'ion-android-arrow-dropup'}}"></i></div>-->
+        <div class="item item-divider item-icon-right">当前信息 <i class="icon {{onOff==true?'ion-android-arrow-dropdown':'ion-android-arrow-dropup'}}"></i></div>
         <div ng-show="onOff">
             <ion-item ng-repeat="item in messageList" item="item" href="#/item/{{item.id}}" class="item-remove-animate">
             <span style="color: red"> {{item.noteInfo}}</span>
