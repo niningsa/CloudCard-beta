@@ -13,7 +13,7 @@
         <div id="tel">   <h2>商家联系电话：<strong>{{chat.storeTeleNumber}}</strong><span id="zandan"></div>
         <div id="address">   <h2>商家联系地址：<strong>{{chat.storeAddress}}</strong><span id="zandan"></div>
 
-        <a class="item" href="#/tab/chats/{{chat.cardId}}/{{chat.cardBalance}}/{{chat.cardName}}/{{chat.cardCode}}/{{chat.isAuthToOthers}}/{{chat.isAuthToMe}}" style="border: 0px">
+        <a class="item" ng-click="cardInfo('{{chat.cardId}}','{{chat.cardBalance}}','{{chat.cardName}}','{{chat.cardCode}}','{{chat.isAuthToOthers}}','{{chat.isAuthToMe}}')" style="border: 0px">
         <div class="item item-image">
           <img src="{{chat.cardImg}}">
         </div>
