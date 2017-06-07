@@ -300,7 +300,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     .state('tab.chooseCard', {
       url: '/chooseCard/:storeId/:storeName/:cloudCardList/:qrCode/:canBuyGroupCard/:canBuyStoreCard/:groupOwnerId',
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-chooseCard.html',
           controller: 'chooseCardCtrl'
         }
@@ -331,7 +331,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     .state('tab.buyShopCard', {
       url: '/buyShopCard/:storeId/:isGroupOwner',
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-buyShopCardPay.html',
           controller: 'buyShopCardCtrl'
         }
@@ -342,7 +342,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     .state('tab.shop', {
       url: '/shop/:storeId/:isGroupOwner',
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-shop.html',
           controller: 'shopCtrl'
         }
@@ -352,7 +352,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     .state('tab.shopRecharge', {
       url: '/shopRecharge/:storeId/:cardId/:isGroupOwner',
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-shopRecharge.html',
           controller: 'shopRechargeCtrl'
         }
@@ -373,7 +373,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     .state('tab.paymentCode', {
       url: '/paymentCode/:qrCode/:refreshTime',
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-paymentCode.html',
           controller: 'paymentCodeCtrl'
         }
@@ -384,7 +384,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.mycards', {
       url: '/mycards',
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-mycard.html',
           controller: 'mycardCtrl'
         }
@@ -400,7 +400,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/subBill/:cardId',
       cache: false,
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-subBill.html',
           controller: 'subBillCtrl'
         }
@@ -412,7 +412,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/cardinput/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-cardinput.html',
           controller: 'inputCtrl'
         }
@@ -425,7 +425,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/accredit/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-accredit.html',
           controller: 'inputAccreditCtrl'
         }
@@ -437,7 +437,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/sellCard/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-sellCard.html',
           controller: 'inputsellCardCtrl'
         }
@@ -450,7 +450,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/sellCardSuccess/:cardBalance/:cardName/:tel',
       cache: false,
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-sellCardSuccess.html',
           controller: 'sellCardSuccessCtrl'
         }
@@ -460,7 +460,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.cardreturn', {
       url: '/cardreturn/:teleNumber/:amount/:fromDate/:thruDate/:cardName',
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-getpower.html',
           controller: 'DashCtrl'
         }
@@ -470,7 +470,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('tab.cardreturnsuccess', {
       url: '/cardreturnsuccess/:teleNumber/:amount/:day/:cardName',
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-accreditSuccess.html',
           controller: 'DashAccreditCtrl'
         }
@@ -497,7 +497,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/paymentSuccess/:type/:cardId/:amount/:cardBalance/:storeName',
     cache: false,
     views: {
-      'tab-circleMap': {
+      'tab-index': {
         templateUrl: 'templates/tab-paymentSuccess.html',
         controller: 'paymentSuccessCtrl'
       }
@@ -509,7 +509,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/userPaymentSuccess/:storeName/:amount/:cardBalance/:type',
     cache: false,
     views: {
-      'tab-circleMap': {
+      'tab-index': {
         templateUrl: 'templates/tab-userPaymentSuccess.html',
         controller: 'userPaymentSuccessCtrl'
       }
@@ -524,7 +524,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/payment/:qrCode/:storeName/:storeId/:cardId/:chooseCardStatus',//这是写死的暂时先拿掉，存在转义字符
       cache: false,
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-payment.html',
           controller: 'paymentController'
         }
@@ -556,7 +556,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/recharge/:cardId/:cardBalance/:cardName/:cardCode/:isAuthToOthers/:isAuthToMe',
       cache: false,
       views: {
-        'tab-circleMap': {
+        'tab-index': {
           templateUrl: 'templates/tab-recharge.html',
           controller: 'rechargeCtrl'
         }
