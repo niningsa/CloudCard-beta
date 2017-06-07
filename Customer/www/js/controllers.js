@@ -1779,7 +1779,7 @@ angular.module('starter.controllers', [])
       }
       $ionicPopup.confirm({
           title:"转卡",
-          template:"是否确认转卡??",
+          template:"确认转卡?",
           okText:"确定",
           cancelText:"取消"
         })
@@ -1802,7 +1802,10 @@ angular.module('starter.controllers', [])
                       "cardName":cardName,
                       "tel":tel
                     });
+                  }else{
+                    $scope.msg=result.msg;
                   }
+
                   if(result.code==500){
                     $ionicPopup.alert({
                       title:"温馨提示",

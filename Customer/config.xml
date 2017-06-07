@@ -113,4 +113,7 @@
         <variable name="CAMERA_USAGE_DESCRIPTION" value="your usage message" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="亲，打开相机哦！" />
     </plugin>
+    <plugin name="cordova-plugin-contacts" spec="~2.3.1">
+        <variable name="CONTACTS_USAGE_DESCRIPTION" value="亲，打开通讯录哦！" />
+    </plugin>
 </widget>

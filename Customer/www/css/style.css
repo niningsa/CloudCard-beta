@@ -308,11 +308,10 @@ td{
   padding-bottom: 0px;
 }
 .sbutton{
-  !important;
   margin: 0;
   font: inherit;
   color: darkgrey;
-  width: 43px;
+  width: 50px;
   font-size: 15px;
   /*padding: 0px 20px 0px 20px;*/
   margin-top: 0px;
