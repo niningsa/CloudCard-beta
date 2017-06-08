@@ -1687,7 +1687,15 @@ angular.module('starter.controllers', [])
         })
         flag = false;
       }
-      if ($other_startDate > $other_endDate) {
+
+      var startDateArr = $other_startDate.split("-");
+      var startDate = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
+      var startDates = startDate.getTime();
+
+      var endDateArr = $other_endDate.split("-");
+      var endDate = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
+      var endDates = endDate.getTime();
+      if (startDates > endDates) {
         $ionicPopup.alert({
           title: "温馨提示",
           template: "截止时间应大于授权时间",
