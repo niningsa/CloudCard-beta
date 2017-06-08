@@ -1856,7 +1856,7 @@ angular.module('starter.controllers', [])
       $other_tel=$("#telphone").val();
       $other_cardId=$("#other_cardId").val();
       $other_money=$("#other_money").val();
-      $day=$("#day").val();
+      $days=$("#days").val();
       var flag =true;
 
       //验证手机号是否合法
@@ -1902,7 +1902,7 @@ angular.module('starter.controllers', [])
             "cardId":$other_cardId,
             "teleNumber":$other_tel,
             //"amount":$other_money,//默认授权的金额默认先不填，为了保证金额的正确性
-            "day":$day
+            "days":$days
           },
           dataFilter: function(data){
             console.log("raw data: "+data);
@@ -1929,7 +1929,7 @@ angular.module('starter.controllers', [])
             }
             if(data.code==200){
               //授权成功，传入必要的参数，跳转到授权成功的查看页面
-              window.location.href="#/tab/cardreturnsuccess/"+$other_tel+"/"+$other_money+"/"+$day+"/"+$scope.cardName;
+              window.location.href="#/tab/cardreturnsuccess/"+$other_tel+"/"+$other_money+"/"+$days+"/"+$scope.cardName;
             }
 
           },
