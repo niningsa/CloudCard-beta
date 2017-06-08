@@ -1002,7 +1002,7 @@ angular.module('starter.controllers', [])
         }
 
         // 添加定位控件
-        var geolocationControl = new BMap.GeolocationControl({ offset:new BMap.Size(10,80)});
+        var geolocationControl = new BMap.GeolocationControl({ offset:new BMap.Size(10,50)});
         geolocationControl.addEventListener("locationSuccess", function(e){
           // 定位成功事件
           var longitude= data.coords.longitude;
