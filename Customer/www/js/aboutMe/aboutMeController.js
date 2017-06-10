@@ -210,10 +210,12 @@ angular.module('aboutMe.controllers', [])
                 });
             }, false);
           }
-          var alertPopup = $ionicPopup.alert({
-            title: '成功',
-            template: "图片上传成功"
-          });
+          if(results.length > 0){
+            var alertPopup = $ionicPopup.alert({
+              title: '成功',
+              template: "图片上传成功"
+            });
+          }
         }, function (error) {
           // error getting photos
         });

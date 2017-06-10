@@ -346,3 +346,8 @@ td{
   color: #222;
   font-weight: 500;
 }
+
+.payPrompt{
+  padding:20px 15px;
+  color: #cecece;
+}
