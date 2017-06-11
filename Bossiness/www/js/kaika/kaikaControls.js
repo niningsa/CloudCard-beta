@@ -9,7 +9,7 @@ angular.module('kaika.controllers', [])
    * Author LN
    * Date 2017-4-10
    * */
-  .controller("phoneNumberActivateCtrl", function ($scope,$state,$rootScope,$stateParams,kaikaService,$ionicPopup) {
+  .controller("phoneNumberActivateCtrl", function ($scope,$ionicLoading, $state,$rootScope,$stateParams,kaikaService,$ionicPopup) {
     $scope.noCardActivate=function(){
       $("#ka").attr("disabled","disabled");//这是为了重复的提交，所以给它弄死
       var flag = true;
@@ -40,7 +40,15 @@ angular.module('kaika.controllers', [])
             $state.go("tab.dash");
           })
         }).error(function (data) {
-
+          $ionicLoading.hide();
+          var alertPopup = $ionicPopup.alert({
+            title: '开卡失败',
+            template: data.msg
+          });
+          alertPopup.then(function (res) {
+            //点击确认后跳转开卡页面
+            $state.go("tab.kaikaHome");
+          })
         });
       }
 
