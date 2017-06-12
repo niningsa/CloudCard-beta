@@ -70,7 +70,7 @@ angular.module('jiesuan.controllers', [])
             if(jiesuanList[j].statusId==1){
               $ionicPopup.alert({
                 title: "温馨提示",
-                template: "请先发起清算请求在确认清算!!",
+                template: "请发送结算请求，对方清算后再确认清算",
                 okText: "确定",
               })
             }else{
