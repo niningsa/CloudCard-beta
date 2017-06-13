@@ -2,7 +2,7 @@ angular.module('chongzhi.services', [])
   .service('chongzhiService', function ($q, $rootScope,$cordovaFileTransfer) {
     return {
       //无卡充值
-      teleNumberRecharge:function(teleNumber,amount) {
+      teleNumberRecharge:function(teleNumber,amount,captcha) {
         var deferred = $q.defer();
         var promise = deferred.promise;
         var token=$.cookie("token");
@@ -15,12 +15,12 @@ angular.module('chongzhi.services', [])
             "token": token,
             "organizationPartyId": organizationPartyId,
             "teleNumber": teleNumber,
-            "amount": amount
+            "amount": amount,
+            "captcha":captcha
           },
           success: function (result) {
-            console.log(result);
             deferred.resolve(result);
-            if (result.code == '200') {
+            if (result.code === '200') {
               deferred.resolve(result);
             } else {
               deferred.reject(result);
@@ -39,5 +39,5 @@ angular.module('chongzhi.services', [])
         };
         return promise;
       },
-    }
-  })
+    };
+  });

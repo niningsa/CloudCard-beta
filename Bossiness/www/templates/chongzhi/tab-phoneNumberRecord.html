@@ -19,10 +19,13 @@
             <span class="input-label">充值金额</span>
             <input type="number" ng-model="amount" name="money" type="text" placeholder="请输入金额" required>
           </label>
-
+          <div class="item item-input item-stacked-label">
+            <input type="number"  style="width: 40%;display: inline-block;border:0px solid #B2B2B2" placeholder="请输入验证码" name="captcha" ng-model="captcha" required/>
+            <input type="button" class="btn btn-primary" style="width: 28%;" ng-value="codeBtn" ng-click="getRechargeIdentifyCode('{{teleNumber}}')" ng-disabled="codeBtnDisable">
+          </div>
         </div>
         <div class="padding">
-          <button id="cz" class="button button-block button-positive" ng-disabled="phoneNumberRecordForm.money.$error.required">确认充值</button>
+          <button id="cz" class="button button-block button-positive" ng-disabled="phoneNumberRecordForm.captcha.$error.required">确认充值</button>
         </div>
       </form>
     </ion-content>

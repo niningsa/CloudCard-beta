@@ -8,12 +8,13 @@ angular.module('chongzhi.controllers', [])
    * Author LN
    * Date 2017-4-10
    * */
-  .controller("phoneNumberRecordCtrl", function ($scope,$ionicPopup,$state,$rootScope,$stateParams,chongzhiService) {
+  .controller("phoneNumberRecordCtrl", function ($http,$interval,$scope,$ionicPopup,$state,$rootScope,$stateParams,chongzhiService) {
+    var token = $.cookie("token");
     $scope.noCardRecharge=function(){
       $("#cz").attr("disabled","disabled");//这是为了重复的提交，所以给它弄死
       //验证手机号是否合法
       var flag = true;
-      var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+      var phoneReg = /^0?1[3|4|5|7|8][0-9]\d{8}$/;
       if (!phoneReg.test( $scope.teleNumber)) {
         $ionicPopup.alert({
           title: "温馨提示",
@@ -25,15 +26,15 @@ angular.module('chongzhi.controllers', [])
       if(flag){
         chongzhiService.teleNumberRecharge(
           $scope.teleNumber,
-          $scope.amount
+          $scope.amount,
+          $scope.captcha
         ).success(function (data) {
-          console.log(data);
-          if(data.code=='500'){
+          if(data.code==='500'){
             $ionicPopup.alert({
               title: "温馨提示",
-              template: "用户不存在!!",
+              template: data.msg,
               okText: "确定",
-            })
+            });
           }
           if(data.code=='200'){
             $state.go("tab.returnChongZhiMess",{
@@ -48,7 +49,54 @@ angular.module('chongzhi.controllers', [])
 
         });
       }
-    }
+    };
+
+    //无卡开卡获取手机验证码
+    $scope.codeBtn = '获取验证码';
+    $scope.getRechargeIdentifyCode = function (teleNumber) {
+      $scope.msg = "";//先清空错误提示
+      if ($scope.teleNumber) {
+        $http({
+          method: "POST",
+          url: $rootScope.interfaceUrl + "getRechargeCaptchaOfUser",
+          data: {
+            "token": token,
+            "teleNumber": $scope.teleNumber,
+            "amount": $scope.amount
+          },
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},         // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+          transformRequest: function (obj) {                                      // 参数是对象的话，需要把参数转成序列化的形式
+            var str = [];
+            for (var p in obj) {
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            }
+            return str.join("&");
+          }
+        }).success(function (result) {
+          if (result.code === '500') {
+            $scope.$apply(function () {
+              $scope.msg = result.msg;
+            });
+          } else {
+            //倒计时
+            $scope.n = 60;
+            $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+            var time = $interval(function () {
+              $scope.n--;
+              $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+              if ($scope.n === 0) {
+                $interval.cancel(time); // 取消定时任务
+                $scope.codeBtn = '获取验证码';
+                $scope.codeBtnDisable = false;
+              }
+            }, 1000);
+            $scope.codeBtnDisable = true;
+          }
+        });
+      } else {
+        $scope.msg = "请输入您的手机号码！！";
+      }
+    };
 
   })
 
@@ -122,5 +170,5 @@ angular.module('chongzhi.controllers', [])
 
       }, 1000);
     };
-  })
+  });
 
