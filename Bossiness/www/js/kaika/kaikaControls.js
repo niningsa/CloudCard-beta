@@ -9,7 +9,8 @@ angular.module('kaika.controllers', [])
    * Author LN
    * Date 2017-4-10
    * */
-  .controller("phoneNumberActivateCtrl", function ($scope,$ionicLoading, $state,$rootScope,$stateParams,kaikaService,$ionicPopup) {
+  .controller("phoneNumberActivateCtrl", function ($http,$interval,$scope,$ionicLoading, $state,$rootScope,$stateParams,kaikaService,$ionicPopup) {
+    var token = $.cookie("token");
     $scope.noCardActivate=function(){
       $("#ka").attr("disabled","disabled");//这是为了重复的提交，所以给它弄死
       var flag = true;
@@ -30,7 +31,6 @@ angular.module('kaika.controllers', [])
           $scope.teleNumber,
           $scope.amount
         ).success(function (data) {
-          console.log(data);
           var alertPopup = $ionicPopup.alert({
             title: '开卡成功',
             template: '恭喜您开卡成功！'
@@ -48,16 +48,62 @@ angular.module('kaika.controllers', [])
           alertPopup.then(function (res) {
             //点击确认后跳转开卡页面
             $state.go("tab.kaikaHome");
-          })
+          });
         });
       }
+    };
 
-    }
+    //无卡开卡获取手机验证码
+    $scope.codeBtn = '获取验证码';
+    $scope.getPurchaseCardIdentifyCode = function (teleNumber) {
+      $scope.msg = "";//先清空错误提示
+      if ($scope.teleNumber) {
+        $http({
+          method: "POST",
+          url: $rootScope.interfaceUrl + "getPurchaseCardCaptchaOfUser",
+          data: {
+            "token": token,
+            "teleNumber": $scope.teleNumber,
+            "amount": $scope.amount
+          },
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},         // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+          transformRequest: function (obj) {                                      // 参数是对象的话，需要把参数转成序列化的形式
+            var str = [];
+            for (var p in obj) {
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            }
+            return str.join("&");
+          }
+        }).success(function (result) {
+          if (result.code === '500') {
+            $scope.$apply(function () {
+              $scope.msg = result.msg;
+            });
+          } else {
+            //倒计时
+            $scope.n = 60;
+            $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+            var time = $interval(function () {
+              $scope.n--;
+              $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+              if ($scope.n === 0) {
+                $interval.cancel(time); // 取消定时任务
+                $scope.codeBtn = '获取验证码';
+                $scope.codeBtnDisable = false;
+              }
+            }, 1000);
+            $scope.codeBtnDisable = true;
+          }
+        });
+      } else {
+        $scope.msg = "请输入您的手机号码！！";
+      }
+    };
 
     //已开卡的列表
     $scope.activateCardList=function(){
       $state.go("tab.activateCardList");
-    }
+    };
   })
 
   /*
@@ -67,7 +113,6 @@ angular.module('kaika.controllers', [])
    * */
   .controller("activateCardListCtrl", function ($scope,$state,$rootScope,$stateParams,kaikaService,$ionicPopup) {
     kaikaService.activateCardListService().success(function (data) {
-      console.log(data);
       $scope.chatList=data.finAccountList;
     }).error(function (data) {
     });
@@ -79,7 +124,7 @@ angular.module('kaika.controllers', [])
         "ownerPartyId":ownerPartyId,
         "cardId":cardId
       });
-    }
+    };
 
   })
 
@@ -98,7 +143,6 @@ angular.module('kaika.controllers', [])
       $scope.ownerPartyId,
       $scope.cardId
     ).success(function (data) {
-      console.log(data);
       $scope.paymentsList=data.paymentsList;
       function getTransDateYearMonth(obj){
         var transDate = parseInt(obj.transDate);
@@ -106,7 +150,6 @@ angular.module('kaika.controllers', [])
         return date.getFullYear() + '年' + (date.getMonth()+1) +'月';
       }
       $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
-      console.log( $scope.list);
     }).error(function (data) {
     });
 
@@ -127,7 +170,8 @@ angular.module('kaika.controllers', [])
         $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
       }).error(function (data) {
       });
-    }
+    };
+
     //总消费账单
     $scope.zongConsume=function(typeId){
       kaikaService.activateCardBillService(
@@ -136,7 +180,6 @@ angular.module('kaika.controllers', [])
         $scope.cardId,
         typeId
       ).success(function (data) {
-        console.log(data);
         $scope.paymentsList=data.paymentsList;
         function getTransDateYearMonth(obj){
           var transDate = parseInt(obj.transDate);
@@ -146,7 +189,7 @@ angular.module('kaika.controllers', [])
         $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
       }).error(function (data) {
       });
-    }
+    };
 
     //总充值账单
     $scope.zongRecharge=function(typeId){
@@ -156,7 +199,6 @@ angular.module('kaika.controllers', [])
         $scope.cardId,
         typeId
       ).success(function (data) {
-        console.log(data);
         $scope.paymentsList=data.paymentsList;
         function getTransDateYearMonth(obj){
           var transDate = parseInt(obj.transDate);
@@ -166,6 +208,6 @@ angular.module('kaika.controllers', [])
         $scope.list=  _.groupBy($scope.paymentsList, getTransDateYearMonth);
       }).error(function (data) {
       });
-    }
+    };
 
-  })
+  });

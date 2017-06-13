@@ -234,7 +234,7 @@ angular.module('shoukuan.controllers', [])
           }
         });
       } else {
-        $scope.msg = "请输入您的手机号码！！"
+        $scope.msg = "请输入您的手机号码！！";
       }
     };
     //无卡收款

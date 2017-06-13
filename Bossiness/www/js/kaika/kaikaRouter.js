@@ -2,8 +2,6 @@ angular.module('starter')
 
   .config(function ($stateProvider) {
     $stateProvider
-
-
       .state('tab.kaikaHome', {
         url: '/kaikaHome',
         // cache: false,  //清除缓存
