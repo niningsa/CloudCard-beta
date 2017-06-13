@@ -2,22 +2,22 @@ angular.module('kaika.services', [])
   .service('kaikaService', function ($q, $rootScope,$cordovaFileTransfer) {
     return {
       //无卡充卡
-      teleNumberActivate:function(teleNumber,amount) {
+      teleNumberActivate:function(teleNumber,amount,captcha) {
         var deferred = $q.defer();
         var promise = deferred.promise;
         var token=$.cookie("token");
         var organizationPartyId = $.cookie("organizationPartyId");
         $.ajax({
-          url: $rootScope.interfaceUrl + "activateCloudCardAndRecharge",
+          url: $rootScope.interfaceUrl + "activateCloudCardAndRechargeByTelNumber",
           type: "POST",
           data: {
             "token": token,
             "organizationPartyId": organizationPartyId,
             "teleNumber": teleNumber,
-            "amount": amount
+            "amount": amount,
+            "captcha":captcha
           },
           success: function (result) {
-            console.log(result);
             if (result.code == '200') {
               deferred.resolve(result);
             } else {

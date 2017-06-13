@@ -16,7 +16,7 @@ angular.module('kaika.controllers', [])
       var flag = true;
 
       //验证手机号是否合法
-      var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+      var phoneReg = /^0?1[3|4|5|7|8][0-9]\d{8}$/;
 
       if (!phoneReg.test( $scope.teleNumber)) {
         $ionicPopup.alert({
@@ -29,7 +29,8 @@ angular.module('kaika.controllers', [])
       if (flag) {
         kaikaService.teleNumberActivate(
           $scope.teleNumber,
-          $scope.amount
+          $scope.amount,
+          $scope.captcha
         ).success(function (data) {
           var alertPopup = $ionicPopup.alert({
             title: '开卡成功',
@@ -38,7 +39,7 @@ angular.module('kaika.controllers', [])
           alertPopup.then(function (res) {
             //用户点击确认登录后跳转
             $state.go("tab.dash");
-          })
+          });
         }).error(function (data) {
           $ionicLoading.hide();
           var alertPopup = $ionicPopup.alert({
