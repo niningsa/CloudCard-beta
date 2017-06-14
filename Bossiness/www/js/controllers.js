@@ -500,7 +500,7 @@ angular.module('starter.controllers', [])
    * Author LN
    * Date 2016-11-15
    * */
-  .controller('login', function ($scope, $state, $rootScope) {
+  .controller('login', function ($cordovaDevice, $scope, $state, $rootScope) {
     // 当设备就绪时
     var onDeviceReady = function () {
       initiateUI();
@@ -522,6 +522,8 @@ angular.module('starter.controllers', [])
         console.log(exception);
       }
     };
+
+
 
     // 获取RegistrationID
     var getRegistrationID = function () {
@@ -588,13 +590,14 @@ angular.module('starter.controllers', [])
     };
 
     $scope.cloudCardLogin = function () {
-      console.log($scope.user.tel + " " + $scope.user.identifyCode);
+      var uuid = $cordovaDevice.getUUID();
       $.ajax({
         url: $rootScope.interfaceUrl + "bizAppLogin",
         type: "POST",
         data: {
           "teleNumber": $scope.user.tel,
-          "captcha": $scope.user.identifyCode
+          "captcha": $scope.user.identifyCode,
+          "deviceId":uuid
         },
         success: function (result) {
           console.log(result);

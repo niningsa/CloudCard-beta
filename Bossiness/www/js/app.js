@@ -6,12 +6,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
                'chongzhi.controllers','chongzhi.services',
                'jiesuan.controllers','jiesuan.services','ngCordova'])
 
-.run(function($ionicPlatform,$rootScope) {
+.run(function($ionicPlatform,$ionicPopup,$rootScope,$state) {
   $ionicPlatform.ready(function() {
 
     // $rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/";   //全局： 以后正式服务器接口 URL
     // $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/";        //全局： 服务器接口 URL
-    $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/";      //全局： 测试接口 URL
+    $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -23,6 +23,60 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
     }
 
   });
+
+  // 接收到消息时的回调函数
+  var onReceiveMessage = function (event) {
+    var token = $.cookie("token");
+    var registrationId = $.cookie("registrationId");
+    try {
+      var message;
+      if (device.platform == "Android") {
+        message = window.plugins.jPushPlugin.receiveMessage.message;
+      } else {
+        message = event.content;
+      }
+      var ret
+      try{
+        ret = JSON.parse(message);
+      }catch (e){
+
+      }
+      if(ret.type ==="loginNotification"){
+        $.cookie('token', null);
+        $.cookie('organizationPartyId', null);
+        $ionicPopup.confirm({
+          title:"下线通知",
+          template:"你的帐号于" + ret.time + "在一台"+ ret.deviceType + "设备登陆。",
+          okText:"退出",
+          cancelText:"重新登录"
+        })
+          .then(function(res){
+
+            //退出时销毁极光推送的registrationID
+            $.ajax(
+              { url: $rootScope.interfaceUrl+"removeJpushRegId",
+                type:"POST",
+                data: {
+                  "token":token,
+                  "regId":registrationId
+                },
+                success: function(result){
+                  $state.go("login");//跳转到登录页面
+                }
+              });
+            $state.go("login");//跳转到登录页面
+          });
+      }
+
+    } catch (exception) {
+      console.log("JPushPlugin:onReceiveMessage-->" + exception);
+    }
+  };
+
+  // 添加对回调函数的监听
+  document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
+
+
 })
 
 
