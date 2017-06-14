@@ -71,6 +71,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       if(ret.type=="chowner"){//这个是转卡的类型，转卡就不用跳转页面
 
       }else if(ret.type=="loginNotification"){
+        $.cookie('token', null);
+        $.cookie('organizationPartyId', null);
           $ionicPopup.confirm({
             title:"下线通知",
             template:"你的帐号于" + ret.time + "在一台"+ ret.deviceType + "设备登陆。",
@@ -78,8 +80,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
             cancelText:"重新登录"
           })
             .then(function(res){
-                $.cookie('token', null);
-                $.cookie('organizationPartyId', null);
                 //极光推送开始
                 //退出时销毁极光推送的registrationID
                 $.ajax(
