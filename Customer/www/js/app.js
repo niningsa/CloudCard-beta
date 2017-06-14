@@ -1,7 +1,7 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova','ionic-datepicker','aboutMe.controllers','aboutMe.services',
                            'mycircle.controllers','mycircle.services','index.controllers','index.services'])
 
-.run(function($ionicPlatform,$rootScope,$state) {
+.run(function($ionicPopup,$ionicPlatform,$rootScope,$state) {
   //当设备运行的时候就执行
   //$rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="http://192.168.3.13:8080/cloudcard/control/"; //接口前一截一样的
@@ -69,6 +69,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         alert("解析失败");
       }
       if(ret.type=="chowner"){//这个是转卡的类型，转卡就不用跳转页面
+
+      }else if(ret.type=="loginNotification"){
+          $ionicPopup.confirm({
+            title:"下线通知",
+            template:"你的帐号于" + ret.time + "在一台"+ ret.deviceType + "设备登陆。",
+            okText:"退出",
+            cancelText:"重新登录"
+          })
+            .then(function(res){
+                $.cookie('token', null);
+                $.cookie('organizationPartyId', null);
+                //极光推送开始
+                //退出时销毁极光推送的registrationID
+                $.ajax(
+                  { url: $rootScope.interfaceUrl+"removeJpushRegId",
+                    type:"POST",
+                    data: {
+                      "token":token,
+                      "regId":registrationID
+                    },
+                    success: function(result){
+                      $state.go("login");//跳转到登录页面
+                    }
+                  });
+                $state.go("login");//跳转到登录页面
+            })
       }else{
         $state.go("tab.paymentSuccess",{
           "type":ret.type,
