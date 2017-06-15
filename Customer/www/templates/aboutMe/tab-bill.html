@@ -35,7 +35,11 @@
             <span>{{bills.transDate |date:'dd'}}</span>日
             <span style="padding-left: 18%">
                   {{bills.type=='1'?'+ '+bills.amount:'- '+bills.amount}}</span>
-            <div><span>{{bills.transDate |date:'h:mm:ss'}}</span> <span style="padding-left: 20%" ng-bind="bills.storeName"></span></div>
+            <div>
+              <span>{{bills.transDate |date:'h:mm:ss'}}</span>
+              <span style="padding-left: 21%;" ng-bind="bills.cardCode"></span>
+            </div>
+            <div> <span style="word-break:normal;width:auto;white-space:pre-wrap;word-wrap:break-word;overflow:hidden;" ng-bind="bills.storeName"></span></div>
           </div>
         </a>
       </div>
