@@ -39,5 +39,5 @@ angular.module('bill.services', [])
         };
         return promise;
       },
-    }
+    };
   })

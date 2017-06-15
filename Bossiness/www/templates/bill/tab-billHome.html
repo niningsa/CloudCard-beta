@@ -1,39 +1,6 @@
 <ion-view view-title="账单">
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
-  <!--<ion-header-bar class="bar-subheader has-header">-->
-  <!--<span id="dianlei">-->
-      <!--<button class="button button-large button-positive" ui-sref="tab.shopConsume">店内他卡消费</button>-->
-     <!--</span>-->
-    <!--<span id="kalei">-->
-      <!--<button class="button button-large button-positive"  ui-sref="tab.cardConsume">店内本卡消费</button>-->
-    <!--</span>-->
-    <!--<span id="taren">-->
-      <!--<button class="button button-large button-positive "  ui-sref="tab.otherConsume" >本卡他店消费</button>-->
-    <!--</span>-->
-  <!--</ion-header-bar>-->
-
   <ion-content>
-    <!--<div class="firstStyle">-->
-      <!--<div style="height: 50px" class="padding">-->
-      <!--<span id="dianlei" style="float: left">-->
-       <!--<button  style="padding: 0px 20px 0px 28px" class="button button-small button-positive">总消费</button>-->
-     <!--</span>-->
-      <!--<span id="kalei" style="float: left">-->
-        <!--<button  style="padding: 0px 10px 0px 10px" class="button button-small button-positive">本店卡消费</button>-->
-      <!--</span>-->
-
-      <!--</div>-->
-
-      <!--<div class="padding">-->
-        <!--<span id="taren" style="float: left">-->
-          <!--<button style="padding: 0px 10px 0px 10px" class="button button-small button-positive">他店卡消费</button>-->
-        <!--</span>-->
-        <!--<span id="tarens" style="float: left">-->
-          <!--<button  style="padding: 0px 20px 0px 20px" class="button button-small button-positive">跨店消费</button>-->
-        <!--</span>-->
-      <!--</div>-->
-    <!--</div>-->
-
     <div class="ftype" style="text-align:center">
       <span id="taren" style="float: left" >
            <label class="widget-buttons">
@@ -72,30 +39,19 @@
             <img src="img/icon.png">
             <span>{{bills.transDate |date:'M'}}</span>月
             <span>{{bills.transDate |date:'dd'}}</span>日
-            <span style="padding-left: 18%">
-                  {{bills.type=='1'?'+ '+bills.amount:'- '+bills.amount}}
+            <span style="padding-left: 20%;padding-top: 2%">
+                  {{bills.amount}}元
             </span>
             <div><span>{{bills.transDate |date:'h:mm:ss'}}</span>
-              <span style="padding-left: 20%" ng-bind="bills.cardCode"></span>
-              <span style="word-break:normal;width:auto;white-space:pre-wrap;word-wrap:break-word;overflow:hidden;" ng-bind="bills.tradePartyName"></span>
-
+              <span style="padding-left: 21%;padding-top: 2%" ng-bind="bills.cardCode"></span>
               <!--发卡商家暂不显示-->
               <!--<span style="padding-left: 20%" ng-bind="bills.cardSellerName"></span>-->
             </div>
+            <div>
+              <span style="padding-top: 2%;word-break:normal;width:auto;white-space:pre-wrap;word-wrap:break-word;overflow:hidden;">{{bills.tradePartyName}}</span>
+            </div>
           </div>
         </a>
-        <!--<div class="item item-divider">-->
-          <!--三月 <span style="padding-left: 55%"> 查看月账单>> </span>-->
-        <!--</div>-->
-
-        <!--<a class="item item-avatar" href="#" >-->
-          <!--<img src="img/bank.png">-->
-          <!--<div>-->
-            <!--<span>3月19日</span> <span style="padding-left: 15%">-200</span>-->
-            <!--<div>16:30 <span style="padding-left: 20%" >包子铺</span></div>-->
-          <!--</div>-->
-        <!--</a>-->
-
       </div>
     </div>
   </ion-content>

@@ -2,7 +2,7 @@ angular.module('bill.controllers', [])
 
   //B端账单
   .controller('billHomeCtrl', function ($scope,billService) {
-    billService.getUserPaymentBybizService().success(function (data) {
+    billService.getUserPaymentBybizService(1).success(function (data) {
       //$scope.yearAndMonthPaymentList=data.yearAndMonthPaymentList;
       $scope.paymentsList=data.paymentsList;
       function getTransDateYearMonth(obj){
