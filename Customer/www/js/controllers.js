@@ -128,7 +128,7 @@ angular.module('starter.controllers', [])
           "cardId":  $scope.cardId,
           "paymentService": "recharge",
           "subject": "库胖-充值",
-          "totalFee": "1",
+          "totalFee": "2",
           "body": "充值"
         },
         success: function(result){
@@ -159,7 +159,7 @@ angular.module('starter.controllers', [])
           "cardId":  $scope.cardId,
           "paymentService": "recharge",
           //"totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
-          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType":"APP"
         },
@@ -201,7 +201,7 @@ angular.module('starter.controllers', [])
           "cardId":  $scope.cardId,
           "paymentService": "recharge",
           "subject": "库胖-充值",
-          "totalFee": "1",
+          "totalFee": "2",
           "body": "充值"
         },
         success: function(result){
@@ -232,7 +232,7 @@ angular.module('starter.controllers', [])
           "cardId":  $scope.cardId,
           "paymentService": "recharge",
           //"totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
-          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType":"APP"
         },
@@ -401,7 +401,7 @@ angular.module('starter.controllers', [])
           "storeId": storeId,
           "paymentService": "buyCard",
           "subject": "库胖-充值",
-          "totalFee": "1",
+          "totalFee": "2",
           "body": "充值"
         },
         success: function (result) {
@@ -431,7 +431,7 @@ angular.module('starter.controllers', [])
           "storeId": storeId,
           "paymentService": "buyCard",
           //"totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
-          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType": "APP"
         },
@@ -618,7 +618,7 @@ angular.module('starter.controllers', [])
           "storeId": groupOwnerId,
           "paymentService": "buyCard",
           "subject": "库胖-充值",
-          "totalFee": "1",
+          "totalFee": "2",
           "body": "充值"
         },
         success: function (result) {
@@ -647,7 +647,7 @@ angular.module('starter.controllers', [])
           "paymentType": "wxPay",
           "storeId": groupOwnerId,
           "paymentService": "buyCard",
-          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType": "APP"
         },
@@ -689,7 +689,7 @@ angular.module('starter.controllers', [])
           "storeId": storeId,
           "paymentService": "buyCard",
           "subject": "库胖-充值",
-          "totalFee": "1",
+          "totalFee": "2",
           "body": "充值"
         },
         success: function (result) {
@@ -719,7 +719,7 @@ angular.module('starter.controllers', [])
           "paymentType": "wxPay",
           "storeId": storeId,
           "paymentService": "buyCard",
-          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType": "APP"
         },
@@ -1311,7 +1311,7 @@ angular.module('starter.controllers', [])
           "storeId": storeId,
           "paymentService": "buyCard",
           "subject": "库胖-充值",
-          "totalFee": "1",
+          "totalFee": "2",
           "body": "充值"
         },
         success: function (result) {
@@ -1338,7 +1338,7 @@ angular.module('starter.controllers', [])
           "paymentType": "wxPay",
           "storeId": storeId,
           "paymentService": "buyCard",
-          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType": "APP"
         },
@@ -1414,7 +1414,7 @@ angular.module('starter.controllers', [])
           "storeId": storeId,
           "paymentService": "buyCard",
           "subject": "库胖-充值",
-          "totalFee": "0.011",
+          "totalFee": "2",
           "body": "充值"
         },
         success: function (result) {
@@ -1441,7 +1441,7 @@ angular.module('starter.controllers', [])
           "paymentType": "wxPay",
           "storeId": storeId,
           "paymentService": "buyCard",
-          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType": "APP"
         },
@@ -2160,16 +2160,17 @@ angular.module('starter.controllers', [])
  * Author LN
  * Date 2016-11-24
  * */
-.controller('login', function($scope,$rootScope,$state) {
-
-    $scope.cloudCardLogin=function () {
+.controller('login', function($cordovaDevice,$scope,$rootScope,$state) {
+  var uuid = $cordovaDevice.getUUID();
+  $scope.cloudCardLogin=function () {
       console.log($scope.user.tel+" "+$scope.user.identifyCode);
       $.ajax({
         url: $rootScope.interfaceUrl+"userAppLogin",
         type:"POST",
         data: {
           "teleNumber":$scope.user.tel,
-          "captcha":$scope.user.identifyCode
+          "captcha":$scope.user.identifyCode,
+          "deviceId":uuid
         },
         success: function(result){
           // console.log(result.code+" "+result.msg);
@@ -2397,7 +2398,7 @@ angular.module('starter.controllers', [])
             "cardId": $scope.cardId,
             "paymentService": "recharge",
             "subject": "库胖-充值",
-            "totalFee": "1",
+            "totalFee": "2",
             "body": "充值"
           },
           success: function(result){
@@ -2426,7 +2427,7 @@ angular.module('starter.controllers', [])
             "cardId": $scope.cardId,
             "paymentService": "recharge",
             //"totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
-            "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
+            "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
             "body": "库胖-充值",           // 标题不能使用中文
             "tradeType":"APP"
           },
