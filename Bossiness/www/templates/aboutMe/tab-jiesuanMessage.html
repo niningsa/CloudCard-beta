@@ -11,7 +11,7 @@
        结算的历史消息记录：
      </div>
       <ion-item ng-repeat="item in partyNotes" item="item" href="#/item/{{item.id}}" class="item-remove-animate">
-      <span style="color: red"> {{item.noteInfo}}</span>
+      <span style="word-break:normal;width:auto;display:block;white-space:pre-wrap;word-wrap:break-word;overflow:hidden;color: red">{{item.noteInfo}}</span>
       <ion-option-button class="button-calm" ng-click="deleteMessage(item.noteId)">
       删除
       </ion-option-button>

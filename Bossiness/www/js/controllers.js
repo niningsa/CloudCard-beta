@@ -23,7 +23,7 @@ angular.module('starter.controllers', [])
      console.log(data);
       $scope.messageList=data.partyNotes;
     });
-//消息已读
+    //消息已读
     $scope.already=function(noteId){
       messageServece.alreadymessageList(noteId).success(function (data) {
         console.log(data);
@@ -32,6 +32,16 @@ angular.module('starter.controllers', [])
         var alertPopup = $ionicPopup.alert({
           title: '成功',
           template: "已读成功"
+        });
+      });
+    }
+    //查看消息明细
+    $scope.viewDetails=function (noteId) {
+      messageServece.bizGetNodeDetailed(noteId).success(function (data) {
+        //查看明细页面
+        $state.go("tab.jiesuanDetailed",{
+          "noteDateTime":data.noteDateTime,
+          "noteInfo":data.noteInfo
         });
       });
     }

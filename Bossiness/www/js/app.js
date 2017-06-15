@@ -233,9 +233,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
   })
 
 
-
-
-  ;
+  //付款码的展示页面
+  .state('tab.jiesuanDetailed', {
+    url: '/jiesuanDetailed/:noteDateTime/:noteInfo',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-jiesuanDetailed.html',
+        controller: 'DashCtrl'
+      }
+    }
+  });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');

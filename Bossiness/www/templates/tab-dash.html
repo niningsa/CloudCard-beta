@@ -70,13 +70,13 @@
         <!--<div class="item item-divider item-icon-right" ng-click="changeOnOff(onOff)">当前信息 <i class="icon {{onOff==true?'ion-android-arrow-dropdown':'ion-android-arrow-dropup'}}"></i></div>-->
         <div class="item item-divider item-icon-right">当前信息 <i class="icon {{onOff==true?'ion-android-arrow-dropdown':'ion-android-arrow-dropup'}}"></i></div>
         <div ng-show="onOff">
-            <ion-item ng-repeat="item in messageList" item="item" href="#/item/{{item.id}}" class="item-remove-animate">
-            <span style="color: red"> {{item.noteInfo}}</span>
+            <ion-item ng-repeat="item in messageList" item="item" class="item-remove-animate">
+            <span style="word-break:normal;width:auto;display:block;white-space:pre-wrap;word-wrap:break-word;overflow:hidden;color: red">{{item.noteInfo}}</span>
             <ion-option-button class="button-calm" ng-click="deleteMessage(item.noteId)">
-            删除
+              删除
             </ion-option-button>
             <ion-option-button class="button-assertive" ng-click="already(item.noteId)">
-            已读
+              已读
             </ion-option-button>
             </ion-item>
 

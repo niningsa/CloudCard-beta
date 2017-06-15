@@ -107,5 +107,39 @@ angular.module('message.services', [])
         };
         return promise;
       },
-    }
+
+      //查看消息明细
+      bizGetNodeDetailed: function (noteId) {
+        var token = $.cookie("token");
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+
+        $.ajax(
+          {
+            url: $rootScope.interfaceUrl + "bizGetNodeDetailed",
+            type: "POST",
+            data: {
+              "token": token,
+              "noteId": noteId
+            },
+            success: function (result) {
+              if (result.code == '200') {
+                deferred.resolve(result);
+              } else {
+                deferred.reject(result);
+              }
+            }
+          });
+
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        };
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        };
+        return promise;
+      },
+    };
   })

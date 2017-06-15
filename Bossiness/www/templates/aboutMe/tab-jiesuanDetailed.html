@@ -1,0 +1,16 @@
+<ion-view view-title="结算信息明细">
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <!--<ion-content class="padding content has-header ionic-pseudo" style="padding: 0px;margin: 0px">-->
+    <ion-nav-buttons side="left">
+      <a class="button icon ion-ios-undo" ui-sref="tab.jiesuanMessage"></a>
+    </ion-nav-buttons>
+    </div>
+  <ion-content>
+    <ion-list>
+      <div class="item text-center">
+        消息时间：<span style="color: red" ng-bind="time"></span><br>
+        消息内容：<span style="color: red" ng-bind="noteInfo"> </span>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

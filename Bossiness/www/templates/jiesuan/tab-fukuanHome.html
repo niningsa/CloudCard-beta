@@ -20,7 +20,8 @@
         <ion-item item="item" >
           <ion-checkbox ng-model="quanxuan" ng-show="show=='1'" ng-click="selectAll(jiesuanList,quanxuan)" >全选/全不选</ion-checkbox>
           <ion-checkbox name="selected"  ng-repeat="jlist in jiesuanList" ng-checked="jlist.checked"   ng-model="jlist.checked">
-            {{jlist.tradePartyName}}：<span style="color: red"> {{jlist.amount}} 元</span>
+            <span style="word-break:normal;width:auto;display:block;white-space:pre-wrap;word-wrap:break-word;overflow:hidden;">{{jlist.tradePartyName}}：</span>
+            <span style="color: red"> {{jlist.amount}} 元</span>
           </ion-checkbox>
         </ion-item>
       </div>
