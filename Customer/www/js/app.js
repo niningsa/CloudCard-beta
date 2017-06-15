@@ -35,6 +35,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   };
   // 接收到通知时的回调函数
   var onReceiveNotification = function (event) {
+    var token = $.cookie("token");
+    var registrationId = $.cookie("registrationId");
     try {
       var alertContent;
       if (device.platform == "Android") {
@@ -52,6 +54,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
   // 接收到消息时的回调函数
   var onReceiveMessage = function (event) {
+    var token = $.cookie("token");
+    var registrationId = $.cookie("registrationId");
     try {
       var message;
       if (device.platform == "Android") {
@@ -59,9 +63,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       } else {
         message = event.content;
       }
-      //$scope.message = message;
-      //$scope.messageResult = message;
-      //alert($scope.message+"接受消息");
+
       try{
         //var ret = JSON.parse($scope.message);
         var ret = JSON.parse(message);
@@ -87,12 +89,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
                     type:"POST",
                     data: {
                       "token":token,
-                      "regId":registrationID
+                      "regId":registrationId
                     },
                     success: function(result){
                       $state.go("login");//跳转到登录页面
                     }
                   });
+
                 $state.go("login");//跳转到登录页面
             })
       }else{
