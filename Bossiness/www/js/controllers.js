@@ -737,7 +737,7 @@ angular.module('starter.controllers', [])
              $ionicLoading.hide();
              var alertPopup = $ionicPopup.alert({
                title: '申请成功',
-               template: '恭喜您申请成功，快快登录使用吧！'
+               template: '恭喜您申请成功，请耐心等待审核！'
              });
              alertPopup.then(function (res) {
                //用户点击确认登录后跳转
