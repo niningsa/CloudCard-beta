@@ -25,4 +25,4 @@ i,em{font-style: normal;}
 .loginFormBtn{width: 80%;height:50px;display:block;border:none;line-height: 50px;text-align: center;margin:30px auto;font-size:1.0rem;background: #1992f2;border-radius: 8px;color:#fff; }
 .loginErrMsg{display: block;text-align: center;font-weight: bold;color: red; margin-top: 10px;font-size:1.0rem;}
 .loginVaildMsg{display: block;text-align: center;font-weight: bold;color: red;margin-top: 10px;font-size:1.0rem;}
-.businessBtn{width: 80%;height:50px;display:block;border:none;line-height: 50px;text-align: center;margin:0px auto;font-size:1.0rem;background: #1992f2;border-radius: 8px;color:#fff; }
+.businessHref{width: 80%;height:50px;display:block;text-align: center;margin:-10px auto;font-size:0.8rem;}
