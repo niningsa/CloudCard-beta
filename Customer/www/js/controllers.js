@@ -2136,12 +2136,13 @@ angular.module('starter.controllers', [])
             $scope.n=60;
             $scope.codeBtn="获取中 "+$scope.n+" 秒";
             var time=$interval(function () {
-              $scope.n--;
-              $scope.codeBtn="获取中 "+$scope.n+" 秒";
-              if($scope.n==0){
+              if($scope.n<=0){
                 $interval.cancel(time); // 取消定时任务
                 $scope.codeBtn='获取验证码';
                 $scope.codeBtnDisable=false;
+              }else{
+                $scope.n--;
+                $scope.codeBtn="获取中 "+$scope.n+" 秒";
               }
             },1000);
             $scope.codeBtnDisable=true;
