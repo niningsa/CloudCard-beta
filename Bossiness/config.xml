@@ -149,4 +149,8 @@
     <plugin name="jpush-phonegap-plugin" spec="~3.1.7">
         <variable name="API_KEY" value="a601771e25dafc5e2abda486" />
     </plugin>
+    <plugin name="cordova-plugin-baidu-geolocation" spec="https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation">
+      <variable name="API_KEY" value="z89D54HRzvzF8jobhBktAbqRIKue8gQN" />
+    </plugin>
+    <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
 </widget>

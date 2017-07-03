@@ -712,10 +712,8 @@ angular.module('starter.controllers', [])
   .controller("registerCtrl", function ($scope, $ionicLoading, $ionicPopup, $state, Banks, applySellerService, $rootScope) {
       $scope.applySeller = function () {
         //alert($scope.boss.phone);
-          // applySellerService.getCurrentPosition();
-          // var latitude = localStorage.getItem('latitude');                      // 纬度
-          // var longitude = localStorage.getItem('longitude');                    // 经度
-          // alert(latitude+" "+longitude);
+        applySellerService.getCurrentPosition();
+
           //验证手机号码
         var flag = true;
         //验证手机号是否合法
@@ -733,12 +731,17 @@ angular.module('starter.controllers', [])
              $scope.boss.businessName,
              $scope.boss.phone,
              $scope.boss.businessUserName,
-             $scope.boss.businessAddr
-           ).success(function (data) {
+             $scope.boss.businessAddr,
+             $scope.boss.aliPayAccount,
+             $scope.boss.aliPayName,
+             $scope.boss.wxPayAccount,
+             $scope.boss.wxPayName
+
+         ).success(function (data) {
              $ionicLoading.hide();
              var alertPopup = $ionicPopup.alert({
-               title: '申请成功',
-               template: '恭喜您申请成功，请耐心等待审核！'
+               title: '成功提示',
+               template: '恭喜您开店成功！'
              });
              alertPopup.then(function (res) {
                //用户点击确认登录后跳转
@@ -750,7 +753,7 @@ angular.module('starter.controllers', [])
            }).error(function (data) {
              $ionicLoading.hide();
              var alertPopup = $ionicPopup.alert({
-               title: '申请失败',
+               title: '开店失败',
                template: data
              });
            });

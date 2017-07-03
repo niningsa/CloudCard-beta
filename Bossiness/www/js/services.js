@@ -131,23 +131,31 @@ angular.module('starter.services', [])
             'message: ' + error.message + '\n');
         }
       },
-      applySellerRegister: function (businessName, phone, businessUserName, businessAddr) {
+      applySellerRegister: function (businessName, phone, businessUserName, businessAddr, aliPayAccount, aliPayName, wxPayAccount, wxPayName) {
         var deferred = $q.defer();
         var promise = deferred.promise;
+        var latitude = localStorage.getItem('latitude');
+        var longitude = localStorage.getItem('longitude');
         //ajax请求
         $.ajax(
           {
             url: $rootScope.interfaceUrl + "bizCreateApply",
             type: "POST",
             data: {
+
+              "latitude":latitude,
+              "longitude":longitude,
               "storeName": businessName,
               "storeAddress": businessAddr,
               "teleNumber": phone,
-              "personName": businessUserName
+              "personName": businessUserName,
+              "aliPayAccount": aliPayAccount,
+              "aliPayName": aliPayName,
+              "wxPayAccount": wxPayAccount,
+              "wxPayName": wxPayName
             },
             success: function (result) {
-              console.log(result);
-              if (result.code == '200') {
+              if (result.code === '200') {
                 deferred.resolve(result.msg);
               } else {
                 deferred.reject(result.msg);

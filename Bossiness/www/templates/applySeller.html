@@ -8,22 +8,55 @@
     <div class="list card">
       <label class="item item-input item-stacked-label">
         <span class="input-label">商铺名称：</span>
-        <input type="text" name="businessName" ng-model="boss.businessName" placeholder="请输入店铺名称" required>
+        <input type="text" name="businessName" ng-model="boss.businessName" placeholder="请输入店铺名称" required/>
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">电话号码：</span>
-        <input type="text" name="phone" ng-model="boss.phone" placeholder="请输入电话号码">
+        <input type="text" name="phone" ng-model="boss.phone" placeholder="请输入电话号码" required/>
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">店主姓名：</span>
-        <input type="text" name="businessUserName" ng-model="boss.businessUserName" placeholder="请输入店主姓名">
+        <input type="text" name="businessUserName" ng-model="boss.businessUserName" placeholder="请输入店主姓名" required/>
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">店铺地址：</span>
-        <input type="text" name="businessAddr" ng-model="boss.businessAddr" placeholder="请输入店铺地址">
+        <input type="text" name="businessAddr" ng-model="boss.businessAddr" placeholder="请输入店铺地址" required/>
       </label>
 
-        <div class="padding">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">支付宝账号：</span>
+        <input type="text" name="aliPayAccount" ng-model="boss.aliPayAccount" placeholder="请输入支付宝账号" required/>
+      </label>
+
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">支付宝姓名：</span>
+        <input type="text" name="aliPayName" ng-model="boss.aliPayName" placeholder="请输入支付宝姓名" required/>
+      </label>
+
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">微信账号：</span>
+        <input type="text" name="wxPayAccount" ng-model="boss.wxPayAccount" placeholder="请输入支付宝账号">
+      </label>
+
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">微信姓名：</span>
+        <input type="text" name="wxPayName" ng-model="boss.wxPayName" placeholder="请输入微信姓名">
+      </label>
+
+      <div class="loginVaildMsg">
+        <span style="color:red" ng-show="regForm.businessName.$dirty && regForm.businessName.$invalid"/>
+        <span ng-show="regForm.businessName.$error.required">店铺名称不能为空。</span>
+      </div>
+      <div class="loginVaildMsg">
+        <span style="color:red" ng-show="regForm.phone.$dirty && regForm.phone.$invalid"/>
+        <span ng-show="regForm.phone.$error.required">电话号码不能为空。</span>
+      </div>
+      <div class="loginVaildMsg">
+        <span style="color:red" ng-show="regForm.businessUserName.$dirty && regForm.businessUserName.$invalid"/>
+        <span ng-show="regForm.businessUserName.$error.required">店主姓名不能为空。</span>
+      </div>
+
+      <div class="padding">
           <button class="button button-block button-positive" type="submit">确认申请</button>
         </div>
 
