@@ -5,12 +5,10 @@
         <img class="logoImg" src="img/logo.png">
         <div class="loginForm">
           <input type="number" class="loginInput" placeholder="手机号" name="tel" ng-model="user.tel" required/>
-
         </div>
         <div class="loginForm codeInput">
           <input type="number" class="loginInput" placeholder="验证码" name="identifyCode" ng-model="user.identifyCode" required/>
           <input type="button" class="codeTxt" ng-value="codeBtn" ng-click="getIdentifyCode(user.tel)" ng-disabled="codeBtnDisable" value="获取验证码"/>
-
         </div>
         <div class="loginVaildMsg">
           <span style="color:red" ng-show="loginForm.tel.$dirty && loginForm.tel.$invalid"/>

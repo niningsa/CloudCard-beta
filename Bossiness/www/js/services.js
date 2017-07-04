@@ -131,7 +131,7 @@ angular.module('starter.services', [])
             'message: ' + error.message + '\n');
         }
       },
-      applySellerRegister: function (businessName, phone, businessUserName, businessAddr, aliPayAccount, aliPayName, wxPayAccount, wxPayName) {
+      applySellerRegister: function (businessName, phone, businessUserName, identifyCode) {
         var deferred = $q.defer();
         var promise = deferred.promise;
         var latitude = localStorage.getItem('latitude');
@@ -146,13 +146,8 @@ angular.module('starter.services', [])
               "latitude":latitude,
               "longitude":longitude,
               "storeName": businessName,
-              "storeAddress": businessAddr,
               "teleNumber": phone,
-              "personName": businessUserName,
-              "aliPayAccount": aliPayAccount,
-              "aliPayName": aliPayName,
-              "wxPayAccount": wxPayAccount,
-              "wxPayName": wxPayName
+              "captcha": identifyCode
             },
             success: function (result) {
               if (result.code === '200') {

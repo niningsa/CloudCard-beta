@@ -709,7 +709,56 @@ angular.module('starter.controllers', [])
    * Author LN
    * Date 2017-2-26
    * */
-  .controller("registerCtrl", function ($scope, $ionicLoading, $ionicPopup, $state, Banks, applySellerService, $rootScope) {
+  .controller("registerCtrl", function ($scope, $ionicLoading, $ionicPopup, $state, Banks, applySellerService, $rootScope, $http, $interval) {
+
+    $scope.codeBtn = '获取验证码';
+    $scope.getCreateStoreCode = function (tel) {
+      $scope.msg = "";//先清空错误提示
+      if (tel) {
+        $http({
+          method: "POST",
+          url: $rootScope.interfaceUrl + "getCreateStoreCaptcha",
+          data: {
+            "teleNumber": tel
+          },
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},         // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+          transformRequest: function (obj) {                                      // 参数是对象的话，需要把参数转成序列化的形式
+            var str = [];
+            for (var p in obj) {
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            }
+            return str.join("&");
+          }
+        }).success(function (result) {
+          if (result.code == '500') {
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '获取验证码失败',
+              template: result.msg
+            });
+            $scope.msg = result.msg;
+          } else {
+            //倒计时
+            $scope.n = 60;
+            $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+            var time = $interval(function () {
+              if ($scope.n <= 0) {
+                $interval.cancel(time); // 取消定时任务
+                $scope.codeBtn = '获取验证码';
+                $scope.codeBtnDisable = false;
+              } else {
+                $scope.n--;
+                $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+              }
+            }, 1000);
+            $scope.codeBtnDisable = true;
+          }
+        });
+      }
+      }
+
+
+
       $scope.applySeller = function () {
         //alert($scope.boss.phone);
         applySellerService.getCurrentPosition();
@@ -731,12 +780,7 @@ angular.module('starter.controllers', [])
              $scope.boss.businessName,
              $scope.boss.phone,
              $scope.boss.businessUserName,
-             $scope.boss.businessAddr,
-             $scope.boss.aliPayAccount,
-             $scope.boss.aliPayName,
-             $scope.boss.wxPayAccount,
-             $scope.boss.wxPayName
-
+             $scope.boss.identifyCode
          ).success(function (data) {
              $ionicLoading.hide();
              var alertPopup = $ionicPopup.alert({
