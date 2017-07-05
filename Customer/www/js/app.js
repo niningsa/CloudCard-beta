@@ -164,11 +164,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }
   };
 
+  function onDeviceReady() {
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  }
+  //定位数据获取成功响应
+  function onSuccess(position) {
+    localStorage.setItem('latitude', position.coords.latitude);
+    localStorage.setItem('longitude', position.coords.longitude);
+  }
+  //定位数据获取失败响应
+  function onError(error) {
+
+  }
+
   // 添加对回调函数的监听
   document.addEventListener("deviceready", onDeviceReady, false);
   document.addEventListener("jpush.openNotification", onOpenNotification, false);
   document.addEventListener("jpush.receiveNotification", onReceiveNotification, false);
   document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
+  document.addEventListener("deviceready", onDeviceReady, false);
+
   //极光推送结束
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
