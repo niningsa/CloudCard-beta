@@ -115,7 +115,14 @@
     <plugin name="cordova-plugin-contacts" spec="~2.3.1">
         <variable name="CONTACTS_USAGE_DESCRIPTION" value="亲，打开通讯录哦！" />
     </plugin>
-    <plugin name="jpush-phonegap-plugin" spec="~3.1.7">
+    <plugin name="cordova-plugin-wechat" spec="~1.4.0">
+        <variable name="WECHATAPPID" value="wxa797cb5a2aed1c3b" />
+    </plugin>
+    <plugin name="cordova-plugin-offbye-alipay" spec="https://github.com/offbye/cordova-plugin-alipay.git">
+        <variable name="PARTNER_ID" value="2088521239967141" />
+    </plugin>
+    <plugin name="jpush-phonegap-plugin" spec="https://github.com/jpush/jpush-phonegap-plugin.git">
         <variable name="APP_KEY" value="0e48e52d81afa8142b7f4db3" />
+        <variable name="API_KEY" value="0e48e52d81afa8142b7f4db3" />
     </plugin>
 </widget>

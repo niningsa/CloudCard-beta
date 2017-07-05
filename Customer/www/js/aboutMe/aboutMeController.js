@@ -9,9 +9,9 @@ angular.module('aboutMe.controllers', [])
      * Date 2017-3-13
      * */
     var token=$.cookie("token");
- if(token==null){
-   $state.go("login");
- }
+     if(token==null){
+       $state.go("login");
+     }
     aboutMeService.bizMyGroup().success(function (data) {
       var token = $.cookie("token");
       if(token){
@@ -34,6 +34,26 @@ angular.module('aboutMe.controllers', [])
       $scope.contentId=result.contentId
     })
 
+    $scope.shareMe=function(){
+      Wechat.share({
+        message: {
+          title: "库胖分享测试",
+          description: "库胖分享测试",
+          thumb: "www/img/thumbnail.png",
+          messageExt: "这是第三方带的测试字段",
+          messageAction: "<action>dotalist</action>",
+          media: {
+            type: Wechat.Type.WEBPAGE,
+            webpageUrl: 'www.baidu.com',
+          }
+        },
+        scene: Wechat.Scene.TIMELINE   // share to Timeline
+      }, function () {
+        alert("分享成功");
+      }, function (reason) {
+        alert(reason);
+      });
+    }
 
   })
 
@@ -144,6 +164,15 @@ angular.module('aboutMe.controllers', [])
    * */
   .controller('aboutCloudCardServiceCtrl', function($scope,$state, $rootScope,aboutMeService) {
 
+
+  })
+
+  /*
+   * Desc 我的分享
+   * Author WK
+   * Date 2017-5-27
+   * */
+  .controller('shareServiceCtrl', function($scope,$state, $rootScope,$Wechat,aboutMeService) {
 
   })
 

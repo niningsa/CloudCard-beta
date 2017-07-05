@@ -159,14 +159,14 @@ angular.module('starter.controllers', [])
           "cardId":  $scope.cardId,
           "paymentService": "recharge",
           //"totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
-          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType":"APP"
         },
         success: function(result){
           console.log(result);
           //第二步：调用支付插件
-          wxpay.payment(result, function success (e) {
+          Wechat.sendPaymentRequest(result, function success (e) {
              //alert("成功了："+e);
             //充值成功后回到圈子卡的页面
             $state.go("tab.myCircleCard",{
@@ -232,14 +232,14 @@ angular.module('starter.controllers', [])
           "cardId":  $scope.cardId,
           "paymentService": "recharge",
           //"totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
-          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType":"APP"
         },
         success: function(result){
           console.log(result);
           //第二步：调用支付插件
-          wxpay.payment(result, function success (e) {
+          Wechat.sendPaymentRequest(result, function success (e) {
              //alert("成功了："+e);
             //充值成功后回到圈子卡的页面
             $state.go("tab.selectCircleCardAndShopCard", {
@@ -431,14 +431,14 @@ angular.module('starter.controllers', [])
           "storeId": storeId,
           "paymentService": "buyCard",
           //"totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
-          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType": "APP"
         },
         success: function (result) {
           console.log(result);
           //第二步：调用支付插件
-          wxpay.payment(result, function success(e) {
+          Wechat.sendPaymentRequest(result, function success(e) {
             //alert("成功了：" + e);
             $state.go("myCircleCard", {
               "storeId": storeId,
@@ -647,14 +647,14 @@ angular.module('starter.controllers', [])
           "paymentType": "wxPay",
           "storeId": groupOwnerId,
           "paymentService": "buyCard",
-          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType": "APP"
         },
         success: function (result) {
           console.log(result);
           //第二步：调用支付插件
-          wxpay.payment(result, function success(e) {
+          Wechat.sendPaymentRequest(result, function success(e) {
             //alert("成功了：" + e);
             $state.go("tab.selectCircleCardAndShopCard", {
               "storeId": $scope.storeId,
@@ -689,7 +689,7 @@ angular.module('starter.controllers', [])
           "storeId": storeId,
           "paymentService": "buyCard",
           "subject": "库胖-充值",
-          "totalFee": "2",
+          "totalFee": "1",
           "body": "充值"
         },
         success: function (result) {
@@ -719,14 +719,14 @@ angular.module('starter.controllers', [])
           "paymentType": "wxPay",
           "storeId": storeId,
           "paymentService": "buyCard",
-          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType": "APP"
         },
         success: function (result) {
           console.log(result);
           //第二步：调用支付插件
-          wxpay.payment(result, function success(e) {
+          Wechat.sendPaymentRequest(result, function success(e) {
             //alert("成功了：" + e);
             $state.go("tab.selectCircleCardAndShopCard", {
               "storeId": $scope.storeId,
@@ -1338,14 +1338,14 @@ angular.module('starter.controllers', [])
           "paymentType": "wxPay",
           "storeId": storeId,
           "paymentService": "buyCard",
-          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType": "APP"
         },
         success: function (result) {
           console.log(result);
           //第二步：调用支付插件
-          wxpay.payment(result, function success(e) {
+          Wechat.sendPaymentRequest(result, function success(e) {
             //alert("成功了：" + e);
             $scope.chooseCard();
             //$state.go("myCircleCard",{"storeId":storeId});
@@ -1441,14 +1441,14 @@ angular.module('starter.controllers', [])
           "paymentType": "wxPay",
           "storeId": storeId,
           "paymentService": "buyCard",
-          "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType": "APP"
         },
         success: function (result) {
           console.log(result);
           //第二步：调用支付插件
-          wxpay.payment(result, function success(e) {
+          Wechat.sendPaymentRequest(result, function success(e) {
             //alert("成功了：" + e);
             $scope.chooseCard();
             //$state.go("myCircleCard",{"storeId":storeId});
@@ -2428,14 +2428,14 @@ angular.module('starter.controllers', [])
             "cardId": $scope.cardId,
             "paymentService": "recharge",
             //"totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
-            "totalFee": "2",              // 微信金额不支持小数，这里1表示0.01
+            "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
             "body": "库胖-充值",           // 标题不能使用中文
             "tradeType":"APP"
           },
           success: function(result){
             console.log(result);
             //第二步：调用支付插件
-            wxpay.payment(result, function success (e) {
+            Wechat.sendPaymentRequest(result, function success (e) {
               $state.go("tab.chats");
             }, function error (e) {
                  //alert("失败了："+e);

@@ -1,36 +1,41 @@
 angular.module('index.controllers', [])
   .controller('indexCtrl',function ($scope,$state, $rootScope,  $cordovaBarcodeScanner, $ionicPopup, $ionicLoading, $timeout, indexService) {
     var token=$.cookie("token");
-    if(token){
+
       //付款码
       $scope.paymentCode = function () {
-          $.ajax({
-            url: $rootScope.interfaceUrl + "getPaymentQRCode",
-            type: "POST",
-            data: {
-              "token": token
-            },
-            success: function (result) {
-              if (result.code == '200') {
-                $scope.$apply(function () {
-                  $scope.msg = "";
-                });
-
-                $state.go("tab.paymentCode",
-                  {
-                    "qrCode": result.qrCode,
-                    "refreshTime": result.refreshTime
+        if(token){
+            $.ajax({
+              url: $rootScope.interfaceUrl + "getPaymentQRCode",
+              type: "POST",
+              data: {
+                "token": token
+              },
+              success: function (result) {
+                if (result.code == '200') {
+                  $scope.$apply(function () {
+                    $scope.msg = "";
                   });
-              } else {
-                $scope.$apply(function () {
-                  $scope.msg = result.msg;
-                });
+
+                  $state.go("tab.paymentCode",
+                    {
+                      "qrCode": result.qrCode,
+                      "refreshTime": result.refreshTime
+                    });
+                } else {
+                  $scope.$apply(function () {
+                    $scope.msg = result.msg;
+                  });
+                }
               }
-            }
-          });
+            });
+        }else{
+          $state.go("login");
+        }
       };
 
       $scope.scanBarcode = function () {
+        if(token){
           $ionicLoading.show({
             template: "正在调摄像头,请稍后...."
           });
@@ -77,6 +82,9 @@ angular.module('index.controllers', [])
             }, function (error) {
             });
           }, 1000);
+        }else{
+          $state.go("login");
+        }
       }
 
       $scope.myCard = function() {
@@ -111,9 +119,6 @@ angular.module('index.controllers', [])
         //下拉刷新完成后提示转圈消失
         $scope.$broadcast("scroll.refreshComplete");
       };
-    }else{
-      $state.go("login");
-    }
   })
 
   .controller('ChatsCtrl', function($scope, Chats,$stateParams,$state, $rootScope, $ionicScrollDelegate) {
