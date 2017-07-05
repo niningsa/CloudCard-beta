@@ -7,12 +7,12 @@
     <form name="regForm" ng-submit="applySeller()" ng-controller="registerCtrl">
       <div class="list card">
         <label class="item item-input item-stacked-label">
-          <span class="input-label">商铺名称：</span>
-          <input type="text" name="businessName" ng-model="boss.businessName" placeholder="请输入店铺名称" required/>
-        </label>
-        <label class="item item-input item-stacked-label">
           <span class="input-label">电话号码：</span>
           <input type="text" name="phone" ng-model="boss.phone" placeholder="请输入电话号码" required/>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">商铺名称：</span>
+          <input type="text" name="businessName" ng-model="boss.businessName" placeholder="请输入店铺名称" required/>
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">店主姓名：</span>
@@ -39,7 +39,7 @@
           <span ng-show="regForm.identifyCode.$error.required">验证码不能为空。</span>
         </div>
         <div class="padding">
-          <button class="button button-block button-positive" type="submit">确认申请</button>
+          <button class="button button-block button-positive" ng-disabled="regForm.businessName.$error.required || regForm.phone.$error.required || regForm.businessUserName.$error.required || regForm.identifyCode.$error.required" type="submit">确认申请</button>
         </div>
         <span ng-bind="regVaildMsg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
       </div>

@@ -757,13 +757,8 @@ angular.module('starter.controllers', [])
       }
       }
 
-
-
       $scope.applySeller = function () {
-        //alert($scope.boss.phone);
-        applySellerService.getCurrentPosition();
-
-          //验证手机号码
+        //验证手机号码
         var flag = true;
         //验证手机号是否合法
         var phoneReg = /^0?1[3|4|5|8][0-9]\d{8}$/;

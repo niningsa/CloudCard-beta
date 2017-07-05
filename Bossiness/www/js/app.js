@@ -74,8 +74,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
     }
   };
 
+
+  function onDeviceReady() {
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  }
+  //定位数据获取成功响应
+  function onSuccess(position) {
+    localStorage.setItem('latitude', position.coords.latitude);
+    localStorage.setItem('longitude', position.coords.longitude);
+  }
+  //定位数据获取失败响应
+  function onError(error) {
+
+  }
+
   // 添加对回调函数的监听
   document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
+  document.addEventListener("deviceready", onDeviceReady, false);
 
 
 })
