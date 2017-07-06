@@ -125,4 +125,5 @@
         <variable name="APP_KEY" value="0e48e52d81afa8142b7f4db3" />
         <variable name="API_KEY" value="0e48e52d81afa8142b7f4db3" />
     </plugin>
+    <plugin name="cordova-sms-plugin" spec="~0.1.11" />
 </widget>

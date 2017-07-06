@@ -1,6 +1,6 @@
 angular.module('aboutMe.controllers', [])
 
-  .controller('aboutMeCtrl', function($scope,$state, $rootScope,aboutMeService) {
+  .controller('aboutMeCtrl', function($scope,$state, $rootScope,aboutMeService, $ionicActionSheet, $cordovaSms) {
 
 
     /*
@@ -35,24 +35,75 @@ angular.module('aboutMe.controllers', [])
     })
 
     $scope.shareMe=function(){
-      Wechat.share({
-        message: {
-          title: "库胖分享测试",
-          description: "库胖分享测试",
-          thumb: "www/img/thumbnail.png",
-          messageExt: "这是第三方带的测试字段",
-          messageAction: "<action>dotalist</action>",
-          media: {
-            type: Wechat.Type.WEBPAGE,
-            webpageUrl: 'www.baidu.com',
+      $ionicActionSheet.show({
+        buttons: [
+          { text: '<b>分享</b> 微信朋友圈' },
+          { text: '<b>分享</b> 微信好友' },
+          { text: '<b>分享</b> 短信' }
+        ],
+        titleText: '分享',
+        cancelText: '关闭',
+        buttonClicked: function(index) {
+          if(index == 0){
+            Wechat.share({
+              message: {
+                title: "库胖分享测试",
+                description: "库胖分享测试",
+                thumb: "www/img/thumbnail.png",
+                messageExt: "这是第三方带的测试字段",
+                messageAction: "<action>dotalist</action>",
+                media: {
+                  type: Wechat.Type.WEBPAGE,
+                  webpageUrl: 'www.baidu.com',
+                }
+              },
+              scene: Wechat.Scene.TIMELINE   // share to Timeline
+            }, function () {
+              alert("分享成功");
+            }, function (reason) {
+              alert(reason);
+            });
+          }else if(index == 1){
+            Wechat.share({
+              message: {
+                title: "库胖测试",
+                description: "库胖测试",
+                thumb: '/img/logo.jpeg',
+                media: {
+                  type: Wechat.Type.WEBPAGE,
+                  webpageUrl: 'www.baidu.com'
+                }
+              },
+              scene: Wechat.Scene.SESSION // share to SESSION
+            }, function () {
+              alert("Success");
+            }, function (reason) {
+              alert("Failed: " + reason);
+            });
+          }else if(index == 2){
+            var options = {
+              replaceLineBreaks: false,
+              android: {
+                intent: 'INTENT'
+              }
+            };
+            document.addEventListener("deviceready", function () {
+              $cordovaSms
+                .send('', 'www.baidu.com', options)
+                .then(function () {
+                  // Success! SMS was sent
+                }, function (error) {
+                  // An error occurred
+                });
+            });
           }
+          return true;//必须
         },
-        scene: Wechat.Scene.TIMELINE   // share to Timeline
-      }, function () {
-        alert("分享成功");
-      }, function (reason) {
-        alert(reason);
+        destructiveButtonClicked:function () {
+          return true;//必须
+        }
       });
+
     }
 
   })
