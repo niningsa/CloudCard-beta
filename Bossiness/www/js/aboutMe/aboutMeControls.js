@@ -6,7 +6,10 @@ angular.module('aboutMe.controllers', [])
    * Author LN
    * Date 2017-1-12
    * */
-  .controller('aboutMeCtrl', function ($scope) {
+  .controller('aboutMeCtrl', function ($scope,myShopDetailService) {
+    myShopDetailService.selectMyShopDetail().success(function (result) {
+      $scope.storeSaleLevel=result.storeSaleLevel;
+    });
 
   })
   /*

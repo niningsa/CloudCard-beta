@@ -8,7 +8,13 @@
       <a class="item item-icon-left item-icon-right"  href="#/tab/myShopDetail">
         <!--<a class="item item-icon-left item-icon-right" href="#tab/goShop">-->
         <i class="icon ion-paintbucket positive"></i>
-        我的店
+        我的店 &nbsp; &nbsp;
+        <element ng-if="storeSaleLevel == 'STORE_SALE_LEVEL_1'">
+          <img style="height: 20px;width: 20px;" ng-show="storeSaleLevel == 'STORE_SALE_LEVEL_1'" src="img/v.png">
+        </element>
+        <element ng-if="storeSaleLevel == 'STORE_SALE_LEVEL_2'">
+          <img style="height: 20px;width: 20px;" ng-show="storeSaleLevel == 'STORE_SALE_LEVEL_2'" src="img/v.png">
+        </element>
         <i class="icon ion-ios-arrow-right" style="color:darkgrey;"></i>
       </a>
 
@@ -46,9 +52,6 @@
         设置
         <span class="item-note"></span>
       </div>
-
-
-
     </div>
   </ion-content>
 </ion-view>
