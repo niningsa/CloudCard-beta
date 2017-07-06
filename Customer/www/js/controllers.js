@@ -110,7 +110,7 @@ angular.module('starter.controllers', [])
    * Author WK
    * Date 2017-3-1
    * */
-  .controller('cirCleCardRechargeCtrl', function($scope,$state, $rootScope,$stateParams) {
+  .controller('cirCleCardRechargeCtrl', function($scope,$state, $rootScope,$stateParams, $ionicLoading, $ionicPopup) {
     $scope.storeId=$stateParams.storeId;
     $scope.cardId=$stateParams.cardId;
     $scope.isGroupOwner=$stateParams.isGroupOwner;
@@ -142,7 +142,11 @@ angular.module('starter.controllers', [])
               "isGroupOwner": $scope.isGroupOwner
             })
           }, function error(e){
-             //alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+              $ionicLoading.hide();
+              var alertPopup = $ionicPopup.alert({
+                title: '充值失败',
+                template: result.msg
+              });
           });
         }
       });
@@ -174,7 +178,11 @@ angular.module('starter.controllers', [])
               "isGroupOwner": $scope.isGroupOwner
             })
           }, function error (e) {
-             //alert("失败了："+e);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '充值失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -183,7 +191,7 @@ angular.module('starter.controllers', [])
 
   })
   //店铺卡的充值
-  .controller('shopRechargeCtrl', function($scope,$state, $rootScope,$stateParams) {
+  .controller('shopRechargeCtrl', function($scope,$state, $rootScope,$stateParams, $ionicLoading, $ionicPopup) {
     $scope.storeId=$stateParams.storeId;
     $scope.cardId=$stateParams.cardId;
     $scope.isGroupOwner=$stateParams.isGroupOwner;
@@ -215,7 +223,11 @@ angular.module('starter.controllers', [])
               "isGroupOwner": $scope.isGroupOwner
             })
           }, function error(e){
-             //alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '充值失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -247,7 +259,11 @@ angular.module('starter.controllers', [])
               "isGroupOwner": $scope.isGroupOwner
             })
           }, function error (e) {
-             //alert("失败了："+e);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '充值失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -414,7 +430,11 @@ angular.module('starter.controllers', [])
               "isGroupOwner": $scope.isGroupOwner,
             });
           }, function error(e) {
-            // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '充值失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -445,7 +465,11 @@ angular.module('starter.controllers', [])
               "isGroupOwner": $scope.isGroupOwner,
             });
           }, function error(e) {
-            //alert("失败了：" + e);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '充值失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -602,7 +626,7 @@ angular.module('starter.controllers', [])
   })
 
   //调用支付宝微信页面
-  .controller('buyCardPayCtrl', function ($scope, $state, $rootScope, $ionicScrollDelegate, $stateParams) {
+  .controller('buyCardPayCtrl', function ($scope, $state, $rootScope, $ionicScrollDelegate, $stateParams, $ionicLoading, $ionicPopup) {
     $scope.storeId = $stateParams.storeId;
     $scope.groupOwnerId = $stateParams.groupOwnerId;
     $scope.isGroupOwner = $stateParams.isGroupOwner;
@@ -632,7 +656,11 @@ angular.module('starter.controllers', [])
               "isGroupOwner": $scope.isGroupOwner
             });
           }, function error(e) {
-            // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '充值失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -662,7 +690,11 @@ angular.module('starter.controllers', [])
             });
             //$state.go("myCircleCard",{"storeId":storeId});
           }, function error(e) {
-            //alert("失败了：" + e);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '充值失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -674,7 +706,7 @@ angular.module('starter.controllers', [])
   })
 
   //购买店里卡调用支付宝微信
-  .controller('buyShopCardCtrl', function ($scope, $state, $rootScope, $ionicScrollDelegate, $stateParams) {
+  .controller('buyShopCardCtrl', function ($scope, $state, $rootScope, $ionicScrollDelegate, $stateParams, $ionicLoading, $ionicPopup) {
     $scope.storeId = $stateParams.storeId;
     $scope.isGroupOwner = $stateParams.isGroupOwner;
     var token = $.cookie("token");
@@ -703,7 +735,11 @@ angular.module('starter.controllers', [])
               "isGroupOwner": $scope.isGroupOwner
             });
           }, function error(e) {
-            // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '充值失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -734,7 +770,11 @@ angular.module('starter.controllers', [])
             });
             //$state.go("myCircleCard",{"storeId":storeId});
           }, function error(e) {
-            //alert("失败了：" + e);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '充值失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -1257,7 +1297,7 @@ angular.module('starter.controllers', [])
    * Author WK
    * Date 2017-3-1
    * */
-  .controller('scanAddCardCtrl', function ($scope, $stateParams, $state, $rootScope) {
+  .controller('scanAddCardCtrl', function ($scope, $stateParams, $state, $rootScope, $ionicLoading, $ionicPopup) {
     $scope.storeId = $stateParams.storeId;
     $scope.qrCode = $stateParams.qrCode;
     var token = $.cookie("token");
@@ -1322,7 +1362,11 @@ angular.module('starter.controllers', [])
             //支付成功到扫一扫的卡页面列表
             $scope.chooseCard();
           }, function error(e) {
-            // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '买卡失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -1350,7 +1394,11 @@ angular.module('starter.controllers', [])
             $scope.chooseCard();
             //$state.go("myCircleCard",{"storeId":storeId});
           }, function error(e) {
-            //alert("失败了：" + e);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '买卡失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -1359,7 +1407,7 @@ angular.module('starter.controllers', [])
 
   })
   //这是购买圈子里的卡
-  .controller('scanAddGroupCardCtrl', function ($scope, $stateParams, $state, $rootScope) {
+  .controller('scanAddGroupCardCtrl', function ($scope, $stateParams, $state, $rootScope, $ionicLoading, $ionicPopup) {
     $scope.storeId = $stateParams.storeId;
     $scope.qrCode = $stateParams.qrCode;
     $scope.groupOwnerId = $stateParams.groupOwnerId;
@@ -1425,7 +1473,11 @@ angular.module('starter.controllers', [])
             //支付成功到扫一扫的卡页面列表
             $scope.chooseCard();
           }, function error(e) {
-            // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '买卡失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -1453,7 +1505,11 @@ angular.module('starter.controllers', [])
             $scope.chooseCard();
             //$state.go("myCircleCard",{"storeId":storeId});
           }, function error(e) {
-            //alert("失败了：" + e);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '买卡失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -2376,7 +2432,7 @@ angular.module('starter.controllers', [])
    * Author LN
    * Date 2016-12-12
    * */
-  .controller('rechargeCtrl', function ($scope, $stateParams, $rootScope,$state, $ionicLoading) {
+  .controller('rechargeCtrl', function ($scope, $stateParams, $rootScope,$state, $ionicLoading, $ionicPopup) {
     //页面信息初始化
     $scope.cardId = $stateParams.cardId;
     $scope.cardBalance = $stateParams.cardBalance;
@@ -2410,7 +2466,12 @@ angular.module('starter.controllers', [])
               // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
               $state.go("tab.chats");
             }, function error(e){
-              // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+              $ionicLoading.hide();
+              var alertPopup = $ionicPopup.alert({
+                title: '充值失败',
+                template: result.msg
+              });
+
             });
           }
         });
@@ -2438,7 +2499,12 @@ angular.module('starter.controllers', [])
             Wechat.sendPaymentRequest(result, function success (e) {
               $state.go("tab.chats");
             }, function error (e) {
-                 //alert("失败了："+e);
+              $ionicLoading.hide();
+              var alertPopup = $ionicPopup.alert({
+                title: '充值失败',
+                template: result.msg
+              });
+
             });
           }
         });

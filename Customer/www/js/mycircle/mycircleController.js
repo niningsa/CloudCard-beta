@@ -158,7 +158,7 @@ angular.module('mycircle.controllers', [])
    * Author WK
    * Date 2017-4-7
    * */
-  .controller('maiKaCtrl', function($scope,$state, $rootScope,mycircleServices,$stateParams) {
+  .controller('maiKaCtrl', function($scope,$state, $rootScope,mycircleServices,$stateParams, $ionicLoading, $ionicPopup) {
     $scope.storeId = $stateParams.storeId;
     //查询客户是否拥有该店铺的卡，如果有卡就进行充值，没卡就买卡
     $scope.ret = {choice: '100'};
@@ -185,7 +185,11 @@ angular.module('mycircle.controllers', [])
               "storeId": $scope.storeId
             });
           }, function error(e) {
-            // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '购买卡失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -207,14 +211,18 @@ angular.module('mycircle.controllers', [])
         success: function (result) {
           console.log(result);
           //第二步：调用支付插件
-          wxpay.payment(result, function success(e) {
+          Wechat.sendPaymentRequest(result, function success(e) {
             //alert("成功了：" + e);
             $state.go("tab.selectShopCard", {
               "storeId": $scope.storeId
             });
             //$state.go("myCircleCard",{"storeId":storeId});
           }, function error(e) {
-            //alert("失败了：" + e);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '购买卡失败',
+              template: result.msg
+            });
           });
         }
       });
@@ -227,7 +235,7 @@ angular.module('mycircle.controllers', [])
    * Author WK
    * Date 2017-4-7
    * */
-  .controller('chongzhiCtrl', function ($scope, $stateParams, $rootScope,$state, $ionicLoading) {
+  .controller('chongzhiCtrl', function ($scope, $stateParams, $rootScope,$state, $ionicLoading, $ionicPopup) {
     //页面信息初始化
     $scope.cardId = $stateParams.cardId;
     $scope.storeId = $stateParams.storeId;
@@ -257,14 +265,17 @@ angular.module('mycircle.controllers', [])
               "storeId": $scope.storeId
             });
           }, function error(e){
-            // alert("失败了："+e.resultStatus+"-"+e.result+"-"+e.memo);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '充值失败',
+              template: result.msg
+            });
           });
         }
       });
     };
     //从我的卡页面进去的充值
     $scope.weiXin=function (choice) {
-      //alert(choice);
       $.ajax({
         url: $rootScope.interfaceUrl+"uniformOrder", // wxPrepayOrder
         // url: "http://cloudcard.ngrok.joinclub.cn/cloudcard/control/uniformOrder", // wxPrepayOrder
@@ -282,12 +293,16 @@ angular.module('mycircle.controllers', [])
         success: function(result){
           console.log(result);
           //第二步：调用支付插件
-          wxpay.payment(result, function success (e) {
+          Wechat.sendPaymentRequest(result, function success (e) {
             $state.go("tab.selectShopCard", {
               "storeId": $scope.storeId
             });
           }, function error (e) {
-            //alert("失败了："+e);
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: '充值失败',
+              template: result.msg
+            });
           });
         }
       });
