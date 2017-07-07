@@ -1,0 +1,120 @@
+html,
+body {
+	font-size: 2.6666666vw;
+}
+body {
+	background-color: #f0eff5;
+}
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	padding-top: 15px;
+	height: 23.33vw;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+.header-img {
+	width: 12vw;
+	height: 12vw;
+	margin-left: 3rem;
+	margin-right: 1.5rem;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.header-img>img {
+	display: block;
+	height: 100%;
+}
+.store-name {
+	margin-bottom: .4rem;
+	font-size: 1.5rem;
+	font-weight: 400;
+	color: #fff;
+}
+.address {
+	font-size: 1.2rem;
+	font-style: normal;
+	color: #ccc;
+}
+
+.function-box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	padding: 2rem 0 3rem;
+	margin-bottom: 3px;
+	background-color: #fff;
+}
+.function-box .btn-code {
+	display: block;
+	width: 36vw;
+	height: 9.4vw;
+	padding-left: 12.5vw;
+	line-height: 9.4vw;
+	font-size: 1.2rem;
+	text-decoration: none;
+	color: #fff;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100% !important;
+}
+.function-box .btn-clear {
+	margin-right: 2rem;
+	font-size: 1.4rem;
+	text-decoration: underline;
+}
+.btn-payment-group {
+	display: flex;
+	width: 100vw;
+	margin-top: 3rem;
+	text-align: center;
+}
+.btn-payment-group>a {
+	display: block;
+	flex-grow: 1;
+	font-size: 1.3rem;
+	text-decoration: none
+}
+.btn-payment-group>a+a {
+	border-left: #eee .5px solid;
+}
+.btn-payment-group img {
+	display: block;
+	width: 60%;
+	margin: 0 auto 1rem;
+}
+.message-box {
+	background-color: #fff;
+}
+.message-box header {
+	padding-left: 2rem;
+	font-size: 1.4rem;
+	font-weight: 400;
+	line-height: 3;
+}
+.message-list>li {
+	padding: 1.5rem 1.5rem 1.5rem calc(15.5% + .5rem);
+	font-size: 1.3rem;
+	background: url(img/main/requestNotify.png) no-repeat 3% center;
+	-webkit-background-size: 12.5%;
+	background-size: 12.5%;
+	border-top: #eee .5px solid
+}
+.message-list>li>h3 {
+	font-size: 1em;
+	margin-bottom: .2rem;
+	color: #2c70c2;
+}
+.message-list>li.end {
+	background-image: url(img/main/overNotify.png);
+}
+.message-list>li.end>h3 {
+	font-size: 1em;
+	margin-bottom: .2rem;
+	color: #ff4949;
+}

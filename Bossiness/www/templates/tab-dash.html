@@ -1,87 +1,48 @@
-<ion-view view-title="库胖商家">
-  <ion-nav-bar class="bar-positive"></ion-nav-bar>
-  <ion-content class="padding content has-header ionic-pseudo" style="padding: 0px;margin: 0px">
-    <!--<div class="list list-borderless">-->
-      <!--<div class="item item-image">-->
-        <!--<img src="img/paris.jpg" >-->
-      <!--</div>-->
-    <!--</div>-->
-      <a class="item item-avatar">
-         <img src="{{storeImg}}">
-        <h2>{{storeName}}</h2>
-        <p>{{storeAddress}}</p>
-      </a>
-
-
-  <div class="padding">
-
-  <div id="bshouye" style="text-align:center;">
-    <span id="sk">
-      <a class="button button-calm buttonstyle" href="#/tab/shoukuanHome">收款</a>
-    </span>
-    <span id="kk">
-      <a class="button button-calm buttonstyle" href="#/tab/kaikaHome">开卡</a>
-    </span>
-    <span>
-      <a class="button button-calm buttonstyle" href="#/tab/chongzhiHome">充值</a>
-    </span>
-    <span id="js">
-      <!--<a class="button button-calm buttonstyle" href="#/tab/jiesuanHome">结算</a>-->
-      <a class="button button-calm buttonstyle" href="#/tab/jiesuanMethod">结算</a>
-    </span>
-  </div>
-
-  </div>
-    <div class="bsiness1">
-      <!--<div style="float: left;padding-left: 60px">-->
-        <!--<a class="item shop" href="#/tab/myShopDetail" >-->
-          <!--<img src="img/myshop.png">-->
-        <!--</a>-->
-        <!--<p>我的店</p>-->
-      <!--</div>-->
-        <div style="float: left;padding-left: 140px">
-           <a class="item shop" href="#/tab/shopQrcode">
-             <img src="img/qcore.jpg">
-           </a>
-        <p>二维码</p>
-        </div>
-
-        <div style="float: left;padding: 0px 40px 0px 40px">
-           <a class="item shop" ng-click="activateCardList()" ng-controller="phoneNumberActivateCtrl">
-             <img src="img/mycard.png">
-           </a>
-        <p>已开的卡</p>
-        </div>
-    </div>
-    <ion-list>
-      <!--当前信息：-->
-      <!--<ion-item ng-repeat="item in messageList" item="item" href="#/item/{{item.id}}" class="item-remove-animate">-->
-       <!--<span style="color: red"> {{item.noteInfo}}</span>-->
-        <!--<ion-option-button class="button-calm" ng-click="deleteMessage(item.noteId)">-->
-          <!--删除-->
-        <!--</ion-option-button>-->
-        <!--<ion-option-button class="button-assertive" ng-click="already(item.noteId)">-->
-          <!--已读-->
-      <!--</ion-item>-->
-      <!--<div class="item text-center" ng-if="messageList==''">-->
-        <!--<span style="color: red"> 当前信用良好，没有欠款信息</span>-->
-      <!--</div>-->
-      <div class="list">
-        <!--<div class="item item-divider item-icon-right" ng-click="changeOnOff(onOff)">当前信息 <i class="icon {{onOff==true?'ion-android-arrow-dropdown':'ion-android-arrow-dropup'}}"></i></div>-->
-        <div class="item item-divider item-icon-right">当前信息 <i class="icon {{onOff==true?'ion-android-arrow-dropdown':'ion-android-arrow-dropup'}}"></i></div>
-        <div ng-show="onOff">
-            <ion-item ng-repeat="item in messageList" item="item" class="item-remove-animate">
-            <span style="word-break:normal;width:auto;display:block;white-space:pre-wrap;word-wrap:break-word;overflow:hidden;color: red">{{item.noteInfo}}</span>
-            <ion-option-button class="button-calm" ng-click="deleteMessage(item.noteId)">
-              删除
-            </ion-option-button>
-            <ion-option-button class="button-assertive" ng-click="already(item.noteId)">
-              已读
-            </ion-option-button>
-            </ion-item>
-
-        </div>
+<ion-view title="首页" hide-back-button="true">
+  <ion-nav-bar></ion-nav-bar>
+  <ion-content>
+    <header class="header" style="background: url('img/main/header.png')  no-repeat center;">
+      <div class="header-img">
+        <img src="{{storeImg}}">
       </div>
-    </ion-list>
+      <div class="user-name">
+        <h1 class="store-name">{{storeName}}</h1>
+        <address class="address">{{storeAddress}}</address>
+      </div>
+    </header>
+
+    <section class="function-box">
+      <a class="btn-code" style="background: url('img/main/scan.png') no-repeat center;" href="#/tab/shopQrcode">店家二维码</a>
+      <a class="btn-clear" href="#/tab/jiesuanMethod">清算</a>
+      <div class="btn-payment-group">
+        <a href="#/tab/chongzhiHome">
+          <img src="img/main/kaika.png" >
+          开卡／充值
+        </a>
+        <a href="#/tab/shoukuanHome">
+          <img src="img/main/shoukuang.png" >
+          收款
+        </a>
+      </div>
+    </section>
+
+    <section class="message-box">
+      <ion-list>
+        <header>当前信息</header>
+        <ul class="message-list">
+            <ion-item ng-repeat="item in messageList" item="item">
+              <li class="start">
+                <p style="word-break:normal;width:auto;display:block;white-space:pre-wrap;word-wrap:break-word;overflow:hidden;">{{item.noteInfo}}</p>
+                <ion-option-button class="button-calm" ng-click="deleteMessage(item.noteId)">
+                  删除
+                </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="already(item.noteId)">
+                  已读
+                </ion-option-button>
+              </li>
+            </ion-item>
+        </ul>
+      </ion-list>
+    </section>
   </ion-content>
 </ion-view>
