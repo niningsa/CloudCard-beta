@@ -55,6 +55,7 @@ angular.module('chongzhi.controllers', [])
     $scope.codeBtn = '获取验证码';
     $scope.getRechargeIdentifyCode = function (teleNumber) {
       $scope.msg = "";//先清空错误提示
+      $scope.codeBtnDisable = false;//防止二次点击
       if ($scope.teleNumber) {
         $http({
           method: "POST",
@@ -74,6 +75,9 @@ angular.module('chongzhi.controllers', [])
           }
         }).success(function (result) {
           if (result.code === '500') {
+            $scope.codeBtn = '获取验证码';
+            $scope.codeBtnDisable = true;//失败后可以立即获取验证码
+
             $scope.$apply(function () {
               $scope.msg = result.msg;
             });
