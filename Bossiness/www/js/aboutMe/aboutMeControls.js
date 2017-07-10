@@ -24,43 +24,39 @@ angular.module('aboutMe.controllers', [])
       $scope.storeAddress=data.storeAddress;
       $scope.storeImg=data.storeImg;
       $scope.ossUrl=data.ossUrl;
-      $scope.storeInfoImgList=data.storeInfoImgList;
+      $scope.bizLicImgList=data.bizLicImgList;
+      $scope.bizAvatarImgList=data.bizAvatarImgList;
+      $scope.bizDetailsList=data.bizDetailsList;
     }).error(function (data) {
 
 
     });
 
-    $scope.selectPhoto = function () {
+    $scope.selectPhoto = function (storeImgType) {
+      var maximumImagesCount;
+      if(storeImgType === 'bizLic' || storeImgType === 'bizAvatar'){
+        maximumImagesCount = 1;
+      }else{
+        maximumImagesCount = 9;
+      }
       var options = {
-        maximumImagesCount: 9,
+        maximumImagesCount: maximumImagesCount,
         width: 800,
         height: 800,
         quality: 100
       };
-      //通过使用流的方式来上传，会出现兼容性的问题
-      //$cordovaImagePicker.getPictures(options)
-      //  .then(function (results) {
-      //    $scope.imageSrcList = results;
-      //    for (var i = 0; i < results.length; i++) {
-      //      applySellerService.uploadFile(results[i]).success(function (data) {
-      //        //alert("图片上传成功："+data.code);
-      //      });
-      //
-      //    }
-      //    //var alertPopup = $ionicPopup.alert({
-      //    //    title: '成功',
-      //    //    template: "图片上传成功"
-      //    //  });
-      //  }, function (error) {
-      //    // error getting photos
-      //  });
-      //通过插件的方式进行上传图片
       $cordovaImagePicker.getPictures(options)
         .then(function (results) {
-          $scope.imageSrcList = results;
+          if(storeImgType === 'bizLic'){
+            $scope.bizLicImageSrcList = results;
+          }else if(storeImgType === 'bizAvatar'){
+            $scope.bizAvatarImageSrcList = results;
+          }else if(storeImgType === 'bizDetails'){
+            $scope.bizDetailsImageSrcList = results;
+          }
           for (var i = 0; i < results.length; i++) {
             document.addEventListener('deviceready', function () {
-              var url = $rootScope.interfaceUrl+"bizUploadStoreInfoImg?organizationPartyId="+organizationPartyId;
+              var url = $rootScope.interfaceUrl+"bizUploadStoreInfoImg?organizationPartyId="+organizationPartyId+"&storeImgType="+storeImgType;
               var options = {
                 fileKey:"uploadedFile"};
               $cordovaFileTransfer.upload(url, results[i], options)
@@ -74,9 +70,9 @@ angular.module('aboutMe.controllers', [])
             }, false);
           }
           var alertPopup = $ionicPopup.alert({
-                  title: '成功',
-                  template: "图片上传成功"
-                });
+            title: '成功',
+            template: "图片上传成功"
+          });
         }, function (error) {
           // error getting photos
         });
@@ -86,10 +82,10 @@ angular.module('aboutMe.controllers', [])
     //图片的预览
     $scope.shouBigImage=function(){
       $state.go("showPicture");
-    }
+    };
   })
 
-//图片预览
+  //图片预览
   .controller('showPictureCtrl', function ($scope,$ionicPopup,$state,$rootScope,myShopDetailService) {
     myShopDetailService.selectMyShopDetail().success(function (data) {
       //console.log(data);

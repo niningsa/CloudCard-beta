@@ -4,21 +4,29 @@
     <a class="button icon ion-ios-undo" ui-sref="tab.aboutMe"></a>
   </ion-nav-buttons>
   <ion-content>
-    <div class="list">
-      <div class="item item-divider" style="min-height:11px"></div>
-      <a class="item item-avatar">
-        <img src="{{storeImg}}">
-        <h2>{{storeName}}</h2>
-        <p>{{storeAddress}}</p>
-      </a>
-      <div class="item item-divider" style="min-height:11px"></div>
-        <div>
-          <span>上传图片：<span><button class="button button-balanced" ng-click="selectPhoto();">从图库里选择</button></span></span>
+    <form name="regForm" ng-submit="updateInformation()">
+      <div class="list card">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">法人姓名：</span>
+          <input type="text"  style="border: 0px solid #d5d5d5;" name="userName" placeholder="请输入法人姓名" ng-model="userName"  required>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">法人手机联系方式：</span>
+          <input type="text" style="border: 0px solid #d5d5d5;" disabled="disabled" name="teleNumber" ng-model="teleNumber">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">店铺地址：</span>
+          <input type="text"  style="border: 0px solid #d5d5d5;" name="address" placeholder="请输入详细的店铺地址" ng-model="address" >
+        </label>
+        <div class="item item-divider" style="min-height:11px"></div>
 
+        <div>
+          <span>上传营业执照照片</span>
+          <span><button class="button button-balanced" ng-click="selectPhoto('bizLic');">从图库里选择</button></span>
           <div class="row padding row-wrap">
             <div class="col col-33"
                  style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
-                 ng-repeat="image in  imageSrcList" ng-click="shouBigImage()">
+                 ng-repeat="image in  bizLicImageSrcList" ng-click="shouBigImage()">
               <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
                    ng-src="{{image}}" id="myImage">
             </div>
@@ -26,15 +34,65 @@
           <div class="row padding row-wrap">
             <div class="col col-33" ng-click="shouBigImage()"
                  style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
-                 ng-repeat="image in  storeInfoImgList">
+                 ng-repeat="image in  bizLicImgList">
               <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
                    ng-src="{{ossUrl+image.objectInfo}}" id="myImages">
             </div>
           </div>
         </div>
 
+        <div>
+          <span>上传店铺招牌照片</span>
+          <span><button class="button button-balanced" ng-click="selectPhoto('bizAvatar');">从图库里选择</button></span>
+          <div class="row padding row-wrap">
+            <div class="col col-33"
+                 style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
+                 ng-repeat="image in  bizAvatarImageSrcList" ng-click="shouBigImage()">
+              <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+                   ng-src="{{image}}" id="myImage">
+            </div>
+          </div>
+          <div class="row padding row-wrap">
+            <div class="col col-33" ng-click="shouBigImage()"
+                 style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
+                 ng-repeat="image in  bizAvatarImgList">
+              <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+                   ng-src="{{ossUrl+image.objectInfo}}" id="myImages">
+            </div>
+          </div>
+        </div>
 
-    </div>
+        <div>
+          <span>上传店铺详情图片：</span>
+          <span><button class="button button-balanced" ng-click="selectPhoto('bizDetails');">从图库里选择</button></span>
+          <div class="row padding row-wrap">
+            <div class="col col-33"
+                 style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
+                 ng-repeat="image in  bizDetailsImageSrcList" ng-click="shouBigImage()">
+              <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+                   ng-src="{{image}}" id="myImage">
+            </div>
+          </div>
+          <div class="row padding row-wrap">
+            <div class="col col-33" ng-click="shouBigImage()"
+                 style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
+                 ng-repeat="image in  bizDetailsList">
+              <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+                   ng-src="{{ossUrl+image.objectInfo}}" id="myImages">
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="padding">
+          <button class="button button-block button-positive" type="submit">申请二级商家</button>
+        </div>
+
+        <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
+      </div>
+
+    </form>
+    <div class="list">
+
 
     </div>
   </ion-content>
