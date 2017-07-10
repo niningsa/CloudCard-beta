@@ -7,6 +7,10 @@
     <form name="regForm" ng-submit="updateInformation()">
       <div class="list card">
         <label class="item item-input item-stacked-label">
+          <span class="input-label">店铺名称：</span>
+          <input type="text" style="border: 0px solid #d5d5d5;" disabled="disabled" name="storeName" ng-model="storeName">
+        </label>
+        <label class="item item-input item-stacked-label">
           <span class="input-label">法人姓名：</span>
           <input type="text"  style="border: 0px solid #d5d5d5;" name="userName" placeholder="请输入法人姓名" ng-model="userName"  required>
         </label>
@@ -16,7 +20,7 @@
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">店铺地址：</span>
-          <input type="text"  style="border: 0px solid #d5d5d5;" name="address" placeholder="请输入详细的店铺地址" ng-model="address" >
+          <input type="text"  style="border: 0px solid #d5d5d5;" name="address" placeholder="请输入详细的店铺地址" ng-model="storeAddress" >
         </label>
         <div class="item item-divider" style="min-height:11px"></div>
 
