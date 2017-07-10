@@ -53,8 +53,7 @@ angular.module('aboutMe.services', [])
               "contentId": contentId
             },
             success: function (result) {
-              console.log(result);
-              if (result.code == '200') {
+              if (result.code === '200') {
                 deferred.resolve(result);
               } else {
                 deferred.reject(result);
@@ -140,7 +139,7 @@ angular.module('aboutMe.services', [])
       },
 
       //申请开店
-      bizCreateApplyVIP: function (storeName,legalName,storeAddress,aliPayAccount,aliPayName,wxPayAccount,wxPayName) {
+      bizCreateApplyVIP: function (storeName,legalId,legalName,storeAddress,aliPayAccount,aliPayName,wxPayAccount,wxPayName) {
         var token = $.cookie("token");
         var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
@@ -152,6 +151,7 @@ angular.module('aboutMe.services', [])
             data: {
               "organizationPartyId":organizationPartyId,
               "storeName": storeName,
+              "legalId": legalId,
               "legalName": legalName,
               "storeAddress": storeAddress,
               "aliPayAccount": aliPayAccount,

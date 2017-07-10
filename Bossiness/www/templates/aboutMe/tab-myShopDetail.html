@@ -52,7 +52,7 @@
             </div>
           </div>
           <div class="row padding row-wrap">
-            <div class="col col-33" ng-click="shouBigImage()"
+            <div class="col col-33" ng-click="shouBigImage('bizLic')"
                  style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
                  ng-repeat="image in  bizLicImgList">
               <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
@@ -73,7 +73,7 @@
             </div>
           </div>
           <div class="row padding row-wrap">
-            <div class="col col-33" ng-click="shouBigImage()"
+            <div class="col col-33" ng-click="shouBigImage('bizAvatar')"
                  style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
                  ng-repeat="image in  bizAvatarImgList">
               <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
@@ -94,7 +94,7 @@
             </div>
           </div>
           <div class="row padding row-wrap">
-            <div class="col col-33" ng-click="shouBigImage()"
+            <div class="col col-33" ng-click="shouBigImage('bizDetails')"
                  style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
                  ng-repeat="image in  bizDetailsList">
               <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
@@ -109,11 +109,6 @@
 
         <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
       </div>
-
     </form>
-    <div class="list">
-
-
-    </div>
   </ion-content>
 </ion-view>

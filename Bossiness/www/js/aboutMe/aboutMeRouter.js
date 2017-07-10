@@ -32,6 +32,7 @@ angular.module('starter')
       .state('showPicture', {
         url: '/showPicture',
         templateUrl: 'templates/aboutMe/showPicture.html',
+        params: {'storeImgType': null},
         controller: 'showPictureCtrl'
       })
 

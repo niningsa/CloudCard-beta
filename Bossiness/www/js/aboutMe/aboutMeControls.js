@@ -21,6 +21,7 @@ angular.module('aboutMe.controllers', [])
     var organizationPartyId = $.cookie("organizationPartyId");
     myShopDetailService.selectMyShopDetail().success(function (data) {
       $scope.storeName=data.storeName;
+      $scope.legalId=data.legalId;
       $scope.storeAddress=data.storeAddress;
       $scope.legalName=data.legalName;
       $scope.legalTeleNumber=data.legalTeleNumber;
@@ -42,6 +43,7 @@ angular.module('aboutMe.controllers', [])
       $scope.codeBtnDisable = false;//防止二次点击
       myShopDetailService.bizCreateApplyVIP(
         $scope.storeName,
+        $scope.legalId,
         $scope.legalName,
         $scope.storeAddress,
         $scope.aliPayAccount,
@@ -107,35 +109,46 @@ angular.module('aboutMe.controllers', [])
     };
 
     //图片的预览
-    $scope.shouBigImage=function(){
-      $state.go("showPicture");
+    $scope.shouBigImage=function(storeImgType){
+      $state.go('showPicture',{storeImgType:storeImgType});
     };
   })
 
   //图片预览
-  .controller('showPictureCtrl', function ($scope,$ionicPopup,$state,$rootScope,myShopDetailService) {
+  .controller('showPictureCtrl', function ($scope,$ionicPopup,$state,$rootScope,myShopDetailService,$stateParams) {
     myShopDetailService.selectMyShopDetail().success(function (data) {
-      //console.log(data);
       $scope.ossUrl=data.ossUrl;
-      $scope.storeInfoImgList=data.storeInfoImgList;
-      console.log( $scope.storeInfoImgList);
+      if($stateParams.storeImgType === 'bizLic'){
+        $scope.storeInfoImgList=data.bizLicImgList;
+      }else if($stateParams.storeImgType === 'bizAvatar'){
+        $scope.storeInfoImgList=data.bizAvatarImgList;
+      }else if($stateParams.storeImgType === 'bizDetails'){
+        $scope.storeInfoImgList=data.bizDetailsList;
+      }
+
     }).error(function (data) {
 
     });
+
    //删除图片
     $scope.deletePicture=function(contentId){
       myShopDetailService.deletePictureService(contentId).success(function (data) {
-        console.log(data);
         var alertPopup = $ionicPopup.alert({
-                  title: '成功',
-                  template: "图片删除成功"
-                });
+              title: '成功',
+              template: "图片删除成功"
+            });
         $scope.ossUrl=data.ossUrl;
-        $scope.storeInfoImgList=data.storeInfoImgList;
+        if($stateParams.storeImgType === 'bizLic'){
+          $scope.bizLicImgList=data.bizLicImgList;
+        }else if($stateParams.storeImgType === 'bizAvatar'){
+          $scope.bizAvatarImgList=data.bizAvatarImgList;
+        }else if($stateParams.storeImgType === 'bizDetails'){
+          $scope.bizDetailsList=data.bizDetailsList;
+        }
       }).error(function (data) {
-
+          
       });
-    }
+    };
 
 
   })
