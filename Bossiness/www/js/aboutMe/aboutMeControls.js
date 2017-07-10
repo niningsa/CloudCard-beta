@@ -139,14 +139,14 @@ angular.module('aboutMe.controllers', [])
             });
         $scope.ossUrl=data.ossUrl;
         if($stateParams.storeImgType === 'bizLic'){
-          $scope.bizLicImgList=data.bizLicImgList;
+          $scope.storeInfoImgList=data.bizLicImgList;
         }else if($stateParams.storeImgType === 'bizAvatar'){
-          $scope.bizAvatarImgList=data.bizAvatarImgList;
+          $scope.storeInfoImgList=data.bizAvatarImgList;
         }else if($stateParams.storeImgType === 'bizDetails'){
-          $scope.bizDetailsList=data.bizDetailsList;
+          $scope.storeInfoImgList=data.bizDetailsList;
         }
       }).error(function (data) {
-          
+
       });
     };
 
