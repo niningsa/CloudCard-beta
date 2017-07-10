@@ -17,11 +17,17 @@ angular.module('aboutMe.controllers', [])
    * Author LN
    * Date 2017-1-12
    * */
-  .controller('myShopDetailCtrl', function ($scope,$state,$rootScope,applySellerService,$ionicPopup,myShopDetailService,$cordovaImagePicker,$cordovaFileTransfer) {
+  .controller('myShopDetailCtrl', function ($scope,$state,$rootScope,applySellerService,$ionicPopup,myShopDetailService,$cordovaImagePicker,$cordovaFileTransfer,$ionicLoading) {
     var organizationPartyId = $.cookie("organizationPartyId");
     myShopDetailService.selectMyShopDetail().success(function (data) {
       $scope.storeName=data.storeName;
       $scope.storeAddress=data.storeAddress;
+      $scope.legalName=data.legalName;
+      $scope.legalTeleNumber=data.legalTeleNumber;
+      $scope.aliPayAccount=data.aliPayAccount;
+      $scope.aliPayName=data.aliPayName;
+      $scope.wxPayAccount=data.wxPayAccount;
+      $scope.wxPayName=data.wxPayName;
       $scope.storeImg=data.storeImg;
       $scope.ossUrl=data.ossUrl;
       $scope.bizLicImgList=data.bizLicImgList;
@@ -31,6 +37,27 @@ angular.module('aboutMe.controllers', [])
 
 
     });
+
+    $scope.bizCreateApplyVIP = function () {
+      $scope.codeBtnDisable = false;//防止二次点击
+      myShopDetailService.bizCreateApplyVIP(
+        $scope.storeName,
+        $scope.legalName,
+        $scope.storeAddress,
+        $scope.aliPayAccount,
+        $scope.aliPayName,
+        $scope.wxPayAccount,
+        $scope.wxPayName
+      ).success(function (data) {
+        $ionicLoading.hide();
+        var alertPopup = $ionicPopup.alert({
+          title: '申请成功',
+          template: '恭喜您申请成功，请耐心等待平台审核。'
+        });
+      }).error(function (data) {
+
+      });
+    }
 
     $scope.selectPhoto = function (storeImgType) {
       var maximumImagesCount;

@@ -39,7 +39,7 @@
           <span ng-show="regForm.identifyCode.$error.required">验证码不能为空。</span>
         </div>
         <div class="padding">
-          <button class="button button-block button-positive" ng-disabled="regForm.businessName.$error.required || regForm.phone.$error.required || regForm.businessUserName.$error.required || regForm.identifyCode.$error.required" type="submit">确认申请</button>
+          <button ng-disabled="codeBtnDisable" class="button button-block button-positive" ng-disabled="regForm.businessName.$error.required || regForm.phone.$error.required || regForm.businessUserName.$error.required || regForm.identifyCode.$error.required" type="submit">确认申请</button>
         </div>
         <span ng-bind="regVaildMsg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
       </div>

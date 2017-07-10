@@ -4,23 +4,39 @@
     <a class="button icon ion-ios-undo" ui-sref="tab.aboutMe"></a>
   </ion-nav-buttons>
   <ion-content>
-    <form name="regForm" ng-submit="updateInformation()">
+    <form name="regForm" ng-submit="bizCreateApplyVIP()" ng-controller="myShopDetailCtrl">
       <div class="list card">
         <label class="item item-input item-stacked-label">
           <span class="input-label">店铺名称：</span>
-          <input type="text" style="border: 0px solid #d5d5d5;" disabled="disabled" name="storeName" ng-model="storeName">
+          <input type="text" style="border: 0px solid #d5d5d5;" name="storeName" ng-model="storeName">
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">法人姓名：</span>
-          <input type="text"  style="border: 0px solid #d5d5d5;" name="userName" placeholder="请输入法人姓名" ng-model="userName"  required>
+          <input type="text"  style="border: 0px solid #d5d5d5;" name="userName" placeholder="请输入法人姓名" ng-model="legalName"  required>
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">法人手机联系方式：</span>
-          <input type="text" style="border: 0px solid #d5d5d5;" disabled="disabled" name="teleNumber" ng-model="teleNumber">
+          <input type="text" style="border: 0px solid #d5d5d5;" disabled="disabled" name="teleNumber" ng-model="legalTeleNumber">
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">店铺地址：</span>
           <input type="text"  style="border: 0px solid #d5d5d5;" name="address" placeholder="请输入详细的店铺地址" ng-model="storeAddress" >
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">支付宝账号：</span>
+          <input type="text"  style="border: 0px solid #d5d5d5;" name="aliPayAccount" placeholder="请输入支付宝账号" ng-model="aliPayAccount" >
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">店家支付宝姓名：</span>
+          <input type="text"  style="border: 0px solid #d5d5d5;" name="aliPayName" placeholder="请输入店家支付宝姓名" ng-model="aliPayName" >
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">店家微信账号：</span>
+          <input type="text"  style="border: 0px solid #d5d5d5;" name="wxPayAccount" placeholder="请输入店家微信账号" ng-model="wxPayAccount" >
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">店家微信姓名：</span>
+          <input type="text"  style="border: 0px solid #d5d5d5;" name="wxPayName" placeholder="店家微信姓名" ng-model="wxPayName" >
         </label>
         <div class="item item-divider" style="min-height:11px"></div>
 
@@ -88,7 +104,7 @@
         </div>
       </div>
         <div class="padding">
-          <button class="button button-block button-positive" type="submit">申请二级商家</button>
+          <button class="button button-block button-positive" ng-disabled="codeBtnDisable" type="submit">申请二级商家</button>
         </div>
 
         <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>

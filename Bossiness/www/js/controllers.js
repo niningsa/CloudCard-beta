@@ -771,6 +771,7 @@ angular.module('starter.controllers', [])
           flag = false;
         }
          if(flag){
+           $scope.codeBtnDisable = false;//防止二次点击
            applySellerService.applySellerRegister(
              $scope.boss.businessName,
              $scope.boss.phone,
