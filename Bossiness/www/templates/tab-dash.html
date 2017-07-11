@@ -4,7 +4,7 @@
     <header class="header" style="background: url('img/main/header.png')  no-repeat center;">
       <div class="header-img">
         <img ng-if="storeImg != null" src="{{ossUrl+storeImg}}">
-        <img ng-if="storeImg == null || storeImg == ''" src="/img/avatar.png">
+        <img ng-if="storeImg == null" src="img/avatar.png">
       </div>
       <div class="user-name">
         <h1 class="store-name">{{storeName}}</h1>
