@@ -5,7 +5,8 @@
     <div class="list">
       <div class="item item-divider" style="min-height:11px"></div>
       <div class="item item-avatar">
-        <img src="{{avaterUrl}}"ui-sref="tab.myAvatar">
+        <img ng-if="avaterUrl == null || avaterUrl == ''"  src="img/avatar.png" ui-sref="tab.myAvatar">
+        <img ng-if="avaterUrl != ''" src="{{avaterUrl}}" ui-sref="tab.myAvatar">
         <a href="#/tab/myInformation">
           <h2>{{userName}}</h2>
           <p>一个属于消费者的平台...</p>

@@ -12,14 +12,12 @@
         <div id="zd">   <h2>{{chat.cardName}}： <strong>{{chat.cardBalance}} 元</strong><span id="zandan"><a href="#/tab/subBill/{{chat.cardId}}"> 分账单</a></span> </h2> </div>
         <div id="tel">   <h2>商家联系电话：<strong>{{chat.storeTeleNumber}}</strong><span id="zandan"></div>
         <div id="address">   <h2>商家联系地址：<strong>{{chat.storeAddress}}</strong><span id="zandan"></div>
-
         <a class="item" ng-click="cardInfo('{{chat.cardId}}','{{chat.cardBalance}}','{{chat.cardName}}','{{chat.cardCode}}','{{chat.isAuthToOthers}}','{{chat.isAuthToMe}}')" style="border: 0px">
-        <div class="item item-image">
-          <img src="{{chat.cardImg}}">
-        </div>
-
+          <div class="item item-image">
+            <img ng-if="chat.cardImg == ''"  src="/img/card.png">
+            <img ng-if="chat.cardImg != ''" src="{{chat.cardImg}}">
+          </div>
        </a>
-
       </div>
       <div class="item text-center" ng-if="chats==''">
         没有卡去消费，请购卡!!

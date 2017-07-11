@@ -98,17 +98,15 @@
       <div ng-repeat="chat in storeList">
         <!--<a class="item item-avatar"   href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">-->
         <a class="item item-avatar" href="#tab/shopDetails/{{chat.storeId}}">
-          <img src="{{chat.storeImg}}">
+          <img ng-if="chat.storeImg == null || chat.storeImg == ''"  src="img/avatar.png">
+          <img ng-if="chat.storeImg != ''" src="{{chat.storeImg}}">
           <h2> {{chat.storeName}}</h2>
           <p>  {{chat.address}}</p>
-          <!--<p>{{chat.storeTeleNumber}}</p>-->
         </a>
       </div>
       <div class="item text-center" ng-if="storeList==''">
         附近暂无库胖店!!
       </div>
-
-
     </div>
   </ion-content>
 
