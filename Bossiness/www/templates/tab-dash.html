@@ -3,7 +3,8 @@
   <ion-content>
     <header class="header" style="background: url('img/main/header.png')  no-repeat center;">
       <div class="header-img">
-        <img src="{{storeImg}}">
+        <img ng-if="storeImg != null" src="{{ossUrl+storeImg}}">
+        <img ng-if="storeImg == null || storeImg == ''" src="/img/avatar.png">
       </div>
       <div class="user-name">
         <h1 class="store-name">{{storeName}}</h1>
