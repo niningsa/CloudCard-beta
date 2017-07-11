@@ -99,7 +99,7 @@
         <!--<a class="item item-avatar"   href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">-->
         <a class="item item-avatar" href="#tab/shopDetails/{{chat.storeId}}">
           <img ng-if="chat.storeImg == null || chat.storeImg == ''"  src="img/avatar.png">
-          <img ng-if="chat.storeImg != ''" src="{{chat.storeImg}}">
+          <img ng-if="chat.storeImg != ''" src="{{chat.storeImg + '?x-oss-process=image/circle,r_100'}}">
           <h2> {{chat.storeName}}</h2>
           <p>  {{chat.address}}</p>
         </a>
