@@ -8,7 +8,7 @@
       <div class="list card">
         <label class="item item-input item-stacked-label">
           <span class="input-label">电话号码：</span>
-          <input type="text" name="phone" ng-model="boss.phone" placeholder="请输入电话号码" required/>
+          <input type="tel" name="phone" ng-model="boss.phone" placeholder="请输入电话号码" required/>
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">商铺名称：</span>
@@ -19,7 +19,7 @@
           <input type="text" name="businessUserName" ng-model="boss.businessUserName" placeholder="请输入店主姓名" required/>
         </label>
         <div class="regForm codeInput">
-          <input type="number" class="regInput" placeholder="请输入开店验证码" name="identifyCode" ng-model="boss.identifyCode" required/>
+          <input type="tel" class="regInput" placeholder="请输入开店验证码" name="identifyCode" ng-model="boss.identifyCode" required/>
           <input type="button" class="codeTxt" ng-value="codeBtn" ng-click="getCreateStoreCode(boss.phone)" ng-disabled="codeBtnDisable" value="获取验证码"/>
         </div>
         <div class="regVaildMsg">
@@ -39,7 +39,7 @@
           <span ng-show="regForm.identifyCode.$error.required">验证码不能为空。</span>
         </div>
         <div class="padding">
-          <button ng-disabled="codeBtnDisable" class="button button-block button-positive" ng-disabled="regForm.businessName.$error.required || regForm.phone.$error.required || regForm.businessUserName.$error.required || regForm.identifyCode.$error.required" type="submit">确认申请</button>
+          <button class="button button-block button-positive" ng-disabled="regForm.businessName.$error.required || regForm.phone.$error.required || regForm.businessUserName.$error.required || regForm.identifyCode.$error.required" type="submit">确认申请</button>
         </div>
         <span ng-bind="regVaildMsg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
       </div>
