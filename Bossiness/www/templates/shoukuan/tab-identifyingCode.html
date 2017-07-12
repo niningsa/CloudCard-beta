@@ -1,4 +1,4 @@
-<ion-view view-title="验证收款验证码">
+<ion-view view-title="收款确认">
   <ion-nav-bar class="bar-dark">
     <!--<ion-nav-back-button class="button-clear">-->
     <!--<i class="icon ion-ios-undo"></i>返回-->
@@ -12,7 +12,7 @@
       <form name="xiaoFeiSaoKaForm" ng-submit="shouKuan();" ng-controller="identifyingCodeCtrl">
         <div style="font-size: 18px;color:red;padding: 10px 0px 20px 0px">您正在进行收款操作>>> </div>
         <div class="loginbox-textbox">
-          收款验证码: <input class="form-control" type="number" style="width: 40%;display: inline-block;border:1px solid #B2B2B2" placeholder="验证码" name="identifyCode" ng-model="identifyCode" required/>
+          收款验证码: <input class="form-control" type="tel"  style="width: 40%;display: inline-block;border:1px solid #B2B2B2" placeholder="验证码" name="identifyCode" ng-model="identifyCode" required/>
           <input type="button" class="btn btn-primary"  ng-value="codeBtn" ng-click="getPayIdentifyCode('{{teleNumber}}')" ng-disabled="codeBtnDisable">
         </div>
         <span ng-bind="msg" style="width:300px;display: block;text-align: center;font-weight: bold;color: red;"></span>
