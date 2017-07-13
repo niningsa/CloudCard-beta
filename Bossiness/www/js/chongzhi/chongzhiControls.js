@@ -54,54 +54,62 @@ angular.module('chongzhi.controllers', [])
     //无卡开卡获取手机验证码
     $scope.codeBtn = '获取验证码';
     $scope.getRechargeIdentifyCode = function (teleNumber) {
-      $scope.msg = "";//先清空错误提示
-      $scope.codeBtnDisable = false;//防止二次点击
-      if ($scope.teleNumber) {
-        $http({
-          method: "POST",
-          url: $rootScope.interfaceUrl + "getRechargeCaptchaOfUser",
-          data: {
-            "token": token,
-            "teleNumber": $scope.teleNumber,
-            "amount": $scope.amount
-          },
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},         // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
-          transformRequest: function (obj) {                                      // 参数是对象的话，需要把参数转成序列化的形式
-            var str = [];
-            for (var p in obj) {
-              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            }
-            return str.join("&");
-          }
-        }).success(function (result) {
-          if (result.code === '500') {
-            $scope.codeBtn = '获取验证码';
-            $scope.codeBtnDisable = true;//失败后可以立即获取验证码
+      $ionicPopup.confirm({
+        title: "提示",
+        template: "<p align='center' style='font-size: 12px'>验证码将发送到"+$scope.teleNumber+"</p>",
+        cancelText: "取消",
+        okText: "确定"
+      }).then(function (res) {
+        if(res) {
+          $scope.msg = "";//先清空错误提示
+          $scope.codeBtnDisable = false;//防止二次点击
+          if ($scope.teleNumber) {
+            $http({
+              method: "POST",
+              url: $rootScope.interfaceUrl + "getRechargeCaptchaOfUser",
+              data: {
+                "token": token,
+                "teleNumber": $scope.teleNumber,
+                "amount": $scope.amount
+              },
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},         // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+              transformRequest: function (obj) {                                      // 参数是对象的话，需要把参数转成序列化的形式
+                var str = [];
+                for (var p in obj) {
+                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                }
+                return str.join("&");
+              }
+            }).success(function (result) {
+              if (result.code === '500') {
+                $scope.codeBtn = '获取验证码';
+                $scope.codeBtnDisable = true;//失败后可以立即获取验证码
 
-            $scope.$apply(function () {
-              $scope.msg = result.msg;
+                $scope.$apply(function () {
+                  $scope.msg = result.msg;
+                });
+              } else {
+                //倒计时
+                $scope.n = 60;
+                $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+                var time = $interval(function () {
+                  $scope.n--;
+                  $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+                  if ($scope.n === 0) {
+                    $interval.cancel(time); // 取消定时任务
+                    $scope.codeBtn = '获取验证码';
+                    $scope.codeBtnDisable = false;
+                  }
+                }, 1000);
+                $scope.codeBtnDisable = true;
+              }
             });
           } else {
-            //倒计时
-            $scope.n = 60;
-            $scope.codeBtn = "获取中 " + $scope.n + " 秒";
-            var time = $interval(function () {
-              $scope.n--;
-              $scope.codeBtn = "获取中 " + $scope.n + " 秒";
-              if ($scope.n === 0) {
-                $interval.cancel(time); // 取消定时任务
-                $scope.codeBtn = '获取验证码';
-                $scope.codeBtnDisable = false;
-              }
-            }, 1000);
-            $scope.codeBtnDisable = true;
+            $scope.msg = "请输入您的手机号码！！";
           }
-        });
-      } else {
-        $scope.msg = "请输入您的手机号码！！";
-      }
+        }
+      });
     };
-
   })
 
 

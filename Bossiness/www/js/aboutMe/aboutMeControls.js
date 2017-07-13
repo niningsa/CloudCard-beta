@@ -25,6 +25,7 @@ angular.module('aboutMe.controllers', [])
       $scope.storeAddress=data.storeAddress;
       $scope.legalName=data.legalName;
       $scope.legalTeleNumber=data.legalTeleNumber;
+      $scope.storeSaleLevel=data.storeSaleLevel;
       $scope.aliPayAccount=data.aliPayAccount;
       $scope.aliPayName=data.aliPayName;
       $scope.wxPayAccount=data.wxPayAccount;
@@ -34,6 +35,9 @@ angular.module('aboutMe.controllers', [])
       $scope.bizLicImgList=data.bizLicImgList;
       $scope.bizAvatarImgList=data.bizAvatarImgList;
       $scope.bizDetailsList=data.bizDetailsList;
+      if(data.storeSaleLevel ==='STORE_SALE_LEVEL_2'){
+        $scope.codeBtnDisable = false;
+      }
     }).error(function (data) {
 
 
