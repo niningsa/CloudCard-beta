@@ -44,7 +44,6 @@ angular.module('chongzhi.controllers', [])
               "amount":data.cardBalance
             });
           }
-
         }).error(function (data) {
 
         });

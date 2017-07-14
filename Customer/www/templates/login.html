@@ -13,7 +13,7 @@
         </div>
         <div class="loginForm codeInput">
           <input type="tel" class="loginInput" placeholder="验证码" name="identifyCode" ng-model="user.identifyCode" required/>
-          <input type="button" class="codeTxt" ng-value="codeBtn" ng-click="getIdentifyCode(user.tel)" ng-disabled="codeBtnDisable" value="获取验证码"/>
+          <input type="button" class="codeTxt" ng-value="codeBtn" ng-click="getIdentifyCode(user.tel)" ng-disabled="codeBtnDisable || loginForm.tel.$error.required" value="获取验证码"/>
 
         </div>
         <div class="loginVaildMsg">

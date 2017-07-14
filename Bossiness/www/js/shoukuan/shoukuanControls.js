@@ -192,50 +192,57 @@ angular.module('shoukuan.controllers', [])
     //无卡收款获取手机验证码
     $scope.codeBtn = '获取验证码';
     $scope.getPayIdentifyCode = function (teleNumber) {
-      $scope.msg = "";//先清空错误提示
-      if (teleNumber) {
-        $http({
-          method: "POST",
-          url: $rootScope.interfaceUrl + "getPayCaptchaOfUser",
-          data: {
-            "token": token,
-            "teleNumber": teleNumber,
-            "amount": $scope.amount
-          },
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},         // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
-          transformRequest: function (obj) {                                      // 参数是对象的话，需要把参数转成序列化的形式
-            var str = [];
-            for (var p in obj) {
-              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            }
-            return str.join("&");
-          }
-        }).success(function (result) {
-          console.log(result);
-          console.log(result.code + " " + result.msg);
-          if (result.code == '500') {
-            $scope.$apply(function () {
-              $scope.msg = result.msg;
+      $ionicPopup.confirm({
+        title: "提示",
+        template: "<p align='center' style='font-size: 12px'>验证码将发送到"+teleNumber+"</p>",
+        cancelText: "取消",
+        okText: "确定"
+      }).then(function (res) {
+        if(res){
+          $scope.msg = "";//先清空错误提示
+          if (teleNumber) {
+            $http({
+              method: "POST",
+              url: $rootScope.interfaceUrl + "getPayCaptchaOfUser",
+              data: {
+                "token": token,
+                "teleNumber": teleNumber,
+                "amount": $scope.amount
+              },
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},         // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+              transformRequest: function (obj) {                                      // 参数是对象的话，需要把参数转成序列化的形式
+                var str = [];
+                for (var p in obj) {
+                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                }
+                return str.join("&");
+              }
+            }).success(function (result) {
+              if (result.code === '500') {
+                $scope.$apply(function () {
+                  $scope.msg = result.msg;
+                });
+              } else {
+                //倒计时
+                $scope.n = 60;
+                $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+                var time = $interval(function () {
+                  $scope.n--;
+                  $scope.codeBtn = "获取中 " + $scope.n + " 秒";
+                  if ($scope.n === 0) {
+                    $interval.cancel(time); // 取消定时任务
+                    $scope.codeBtn = '获取验证码';
+                    $scope.codeBtnDisable = false;
+                  }
+                }, 1000);
+                $scope.codeBtnDisable = true;
+              }
             });
           } else {
-            //倒计时
-            $scope.n = 60;
-            $scope.codeBtn = "获取中 " + $scope.n + " 秒";
-            var time = $interval(function () {
-              $scope.n--;
-              $scope.codeBtn = "获取中 " + $scope.n + " 秒";
-              if ($scope.n == 0) {
-                $interval.cancel(time); // 取消定时任务
-                $scope.codeBtn = '获取验证码';
-                $scope.codeBtnDisable = false;
-              }
-            }, 1000);
-            $scope.codeBtnDisable = true;
+            $scope.msg = "请输入您的手机号码！！";
           }
-        });
-      } else {
-        $scope.msg = "请输入您的手机号码！！";
-      }
+        }
+      });
     };
     //无卡收款
     $scope.shouKuan=function(){
@@ -252,8 +259,8 @@ angular.module('shoukuan.controllers', [])
         if(data.code=="200"){
           $ionicLoading.hide();
           var alertPopup = $ionicPopup.alert({
-            title: '支付成功',
-            template: '恭喜您支付成功！'
+            title: '收款成功',
+            template: '恭喜您收款成功！'
           });
           alertPopup.then(function (res) {
             //用户点击确认登录后跳转

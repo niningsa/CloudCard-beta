@@ -2151,11 +2151,7 @@ angular.module('starter.controllers', [])
    * Author LN
    * Date 2016-11-24
    * */
-.controller('LoginCtrl', function($scope,$interval,$rootScope,$http,$state) {
-  // $scope.tel='15910989807';
-  //$scope.user={
-  //  tel:"18702104254"
-  //};
+.controller('LoginCtrl', function($scope,$interval,$rootScope,$http,$state,$ionicPopup) {
   //为了让安卓手机按返回时不跳到登陆页面，判断tooken
   $scope.$on('$ionicView.beforeEnter', function () {                           // 这个玩意儿不错，刚加载执行的广播通知方法
     if ($.cookie("token") != null) { // 登录成功了，按物理返回键，就别想重新登录
@@ -2164,51 +2160,58 @@ angular.module('starter.controllers', [])
       $state.go("tab.index");
     }
   });
+
   $scope.codeBtn='获取验证码';
-
   $scope.getIdentifyCode=function (tel) {
-    $scope.msg="";//先清空错误提示
-    if(tel){
-      $http({
-        method: "POST",
-        url: $rootScope.interfaceUrl+"getLoginCaptcha",
-        data: {
-          "teleNumber":tel
-        },
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },// 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
-        transformRequest: function(obj) { // 参数是对象的话，需要把参数转成序列化的形式
-          var str = [];
-          for (var p in obj) {
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-          }
-          return str.join("&");
-        }
-      }).success(function (result) {
-          // console.log(result);
-          if(result.code=='500'){
-                $scope.msg=result.msg;
-          }else{
-            //倒计时
-            $scope.n=60;
-            $scope.codeBtn="获取中 "+$scope.n+" 秒";
-            var time=$interval(function () {
-              if($scope.n<=0){
-                $interval.cancel(time); // 取消定时任务
-                $scope.codeBtn='获取验证码';
-                $scope.codeBtnDisable=false;
-              }else{
-                $scope.n--;
-                $scope.codeBtn="获取中 "+$scope.n+" 秒";
+    $ionicPopup.confirm({
+      title: "提示",
+      template: "<p align='center' style='font-size: 12px'>验证码将发送到"+tel+"</p>",
+      cancelText: "取消",
+      okText: "确定"
+    }).then(function (res) {
+      if(res){
+        $scope.msg="";//先清空错误提示
+        if(tel){
+          $http({
+            method: "POST",
+            url: $rootScope.interfaceUrl+"getLoginCaptcha",
+            data: {
+              "teleNumber":tel
+            },
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },// 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
+            transformRequest: function(obj) { // 参数是对象的话，需要把参数转成序列化的形式
+              var str = [];
+              for (var p in obj) {
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
               }
-            },1000);
-            $scope.codeBtnDisable=true;
-          }
-      });
-
-
-    }else{
-        $scope.msg="请输入您的手机号码！！"
-    }
+              return str.join("&");
+            }
+          }).success(function (result) {
+            // console.log(result);
+            if(result.code=='500'){
+              $scope.msg=result.msg;
+            }else{
+              //倒计时
+              $scope.n=60;
+              $scope.codeBtn="获取中 "+$scope.n+" 秒";
+              var time=$interval(function () {
+                if($scope.n<=0){
+                  $interval.cancel(time); // 取消定时任务
+                  $scope.codeBtn='获取验证码';
+                  $scope.codeBtnDisable=false;
+                }else{
+                  $scope.n--;
+                  $scope.codeBtn="获取中 "+$scope.n+" 秒";
+                }
+              },1000);
+              $scope.codeBtnDisable=true;
+            }
+          });
+        }else{
+          $scope.msg="请输入您的手机号码！！"
+        }
+      }
+    });
   };
 })
 

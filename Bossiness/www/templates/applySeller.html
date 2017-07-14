@@ -20,7 +20,7 @@
         </label>
         <div class="regForm codeInput">
           <input type="tel" class="regInput" placeholder="请输入开店验证码" name="identifyCode" ng-model="boss.identifyCode" required/>
-          <input type="button" class="codeTxt" ng-value="codeBtn" ng-click="getCreateStoreCode(boss.phone)" ng-disabled="codeBtnDisable" value="获取验证码"/>
+          <input type="button" class="codeTxt" ng-value="codeBtn" ng-click="getCreateStoreCode(boss.phone)" ng-disabled="codeBtnDisable || regForm.phone.$error.required " value="获取验证码"/>
         </div>
         <div class="regVaildMsg">
           <span style="color:red" ng-show="regForm.businessName.$dirty && regForm.businessName.$invalid"/>

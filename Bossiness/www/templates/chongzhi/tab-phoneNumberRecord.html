@@ -9,7 +9,6 @@
     </ion-nav-buttons>
     <ion-content class="padding">
       <form name="phoneNumberRecordForm" ng-submit="noCardRecharge()" ng-controller="phoneNumberRecordCtrl" >
-
         <div class="list">
           <label class="item item-input item-stacked-label">
             <span class="input-label">手机号</span>
@@ -21,7 +20,7 @@
           </label>
           <div class="item item-input item-stacked-label">
             <input type="tel"  style="width: 40%;display: inline-block;border:0px solid #B2B2B2" placeholder="请输入验证码" name="captcha" ng-model="captcha" required/>
-            <input type="button" class="btn btn-primary" style="width: 28%;" ng-value="codeBtn" ng-click="getRechargeIdentifyCode('{{teleNumber}}')" ng-disabled="codeBtnDisable">
+            <input type="button" class="btn btn-primary" style="width: 28%;" ng-value="codeBtn" ng-disabled="codeBtnDisable || phoneNumberRecordForm.teleNumber.$error.required" ng-click="getRechargeIdentifyCode('{{teleNumber}}')" >
           </div>
         </div>
         <div class="padding">
