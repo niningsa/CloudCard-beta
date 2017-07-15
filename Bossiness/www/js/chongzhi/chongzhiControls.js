@@ -9,6 +9,7 @@ angular.module('chongzhi.controllers', [])
    * Date 2017-4-10
    * */
   .controller("phoneNumberRecordCtrl", function ($http,$interval,$scope,$ionicPopup,$state,$rootScope,$stateParams,chongzhiService) {
+    var organizationPartyId = $.cookie("organizationPartyId");
     var token = $.cookie("token");
     $scope.noCardRecharge=function(){
       $("#cz").attr("disabled","disabled");//这是为了重复的提交，所以给它弄死
@@ -68,6 +69,7 @@ angular.module('chongzhi.controllers', [])
               url: $rootScope.interfaceUrl + "getRechargeCaptchaOfUser",
               data: {
                 "token": token,
+                "organizationPartyId": organizationPartyId,
                 "teleNumber": $scope.teleNumber,
                 "amount": $scope.amount
               },

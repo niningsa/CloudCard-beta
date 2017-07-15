@@ -188,6 +188,8 @@ angular.module('shoukuan.controllers', [])
     $scope.teleNumber = $stateParams.teleNumber;
     $scope.amount = $stateParams.amount;
     $scope.cardCode = $stateParams.cardCode;
+    var organizationPartyId = $.cookie("organizationPartyId");
+
     var token=$.cookie("token");
     //无卡收款获取手机验证码
     $scope.codeBtn = '获取验证码';
@@ -207,7 +209,8 @@ angular.module('shoukuan.controllers', [])
               data: {
                 "token": token,
                 "teleNumber": teleNumber,
-                "amount": $scope.amount
+                "amount": $scope.amount,
+                "organizationPartyId":organizationPartyId
               },
               headers: {'Content-Type': 'application/x-www-form-urlencoded'},         // 默认的Content-Type是text/plain;charset=UTF-8，所以需要更改下
               transformRequest: function (obj) {                                      // 参数是对象的话，需要把参数转成序列化的形式
