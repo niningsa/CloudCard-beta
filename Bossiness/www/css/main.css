@@ -13,7 +13,7 @@ a {
 .header {
 	display: flex;
 	align-items: center;
-	padding-top: 15px;
+	padding-top: 35px;
 	height: 23.33vw;
 	-webkit-background-size: 100% 100%;
 	background-size: 100% 100%;
@@ -21,17 +21,19 @@ a {
 .header-img {
 	width: 12vw;
 	height: 12vw;
-	margin-left: 3rem;
+  margin-bottom: 1.6rem;
+  margin-left: 3rem;
 	margin-right: 1.5rem;
 	border-radius: 50%;
 	overflow: hidden;
 }
 .header-img>img {
-	display: block;
+  margin-bottom: 0.4rem;
+  display: block;
 	height: 100%;
 }
 .store-name {
-	margin-bottom: .4rem;
+	margin-bottom: 0.4rem;
 	font-size: 1.5rem;
 	font-weight: 400;
 	color: #fff;
