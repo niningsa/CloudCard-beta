@@ -1149,13 +1149,14 @@ angular.module('starter.controllers', [])
                   var latitude = location[1];
                   var isGroupOwner = result.storeList[o].isGroupOwner;
                   var isHasCard = result.storeList[o].isHasCard;
+                  var storeSaleLevel = result.storeList[o].storeSaleLevel;
                   var address = result.storeList[o].address;
                   var telNum = result.storeList[o].telNum;
                   var gpsPoint = new BMap.Point(longitude, latitude);  // 创建点坐标
                   map.centerAndZoom(gpsPoint, 16);
                   var marker = new BMap.Marker(gpsPoint);
 
-                  if (isHasCard == 'N') {//如果是圈主的话就将默认的marker变成蓝色
+                  if (storeSaleLevel == 'STORE_SALE_LEVEL_2') {//如果是圈主的话就将默认的marker变成蓝色
                     var icon = new BMap.Icon("img/blueMarket.png", new BMap.Size(20, 32)); //icon_url为自己的图片路径
                     var marker = new BMap.Marker(gpsPoint, {icon: icon});
                   }
