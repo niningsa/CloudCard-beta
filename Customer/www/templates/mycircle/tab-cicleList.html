@@ -1,79 +1,7 @@
 <ion-view view-title="附近店铺列表">
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
-  <!--<ion-nav-title>-->
-    <!--<ion-header-bar class="item-input-inset search">-->
-    <!--<ion-header-bar align-title="left" class="bar-positive">-->
-     <!--<span id="zsearch">-->
-       <!--&lt;!&ndash;<span id="adress" ng-click="openModal();">上海</span> >&ndash;&gt;-->
-       <!--<span id="geo" style="display: none"></span>-->
-       <!--<span id="adress" ng-click="openModal();">{{region}} </span> >-->
-       <!--<label >-->
-         <!--&lt;!&ndash;{{region}}&ndash;&gt;-->
-         <!--<input id="inputSearch" ng-model="storeName" placeholder="Search" >-->
-       <!--</label>-->
-       <!--<button class="sbutton" ng-click="searchStoreName(storeName,area)">-->
-         <!--查 找-->
-       <!--</button>-->
-     <!--</span>-->
-    <!--</ion-header-bar>-->
-  <!--</ion-nav-title>-->
-  <!--<ion-header-bar class="bar-subheader has-header slist">-->
-    <!--<ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false" does-continue="true">-->
-      <!--<ion-slide >-->
-        <!--<div class="row all">-->
-          <!--<div class="col ">-->
-            <!--<div class="col-demo">美食</div>-->
-          <!--</div>-->
-          <!--<div class="col">-->
-            <!--<div class="col-demo">酒店住宿</div>-->
-          <!--</div>-->
-          <!--<div class="col">-->
-            <!--<div class="col-demo">休闲娱乐</div>-->
-          <!--</div>-->
-          <!--<div class="col">-->
-            <!--<div class="col-demo">外卖</div>-->
-          <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="row all">-->
-          <!--<div class="col ">-->
-            <!--<div class="col-demo">KTV</div>-->
-          <!--</div>-->
-          <!--<div class="col">-->
-            <!--<div class="col-demo">周边游</div>-->
-          <!--</div>-->
-          <!--<div class="col">-->
-            <!--<div class="col-demo">高端酒店</div>-->
-          <!--</div>-->
-          <!--<div class="col">-->
-            <!--<div class="col-demo">结婚</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</ion-slide>-->
-
-      <!--<ion-slide>-->
-        <!--<div class="row all">-->
-          <!--<div class="col ">-->
-            <!--<div class="col-demo">景点</div>-->
-          <!--</div>-->
-          <!--<div class="col">-->
-            <!--<div class="col-demo">动物园</div>-->
-          <!--</div>-->
-          <!--<div class="col">-->
-            <!--<div class="col-demo">家装</div>-->
-          <!--</div>-->
-          <!--<div class="col">-->
-            <!--<div class="col-demo">母婴亲子</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</ion-slide>-->
-    <!--</ion-slide-box>-->
-
-
-  <!--</ion-header-bar>-->
-
   <ion-content has-header="true">
-     <div class="padding" style="padding-left: 8%" >
+    <div class="padding" style="padding-left: 8%" >
        <span id="zsearch">
        <!--<span id="adress" ng-click="openModal();" style="padding: 4px 0px 0px 0px;font-size: 18px">上海</span> <span style="padding: 4px 0px 0px 0px;font-size: 18px"> >> </span>-->
        <span id="geo" style="display: none">{{geoId}}</span>
@@ -82,7 +10,7 @@
          <span id="adress" ng-click="openModal();"
                style="padding: 4px 0px 0px 0px;font-size: 16px">{{region}}</span>
          <!--<span id="adress" ng-click="openModal();"-->
-               <!--style="padding: 4px 0px 0px 0px;font-size: 16px">杭州市</span>-->
+         <!--style="padding: 4px 0px 0px 0px;font-size: 16px">杭州市</span>-->
          <span style="padding: 4px 0px 0px 0px;font-size: 16px"> >> </span>
 
        <label>
@@ -93,13 +21,13 @@
          查 找
        </button>
      </span>
-     </div>
+    </div>
     <div class="shoplist">
       <div ng-repeat="chat in storeList">
         <!--<a class="item item-avatar"   href="#tab/shop/{{chat.storeId}}/{{isGroupOwner}}">-->
         <a class="item item-avatar" href="#tab/shopDetails/{{chat.storeId}}">
-          <img ng-if="chat.storeImg == null || chat.storeImg == ''"  src="img/avatar.png">
-          <img ng-if="chat.storeImg != ''" src="{{chat.storeImg + '?x-oss-process=image/circle,r_100'}}">
+          <img ng-if="chat.storeImg == null"  src="img/avatar.png">
+          <img ng-if="chat.storeImg != null" src="{{chat.storeImg + '?x-oss-process=image/circle,r_100'}}">
           <h2> {{chat.storeName}}</h2>
           <p>  {{chat.address}}</p>
         </a>

@@ -15,8 +15,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
   // 当设备就绪时
   var onDeviceReady = function () {
-    //$scope.message += "JPushPlugin:Device ready!";
     initiateUI();
+
+    window.baidumap_location.getCurrentPosition(function (result) {
+
+    }, function (error) {
+
+    });
   };
 
   // 打开通知的回调函数
@@ -164,25 +169,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }
   };
 
-  function onDeviceReady() {
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  }
-  //定位数据获取成功响应
-  function onSuccess(position) {
-    localStorage.setItem('latitude', position.coords.latitude);
-    localStorage.setItem('longitude', position.coords.longitude);
-  }
-  //定位数据获取失败响应
-  function onError(error) {
-
-  }
-
   // 添加对回调函数的监听
   document.addEventListener("deviceready", onDeviceReady, false);
   document.addEventListener("jpush.openNotification", onOpenNotification, false);
   document.addEventListener("jpush.receiveNotification", onReceiveNotification, false);
   document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
-  document.addEventListener("deviceready", onDeviceReady, false);
 
   //极光推送结束
   $ionicPlatform.ready(function() {
@@ -194,13 +185,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
-
-
-
   });
-
-
-
 })
 
 .config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider,ionicDatePickerProvider) {

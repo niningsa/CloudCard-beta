@@ -11,8 +11,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
 
     // $rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/";   //全局： 以后正式服务器接口 URL
     // $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/";        //全局： 服务器接口 URL
-    $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
-    //$rootScope.interfaceUrl="https://kayunka.kupangka.com/cloudcard/control/"; //接口前一截一样的
+    // $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
+    $rootScope.interfaceUrl="https://kayunka.kupangka.com/cloudcard/control/"; //接口前一截一样的
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -76,17 +76,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
 
 
   function onDeviceReady() {
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  }
-  //定位数据获取成功响应
-  function onSuccess(position) {
-    localStorage.setItem('latitude', position.coords.latitude);
-    localStorage.setItem('longitude', position.coords.longitude);
-  }
-  //定位数据获取失败响应
-  function onError(error) {
+    window.baidumap_location.getCurrentPosition(function (result) {
+      var data = JSON.parse(JSON.stringify(result, null, 4));
+      localStorage.setItem('latitude', data.latitude);
+      localStorage.setItem('longitude', data.longitude);
+    }, function (error) {
 
+    });
   }
+
 
   // 添加对回调函数的监听
   document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);

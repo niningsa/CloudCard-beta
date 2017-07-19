@@ -3,8 +3,9 @@
     "version": "1.1.1",
     "description": "Ionic1: An Ionic project",
     "dependencies": {
+        "cordova-android": "^6.2.3",
         "cordova-ios": "^4.4.0",
-        "cordova-plugin-baidu-geolocation": "https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git",
+        "cordova-plugin-baidumaplocation": "^3.0.1",
         "cordova-plugin-camera": "^2.3.1",
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.7",
@@ -12,7 +13,6 @@
         "cordova-plugin-device": "^1.1.6",
         "cordova-plugin-file": "~4.3.3",
         "cordova-plugin-file-transfer": "~1.6.3",
-        "cordova-plugin-geolocation": "^2.4.3",
         "cordova-plugin-image-picker": "~1.1.1",
         "cordova-plugin-media-capture": "^1.4.3",
         "cordova-plugin-offbye-alipay": "https://github.com/offbye/cordova-plugin-alipay.git",
@@ -55,9 +55,6 @@
             },
             "cordova-plugin-console": {},
             "cordova-plugin-device": {},
-            "cordova-plugin-geolocation": {
-                "GEOLOCATION_USAGE_DESCRIPTION": " "
-            },
             "cordova-plugin-media-capture": {
                 "CAMERA_USAGE_DESCRIPTION": " ",
                 "MICROPHONE_USAGE_DESCRIPTION": " ",
@@ -71,9 +68,6 @@
                 "APP_KEY": "0e48e52d81afa8142b7f4db3"
             },
             "phonegap-plugin-barcodescanner": {},
-            "cordova-plugin-baidu-geolocation": {
-                "API_KEY": "z89D54HRzvzF8jobhBktAbqRIKue8gQN"
-            },
             "cordova-plugin-contacts": {
                 "CONTACTS_USAGE_DESCRIPTION": "亲，打开通讯录哦！"
             },
@@ -88,7 +82,15 @@
             "cordova-plugin-wechat": {
                 "WECHATAPPID": "wxa797cb5a2aed1c3b"
             },
-            "cordova-sms-plugin": {}
-        }
+            "cordova-sms-plugin": {},
+            "cordova-plugin-baidumaplocation": {
+                "ANDROID_KEY": "HEGuyWDHb26YTARh0bkyMd3vLasPta0h",
+                "IOS_KEY": "qj5BvdK9mVZ7vulMoy44Gr4HmSi2HGxx"
+            }
+        },
+        "platforms": [
+            "android",
+            "ios"
+        ]
     }
 }

@@ -3,12 +3,17 @@
     "version": "1.1.1",
     "description": "Bossiness: An Ionic project",
     "dependencies": {
+        "cordova-android": "^6.2.3",
         "cordova-ios": "^4.4.0",
+        "cordova-plugin-baidumaplocation": "^3.0.1",
         "cordova-plugin-camera": "^2.3.1",
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.7",
         "cordova-plugin-device": "^1.1.6",
         "cordova-plugin-file": "~4.3.3",
+        "cordova-plugin-file-transfer": "~1.6.3",
+        "cordova-plugin-image-picker": "~1.1.1",
+        "cordova-plugin-jcore": "^1.1.5",
         "cordova-plugin-media-capture": "^1.4.3",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-statusbar": "^2.2.3",
@@ -20,11 +25,7 @@
         "gulp-sass": "^2.0.4",
         "ionic-plugin-keyboard": "^2.2.1",
         "jpush-phonegap-plugin": "^2.2.8",
-        "phonegap-plugin-barcodescanner": "^4.0.2",
-        "cordova-plugin-baidu-geolocation": "https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation",
-        "cordova-plugin-file-transfer": "~1.6.3",
-        "cordova-plugin-geolocation": "~2.4.3",
-        "cordova-plugin-image-picker": "~1.1.1"
+        "phonegap-plugin-barcodescanner": "^4.0.2"
     },
     "devDependencies": {
         "@ionic/cli-plugin-cordova": "1.4.1",
@@ -68,17 +69,19 @@
                 "API_KEY": "a601771e25dafc5e2abda486"
             },
             "phonegap-plugin-barcodescanner": {},
-            "cordova-plugin-baidu-geolocation": {
-                "API_KEY": "z89D54HRzvzF8jobhBktAbqRIKue8gQN"
-            },
             "cordova-plugin-file": {},
             "cordova-plugin-file-transfer": {},
-            "cordova-plugin-geolocation": {},
             "cordova-plugin-image-picker": {
                 "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
+            },
+            "cordova-plugin-baidumaplocation": {
+                "ANDROID_KEY": "HEGuyWDHb26YTARh0bkyMd3vLasPta0h",
+                "IOS_KEY": "qj5BvdK9mVZ7vulMoy44Gr4HmSi2HGxx",
+                "IOS_LOCATION_DESC": "请点击'好'以允许访问。"
             }
         },
         "platforms": [
+            "android",
             "ios"
         ]
     }
