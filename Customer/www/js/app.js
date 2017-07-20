@@ -22,6 +22,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }, function (error) {
 
     });
+
   };
 
   // 打开通知的回调函数

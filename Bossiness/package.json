@@ -66,6 +66,7 @@
             "cordova-plugin-whitelist": {},
             "ionic-plugin-keyboard": {},
             "jpush-phonegap-plugin": {
+                "APP_KEY": "a601771e25dafc5e2abda486",
                 "API_KEY": "a601771e25dafc5e2abda486"
             },
             "phonegap-plugin-barcodescanner": {},

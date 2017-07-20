@@ -13,6 +13,7 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <allow-navigation href="*" />
     <pre class="html" name="code" />
     <preference name="orientation" value="portrait" />
     <preference name="webviewbounce" value="false" />
