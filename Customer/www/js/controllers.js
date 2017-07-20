@@ -988,21 +988,7 @@ angular.module('starter.controllers', [])
         var ctrl_nav = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE});
         var token = $.cookie("token");
 
-        //显示当前我的位置
-        var Point = new BMap.Point(data.longitude, data.latitude);  // 创建点坐标
-        map.centerAndZoom(Point, 16);
-        var marker = new BMap.Marker(Point);
-        map.addOverlay(marker);
-        var myLabels = new BMap.Label("我的位置", //为lable填写内容
-          {position: Point,offset:new BMap.Size(10,-20)}); //label的位置
-        myLabels.setStyle({ //给label设置样式，任意的CSS都是可以的
-          "color": "blue", //颜色
-          "fontSize": "12px", //字号
-          "border": "0", //边
-          "height": "10px", //高度
-          "width": "20px" //宽
-        });
-        map.addOverlay(myLabels);
+
         map.addControl(ctrl_nav);//给地图添加缩放的按钮
 
         // 添加定位控件
@@ -1072,6 +1058,23 @@ angular.module('starter.controllers', [])
                   })(gpsPoint, marker, storeName
                     , isGroupOwner, distance, storeId, address, telNum);
                 }
+
+                //显示当前我的位置
+                var Point = new BMap.Point(data.longitude, data.latitude);  // 创建点坐标
+                map.centerAndZoom(Point, 16);
+                var marker = new BMap.Marker(Point);
+                map.addOverlay(marker);
+                var myLabels = new BMap.Label("我的位置", //为lable填写内容
+                  {position: Point,offset:new BMap.Size(10,-20)}); //label的位置
+                myLabels.setStyle({ //给label设置样式，任意的CSS都是可以的
+                  "color": "blue", //颜色
+                  "fontSize": "12px", //字号
+                  "border": "0", //边
+                  "height": "10px", //高度
+                  "width": "20px" //宽
+                });
+                map.addOverlay(myLabels);
+
               } else {
                 $ionicPopup.alert({
                   title: '温馨提示',
@@ -1149,6 +1152,23 @@ angular.module('starter.controllers', [])
                 })(gpsPoint, marker, storeName
                   , isGroupOwner, distance, storeId, address, telNum);
               }
+
+              //显示当前我的位置
+              var Point = new BMap.Point(data.longitude, data.latitude);  // 创建点坐标
+              map.centerAndZoom(Point, 16);
+              var marker = new BMap.Marker(Point);
+              map.addOverlay(marker);
+              var myLabels = new BMap.Label("我的位置", //为lable填写内容
+                {position: Point,offset:new BMap.Size(10,-20)}); //label的位置
+              myLabels.setStyle({ //给label设置样式，任意的CSS都是可以的
+                "color": "blue", //颜色
+                "fontSize": "12px", //字号
+                "border": "0", //边
+                "height": "10px", //高度
+                "width": "20px" //宽
+              });
+              map.addOverlay(myLabels);
+
             } else {
               $ionicPopup.alert({
                 title: '温馨提示',
