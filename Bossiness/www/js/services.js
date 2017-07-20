@@ -106,7 +106,7 @@ angular.module('starter.services', [])
 
   .service('applySellerService', function ($q, $rootScope,$cordovaFileTransfer) {
     return {
-      applySellerRegister: function (businessName, phone, businessUserName, identifyCode) {
+      applySellerRegister: function (businessName, phone, businessAddr, identifyCode) {
         var deferred = $q.defer();
         var promise = deferred.promise;
         var latitude = localStorage.getItem('latitude');
@@ -121,7 +121,7 @@ angular.module('starter.services', [])
               "longitude":longitude,
               "storeName": businessName,
               "teleNumber": phone,
-              "personName": businessUserName,
+              "storeAddress": businessAddr,
               "captcha": identifyCode
             },
             success: function (result) {

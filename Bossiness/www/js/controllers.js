@@ -701,8 +701,29 @@ angular.module('starter.controllers', [])
   })
 
 
-  .controller('applySellerCtrl', function ($scope,$cordovaCamera,$rootScope,$cordovaImagePicker,applySellerService,$cordovaFileTransfer) {
-
+  .controller('applySellerCtrl', function ($scope) {
+    var longitude = localStorage.getItem('longitude');
+    var latitude = localStorage.getItem('latitude');
+    var po=new BMap.Point(longitude,latitude);
+    //创建一个地理解析器
+    var geocoder=new BMap.Geocoder();
+    //获取位置
+    geocoder.getLocation(po,function(rs){
+      //获取地理组件
+      var addComp=rs.addressComponents;
+      //获取省份
+      var province=addComp.province;
+      //获取城市
+      var city=addComp.city;
+      //获取区县
+      var district=addComp.district;
+      //获取街道
+      var street=addComp.street;
+      //获取街道号
+      var streetNumber=addComp.streetNumber;
+      //地址
+      $scope.businessAddr = province+city+district+street+streetNumber;//将获取到的信息输出到页面
+    });
   })
 
   /*
@@ -716,7 +737,7 @@ angular.module('starter.controllers', [])
       var flag = true;
       //验证手机号是否合法
       var phoneReg = /^0?1[3|4|5|7|8][0-9]\d{8}$/;
-      if (!phoneReg.test($scope.boss.phone)) {
+      if (!phoneReg.test($scope.phone)) {
         $ionicPopup.alert({
           title: "温馨提示",
           template: "手机号码不正确!!",
@@ -727,10 +748,10 @@ angular.module('starter.controllers', [])
       if(flag){
         $scope.codeBtnDisable = false;//防止二次点击
         applySellerService.applySellerRegister(
-          $scope.boss.businessName,
-          $scope.boss.phone,
-          $scope.boss.businessUserName,
-          $scope.boss.identifyCode
+          $scope.businessName,
+          $scope.phone,
+          $scope.businessAddr,
+          $scope.identifyCode
         ).success(function (data) {
           $ionicLoading.hide();
           var alertPopup = $ionicPopup.alert({
