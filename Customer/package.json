@@ -88,7 +88,8 @@
             },
             "jpush-phonegap-plugin": {
                 "APP_KEY": "0e48e52d81afa8142b7f4db3"
-            }
+            },
+            "cordova-plugin-jcore": {}
         },
         "platforms": [
             "android",
