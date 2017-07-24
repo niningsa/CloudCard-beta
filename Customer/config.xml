@@ -118,6 +118,7 @@
     <plugin name="cordova-plugin-baidumaplocation" spec="^3.0.1">
         <variable name="ANDROID_KEY" value="HEGuyWDHb26YTARh0bkyMd3vLasPta0h" />
         <variable name="IOS_KEY" value="qj5BvdK9mVZ7vulMoy44Gr4HmSi2HGxx" />
+        <variable name="IOS_LOCATION_DESC" value="请点击'好'以允许访问。" />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="^2.4.1">
         <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
