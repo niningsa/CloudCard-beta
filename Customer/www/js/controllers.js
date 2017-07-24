@@ -2433,7 +2433,7 @@ angular.module('starter.controllers', [])
           "cardId": $scope.cardId,
           "paymentService": "recharge",
           "subject": "库胖-充值",
-          "totalFee": "2",
+          "totalFee": choice,
           "body": "充值"
         },
         success: function(result){
@@ -2467,7 +2467,7 @@ angular.module('starter.controllers', [])
           "cardId": $scope.cardId,
           "paymentService": "recharge",
           //"totalFee": parseFloat(1) * 100,              // 微信金额不支持小数，这里1表示0.01
-          "totalFee": "1",              // 微信金额不支持小数，这里1表示0.01
+          "totalFee": choice,              // 微信金额不支持小数，这里1表示0.01
           "body": "库胖-充值",           // 标题不能使用中文
           "tradeType":"APP"
         },
