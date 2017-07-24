@@ -1029,7 +1029,6 @@ angular.module('starter.controllers', [])
                     var marker = new BMap.Marker(gpsPoint, {icon: icon});
                   }
                   map.addOverlay(marker);
-
                   map.enableScrollWheelZoom(true);
                   var myLabel = new BMap.Label(storeName, //为lable填写内容
                     {position: gpsPoint}); //label的位置
@@ -1123,6 +1122,7 @@ angular.module('starter.controllers', [])
                 map.addOverlay(marker);
 
                 map.enableScrollWheelZoom(true);
+                map.dis
                 var myLabel = new BMap.Label(storeName, //为lable填写内容
                   {position: gpsPoint}); //label的位置
                 myLabel.setStyle({ //给label设置样式，任意的CSS都是可以的
@@ -1134,6 +1134,9 @@ angular.module('starter.controllers', [])
                 });
                 map.addOverlay(myLabel);
 
+                /*map.addEventListener('ondragging', function(){
+                  marker.setPosition(map.getCenter());
+                });*/
 
                 (function (p, m, storeName, isGroupOwner, distance, storeId, address, telNum) {
 
