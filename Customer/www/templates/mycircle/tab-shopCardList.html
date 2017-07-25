@@ -11,12 +11,11 @@
           <!--<a class="item" href="#/tab/payment/{{chat.cardCode}}/{{chat.storeName}}/{{chat.storeId}}/{{chat.cardId}}" style="border: 0px">-->
           <a class="item" ng-click="chongzhi('{{storeId}}','{{chat.cardId}}')" style="border: 0px">
             <div class="item item-image">
-              <img src="{{chat.cardImg}}">
+              <img ng-if="chat.cardImg == ''"  src="img/card.png">
+              <img ng-if="chat.cardImg != ''" src="{{chat.cardImg}}">
             </div>
-
           </a>
         </div>
-
         <div class="item text-center" ng-if="cloudList==''">
           <a style="font-size: 50px;" ng-click="maiKa('{{storeId}}');" >+</a>
         </div>

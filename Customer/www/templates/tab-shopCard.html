@@ -11,8 +11,8 @@
           <!--<a class="item" href="#/tab/payment/{{chat.cardCode}}/{{chat.storeName}}/{{chat.storeId}}/{{chat.cardId}}" style="border: 0px">-->
           <a class="item" ng-click="shopCardchongZhi('{{storeId}}','{{chat.cardId}}')" style="border: 0px">
             <div class="item item-image">
-              <img ng-if="chat.cardImg == ''"  src="img/card.png">
-              <img ng-if="chat.cardImg != ''" src="{{chat.cardImg}}">
+              <img ng-if="{{chat.storeImg}} == ''"  src="img/avatar.png">
+              <img ng-if="{{chat.storeImg}} != ''" src="{{chat.ossUrl + chat.storeImg}}">
             </div>
           </a>
         </div>
