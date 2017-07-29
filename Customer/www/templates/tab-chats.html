@@ -14,8 +14,8 @@
         <div id="address">   <h2>商家联系地址：<strong>{{chat.storeAddress}}</strong><span id="zandan"></div>
         <a class="item" ng-click="cardInfo('{{chat.cardId}}','{{chat.cardBalance}}','{{chat.cardName}}','{{chat.cardCode}}','{{chat.isAuthToOthers}}','{{chat.isAuthToMe}}')" style="border: 0px">
           <div class="item item-image">
-            <img ng-if="chat.cardImg == ''"  src="img/card.png">
-            <img ng-if="chat.cardImg != ''" src="{{chat.cardImg}}">
+            <img ng-if="chat.cardImg == null"  src="img/card.png">
+              <img ng-if="chat.cardImg != null" src="{{chat.cardImg}}">
           </div>
        </a>
       </div>
