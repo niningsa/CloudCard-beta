@@ -2099,6 +2099,12 @@ angular.module('starter.controllers', [])
   .controller('settingCtrl', function($scope,$state,$ionicPopup,$rootScope) {
     var token=$.cookie("token");
     var registrationID=$.cookie("registrationID");
+
+    //获取app版本
+    cordova.getAppVersion.getVersionNumber().then(function(version){
+      $scope.appVersion = version;
+    })
+
     $scope.outLogin=function () {
 
       $ionicPopup.confirm({

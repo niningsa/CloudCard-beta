@@ -649,6 +649,13 @@ angular.module('starter.controllers', [])
     if ($.cookie("token") == null || $.cookie("organizationPartyId") == null) {
       $state.go("login");
     }
+
+    //获取app版本
+    cordova.getAppVersion.getVersionNumber().then(function(version){
+      $scope.appVersion = version;
+    })
+
+    //退出登录
     $scope.exitLogin = function () {
       $ionicPopup.confirm({
         title: "退出",

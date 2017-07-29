@@ -136,6 +136,7 @@
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.4.0" />
+    <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="cordova-plugin-baidumaplocation" spec="^3.0.1">
         <variable name="ANDROID_KEY" value="HEGuyWDHb26YTARh0bkyMd3vLasPta0h" />
         <variable name="IOS_KEY" value="qj5BvdK9mVZ7vulMoy44Gr4HmSi2HGxx" />
