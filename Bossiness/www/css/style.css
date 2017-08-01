@@ -340,3 +340,77 @@ td {
   top: 40%;
   right: 10%
 }
+
+/*我-店铺升级*/
+.store_leve_up{
+
+}
+/*表单文本框标题*/
+.input_label_name{
+  color: #3f3f3f;
+  font-family: 黑体;
+  font-size: 20px;
+}
+/*表单文本框值*/
+.input_label_value{
+  color: #7d7d7d;
+  font-family: 黑体;
+  font-size: 20px;
+}
+.input_label_value:disabled{
+  background:white;
+
+}
+
+/*认证完成*/
+.accright{
+  width: 16px;
+  height: 16px;
+}
+/*地址→箭头*/
+.address_more{
+  width: 8px;
+  height: 15px;
+}
+
+/*营业执照照片*/
+.store_leve_up .yin_ye_picture{
+  width: 87px;
+  height: 61px;
+}
+
+/*其他店铺照片*/
+.store_leve_up .store_picture{
+  width: 85px;
+  height: 79px;
+}
+
+/*奇怪的标题栏*/
+.picture_title_block{
+  width:155px;
+  height:25px;
+  font-size:20px;
+  background-color:#5C98FF;
+  color:white;
+}
+
+.store_leve_up .bar-footer{
+ border-radius:20px;
+ width:90%;
+ margin:0 auto;
+}
+
+
+.store_leve_up .item-input {
+
+  padding-right: 14px;
+}
+
+
+.store_leve_up  .item-text-wrap{
+  border-top: none;
+}
+
+.store_leve_up .list{
+  margin-bottom: 0px;
+}
