@@ -4,7 +4,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
                'kaika.controllers','kaika.services',
                'shoukuan.controllers','shoukuan.services',
                'chongzhi.controllers','chongzhi.services',
-               'jiesuan.controllers','jiesuan.services','ngCordova'])
+               'jiesuan.controllers','jiesuan.services','ngCordova','directive.hideTabs'])
 
 .run(function($ionicPlatform,$ionicPopup,$rootScope,$state) {
   $ionicPlatform.ready(function() {
