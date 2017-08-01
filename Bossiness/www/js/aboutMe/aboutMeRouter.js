@@ -19,7 +19,8 @@ angular.module('starter')
 
         views: {
           'tab-aboutMe': {
-            templateUrl: 'templates/aboutMe/tab-myShopDetail.html',
+            //templateUrl: 'templates/aboutMe/tab-myShopDetail.html',
+            templateUrl: 'templates/aboutMe/tab-myShopLevelUp.html',
             controller: 'myShopDetailCtrl'
           }
         },

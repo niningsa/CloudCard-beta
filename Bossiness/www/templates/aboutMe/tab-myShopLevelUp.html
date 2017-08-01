@@ -1,0 +1,147 @@
+<ion-view view-title="店铺升级" hide-tabs="true" class="store_leve_up">
+  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a class="button icon ion-ios-undo" ui-sref="tab.aboutMe"></a>
+  </ion-nav-buttons>
+  <ion-content>
+
+    <form name="regForm" ng-submit="bizCreateApplyVIP()" ng-controller="myShopDetailCtrl">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">
+             店铺名称:
+        </span>
+        <input class="input_label_value" type="text" name="storeName" ng-model="storeName">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">
+           法人姓名:
+        </span>
+        <input class="input_label_value" type="text" name="userName" placeholder="请输入法人姓名" ng-model="legalName"  required>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">
+         法人手机号:
+
+        </span>
+        <input class="input_label_value" type="text" disabled="disabled" name="teleNumber" ng-model="legalTeleNumber">
+        <img class="accright" src="/img/aboutme/icon-accright-32X32@2x.png"/>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">
+         店铺地址:
+
+        </span>
+        <input class="input_label_value" type="text" name="address" placeholder="请输入详细的店铺地址" ng-model="storeAddress">
+        <img class="address_more" src="/img/aboutme/icon-more-16X30@2x.png"/>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">
+          支付宝账号:
+        </span>
+        <input class="input_label_value" type="text" name="aliPayAccount" placeholder="请输入支付宝账号" ng-model="aliPayAccount">
+        <img class="accright" src="/img/aboutme/icon-accright-32X32@2x.png"/>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">
+        支付宝名称:
+
+        </span>
+        <input class="input_label_value" type="text" name="aliPayName" placeholder="请输入店家支付宝姓名" ng-model="aliPayName" >
+      </label>
+      <label class="item item-input">
+        <span class="input-label">
+          <span class="input_label_name">微信号:
+          </span>
+        </span>
+        <input class="input_label_value" type="text" name="wxPayAccount" placeholder="请输入店家微信账号" ng-model="wxPayAccount">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">
+          <span class="input_label_name">微信名称:
+          </span>
+        </span>
+        <input type="text" class="input_label_value"  name="wxPayName" placeholder="店家微信姓名" ng-model="wxPayName">
+      </label>
+    </div>
+    <div class="list">
+
+        <span class="picture_title_block">上传营业执照照片
+          </span>
+
+      <div class="item item-text-wrap">
+        <div class="row" ng-repeat="image in  bizLicImageSrcList" ng-click="shouBigImage()" >
+          <div class="col">
+            <img  ng-if="image != null" class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+                 ng-src="{{image}}" id="myImage">
+            <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+                 ng-if="image == null || image == ''" src="/img/aboutme/upload_file.png" id="myImage">
+          </div>
+        </div>
+
+        <div ng-if="bizLicImageSrcList == null" class="row" >
+          <div class="col">
+            <img class="store_leve_up yin_ye_picture"
+                src="/img/aboutme/upload_file.png" id="myImage">
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="list">
+
+        <span class="picture_title_block">
+        上传店铺招牌图片
+        </span>
+
+      <div class="item item-text-wrap">
+        <div class="row"  ng-repeat="image in  bizLicImgList" ng-click="shouBigImage('bizLic')">
+          <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+               ng-src="{{ossUrl+image.objectInfo}}" id="myImages">
+        </div>
+
+        <div ng-if="bizLicImgList == null" class="row" >
+          <div class="col">
+            <img class="store_leve_up store_picture"
+                 src="/img/aboutme/upload_file.png" id="myImage">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="list">
+
+        <span class="picture_title_block">上传店铺详情图片
+         </span>
+
+      <div class="item item-text-wrap">
+        <div class="row" ng-repeat="image in  bizAvatarImageSrcList" ng-click="shouBigImage()">
+          <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+               ng-src="{{image}}" id="myImage">
+        </div>
+
+        <div ng-if="bizAvatarImageSrcList == null" class="row" >
+          <div class="col">
+            <img class="store_leve_up store_picture"
+                 src="/img/aboutme/upload_file.png" id="myImage">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+    </form>
+    <br/><br/>
+  </ion-content>
+  <div class="bar bar-footer bar-positive">
+    <h1 class="title">更新店铺信息</h1>
+  </div>
+
+
+</ion-view>
