@@ -603,7 +603,8 @@ angular.module('starter.controllers', [])
     };
 
     $scope.cloudCardLogin = function () {
-      var uuid = $cordovaDevice.getUUID();
+      var uuid = "5438543854384385202501314438";
+        //$cordovaDevice.getUUID();
       $.ajax({
         url: $rootScope.interfaceUrl + "bizAppLogin",
         type: "POST",

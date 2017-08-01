@@ -4,15 +4,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'circle.controllers',
                'kaika.controllers','kaika.services',
                'shoukuan.controllers','shoukuan.services',
                'chongzhi.controllers','chongzhi.services',
-               'jiesuan.controllers','jiesuan.services','ngCordova'])
+               'jiesuan.controllers','jiesuan.services','ngCordova','directive.hideTabs'])
 
 .run(function($ionicPlatform,$ionicPopup,$rootScope,$state) {
   $ionicPlatform.ready(function() {
 
+
+
     // $rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/";   //全局： 以后正式服务器接口 URL
     // $rootScope.interfaceUrl="http://121.40.214.81:8080/cloudcard/control/";        //全局： 服务器接口 URL
-    // $rootScope.interfaceUrl="http://139.196.112.121:8080/cloudcard/control/"; //接口前一截一样的
-     $rootScope.interfaceUrl="https://kayunka.kupangka.com/cloudcard/control/"; //接口前一截一样的
+      $rootScope.interfaceUrl="http://106.15.44.108:8080/cloudcard/control/"; //接口前一截一样的
+     //$rootScope.interfaceUrl="https://kayunka.kupangka.com/cloudcard/control/"; //接口前一截一样的
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
