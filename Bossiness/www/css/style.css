@@ -1,105 +1,115 @@
 Empty. Add your own CSS if you like
-.accountbg{
-	width: 100%;
-	padding: 0px;
-	margin: 0px;
+.accountbg {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
 }
-.zkmoney{
-	text-align: center;
-	width:100%;
-	/* height: 280px; */
-	/* background: yellow; */
-	background: url('../img/bg05.jpg');
-	background-size:100%;
+
+.zkmoney {
+  text-align: center;
+  width: 100%;
+  /* height: 280px; */
+  /* background: yellow; */
+  background: url('../img/bg05.jpg');
+  background-size: 100%;
 }
-.moeny1{
-	width:100%;
-	height:70px;  /*设置div的大小*/
-	background: url('../img/timg.jpg');
-	text-align: center;        /*文字水平居中对齐*/
-	line-height: 90px;        /*设置文字行距等于div的高度*/
-	overflow:hidden;
+
+.moeny1 {
+  width: 100%;
+  height: 70px; /*设置div的大小*/
+  background: url('../img/timg.jpg');
+  text-align: center; /*文字水平居中对齐*/
+  line-height: 90px; /*设置文字行距等于div的高度*/
+  overflow: hidden;
 }
-.money{
-	/* background: url('../img/bg01.jpg'); */
-	text-align: center;
-	height: 150px;
-	padding: 0px;
-	margin: 0px;
+
+.money {
+  /* background: url('../img/bg01.jpg'); */
+  text-align: center;
+  height: 150px;
+  padding: 0px;
+  margin: 0px;
 
 }
 
-.money2{
-	float: left;
-	margin-bottom: 0px;
+.money2 {
+  float: left;
+  margin-bottom: 0px;
 
 }
-.money3{
-	margin-left: 10px;
-	padding-left: 12px;
-	margin-bottom: 0px;
-}
-.money4{
-	/* background: #EE6435; */
-	background: url('../img/timg2.jpg');
-	line-height: 30px;
-	overflow:hidden;
+
+.money3 {
+  margin-left: 10px;
+  padding-left: 12px;
+  margin-bottom: 0px;
 }
 
-.al{
-	filter:alpha(opacity=70);  -moz-opacity:0.7;  -khtml-opacity: 0.7;  opacity: 0.7;
-	background:  url('../img/bg1_2.jpg') no-repeat;
-}
-.alcolor{
-
-	font-family:"黑体";
-	color:#ff0000;
+.money4 {
+  /* background: #EE6435; */
+  background: url('../img/timg2.jpg');
+  line-height: 30px;
+  overflow: hidden;
 }
 
-.showType{
-	/* background:  url('../img/bg1_3.jpg'); */
-	height: 100%;
-	height: 90px;
-	text-align: center;
-	line-height: 90px;        /*设置文字行距等于div的高度*/
-	overflow:hidden;
+.al {
+  filter: alpha(opacity=70);
+  -moz-opacity: 0.7;
+  -khtml-opacity: 0.7;
+  opacity: 0.7;
+  background: url('../img/bg1_2.jpg') no-repeat;
 }
-#qname{
+
+.alcolor {
+
+  font-family: "黑体";
+  color: #ff0000;
+}
+
+.showType {
+  /* background:  url('../img/bg1_3.jpg'); */
+  height: 100%;
+  height: 90px;
+  text-align: center;
+  line-height: 90px; /*设置文字行距等于div的高度*/
+  overflow: hidden;
+}
+
+#qname {
   padding: 8px 0px 10px 0px;
   font-size: 18px;
 }
 
-
-.charInfo{
-	margin: 40px auto;
-	text-align: center;
-	width: 350px;
+.charInfo {
+  margin: 40px auto;
+  text-align: center;
+  width: 350px;
 }
 
-.topType{
-	height: 70px;
+.topType {
+  height: 70px;
 }
 
-.cardCloud{
-  background: url('../img/cardCloud.png') no-repeat -30px center;height:110px;
+.cardCloud {
+  background: url('../img/cardCloud.png') no-repeat -30px center;
+  height: 110px;
 }
 
-
-.item .badge{
+.item .badge {
   top: 26px;
 }
 
-.badge{
-  font-size:18px!important;
-  font-weight:400;
-  padding:3px 6px 22px 6px;
+.badge {
+  font-size: 18px !important;
+  font-weight: 400;
+  padding: 3px 6px 22px 6px;
 }
 
-label{
+label {
   font-weight: inherit;
 }
-.charInfoPayment{
-  padding-top:20px;
+
+.charInfoPayment {
+  padding-top: 20px;
   margin: 4px auto;
   /* background: red; */
   text-align: center;
@@ -107,8 +117,9 @@ label{
   height: 100%;
   background: url('../img/bg1.jpg') no-repeat;
 }
-.charInfoPayments{
-  padding-top:20px;
+
+.charInfoPayments {
+  padding-top: 20px;
   margin: 4px auto;
   /* background: red; */
   text-align: center;
@@ -116,19 +127,20 @@ label{
   height: 100%;
   background: url('../img/timg2.jpg') no-repeat;
 }
-.cardinputInfo{
+
+.cardinputInfo {
   margin: 30px auto;
   /* background: red; */
   text-align: center;
   width: 90%;
   height: 90%;
 }
-.char_style{
+
+.char_style {
   height: 120px;
   padding: 0px;
   margin: 0px;
 }
-
 
 /* 圈友详情 */
 .circlebg {
@@ -138,47 +150,58 @@ label{
   display: inline-block;
 }
 
-#shoukuan{
-  padding-left:15%;
+#shoukuan {
+  padding-left: 15%;
 }
-#kaika{
-  padding-left:25%;
+
+#kaika {
+  padding-left: 25%;
 
 }
-#chongzhi{
+
+#chongzhi {
   padding-left: 15%;
 
 }
-.se{
+
+.se {
   padding-left: 20%;
   font-size: 15px;
 }
-.shop{
+
+.shop {
   color: blue;
 }
 
-#dianlei{
-  padding-left:3%;
-}
-#all{
-  padding-left:15%;
-}
-#kalei{
+#dianlei {
   padding-left: 3%;
 }
-#taren{
+
+#all {
+  padding-left: 15%;
+}
+
+#kalei {
   padding-left: 3%;
 }
-#tarens{
+
+#taren {
   padding-left: 3%;
 }
-#seeMonth{
+
+#tarens {
+  padding-left: 3%;
+}
+
+#seeMonth {
   float: right;
 }
-td{
-  padding:6px;
+
+td {
+  padding: 6px;
 }
-.chakanzhangdan{
+
+.chakanzhangdan {
   padding-top: 8px;
   padding-bottom: 8px;
   min-height: 30px;
@@ -186,36 +209,40 @@ td{
   color: #222;
   font-weight: 500;
 }
-.char_style{
+
+.char_style {
   height: 120px;
   padding: 0px;
   margin: 0px;
 }
-.wujiaoxing{
+
+.wujiaoxing {
   vertical-align: middle;
 }
-#zd{
+
+#zd {
   height: 20px;
 }
 
-#bshouye{
-  padding-left:5%;
-  margin:40px 0px 80px 0px;
+#bshouye {
+  padding-left: 5%;
+  margin: 40px 0px 80px 0px;
 }
 
-#kk{
+#kk {
   padding: 4%;
 }
-#js{
+
+#js {
   padding: 4%;
 }
-.buttonstyle{
+
+.buttonstyle {
   padding: 6px 12px 6px 12px;
 }
 
-
-#shoukuan{
- padding: 30px 40px 10px 80px;
+#shoukuan {
+  padding: 30px 40px 10px 80px;
 }
 
 .bsiness1 {
@@ -223,7 +250,8 @@ td{
   width: 100%;
   margin-bottom: 1.5em;
 }
-.shop{
+
+.shop {
   border-color: #ddd;
   background-color: #fff;
   color: #444;
@@ -237,20 +265,68 @@ td{
   font-size: 16px;
 }
 
-.chartext{
+.chartext {
   font-size: 20px;
   text-align: left;
   margin-bottom: 30px;
   margin-left: 10px;
 }
 
-.radio-content{
+.radio-content {
   text-overflow: inherit;
   width: 135px;
 }
 
-.ftype{
-  height:45px;
+.ftype {
+  height: 45px;
   margin-top: 15px;
-  padding-left:11%;
+  padding-left: 11%;
+}
+
+/*账单列表**************************************************************************************************************/
+.bill_list .button {
+  border-radius: 40px;
+  width: 125px;
+  min-height: 30px;
+  line-height: 40px;
+  margin: 12px auto;
+}
+
+.bill_list .row {
+  margin-left: 0;
+  margin-top: 14px;
+  border: 1px solid #f0eff5;
+  border-bottom: none;
+
+}
+
+.bill_list .row, .bill_list .col {
+  margin: 0;
+  padding: 0;
+}
+
+.bill_list .item {
+  border-color: #f0eff5;
+}
+.bill_list .row-wrap{
+  padding-top: 20px;
+}
+.bill_list h3, .bill_list p {
+  margin: 0;
+}
+.bill_list .col .text-center{
+  padding-right: 0;
+}
+
+.bill_list h3 {
+  font-size: 18px;
+  color: #1d1d1d;
+}
+
+.bill_list p {
+  font-size: 14px;
+  color: #3f3f3f;
+}
+.bill_list .bills_title{
+  background-color: #f0eff5;
 }

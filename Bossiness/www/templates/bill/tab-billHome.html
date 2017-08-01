@@ -1,67 +1,98 @@
-<ion-view view-title="账单">
+<ion-view view-title="账单" class="bill_list">
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
   <ion-content>
-    <div class="ftype" style="text-align:center">
-      <span id="taren" style="float: left" >
-           <label class="widget-buttons">
-             <ion-radio class="calm" ng-model="aa" ng-click="change('1')" ng-checked="checked" required>总&nbsp;&nbsp;充&nbsp;&nbsp;值</ion-radio>
-           </label>
-      </span>
-        <span id="tarens" style="float: left">
-            <label class="widget-buttons">
-              <ion-radio class="calm"   ng-click="change('4')" >本店收本店
-              </ion-radio>
-            </label>
-      </span>
-    </div>
-    <div  class="ftype" style="text-align:center">
-      <span id="dianlei" style="float: left">
-       <label class="widget-buttons">
-         <ion-radio class="calm"   ng-click="change('3')">本店收他店
-         </ion-radio>
-       </label>
-      </span>
-      <span id="kalei" style="float: left">
-      <label class="widget-buttons">
-        <ion-radio class="calm"   ng-click="change('5')">他店收本店
-        </ion-radio>
-      </label>
-      </span>
-    </div>
-    <div  class="ftype" style="text-align:center">
-      <span id="dianlei" style="float: left">
-       <label class="widget-buttons">
-         <ion-radio class="calm" ng-click="activateCardList()" ng-controller="phoneNumberActivateCtrl">本店已开卡
-         </ion-radio>
-       </label>
-      </span>
-    </div>
-    <div>
-    <div>
-      <div class="list">
-        <a class="padding"  ng-repeat="(key,value)  in list"  >
-          <div class="chakanzhangdan" >
-            {{key}}
-          </div>
-
-          <div class="item item-avatar" ng-repeat="bills in value">
-            <img src="img/icon.png">
-            <span>{{bills.transDate |date:'M'}}</span>月
-            <span>{{bills.transDate |date:'dd'}}</span>日
-            <span style="padding-left: 20%;padding-top: 2%">
-                  {{bills.amount}}元
-            </span>
-            <div><span>{{bills.transDate |date:'h:mm:ss'}}</span>
-              <span style="padding-left: 21%;padding-top: 2%" ng-bind="bills.cardCode"></span>
-              <!--发卡商家暂不显示-->
-              <!--<span style="padding-left: 20%" ng-bind="bills.cardSellerName"></span>-->
-            </div>
-            <div>
-              <span style="padding-top: 2%;word-break:normal;width:auto;white-space:pre-wrap;word-wrap:break-word;overflow:hidden;">{{bills.tradePartyName}}</span>
-            </div>
-          </div>
-        </a>
+    <div class="row row-wrap">
+      <div class="col col-50 text-center" ng-repeat="item in billTypeList">
+        <button class="button button-positive"
+                ng-class="{true: 'button-positive', false: 'button-outline button-positive'}[item.type===1]"
+                ng-click="change(item.type)">
+          {{item.text}}
+        </button>
       </div>
     </div>
+    <ion-list ng-repeat="bills in paymentsList">
+        <div class="bills_title">
+          <p class="padding-left-20" ng-if="$index==0">{{bills.transDate |date:'yyyy年MM月'}}</p>
+        </div>
+        <div class="row" >
+          <div class="col col-20">
+            <div class="item">
+              <h3 class="text-center">{{bills.transDate |date:'dd'}}日</h3>
+              <p class="text-center">{{bills.transDate |date:'h:mm'}}</p>
+            </div>
+          </div>
+          <div class="col col-80">
+            <div class="item item-avatar" >
+              <img src="img/icon.png">
+              <h2>{{bills.tradePartyName}}</h2>
+              <p>共计：{{bills.amount}}元</p>
+              <p style="position: absolute;top:40%;right: 10%">＋{{bills.cardCode}}</p>
+            </div>
+          </div>
+        </div>
+    </ion-list>
+    <!--<div class="ftype" style="text-align:center">-->
+    <!--<span id="taren" style="float: left">-->
+    <!--<label class="widget-buttons">-->
+    <!--<ion-radio class="calm" ng-model="aa" ng-click="change('1')" ng-checked="checked" required>总&nbsp;&nbsp;充&nbsp;&nbsp;值</ion-radio>-->
+    <!--</label>-->
+    <!--</span>-->
+      <!--<span id="tarens" style="float: left">-->
+    <!--<label class="widget-buttons">-->
+    <!--<ion-radio class="calm" ng-click="change('4')">本店收本店-->
+    <!--</ion-radio>-->
+    <!--</label>-->
+    <!--</span>-->
+    <!--</div>-->
+    <!--<div class="ftype" style="text-align:center">-->
+    <!--<span id="dianlei" style="float: left">-->
+    <!--<label class="widget-buttons">-->
+    <!--<ion-radio class="calm" ng-click="change('3')">本店收他店-->
+    <!--</ion-radio>-->
+    <!--</label>-->
+    <!--</span>-->
+      <!--<span id="kalei" style="float: left">-->
+    <!--<label class="widget-buttons">-->
+    <!--<ion-radio class="calm" ng-click="change('5')">他店收本店-->
+    <!--</ion-radio>-->
+    <!--</label>-->
+    <!--</span>-->
+    <!--</div>-->
+    <!--<div class="ftype" style="text-align:center">-->
+    <!--<span id="dianlei" style="float: left">-->
+    <!--<label class="widget-buttons">-->
+    <!--<ion-radio class="calm" ng-click="activateCardList()" ng-controller="phoneNumberActivateCtrl">本店已开卡-->
+    <!--</ion-radio>-->
+    <!--</label>-->
+    <!--</span>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<div>-->
+        <!--<div class="list">-->
+          <!--<a class="padding" ng-repeat="(key,value)  in list">-->
+            <!--<div class="chakanzhangdan">-->
+              <!--{{key}}-->
+            <!--</div>-->
+
+            <!--<div class="item item-avatar" ng-repeat="bills in value">-->
+              <!--<img src="img/icon.png">-->
+              <!--<span>{{bills.transDate |date:'M'}}</span>月-->
+              <!--<span>{{bills.transDate |date:'dd'}}</span>日-->
+              <!--<span style="padding-left: 20%;padding-top: 2%">-->
+    <!--{{bills.amount}}元-->
+    <!--</span>-->
+              <!--<div><span>{{bills.transDate |date:'h:mm:ss'}}</span>-->
+                <!--<span style="padding-left: 21%;padding-top: 2%" ng-bind="bills.cardCode"></span>-->
+                <!--&lt;!&ndash;发卡商家暂不显示&ndash;&gt;-->
+                <!--&lt;!&ndash;<span style="padding-left: 20%" ng-bind="bills.cardSellerName"></span>&ndash;&gt;-->
+              <!--</div>-->
+              <!--<div>-->
+                <!--<span-->
+                  <!--style="padding-top: 2%;word-break:normal;width:auto;white-space:pre-wrap;word-wrap:break-word;overflow:hidden;">{{bills.tradePartyName}}</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</a>-->
+        <!--</div>-->
+      <!--</div>-->
   </ion-content>
 </ion-view>
