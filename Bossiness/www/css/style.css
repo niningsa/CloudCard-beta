@@ -308,13 +308,16 @@ td {
 .bill_list .item {
   border-color: #f0eff5;
 }
-.bill_list .row-wrap{
+
+.bill_list .row-wrap {
   padding-top: 20px;
 }
+
 .bill_list h3, .bill_list p {
   margin: 0;
 }
-.bill_list .col .text-center{
+
+.bill_list .col .text-center {
   padding-right: 0;
 }
 
@@ -327,6 +330,13 @@ td {
   font-size: 14px;
   color: #3f3f3f;
 }
-.bill_list .bills_title{
+
+.bill_list .bills_title {
   background-color: #f0eff5;
+}
+
+.bill_list .bill_modify {
+  position: absolute;
+  top: 40%;
+  right: 10%
 }
