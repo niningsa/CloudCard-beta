@@ -7,7 +7,7 @@
         "cordova-android": "^6.2.3",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-app-version": "^0.1.9",
-        "cordova-plugin-baidumaplocation": "^3.0.1",
+        "cordova-plugin-baidumaplocation": "^3.1.1",
         "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.7",
@@ -77,13 +77,13 @@
             "cordova-plugin-image-picker": {
                 "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
             },
+            "cordova-plugin-jcore": {},
+            "cordova-plugin-app-version": {},
             "cordova-plugin-baidumaplocation": {
                 "ANDROID_KEY": "HEGuyWDHb26YTARh0bkyMd3vLasPta0h",
                 "IOS_KEY": "qj5BvdK9mVZ7vulMoy44Gr4HmSi2HGxx",
                 "IOS_LOCATION_DESC": "请点击'好'以允许访问。"
-            },
-            "cordova-plugin-jcore": {},
-            "cordova-plugin-app-version": {}
+            }
         },
         "platforms": [
             "android",
