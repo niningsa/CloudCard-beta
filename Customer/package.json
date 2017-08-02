@@ -17,6 +17,8 @@
         "cordova-plugin-image-picker": "^1.1.3",
         "cordova-plugin-jcore": "^1.1.6",
         "cordova-plugin-media-capture": "^1.4.3",
+        "cordova-plugin-network-information": "^1.3.3",
+        "cordova-plugin-networkinterface": "^1.2.0",
         "cordova-plugin-offbye-alipay": "git+https://github.com/offbye/cordova-plugin-alipay.git",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-statusbar": "^2.2.3",
@@ -92,7 +94,9 @@
                 "ANDROID_KEY": "HEGuyWDHb26YTARh0bkyMd3vLasPta0h",
                 "IOS_KEY": "qj5BvdK9mVZ7vulMoy44Gr4HmSi2HGxx",
                 "IOS_LOCATION_DESC": "请点击'好'以允许访问。"
-            }
+            },
+            "cordova-plugin-networkinterface": {},
+            "cordova-plugin-network-information": {}
         },
         "platforms": [
             "android",

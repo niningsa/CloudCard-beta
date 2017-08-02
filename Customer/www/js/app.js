@@ -22,6 +22,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }, function (error) {
 
     });
+
+
+    /*
+    //获取IP和手机联网状态
+    window.networkinterface.getWiFiIPAddress(function (ip) {
+
+    });
+
+    window.networkinterface.getCarrierIPAddress(function (ip) {
+
+    });
+
+    function checkConnection() {
+      var networkState = navigator.connection.type;
+
+      var states = {};
+      states[Connection.UNKNOWN]  = 'Unknown connection'; //未知连接
+      states[Connection.ETHERNET] = 'Ethernet connection'; //以太网
+      states[Connection.WIFI]     = 'WiFi';
+      states[Connection.CELL_2G]  = '2G';
+      states[Connection.CELL_3G]  = '3G';
+      states[Connection.CELL_4G]  = '4G';
+      states[Connection.CELL]     = 'Cell generic connection'; //蜂窝网络
+      states[Connection.NONE]     = 'No network connection'; //没有网络
+      alert('Connection type: ' + states[networkState]);
+    }*/
   };
 
   // 打开通知的回调函数
