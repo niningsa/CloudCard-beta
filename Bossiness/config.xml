@@ -137,6 +137,11 @@
     <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
+    <plugin name="cordova-plugin-baidumaplocation" spec="^3.1.2">
+        <variable name="ANDROID_KEY" value="HEGuyWDHb26YTARh0bkyMd3vLasPta0h" />
+        <variable name="IOS_KEY" value="qj5BvdK9mVZ7vulMoy44Gr4HmSi2HGxx" />
+        <variable name="IOS_LOCATION_DESC" value="请点击'好'以允许访问。" />
+    </plugin>
     <plugin name="cordova-plugin-camera" spec="^2.4.1">
         <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
@@ -162,9 +167,4 @@
         <variable name="APP_KEY" value="a601771e25dafc5e2abda486" />
     </plugin>
     <plugin name="phonegap-plugin-barcodescanner" spec="^4.1.0" />
-    <plugin name="cordova-plugin-baidumaplocation" spec="^3.1.1">
-        <variable name="ANDROID_KEY" value="HEGuyWDHb26YTARh0bkyMd3vLasPta0h" />
-        <variable name="IOS_KEY" value="qj5BvdK9mVZ7vulMoy44Gr4HmSi2HGxx" />
-        <variable name="IOS_LOCATION_DESC" value="请点击'好'以允许访问。" />
-    </plugin>
 </widget>
