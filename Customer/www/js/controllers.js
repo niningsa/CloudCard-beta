@@ -475,11 +475,11 @@ angular.module('starter.controllers', [])
               "isGroupOwner": $scope.isGroupOwner,
             });
           }, function error(e) {
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '充值失败',
               template: result.msg
-            });
+            });*/
           });
         }
       });
@@ -702,11 +702,11 @@ angular.module('starter.controllers', [])
             });
             //$state.go("myCircleCard",{"storeId":storeId});
           }, function error(e) {
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '充值失败',
               template: result.msg
-            });
+            });*/
           });
         }
       });
@@ -784,11 +784,11 @@ angular.module('starter.controllers', [])
             });
             //$state.go("myCircleCard",{"storeId":storeId});
           }, function error(e) {
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '充值失败',
               template: result.msg
-            });
+            });*/
           });
         }
       });
@@ -1351,11 +1351,11 @@ angular.module('starter.controllers', [])
             //支付成功到扫一扫的卡页面列表
             $scope.chooseCard();
           }, function error(e) {
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '买卡失败',
               template: result.msg
-            });
+            });*/
           });
         }
       });
@@ -1383,11 +1383,11 @@ angular.module('starter.controllers', [])
             $scope.chooseCard();
             //$state.go("myCircleCard",{"storeId":storeId});
           }, function error(e) {
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '买卡失败',
               template: result.msg
-            });
+            });*/
           });
         }
       });
@@ -1462,11 +1462,11 @@ angular.module('starter.controllers', [])
             //支付成功到扫一扫的卡页面列表
             $scope.chooseCard();
           }, function error(e) {
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '买卡失败',
               template: result.msg
-            });
+            });*/
           });
         }
       });
@@ -1494,11 +1494,11 @@ angular.module('starter.controllers', [])
             $scope.chooseCard();
             //$state.go("myCircleCard",{"storeId":storeId});
           }, function error(e) {
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '买卡失败',
               template: result.msg
-            });
+            });*/
           });
         }
       });
@@ -2464,12 +2464,11 @@ angular.module('starter.controllers', [])
             // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
             $state.go("tab.chats");
           }, function error(e){
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '充值失败',
               template: result.msg
-            });
-
+            });*/
           });
         }
       });
@@ -2497,12 +2496,11 @@ angular.module('starter.controllers', [])
           Wechat.sendPaymentRequest(result, function success (e) {
             $state.go("tab.chats");
           }, function error (e) {
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '充值失败',
               template: result.msg
-            });
-
+            });*/
           });
         }
       });
