@@ -185,11 +185,11 @@ angular.module('mycircle.controllers', [])
               "storeId": $scope.storeId
             });
           }, function error(e) {
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '购买卡失败',
               template: result.msg
-            });
+            });*/
           });
         }
       });
@@ -218,11 +218,11 @@ angular.module('mycircle.controllers', [])
             });
             //$state.go("myCircleCard",{"storeId":storeId});
           }, function error(e) {
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '购买卡失败',
               template: result.msg
-            });
+            });*/
           });
         }
       });
@@ -265,11 +265,11 @@ angular.module('mycircle.controllers', [])
               "storeId": $scope.storeId
             });
           }, function error(e){
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '充值失败',
               template: result.msg
-            });
+            });*/
           });
         }
       });
@@ -298,11 +298,11 @@ angular.module('mycircle.controllers', [])
               "storeId": $scope.storeId
             });
           }, function error (e) {
-            $ionicLoading.hide();
+            /*$ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: '充值失败',
               template: result.msg
-            });
+            });*/
           });
         }
       });
