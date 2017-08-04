@@ -2218,7 +2218,6 @@ angular.module('starter.controllers', [])
   .controller('login', function($cordovaDevice,$scope,$rootScope,$state) {
     var uuid = $cordovaDevice.getUUID();
     $scope.cloudCardLogin=function () {
-      console.log($scope.user.tel+" "+$scope.user.identifyCode);
       $.ajax({
         url: $rootScope.interfaceUrl+"userAppLogin",
         type:"POST",
@@ -2226,6 +2225,11 @@ angular.module('starter.controllers', [])
           "teleNumber":$scope.user.tel,
           "captcha":$scope.user.identifyCode,
           "deviceId":uuid
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          /*alert(XMLHttpRequest.status);
+          alert(XMLHttpRequest.readyState);
+          alert(textStatus);*/
         },
         success: function(result){
           // console.log(result.code+" "+result.msg);
