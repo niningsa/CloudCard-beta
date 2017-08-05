@@ -178,7 +178,7 @@ angular.module('mycircle.controllers', [])
         success: function (result) {
           console.log(result.payInfo);
           //第二步：调用支付插件
-          cordova.plugins.AliPay.pay(result.payInfo, function success(e) {
+          cordova.plugins.alipay.payment(result.payInfo, function success(e) {
             // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
             //支付成功到扫一扫的卡页面列表
             $state.go("tab.selectShopCard", {
@@ -260,7 +260,7 @@ angular.module('mycircle.controllers', [])
           console.log(result.payInfo);
 
           //第二步：调用支付插件
-          cordova.plugins.AliPay.pay(result.payInfo, function success(e){
+          cordova.plugins.alipay.payment(result.payInfo, function success(e){
             $state.go("tab.selectShopCard", {
               "storeId": $scope.storeId
             });

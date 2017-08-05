@@ -134,7 +134,7 @@ angular.module('starter.controllers', [])
         success: function(result){
           console.log(result.payInfo);
           //第二步：调用支付插件
-          cordova.plugins.AliPay.pay(result.payInfo, function success(e){
+          cordova.plugins.alipay.payment(result.payInfo, function success(e){
             //alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
             //充值成功后回到圈子卡的页面
             $state.go("tab.myCircleCard",{
@@ -219,7 +219,7 @@ angular.module('starter.controllers', [])
         success: function(result){
           console.log(result.payInfo);
           //第二步：调用支付插件
-          cordova.plugins.AliPay.pay(result.payInfo, function success(e){
+          cordova.plugins.alipay.payment(result.payInfo, function success(e){
             //alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
             //充值成功后回到圈子卡的页面
             $state.go("tab.selectCircleCardAndShopCard", {
@@ -431,7 +431,7 @@ angular.module('starter.controllers', [])
         success: function (result) {
           console.log(result.payInfo);
           //第二步：调用支付插件
-          cordova.plugins.AliPay.pay(result.payInfo, function success(e) {
+          cordova.plugins.alipay.payment(result.payInfo, function success(e) {
             // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
             $state.go("myCircleCard", {
               "storeId": storeId,
@@ -658,7 +658,7 @@ angular.module('starter.controllers', [])
         success: function (result) {
           console.log(result.payInfo);
           //第二步：调用支付插件
-          cordova.plugins.AliPay.pay(result.payInfo, function success(e) {
+          cordova.plugins.alipay.payment(result.payInfo, function success(e) {
             // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
             //支付成功到扫一扫的卡页面列表
             $state.go("tab.selectCircleCardAndShopCard", {
@@ -739,7 +739,7 @@ angular.module('starter.controllers', [])
         success: function (result) {
           console.log(result.payInfo);
           //第二步：调用支付插件
-          cordova.plugins.AliPay.pay(result.payInfo, function success(e) {
+          cordova.plugins.alipay.payment(result.payInfo, function success(e) {
             // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
             //支付成功到扫一扫的卡页面列表
             $state.go("tab.selectCircleCardAndShopCard", {
@@ -1346,7 +1346,7 @@ angular.module('starter.controllers', [])
         success: function (result) {
           console.log(result.payInfo);
           //第二步：调用支付插件
-          cordova.plugins.AliPay.pay(result.payInfo, function success(e) {
+          cordova.plugins.alipay.payment(result.payInfo, function success(e) {
             // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
             //支付成功到扫一扫的卡页面列表
             $scope.chooseCard();
@@ -1457,7 +1457,7 @@ angular.module('starter.controllers', [])
         success: function (result) {
           console.log(result.payInfo);
           //第二步：调用支付插件
-          cordova.plugins.AliPay.pay(result.payInfo, function success(e) {
+          cordova.plugins.alipay.payment(result.payInfo, function success(e) {
             // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
             //支付成功到扫一扫的卡页面列表
             $scope.chooseCard();
@@ -2464,7 +2464,7 @@ angular.module('starter.controllers', [])
           console.log(result.payInfo);
 
           //第二步：调用支付插件
-          cordova.plugins.AliPay.pay(result.payInfo, function success(e){
+          cordova.plugins.alipay.payment(result.payInfo, function success(e){
             // alert("成功了："+e.resultStatus+"-"+e.result+"-"+e.memo);
             $state.go("tab.chats");
           }, function error(e){
