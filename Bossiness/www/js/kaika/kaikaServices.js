@@ -1,7 +1,7 @@
 angular.module('kaika.services', [])
   .service('kaikaService', function ($q, $rootScope,$cordovaFileTransfer) {
     return {
-      //无卡充卡
+      //无卡充卡111111
       teleNumberActivate:function(teleNumber,amount,captcha) {
         var deferred = $q.defer();
         var promise = deferred.promise;
@@ -37,7 +37,7 @@ angular.module('kaika.services', [])
         };
         return promise;
       },
-      //已开卡账单查询列表
+      //已开卡账单查询列�?
       activateCardBillService: function (cardNumber,ownerPartyId,cardId,amountType) {
         var deferred = $q.defer();
         var promise = deferred.promise;
@@ -54,7 +54,7 @@ angular.module('kaika.services', [])
               "cardNumber": cardNumber,
               "ownerPartyId": ownerPartyId,
               "cardId": cardId,
-              "type":amountType  //0-全部， 1-充值，2-支付
+              "type":amountType  //0-全部�?1-充值，2-支付
             },
             success: function (result) {
               //console.log(result);
