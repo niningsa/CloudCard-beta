@@ -466,7 +466,7 @@ angular.module('starter.controllers', [])
           if (tel) {
             $http({
               method: "POST",
-              url: $rootScope.interfaceUrl + "getLoginCaptcha",
+              url: $rootScope.interfaceUrl + "getBizLoginCaptcha",
               data: {
                 "teleNumber": tel
               },
@@ -500,7 +500,7 @@ angular.module('starter.controllers', [])
               }
             });
           } else {
-            $scope.msg = "请输入您的手机号码！！";
+            $scope.msg = result.msg;
           }
         }
       });
