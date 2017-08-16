@@ -11,7 +11,7 @@ angular.module('aboutMe.services', [])
 
         $.ajax(
           {
-            url: $rootScope.interfaceUrl + "userGetStoreInfo",
+            url: $rootScope.interfaceUrl + "bizGetStoreInfo",
             type: "POST",
             data: {
               "token": token,
