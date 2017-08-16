@@ -1032,8 +1032,8 @@ angular.module('starter.controllers', [])
                   var isGroupOwner = result.storeList[o].isGroupOwner;
                   var isHasCard = result.storeList[o].isHasCard;
                   var storeSaleLevel = result.storeList[o].storeSaleLevel;
-                  var address = result.storeList[o].address;
-                  var telNum = result.storeList[o].telNum;
+                  var storeAddress = result.storeList[o].storeAddress;
+                  var storeTeleNumber = result.storeList[o].storeTeleNumber;
                   var gpsPoint = new BMap.Point(longitude, latitude);  // 创建点坐标
                   map.centerAndZoom(gpsPoint, 16);
                   var marker = new BMap.Marker(gpsPoint);
@@ -1055,7 +1055,7 @@ angular.module('starter.controllers', [])
                   });
                   map.addOverlay(myLabel);
 
-                  (function (p, m, storeName, isGroupOwner, distance, storeId, address, telNum) {
+                  (function (p, m, storeName, isGroupOwner, distance, storeId, storeAddress, storeTeleNumber) {
                     m.addEventListener("click", function () {
                       $scope.$apply(function () {
                         $scope.storeInfo = true;
@@ -1063,13 +1063,13 @@ angular.module('starter.controllers', [])
                         $scope.storeId = storeId;
                         $scope.isGroupOwner = isGroupOwner;
                         $scope.distance = distance;
-                        $scope.telNum = telNum;
-                        $scope.address = address;
+                        $scope.storeTeleNumber = storeTeleNumber;
+                        $scope.storeAddress = storeAddress;
                       });
 
                     })
                   })(gpsPoint, marker, storeName
-                    , isGroupOwner, distance, storeId, address, telNum);
+                    , isGroupOwner, distance, storeId, storeAddress, storeTeleNumber);
                 }
 
                 //显示当前我的位置
@@ -1123,8 +1123,8 @@ angular.module('starter.controllers', [])
                 var isGroupOwner = result.storeList[o].isGroupOwner;
                 var isHasCard = result.storeList[o].isHasCard;
                 var storeSaleLevel = result.storeList[o].storeSaleLevel;
-                var address = result.storeList[o].address;
-                var telNum = result.storeList[o].telNum;
+                var storeAddress = result.storeList[o].storeAddress;
+                var storeTeleNumber = result.storeList[o].storeTeleNumber;
                 var gpsPoint = new BMap.Point(longitude, latitude);  // 创建点坐标
                 map.centerAndZoom(gpsPoint, 16);
                 var marker = new BMap.Marker(gpsPoint);
@@ -1152,7 +1152,7 @@ angular.module('starter.controllers', [])
                   marker.setPosition(map.getCenter());
                 });*/
 
-                (function (p, m, storeName, isGroupOwner, distance, storeId, address, telNum) {
+                (function (p, m, storeName, isGroupOwner, distance, storeId, storeAddress, storeTeleNumber) {
 
                   m.addEventListener("click", function () {
                     $scope.$apply(function () {
@@ -1161,13 +1161,13 @@ angular.module('starter.controllers', [])
                       $scope.storeId = storeId;
                       $scope.isGroupOwner = isGroupOwner;
                       $scope.distance = distance;
-                      $scope.telNum = telNum;
-                      $scope.address = address;
+                      $scope.storeTeleNumber = storeTeleNumber;
+                      $scope.storeAddress = storeAddress;
                     });
 
                   })
                 })(gpsPoint, marker, storeName
-                  , isGroupOwner, distance, storeId, address, telNum);
+                  , isGroupOwner, distance, storeId, storeAddress, storeTeleNumber);
               }
 
               //显示当前我的位置

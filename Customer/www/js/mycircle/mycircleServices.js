@@ -10,7 +10,7 @@ angular.module('mycircle.services', [])
           var data = JSON.parse(JSON.stringify(result, null, 4));
           $.ajax(
             {
-              url: $rootScope.interfaceUrl + "userStoreListLBS",
+              url: $rootScope.interfaceUrl + "userGetNearbyStore",
               type: "POST",
               data: {
                 //"token": token,

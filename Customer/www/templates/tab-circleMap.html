@@ -29,20 +29,22 @@
         <a href="#tab/myCircle/{{storeId}}/{{isGroupOwner}}" ng-bind="storeName"></a>
         </span >
 
-
-        <span ng-show="isGroupOwner=='N'?true:false">店铺名称:
-        <a href="#tab/shop/{{storeId}}/{{isGroupOwner}}" ng-bind="storeName"></a>
+        <!--    <span ng-show="isGroupOwner=='N'?true:false">店铺名称:
+                <a href="#tab/shop/{{storeId}}/{{isGroupOwner}}" ng-bind="storeName"></a>
+        -->
+        <span>店铺名称:
+        <a href="#tab/shop/{{storeId}}/N" ng-bind="storeName"></a>
         </span>
         <!--<i class="icon ion-close-circled positive" style="padding: 0px 2px 0px 80px;width: 20px;height: 20px"></i>-->
         <span style="color: blue;float: right" ng-click="diglogHide()"> <i class="icon ion-close"></i></span>
       </div>
       <div>
         <i class="icon ion-ios-telephone positive"></i>
-        <span>联系方式: </span><span ng-bind="telNum"></span>
+        <span>联系方式: </span><span ng-bind="storeTeleNumber"></span>
       </div>
       <div>
         <i class="icon ion-ios-location positive"></i>
-        <span>地址: </span><span ng-bind="address"></span>
+        <span>地址: </span><span ng-bind="storeAddress"></span>
       </div>
     </div>
 
