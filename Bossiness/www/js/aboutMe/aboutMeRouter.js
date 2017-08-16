@@ -15,7 +15,7 @@ angular.module('starter')
       })
       //我的店铺的具体信息
       .state('tab.myShopDetail', {
-        url: '/myShopDetail',
+        url: '/myShopDetail/:reqType',
 
         views: {
           'tab-aboutMe': {

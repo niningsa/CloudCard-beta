@@ -139,7 +139,7 @@ angular.module('aboutMe.services', [])
       },
 
       //申请开店
-      bizCreateApplyVIP: function (storeName,legalId,legalName,storeAddress,aliPayAccount,aliPayName,wxPayAccount,wxPayName) {
+      bizCreateApplyVIP: function (storeName,legalId,legalName,storeAddress,aliPayAccount,aliPayName,wxPayAccount,wxPayName,reqType) {
         var token = $.cookie("token");
         var organizationPartyId = $.cookie("organizationPartyId");
         var deferred = $q.defer();
@@ -157,7 +157,8 @@ angular.module('aboutMe.services', [])
               "aliPayAccount": aliPayAccount,
               "aliPayName": aliPayName,
               "wxPayAccount": wxPayAccount,
-              "wxPayName": wxPayName
+              "wxPayName": wxPayName,
+              "reqType": reqType
             },
             success: function (result) {
               if (result.code === '200') {

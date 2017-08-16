@@ -17,7 +17,7 @@ angular.module('aboutMe.controllers', [])
    * Author LN
    * Date 2017-1-12
    * */
-  .controller('myShopDetailCtrl', function ($scope,$state,$rootScope,applySellerService,$ionicPopup,myShopDetailService,$cordovaImagePicker,$cordovaFileTransfer,$ionicLoading) {
+  .controller('myShopDetailCtrl', function ($scope,$state,$rootScope,$stateParams,applySellerService,$ionicPopup,myShopDetailService,$cordovaImagePicker,$cordovaFileTransfer,$ionicLoading) {
     var organizationPartyId = $.cookie("organizationPartyId");
     myShopDetailService.selectMyShopDetail().success(function (data) {
       $scope.storeName=data.storeName;
@@ -36,7 +36,13 @@ angular.module('aboutMe.controllers', [])
       $scope.bizAvatarImgList=data.bizAvatarImgList;
       $scope.bizDetailsList=data.bizDetailsList;
       if(data.storeSaleLevel ==='STORE_SALE_LEVEL_2'){
-        $scope.codeBtnDisable = false;
+        $scope.codeBtnDisable = true;
+      }
+      $scope.reqType = $stateParams.reqType;
+      if($stateParams.reqType === 'details'){
+        $scope.btnText='更新店铺信息';
+      }else if($stateParams.reqType === 'apply'){
+        $scope.btnText='申请二级商家';
       }
     }).error(function (data) {
 
@@ -53,13 +59,21 @@ angular.module('aboutMe.controllers', [])
         $scope.aliPayAccount,
         $scope.aliPayName,
         $scope.wxPayAccount,
-        $scope.wxPayName
+        $scope.wxPayName,
+        $scope.reqType
       ).success(function (data) {
         $ionicLoading.hide();
-        var alertPopup = $ionicPopup.alert({
-          title: '申请成功',
-          template: '恭喜您申请成功，请耐心等待平台审核。'
-        });
+        if(data.reqType === 'apply'){
+          var alertPopup = $ionicPopup.alert({
+            title: '申请成功',
+            template: '恭喜您申请成功，请耐心等待平台审核。'
+          });
+        }else if(data.reqType === 'details'){
+          var alertPopup = $ionicPopup.alert({
+            title: '修改成功',
+            template: '店铺信息更新成功。'
+          });
+        }
       }).error(function (data) {
 
       });
