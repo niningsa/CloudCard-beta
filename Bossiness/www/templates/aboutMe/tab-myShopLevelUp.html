@@ -65,66 +65,77 @@
       </label>
     </div>
     <div class="list">
-
-        <span class="picture_title_block">上传营业执照照片
-          </span>
-
+      <span class="picture_title_block">
+        上传营业执照照片
+      </span>
       <div class="item item-text-wrap">
-        <div class="row" ng-repeat="image in  bizLicImageSrcList" ng-click="shouBigImage()" >
-          <div class="col">
-            <img  ng-if="image != null" class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
-                 ng-src="{{image}}" id="myImage">
-            <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
-                 ng-if="image == null || image == ''" src="/img/aboutme/upload_file.png" id="myImage">
-          </div>
+        <div class="row" ng-repeat="image in  bizLicImgList" ng-click="shouBigImage('bizLic');">
+          <img  class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+                ng-src="{{ossUrl+image.objectInfo}}" id="myImages">
         </div>
 
-        <div ng-if="bizLicImageSrcList == null" class="row" >
-          <div class="col">
-            <img class="store_leve_up yin_ye_picture"
-                src="img/aboutme/upload_file.png" id="myImage">
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="list">
-
-        <span class="picture_title_block">
-        上传店铺招牌图片
-        </span>
-
-      <div class="item item-text-wrap">
-        <div class="row"  ng-repeat="image in  bizLicImgList" ng-click="shouBigImage('bizLic')">
-          <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
-               ng-src="{{ossUrl+image.objectInfo}}" id="myImages">
-        </div>
-
-        <div ng-if="bizLicImgList == null" class="row" >
-          <div class="col">
-            <img class="store_leve_up store_picture"
-                 src="img/aboutme/upload_file.png" id="myImage">
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-    <div class="list">
-
-        <span class="picture_title_block">上传店铺详情图片
-         </span>
-
-      <div class="item item-text-wrap">
-        <div class="row" ng-repeat="image in  bizAvatarImageSrcList" ng-click="shouBigImage()">
+        <div class="row"
+             style="height: 200px;width: 200px; border:1px solid #ffffff;"
+             ng-repeat="image in  bizLicImageSrcList" ng-click="shouBigImage()">
           <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
                ng-src="{{image}}" id="myImage">
         </div>
 
-        <div ng-if="bizAvatarImageSrcList == null" class="row" >
+        <div class="row" ng-show="storeSaleLevel ==='STORE_SALE_LEVEL_1'">
+          <div class="col">
+            <img class="store_leve_up store_picture" src="img/aboutme/upload_file.png" id="myImage" ng-click="selectPhoto('bizLic');">
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="list">
+      <span class="picture_title_block">
+      上传店铺招牌图片
+      </span>
+      <div class="item item-text-wrap">
+        <div class="row"  ng-repeat="image in  bizAvatarImgList" ng-click="shouBigImage('bizAvatar')">
+          <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+               ng-src="{{ossUrl+image.objectInfo}}" id="myImages">
+        </div>
+
+        <div class="row"
+             style="height: 200px;width: 200px; border:1px solid #ffffff;"
+             ng-repeat="image in  bizAvatarImageSrcList" ng-click="shouBigImage()">
+          <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+               ng-src="{{image}}" id="myImage">
+        </div>
+
+        <div class="row" ng-show="storeSaleLevel ==='STORE_SALE_LEVEL_1'">
+          <div class="col">
+            <img class="store_leve_up store_picture" src="img/aboutme/upload_file.png" id="myImage" ng-click="selectPhoto('bizAvatar');">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="list">
+      <span class="picture_title_block">
+        上传店铺详情图片
+      </span>
+
+      <div class="item item-text-wrap">
+        <div class="row" ng-repeat="image in  bizDetailsList"  ng-click="shouBigImage('bizDetails')">
+          <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+               ng-src="{{ossUrl+image.objectInfo}}" id="myImage">
+        </div>
+
+        <div class="row"
+             style="height: 200px;width: 200px; border:1px solid #ffffff;"
+             ng-repeat="image in  bizDetailsImageSrcList" ng-click="shouBigImage()">
+          <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
+               ng-src="{{image}}" id="myImage">
+        </div>
+
+        <div class="row" >
           <div class="col">
             <img class="store_leve_up store_picture"
-                 src="img/aboutme/upload_file.png" id="myImage">
+                 src="img/aboutme/upload_file.png" id="myImage" ng-click="selectPhoto('bizDetails');">
           </div>
         </div>
       </div>

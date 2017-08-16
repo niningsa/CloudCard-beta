@@ -94,6 +94,10 @@ angular.module('aboutMe.controllers', [])
       };
       $cordovaImagePicker.getPictures(options)
         .then(function (results) {
+          if(Object.keys(results).length==0){
+            return;
+          }
+
           if(storeImgType === 'bizLic'){
             $scope.bizLicImageSrcList = results;
           }else if(storeImgType === 'bizAvatar'){
@@ -120,10 +124,10 @@ angular.module('aboutMe.controllers', [])
             title: '成功',
             template: "图片上传成功"
           });
+
         }, function (error) {
           // error getting photos
         });
-
     };
 
     //图片的预览
@@ -136,6 +140,8 @@ angular.module('aboutMe.controllers', [])
   .controller('showPictureCtrl', function ($scope,$ionicPopup,$state,$rootScope,myShopDetailService,$stateParams) {
     myShopDetailService.selectMyShopDetail().success(function (data) {
       $scope.ossUrl=data.ossUrl;
+      $scope.storeSaleLevel=data.storeSaleLevel;
+      $scope.storeImgType=$stateParams.storeImgType;
       if($stateParams.storeImgType === 'bizLic'){
         $scope.storeInfoImgList=data.bizLicImgList;
       }else if($stateParams.storeImgType === 'bizAvatar'){
