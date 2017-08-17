@@ -119,7 +119,7 @@
         <variable name="APP_ID" value="2088521239967141" />
     </plugin>
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
-    <plugin name="cordova-plugin-baidumaplocation" spec="^3.1.2">
+    <plugin name="cordova-plugin-baidumaplocation" spec="^3.2.0">
         <variable name="ANDROID_KEY" value="HEGuyWDHb26YTARh0bkyMd3vLasPta0h" />
         <variable name="IOS_KEY" value="qj5BvdK9mVZ7vulMoy44Gr4HmSi2HGxx" />
         <variable name="IOS_LOCATION_DESC" value="请点击'好'以允许访问。" />
