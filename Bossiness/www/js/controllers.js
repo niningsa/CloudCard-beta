@@ -84,14 +84,9 @@ angular.module('starter.controllers', [])
 
     //查询店家的二维码，然后生成二维码
     applySellerService.shopQrcode().success(function (data) {
-     console.log(data);
-
+      console.log(data);
       jQuery('#pcode').qrcode(data.storeCode);
-
     });
-
-
-
   })
 
   /*

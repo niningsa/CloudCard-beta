@@ -153,7 +153,7 @@ angular.module('starter.services', [])
         //ajax请求
         $.ajax(
           {
-            url: $rootScope.interfaceUrl + "userGetStoreInfo",
+            url: $rootScope.interfaceUrl + "bizGetStoreInfo",
             type: "POST",
             data: {
               "token": token,
