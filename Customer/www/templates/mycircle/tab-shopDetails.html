@@ -7,8 +7,8 @@
     <div class="list">
       <div class="item item-divider" style="min-height:11px"></div>
       <a class="item item-avatar">
-        <img ng-if="{{storeImg}} == ''"  src="img/avatar.png">
-        <img ng-if="{{storeImg}} != ''" src="{{storeImg}} + '?x-oss-process=image/circle,r_100'">
+        <img ng-if="storeImg == null"  src="img/avatar.png">
+        <img ng-if="storeImg != null" src="{{ossUrl + storeImg  + '?x-oss-process=image/circle,r_100'}}">
         <h2>{{storeName}}</h2>
         <p>{{storeAddress}}</p>
       </a>
@@ -30,7 +30,7 @@
         <div class="row padding row-wrap">
           <div class="col col-33"  ng-click="shouBigImage()"
                style="width: 200px;height: 200px;padding:3px;-webkit-box-shadow: 0 0 10px rgb(153,134,117);-moz-box-shadow:0 0 10px rgb(153,134,117);box-shadow:0 0 10px rgb(153,134,117);border-radius: 3px;margin: -1px 0 0 -1px;text-align: center"
-               ng-repeat="image in  storeInfoImgList">
+               ng-repeat="image in  bizDetailsList">
             <img class="img-responsive"  style="height: 200px;width: 200px; border:1px solid #ffffff;"
                  ng-src="{{ossUrl+image.objectInfo}}" id="myImages">
           </div>

@@ -91,8 +91,8 @@ angular.module('mycircle.controllers', [])
        $scope.storeName=data.storeName;
        $scope.storeAddress=data.storeAddress;
        $scope.storeImg=data.storeImg;
-      $scope.ossUrl=data.ossUrl;
-      $scope.storeInfoImgList=data.storeInfoImgList;
+       $scope.ossUrl=data.ossUrl;
+       $scope.bizDetailsList=data.bizDetailsList;
     })
 
     //查询客户是否拥有该店铺的卡，如果有卡就进行充值，没卡就买卡
