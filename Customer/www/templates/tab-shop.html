@@ -11,7 +11,7 @@
         <img ng-if="chat.storeImg == null"  src="img/avatar.png">
         <img ng-if="chat.storeImg != null" src="{{chat.storeImg + '?x-oss-process=image/circle,r_100'}}">
         <h2>{{storeName}}</h2>
-        <p>。。。。。</p>
+        <!--<p>。。。。。</p>-->
       </a>
 
       <div class="item item-divider" style="min-height:11px"></div>
@@ -24,13 +24,13 @@
       <!--如果属于圈子才能购卡-->
       <a class="item item-icon-left item-icon-right" ng-if="isGroupOwner=='Y'" ng-click="buyCircleCard('{{storeId}}','{{isGroupOwner}}')">
       <i class="icon ion-ios-cart positive"></i>
-      购卡/充值
+        购卡/充值
       <i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>
     </a>
       <!--没有加入圈子购卡方式-->
       <a class="item item-icon-left item-icon-right" ng-if="isGroupOwner=='N'" ng-click="selectCircleCardAndShopCard('{{storeId}}','{{isGroupOwner}}')">
       <i class="icon ion-ios-cart positive"></i>
-      购卡/充值
+        购卡/充值
       <i class="icon ion-ios-arrow-right" style="color:darkgrey"></i>
     </a>
       <div class="item item-divider" style="min-height:11px"></div>
