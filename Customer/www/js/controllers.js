@@ -69,7 +69,6 @@ angular.module('starter.controllers', [])
     $scope.latitude = $stateParams.latitude;
     $scope.storeId = $stateParams.storeId;
     $scope.isGroupOwner = $stateParams.isGroupOwner;
-    $scope.storeAddress = $stateParams.storeAddress
 
     //导航
     $scope.launchNavigator = function() {
@@ -82,7 +81,6 @@ angular.module('starter.controllers', [])
        *
        */
 
-      /*
       //定义一些常量
       var x_PI = 3.14159265358979324 * 3000.0 / 180.0;
       var PI = 3.1415926535897932384626;
@@ -99,9 +97,7 @@ angular.module('starter.controllers', [])
       var gg_lat = z * Math.sin(theta);
 
       $scope.destination = [gg_lat,gg_lng];
-      */
-
-      $cordovaLaunchNavigator.navigate($scope.storeAddress).then(function () {
+      $cordovaLaunchNavigator.navigate($scope.destination).then(function () {
 
       }, function (err) {
         console.error(err);
