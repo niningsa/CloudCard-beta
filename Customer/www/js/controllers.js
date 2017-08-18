@@ -69,20 +69,38 @@ angular.module('starter.controllers', [])
     $scope.latitude = $stateParams.latitude;
     $scope.storeId = $stateParams.storeId;
     $scope.isGroupOwner = $stateParams.isGroupOwner;
+
     //导航
     $scope.launchNavigator = function() {
-      window.baidumap_location.getCurrentPosition(function (result)  {
-        var data = JSON.parse(JSON.stringify(result, null, 4));
-        // 定位成功事件
-        var longitude= data.longitude;
-        var latitude=data.latitude;
-        $scope.start = [latitude, longitude];
-        $scope.destination = [$scope.latitude,$scope.longitude];
-        $cordovaLaunchNavigator.navigate($scope.destination, $scope.start).then(function () {
-        }, function (err) {
-          console.error(err);
-        });
+      /**
+       * 百度坐标系 (BD-09) 与 火星坐标系 (GCJ-02)的转换
+       * 即 百度 转 谷歌、高德
+       * @param bd_lon
+       * @param bd_lat
+       * @returns {*[]}
+       *
+       */
 
+      //定义一些常量
+      var x_PI = 3.14159265358979324 * 3000.0 / 180.0;
+      var PI = 3.1415926535897932384626;
+      var a = 6378245.0;
+      var ee = 0.00669342162296594323;
+
+      var bd_lon = $scope.longitude;
+      var bd_lat =  $scope.latitude;
+      var x = bd_lon - 0.0065;
+      var y = bd_lat - 0.006;
+      var z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * x_PI);
+      var theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * x_PI);
+      var gg_lng = z * Math.cos(theta);
+      var gg_lat = z * Math.sin(theta);
+
+      $scope.destination = [gg_lat,gg_lng];
+      $cordovaLaunchNavigator.navigate($scope.destination).then(function () {
+
+      }, function (err) {
+        console.error(err);
       });
     };
 
@@ -104,8 +122,8 @@ angular.module('starter.controllers', [])
       map.addControl(ctrl_nav);//给地图添加缩放的按钮
       map.enableScrollWheelZoom(true);
       //根据经纬度来规划路线
-      /*var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map,panel: "r-result", autoViewport: true}});
-      walking.search(Point,gpsPoint);*/
+      var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map,panel: "r-result", autoViewport: true}});
+      walking.search(Point,gpsPoint);
     }, function (error) {
       console.log(error);
     })
