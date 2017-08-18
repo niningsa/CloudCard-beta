@@ -418,7 +418,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     //导航去这家店铺
     .state('tab.goShop', {
-      url: '/goShop/:longitude/:latitude/:storeId/:isGroupOwner',
+      url: '/goShop/:longitude/:latitude/:storeId/:isGroupOwner/:storeAddress',
       views: {
         'tab-circleMap': {
           templateUrl: 'templates/tab-shopMap.html',
