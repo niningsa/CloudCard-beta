@@ -1,7 +1,7 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova','ionic-datepicker','aboutMe.controllers','aboutMe.services',
+angular.module('starter', ['ionic', 'ngCookies', 'starter.controllers', 'starter.services','ngCordova','ionic-datepicker','aboutMe.controllers','aboutMe.services',
                            'mycircle.controllers','mycircle.services','index.controllers','index.services'])
 
-.run(function($ionicPopup,$ionicPlatform,$rootScope,$state) {
+.run(function($ionicPopup,$ionicPlatform,$rootScope,$state,$cookies) {
   //当设备运行的时候就执行
   //$rootScope.interfaceUrl="http://106.15.44.108:8080/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="http://192.168.3.13:8080/cloudcard/control/"; //接口前一截一样的
@@ -9,7 +9,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   //$rootScope.interfaceUrl="https://kayunka.c1337y.com/cloudcard/control/"; //接口前一截一样的
   //$rootScope.interfaceUrl="https://kayunka.weibeitech.com/cloudcard/control/"; //接口前一截一样的
   $rootScope.interfaceUrl="https://kayunka.kupangka.com/cloudcard/control/"; //接口前一截一样的
-
 
   //调用极光推送
   //极光推送开始
