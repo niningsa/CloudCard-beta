@@ -117,8 +117,8 @@ angular.module('starter.services', [])
             url: $rootScope.interfaceUrl + "bizCreateApply",
             type: "POST",
             data: {
-              "latitude":latitude,
-              "longitude":longitude,
+              "latitude": '31.208196',
+              "longitude": '121.42006',
               "storeName": businessName,
               "teleNumber": phone,
               "storeAddress": businessAddr,
