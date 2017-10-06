@@ -16,6 +16,9 @@ angular.module('starter', ['ionic', 'ngCookies', 'starter.controllers', 'starter
   // 当设备就绪时
   var onDeviceReady = function () {
     initiateUI();
+    window.JAnalytics.init();
+    var params = {'enable': true}
+    window.JAnalytics.setDebugMode(params);
 
     window.baidumap_location.getCurrentPosition(function (result) {
 

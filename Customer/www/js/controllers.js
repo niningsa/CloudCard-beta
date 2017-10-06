@@ -2282,6 +2282,12 @@ angular.module('starter.controllers', [])
               });
             //$state.go("tab.chats");
             //$state.go("tab.circleMap");
+            var params = {
+              'loginMethod': 'phone',     // 登录方式
+              'isLoginSuccess': true, // 是否登录成功
+              'extras': {'key1': $scope.user.tel}           // Optional. 扩展参数，类似 {'key1': 'value1'}
+            };
+            window.JAnalytics.addLoginEvent(params);
             $state.go("tab.index");
             // location.href="http://"+location.host+"/#/tab/chats";
           }else{
